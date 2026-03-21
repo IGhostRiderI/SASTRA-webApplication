@@ -332,8 +332,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           Total Scans
         </div>
-        <div class="stat-value">5</div>
-        <div class="stat-sub up">↑ +12% from last week</div>
+        <div class="stat-value" id="stat-total-scans">0</div>
       </div>
       <!-- Total Vulnerabilities -->
       <div class="stat-card">
@@ -341,7 +340,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           Total Vulnerabilities
         </div>
-        <div class="stat-value">45</div>
+        <div class="stat-value" id="stat-total-vulns">0</div>
         <div class="stat-sub">Across all scans</div>
       </div>
       <!-- Critical + High -->
@@ -350,7 +349,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
           Critical + High Issues
         </div>
-        <div class="stat-value danger">22</div>
+        <div class="stat-value danger" id="stat-critical-high">0</div>
         <div class="stat-sub warn">Requires immediate attention</div>
       </div>
       <!-- Last Scan -->
@@ -359,8 +358,8 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           Last Scan
         </div>
-        <div class="stat-file">auth-service.py</div>
-        <div class="stat-sub" style="margin-top:6px">2 days ago</div>
+        <div class="stat-file" id="stat-last-file">No scans yet</div>
+        <div class="stat-sub" id="stat-last-time" style="margin-top:6px">-</div>
       </div>
     </div>
 
@@ -460,6 +459,20 @@
       }).join('');
     }
 
+    function formatStatRelativeTime(value) {
+      if (!value) return '-';
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return '-';
+      const diffMs = Date.now() - d.getTime();
+      const mins = Math.floor(diffMs / (60 * 1000));
+      if (mins < 1) return 'Just now';
+      if (mins < 60) return `${mins} minute${mins === 1 ? '' : 's'} ago`;
+      const hours = Math.floor(mins / 60);
+      if (hours < 24) return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+      const days = Math.floor(hours / 24);
+      return `${days} day${days === 1 ? '' : 's'} ago`;
+    }
+
     async function loadDashboard() {
       const meRes = await fetch('/api/auth/me', { credentials: 'include' });
       if (!meRes.ok) {
@@ -481,12 +494,17 @@
       const criticalHigh = items.reduce((a, s) => a + (s.critical_count || 0) + (s.high_count || 0), 0);
       const latest = items[0];
 
-      const statValues = document.querySelectorAll('.stat-value');
-      if (statValues[0]) statValues[0].textContent = String(totalScans);
-      if (statValues[1]) statValues[1].textContent = String(totalVulns);
-      if (statValues[2]) statValues[2].textContent = String(criticalHigh);
-      const statFile = document.querySelector('.stat-file');
-      if (statFile) statFile.textContent = latest?.filename || 'No scans yet';
+      const statTotalScans = document.getElementById('stat-total-scans');
+      const statTotalVulns = document.getElementById('stat-total-vulns');
+      const statCriticalHigh = document.getElementById('stat-critical-high');
+      const statLastFile = document.getElementById('stat-last-file');
+      const statLastTime = document.getElementById('stat-last-time');
+
+      if (statTotalScans) statTotalScans.textContent = String(totalScans);
+      if (statTotalVulns) statTotalVulns.textContent = String(totalVulns);
+      if (statCriticalHigh) statCriticalHigh.textContent = String(criticalHigh);
+      if (statLastFile) statLastFile.textContent = latest?.filename || 'No scans yet';
+      if (statLastTime) statLastTime.textContent = latest?.scanned_at ? formatStatRelativeTime(latest.scanned_at) : '-';
       renderRecentScans(items);
     }
 

@@ -402,3 +402,14 @@ weighted avg       0.76      0.76      0.76      2334
 2026-03-21 13:00:04 [INFO] sast: Paste scan by 'ghostrider' — snippet.py  lang: python
 2026-03-21 13:00:05 [INFO] sast: Scan #54 complete — user: 'ghostrider'  findings: 1  risk: 5.0
 2026-03-21 13:04:04 [INFO] sast: SAST application shutting down
+2026-03-21 13:08:30 [INFO] sast: SAST application starting up
+2026-03-21 13:08:30 [INFO] sast: Database initialised
+2026-03-21 13:08:30 [INFO] sast.backup: Database backed up → sast_20260321T130830Z.db
+2026-03-21 13:08:30 [INFO] sast.backup: Pruned old backup: sast_20260321T115939Z.db
+2026-03-21 13:08:30 [INFO] sast: Startup backup created: sast_20260321T130830Z.db
+2026-03-21 13:08:30 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 13:08:30 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 13:08:34 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:08:34 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:08:34 [INFO] sast: SAST application ready
+2026-03-21 13:08:48 [INFO] sast: User signed in — username: ghostrider  role: user
