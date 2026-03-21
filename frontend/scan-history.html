@@ -494,7 +494,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
       <div class="pill-text">
-        <div class="pill-val">8</div>
+        <div class="pill-val" id="hist-total-scans">0</div>
         <div class="pill-label">Total Scans</div>
       </div>
     </div>
@@ -503,7 +503,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <div class="pill-text">
-        <div class="pill-val">7</div>
+        <div class="pill-val" id="hist-completed">0</div>
         <div class="pill-label">Completed</div>
       </div>
     </div>
@@ -512,7 +512,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       </div>
       <div class="pill-text">
-        <div class="pill-val">73</div>
+        <div class="pill-val" id="hist-total-vulns">0</div>
         <div class="pill-label">Total Vulnerabilities</div>
       </div>
     </div>
@@ -521,7 +521,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       </div>
       <div class="pill-text">
-        <div class="pill-val">2d</div>
+        <div class="pill-val" id="hist-last-scan">-</div>
         <div class="pill-label">Last Scan</div>
       </div>
     </div>
@@ -604,6 +604,37 @@
   let currentPage = 1;
   const perPage = 8;
 
+  function formatRelativeSince(value) {
+    if (!value) return '-';
+    const t = new Date(value).getTime();
+    if (!Number.isFinite(t)) return '-';
+    const diffMs = Date.now() - t;
+    const mins = Math.floor(diffMs / (60 * 1000));
+    if (mins < 1) return 'now';
+    if (mins < 60) return `${mins}m`;
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `${hours}h`;
+    const days = Math.floor(hours / 24);
+    return `${days}d`;
+  }
+
+  function renderSummary(items) {
+    const totalScans = items.length;
+    const completed = items.length;
+    const totalVulns = items.reduce((acc, s) => acc + Number(s.total_findings || 0), 0);
+    const latest = items[0];
+
+    const elTotal = document.getElementById('hist-total-scans');
+    const elCompleted = document.getElementById('hist-completed');
+    const elVulns = document.getElementById('hist-total-vulns');
+    const elLast = document.getElementById('hist-last-scan');
+
+    if (elTotal) elTotal.textContent = String(totalScans);
+    if (elCompleted) elCompleted.textContent = String(completed);
+    if (elVulns) elVulns.textContent = String(totalVulns);
+    if (elLast) elLast.textContent = latest ? formatRelativeSince(latest.scanned_at || latest.created_at) : '-';
+  }
+
   async function initHistory() {
     const meRes = await fetch('/api/auth/me', { credentials: 'include' });
     if (!meRes.ok) {
@@ -618,14 +649,16 @@
 
     const scansRes = await fetch('/api/scans', { credentials: 'include' });
     const scansPayload = await scansRes.json();
-    scans = (scansPayload.items || []).map((s) => ({
+    const items = scansPayload.items || [];
+    renderSummary(items);
+    scans = items.map((s) => ({
       id: s.id,
       name: s.filename,
       lang: (s.language || '').toUpperCase(),
       size: '—',
       status: 'completed',
-      date: new Date(s.created_at).toLocaleString(),
-      dateSort: new Date(s.created_at).getTime(),
+      date: new Date(s.scanned_at || s.created_at).toLocaleString(),
+      dateSort: new Date(s.scanned_at || s.created_at).getTime(),
       issues: s.total_findings || 0,
       critical: s.critical_count || 0,
       high: s.high_count || 0,

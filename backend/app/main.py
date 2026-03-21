@@ -594,15 +594,30 @@ async def auth_me_delete(current_user: dict = Depends(_require_user)) -> JSONRes
     if current_user.get("role") == ROLE_SUPERADMIN:
         raise HTTPException(status_code=403, detail="Superadmin account cannot be deleted.")
 
-    delete_user_and_data(int(current_user["id"]))
+    try:
+        delete_user_and_data(int(current_user["id"]))
+    except Exception:
+        logger.exception("Account deletion failed for user id=%s", current_user["id"])
+        raise HTTPException(status_code=500, detail="Unable to delete account data.")
     logger.info("User deleted their account — id: %s", current_user["id"])
     response = JSONResponse({"ok": True})
     _clear_session_cookie(response)
     return response
 
 
+@app.post("/api/auth/delete")
+async def auth_me_delete_post(current_user: dict = Depends(_require_user)) -> JSONResponse:
+    # Fallback for clients/proxies that restrict DELETE requests.
+    return await auth_me_delete(current_user)
+
+
 @app.delete("/api/me")
 async def auth_me_delete_compat(current_user: dict = Depends(_require_user)) -> JSONResponse:
+    return await auth_me_delete(current_user)
+
+
+@app.post("/api/delete")
+async def auth_me_delete_compat_post(current_user: dict = Depends(_require_user)) -> JSONResponse:
     return await auth_me_delete(current_user)
 
 

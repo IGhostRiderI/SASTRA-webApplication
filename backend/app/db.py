@@ -379,13 +379,24 @@ def update_user_credentials(
 def delete_user_and_data(user_id: int) -> None:
     """
     Delete a user and all their associated scans and findings.
-    SQLAlchemy cascade="all, delete-orphan" on the relationships handles
-    the child rows automatically — no manual ordering is needed.
+    Child rows are removed explicitly in dependency order so this works even
+    when older SQLite tables were created without ON DELETE CASCADE.
     """
     with _get_session() as session:
-        user = session.get(User, user_id)
-        if user:
-            session.delete(user)
+        scan_ids = [
+            row[0]
+            for row in session.query(Scan.id).filter(Scan.user_id == user_id).all()
+        ]
+
+        if scan_ids:
+            session.query(Finding).filter(Finding.scan_id.in_(scan_ids)).delete(
+                synchronize_session=False
+            )
+            session.query(Scan).filter(Scan.id.in_(scan_ids)).delete(
+                synchronize_session=False
+            )
+
+        session.query(User).filter(User.id == user_id).delete(synchronize_session=False)
 
 
 # ══════════════════════════════════════════════════════════════════════════════

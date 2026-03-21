@@ -421,6 +421,28 @@
   <script>
     let originalUsername = '';
 
+    async function getErrorMessage(response, fallback) {
+      let payload = null;
+      try {
+        payload = await response.clone().json();
+      } catch {
+        payload = null;
+      }
+
+      if (payload && typeof payload.detail === 'string' && payload.detail.trim()) {
+        return payload.detail;
+      }
+
+      try {
+        const txt = (await response.text()).trim();
+        if (txt) return txt;
+      } catch {
+        // ignore text extraction errors
+      }
+
+      return fallback;
+    }
+
     async function loadUser() {
       const response = await fetch('/api/auth/me', { credentials: 'include' });
       if (!response.ok) {
@@ -498,13 +520,21 @@
     }
 
     async function deleteAccount() {
-      const response = await fetch('/api/auth/me', {
+      let response = await fetch('/api/auth/me', {
         method: 'DELETE',
         credentials: 'include',
       });
-      const payload = await response.json().catch(() => ({}));
+
+      // Some proxies reject DELETE; fallback to POST endpoint.
+      if (response.status === 404 || response.status === 405) {
+        response = await fetch('/api/auth/delete', {
+          method: 'POST',
+          credentials: 'include',
+        });
+      }
+
       if (!response.ok) {
-        alert(payload.detail || 'Unable to delete account.');
+        alert(await getErrorMessage(response, 'Unable to delete account.'));
         return;
       }
       sessionStorage.removeItem('sastra_user');
