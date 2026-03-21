@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SASTRA – Sign In</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-start: #c8e6e0;
+      --bg-mid:   #dde8f0;
+      --bg-end:   #e8ddf0;
+      --text-primary: #0a0a0a;
+      --text-muted: #6b7280;
+      --btn-dark: #0a0a0a;
+      --btn-dark-text: #ffffff;
+      --card-bg: #f3f3f3;
+      --input-bg: #d9d9d9;
+      --radius: 14px;
+    }
+
+    html, body {
+      min-height: 100vh;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .blob { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.35; pointer-events: none; z-index: 1; }
+    .blob-1 { width: 480px; height: 480px; background: radial-gradient(circle, #a7f3d0, transparent 70%); top: -100px; right: 100px; animation: drift 12s ease-in-out infinite alternate; }
+    .blob-2 { width: 380px; height: 380px; background: radial-gradient(circle, #c4b5fd, transparent 70%); bottom: -80px; right: 200px; animation: drift 16s 2s ease-in-out infinite alternate; }
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,20px) scale(1.06); } }
+
+    nav {
+      position: relative;
+      z-index: 10;
+      padding: 28px 56px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .logo svg { width: 26px; height: 26px; }
+
+    .page-center {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 100px);
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 28px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+      padding: 52px 56px 48px;
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .card-sub {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+
+    .field {
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .field label {
+      display: block;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .field input {
+      width: 100%;
+      background: var(--input-bg);
+      border: none;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      outline: none;
+      transition: box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .field input:focus {
+      background: #ccc;
+      box-shadow: 0 0 0 2px rgba(10,10,10,0.15);
+    }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: 16px;
+      padding: 14px;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      background: var(--btn-dark);
+      color: var(--btn-dark-text);
+      border: 1.5px solid var(--btn-dark);
+      letter-spacing: 0.01em;
+    }
+
+    .btn-submit:hover {
+      background: #222;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.22);
+    }
+
+    .btn-submit:active { transform: translateY(0); }
+
+    .card-footer {
+      margin-top: 28px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .card-footer a {
+      color: var(--text-primary);
+      text-decoration: underline;
+      font-weight: 700;
+      transition: opacity 0.15s;
+    }
+
+    .card-footer a:hover { opacity: 0.6; }
+
+    @media (max-width: 560px) {
+      nav { padding: 20px 24px; }
+      .card { padding: 36px 24px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <nav>
+    <a href="sastra-landing.html" class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+      </svg>
+      SASTRA
+    </a>
+  </nav>
+
+  <div class="page-center">
+    <div class="card">
+      <h1 class="card-title">Sign In</h1>
+      <p class="card-sub">Welcome back</p>
+
+      <div class="field">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="" autocomplete="username"/>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="" autocomplete="current-password"/>
+      </div>
+
+      <button class="btn-submit" onclick="handleLogin()">Login</button>
+
+      <p class="card-footer">Don't have an account? <a href="signup.html">Sign up</a></p>
+    </div>
+  </div>
+
+  <script>
+    async function handleLogin() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      if (!username || !password) {
+        document.getElementById('username').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
+        document.getElementById('password').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ username, password }),
+        });
+        if (!response.ok) {
+          throw new Error('Invalid username or password');
+        }
+        const payload = await response.json();
+        sessionStorage.setItem('sastra_user', payload.user?.username || username);
+        window.location.href = 'dashboard.html';
+      } catch (error) {
+        alert(error.message || 'Login failed');
+      }
+    }
+  </script>
+</body>
+</html>

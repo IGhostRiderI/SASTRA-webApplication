@@ -1,0 +1,3571 @@
+{
+  "generated_at": "2026-03-19T17:36:53.887343+00:00",
+  "rule_count": 196,
+  "rules": [
+    {
+      "id": "juliet-cpp-cwe-114-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-114",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.65
+    },
+    {
+      "id": "juliet-cpp-cwe-114-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-114",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "csv-cpp-cwe-119-memcpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-119",
+      "cwe_name": "Improper Restriction of Operations within the Bounds of a Memory Buffer",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.64
+    },
+    {
+      "id": "csv-cpp-cwe-119-sscanf",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: sscanf",
+      "pattern": "\\bsscanf\\s*\\(",
+      "cwe_id": "CWE-119",
+      "cwe_name": "Improper Restriction of Operations within the Bounds of a Memory Buffer",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-cpp-cwe-119-strncat",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: strncat",
+      "pattern": "\\bstrncat\\s*\\(",
+      "cwe_id": "CWE-119",
+      "cwe_name": "Improper Restriction of Operations within the Bounds of a Memory Buffer",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-cpp-cwe-119-strncpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: strncpy",
+      "pattern": "\\bstrncpy\\s*\\(",
+      "cwe_id": "CWE-119",
+      "cwe_name": "Improper Restriction of Operations within the Bounds of a Memory Buffer",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.88
+    },
+    {
+      "id": "seed-cpp-cwe-120-45109",
+      "language": "cpp",
+      "title": "Unbounded format write",
+      "pattern": "\\bsprintf\\s*\\(",
+      "cwe_id": "CWE-120",
+      "cwe_name": "Buffer Copy without Checking Size of Input",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-cpp-cwe-120-64455",
+      "language": "cpp",
+      "title": "Unbounded copy",
+      "pattern": "\\bstrcpy\\s*\\(",
+      "cwe_id": "CWE-120",
+      "cwe_name": "Buffer Copy without Checking Size of Input",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "juliet-cpp-cwe-121-memcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-121",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.69
+    },
+    {
+      "id": "juliet-cpp-cwe-121-memmove",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memmove",
+      "pattern": "\\bmemmove\\s*\\(",
+      "cwe_id": "CWE-121",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.77
+    },
+    {
+      "id": "juliet-cpp-cwe-121-wcsncpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcsncpy",
+      "pattern": "\\bwcsncpy\\s*\\(",
+      "cwe_id": "CWE-121",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-122-memcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-122",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.77
+    },
+    {
+      "id": "juliet-cpp-cwe-122-strcat",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strcat",
+      "pattern": "\\bstrcat\\s*\\(",
+      "cwe_id": "CWE-122",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-122-strcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strcpy",
+      "pattern": "\\bstrcpy\\s*\\(",
+      "cwe_id": "CWE-122",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.65
+    },
+    {
+      "id": "juliet-cpp-cwe-122-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-122",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.69
+    },
+    {
+      "id": "juliet-cpp-cwe-122-wcsncpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcsncpy",
+      "pattern": "\\bwcsncpy\\s*\\(",
+      "cwe_id": "CWE-122",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-123-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-123",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-124-memcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-124",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.69
+    },
+    {
+      "id": "juliet-cpp-cwe-124-memmove",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memmove",
+      "pattern": "\\bmemmove\\s*\\(",
+      "cwe_id": "CWE-124",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.5700000000000001
+    },
+    {
+      "id": "juliet-cpp-cwe-124-strcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strcpy",
+      "pattern": "\\bstrcpy\\s*\\(",
+      "cwe_id": "CWE-124",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-124-strncpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strncpy",
+      "pattern": "\\bstrncpy\\s*\\(",
+      "cwe_id": "CWE-124",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.5700000000000001
+    },
+    {
+      "id": "juliet-cpp-cwe-124-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-124",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "csv-cpp-cwe-125-memcpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-125",
+      "cwe_name": "Out-of-bounds Read",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.98
+    },
+    {
+      "id": "csv-cpp-cwe-125-memmove",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: memmove",
+      "pattern": "\\bmemmove\\s*\\(",
+      "cwe_id": "CWE-125",
+      "cwe_name": "Out-of-bounds Read",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-cpp-cwe-125-strncpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: strncpy",
+      "pattern": "\\bstrncpy\\s*\\(",
+      "cwe_id": "CWE-125",
+      "cwe_name": "Out-of-bounds Read",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.62
+    },
+    {
+      "id": "juliet-cpp-cwe-126-memcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-126",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.9299999999999999
+    },
+    {
+      "id": "juliet-cpp-cwe-126-memmove",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memmove",
+      "pattern": "\\bmemmove\\s*\\(",
+      "cwe_id": "CWE-126",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.73
+    },
+    {
+      "id": "juliet-cpp-cwe-127-memcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-127",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-127-memmove",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memmove",
+      "pattern": "\\bmemmove\\s*\\(",
+      "cwe_id": "CWE-127",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.5700000000000001
+    },
+    {
+      "id": "juliet-cpp-cwe-127-strcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strcpy",
+      "pattern": "\\bstrcpy\\s*\\(",
+      "cwe_id": "CWE-127",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.5700000000000001
+    },
+    {
+      "id": "juliet-cpp-cwe-127-strncpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strncpy",
+      "pattern": "\\bstrncpy\\s*\\(",
+      "cwe_id": "CWE-127",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-127-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-127",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.5700000000000001
+    },
+    {
+      "id": "juliet-cpp-cwe-127-wcsncpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcsncpy",
+      "pattern": "\\bwcsncpy\\s*\\(",
+      "cwe_id": "CWE-127",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-134-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-134",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-15-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-15",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-176-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-176",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "csv-cpp-cwe-189-memcpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-189",
+      "cwe_name": "Numeric Errors",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-cpp-cwe-190-memcpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-190",
+      "cwe_name": "Integer Overflow or Wraparound",
+      "severity": "High",
+      "owasp_category": "A04:2021 - Insecure Design",
+      "source": "dataset:13870382",
+      "confidence": 0.72
+    },
+    {
+      "id": "csv-cpp-cwe-190-strncpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: strncpy",
+      "pattern": "\\bstrncpy\\s*\\(",
+      "cwe_id": "CWE-190",
+      "cwe_name": "Integer Overflow or Wraparound",
+      "severity": "High",
+      "owasp_category": "A04:2021 - Insecure Design",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "juliet-cpp-cwe-190-fscanf",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: fscanf",
+      "pattern": "\\bfscanf\\s*\\(",
+      "cwe_id": "CWE-190",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A04:2021 - Insecure Design",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.95
+    },
+    {
+      "id": "juliet-cpp-cwe-191-fscanf",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: fscanf",
+      "pattern": "\\bfscanf\\s*\\(",
+      "cwe_id": "CWE-191",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A04:2021 - Insecure Design",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.89
+    },
+    {
+      "id": "juliet-cpp-cwe-191-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-191",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A04:2021 - Insecure Design",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-194-memcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-194",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.95
+    },
+    {
+      "id": "juliet-cpp-cwe-194-memmove",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memmove",
+      "pattern": "\\bmemmove\\s*\\(",
+      "cwe_id": "CWE-194",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.9299999999999999
+    },
+    {
+      "id": "juliet-cpp-cwe-194-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-194",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.69
+    },
+    {
+      "id": "juliet-cpp-cwe-194-strncpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strncpy",
+      "pattern": "\\bstrncpy\\s*\\(",
+      "cwe_id": "CWE-194",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.95
+    },
+    {
+      "id": "juliet-cpp-cwe-195-memcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-195",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.95
+    },
+    {
+      "id": "juliet-cpp-cwe-195-memmove",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memmove",
+      "pattern": "\\bmemmove\\s*\\(",
+      "cwe_id": "CWE-195",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.95
+    },
+    {
+      "id": "juliet-cpp-cwe-195-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-195",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.65
+    },
+    {
+      "id": "juliet-cpp-cwe-195-strncpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strncpy",
+      "pattern": "\\bstrncpy\\s*\\(",
+      "cwe_id": "CWE-195",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.95
+    },
+    {
+      "id": "juliet-cpp-cwe-197-fscanf",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: fscanf",
+      "pattern": "\\bfscanf\\s*\\(",
+      "cwe_id": "CWE-197",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.8500000000000001
+    },
+    {
+      "id": "juliet-cpp-cwe-197-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-197",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "csv-cpp-cwe-20-fscanf",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: fscanf",
+      "pattern": "\\bfscanf\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "seed-cpp-cwe-20-19092",
+      "language": "cpp",
+      "title": "Unvalidated user input via scanf",
+      "pattern": "\\bscanf\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-cpp-cwe-20-69928",
+      "language": "cpp",
+      "title": "Unvalidated string-to-integer conversion (atoi does not detect errors)",
+      "pattern": "\\batoi\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-cpp-cwe-20-81031",
+      "language": "cpp",
+      "title": "Unvalidated string-to-float conversion (atof does not detect errors)",
+      "pattern": "\\batof\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-cpp-cwe-20-97932",
+      "language": "cpp",
+      "title": "Unvalidated environment variable access",
+      "pattern": "\\bgetenv\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "juliet-cpp-cwe-23-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-23",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.77
+    },
+    {
+      "id": "juliet-cpp-cwe-23-strncat",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strncat",
+      "pattern": "\\bstrncat\\s*\\(",
+      "cwe_id": "CWE-23",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.5700000000000001
+    },
+    {
+      "id": "seed-cpp-cwe-242-90983",
+      "language": "cpp",
+      "title": "Unsafe input API",
+      "pattern": "\\bgets\\s*\\(",
+      "cwe_id": "CWE-242",
+      "cwe_name": "Use of Inherently Dangerous Function",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "juliet-cpp-cwe-259-strcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strcpy",
+      "pattern": "\\bstrcpy\\s*\\(",
+      "cwe_id": "CWE-259",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-259-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-259",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-319-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-319",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.77
+    },
+    {
+      "id": "juliet-cpp-cwe-321-memcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-321",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.77
+    },
+    {
+      "id": "juliet-cpp-cwe-321-strcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strcpy",
+      "pattern": "\\bstrcpy\\s*\\(",
+      "cwe_id": "CWE-321",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-321-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-321",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-36-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-36",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.73
+    },
+    {
+      "id": "juliet-cpp-cwe-36-strncat",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strncat",
+      "pattern": "\\bstrncat\\s*\\(",
+      "cwe_id": "CWE-36",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "csv-cpp-cwe-362-strcpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: strcpy",
+      "pattern": "\\bstrcpy\\s*\\(",
+      "cwe_id": "CWE-362",
+      "cwe_name": "Concurrent Execution using Shared Resource with Improper Synchronization ('Race Condition')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-cpp-cwe-362-strncpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: strncpy",
+      "pattern": "\\bstrncpy\\s*\\(",
+      "cwe_id": "CWE-362",
+      "cwe_name": "Concurrent Execution using Shared Resource with Improper Synchronization ('Race Condition')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "juliet-cpp-cwe-369-fscanf",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: fscanf",
+      "pattern": "\\bfscanf\\s*\\(",
+      "cwe_id": "CWE-369",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.77
+    },
+    {
+      "id": "juliet-cpp-cwe-369-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-369",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.65
+    },
+    {
+      "id": "csv-cpp-cwe-399-memcpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-399",
+      "cwe_name": "Resource Management Errors",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "juliet-cpp-cwe-400-fscanf",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: fscanf",
+      "pattern": "\\bfscanf\\s*\\(",
+      "cwe_id": "CWE-400",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.8500000000000001
+    },
+    {
+      "id": "juliet-cpp-cwe-400-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-400",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.65
+    },
+    {
+      "id": "csv-cpp-cwe-401-strncpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: strncpy",
+      "pattern": "\\bstrncpy\\s*\\(",
+      "cwe_id": "CWE-401",
+      "cwe_name": "Missing Release of Memory after Effective Lifetime",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "juliet-cpp-cwe-416-strcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strcpy",
+      "pattern": "\\bstrcpy\\s*\\(",
+      "cwe_id": "CWE-416",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.5700000000000001
+    },
+    {
+      "id": "juliet-cpp-cwe-426-popen",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: popen",
+      "pattern": "\\bpopen\\s*\\(",
+      "cwe_id": "CWE-426",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-426-strcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strcpy",
+      "pattern": "\\bstrcpy\\s*\\(",
+      "cwe_id": "CWE-426",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-426-system",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: system",
+      "pattern": "\\bsystem\\s*\\(",
+      "cwe_id": "CWE-426",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-426-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-426",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-427-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-427",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.73
+    },
+    {
+      "id": "juliet-cpp-cwe-427-strncat",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strncat",
+      "pattern": "\\bstrncat\\s*\\(",
+      "cwe_id": "CWE-427",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-591-strcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strcpy",
+      "pattern": "\\bstrcpy\\s*\\(",
+      "cwe_id": "CWE-591",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-591-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-591",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-606-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-606",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.69
+    },
+    {
+      "id": "juliet-cpp-cwe-606-sscanf",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: sscanf",
+      "pattern": "\\bsscanf\\s*\\(",
+      "cwe_id": "CWE-606",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.95
+    },
+    {
+      "id": "juliet-cpp-cwe-617-fscanf",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: fscanf",
+      "pattern": "\\bfscanf\\s*\\(",
+      "cwe_id": "CWE-617",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.77
+    },
+    {
+      "id": "juliet-cpp-cwe-617-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-617",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-665-strcat",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strcat",
+      "pattern": "\\bstrcat\\s*\\(",
+      "cwe_id": "CWE-665",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.77
+    },
+    {
+      "id": "juliet-cpp-cwe-665-strncat",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strncat",
+      "pattern": "\\bstrncat\\s*\\(",
+      "cwe_id": "CWE-665",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.77
+    },
+    {
+      "id": "juliet-cpp-cwe-680-fscanf",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: fscanf",
+      "pattern": "\\bfscanf\\s*\\(",
+      "cwe_id": "CWE-680",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.73
+    },
+    {
+      "id": "juliet-cpp-cwe-680-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-680",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.69
+    },
+    {
+      "id": "juliet-cpp-cwe-690-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-690",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.8500000000000001
+    },
+    {
+      "id": "juliet-cpp-cwe-761-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-761",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.65
+    },
+    {
+      "id": "juliet-cpp-cwe-761-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-761",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "juliet-cpp-cwe-78-popen",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: popen",
+      "pattern": "\\bpopen\\s*\\(",
+      "cwe_id": "CWE-78",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.61
+    },
+    {
+      "id": "juliet-cpp-cwe-78-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-78",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.95
+    },
+    {
+      "id": "seed-cpp-cwe-78-96909",
+      "language": "cpp",
+      "title": "Command execution sink",
+      "pattern": "\\bsystem\\s*\\(",
+      "cwe_id": "CWE-78",
+      "cwe_name": "OS Command Injection",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "csv-cpp-cwe-787-fscanf",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: fscanf",
+      "pattern": "\\bfscanf\\s*\\(",
+      "cwe_id": "CWE-787",
+      "cwe_name": "Out-of-bounds Write",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.66
+    },
+    {
+      "id": "csv-cpp-cwe-787-memcpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: memcpy",
+      "pattern": "\\bmemcpy\\s*\\(",
+      "cwe_id": "CWE-787",
+      "cwe_name": "Out-of-bounds Write",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.98
+    },
+    {
+      "id": "csv-cpp-cwe-787-memmove",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: memmove",
+      "pattern": "\\bmemmove\\s*\\(",
+      "cwe_id": "CWE-787",
+      "cwe_name": "Out-of-bounds Write",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.6799999999999999
+    },
+    {
+      "id": "csv-cpp-cwe-787-strncpy",
+      "language": "cpp",
+      "title": "Dataset-derived risky call: strncpy",
+      "pattern": "\\bstrncpy\\s*\\(",
+      "cwe_id": "CWE-787",
+      "cwe_name": "Out-of-bounds Write",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.9
+    },
+    {
+      "id": "juliet-cpp-cwe-789-fscanf",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: fscanf",
+      "pattern": "\\bfscanf\\s*\\(",
+      "cwe_id": "CWE-789",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.9299999999999999
+    },
+    {
+      "id": "juliet-cpp-cwe-789-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-789",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.69
+    },
+    {
+      "id": "juliet-cpp-cwe-789-strcpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strcpy",
+      "pattern": "\\bstrcpy\\s*\\(",
+      "cwe_id": "CWE-789",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.95
+    },
+    {
+      "id": "juliet-cpp-cwe-789-wcscpy",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: wcscpy",
+      "pattern": "\\bwcscpy\\s*\\(",
+      "cwe_id": "CWE-789",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.95
+    },
+    {
+      "id": "juliet-cpp-cwe-90-recv",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: recv",
+      "pattern": "\\brecv\\s*\\(",
+      "cwe_id": "CWE-90",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.65
+    },
+    {
+      "id": "juliet-cpp-cwe-90-strncat",
+      "language": "cpp",
+      "title": "Juliet-derived risky call: strncat",
+      "pattern": "\\bstrncat\\s*\\(",
+      "cwe_id": "CWE-90",
+      "cwe_name": "Juliet CWE pattern",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:juliet-cpp",
+      "confidence": 0.53
+    },
+    {
+      "id": "seed-java-cwe-20-36246",
+      "language": "java",
+      "title": "Unvalidated query string access",
+      "pattern": "\\bgetQueryString\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-java-cwe-20-49646",
+      "language": "java",
+      "title": "Unvalidated HTTP request header access",
+      "pattern": "\\bgetHeader\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-java-cwe-20-67011",
+      "language": "java",
+      "title": "Unvalidated raw request body access",
+      "pattern": "\\bgetInputStream\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-java-cwe-20-8270",
+      "language": "java",
+      "title": "Unvalidated HTTP request parameter",
+      "pattern": "\\bgetParameter\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "csv-java-cwe-22-evaluate",
+      "language": "java",
+      "title": "Dataset-derived risky call: evaluate",
+      "pattern": "\\bevaluate\\s*\\(",
+      "cwe_id": "CWE-22",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-java-cwe-22-parse",
+      "language": "java",
+      "title": "Dataset-derived risky call: parse",
+      "pattern": "\\bparse\\s*\\(",
+      "cwe_id": "CWE-22",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.98
+    },
+    {
+      "id": "csv-java-cwe-22-setproperty",
+      "language": "java",
+      "title": "Dataset-derived risky call: setProperty",
+      "pattern": "\\bsetProperty\\s*\\(",
+      "cwe_id": "CWE-22",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.62
+    },
+    {
+      "id": "csv-java-cwe-264-setproperty",
+      "language": "java",
+      "title": "Dataset-derived risky call: setProperty",
+      "pattern": "\\bsetProperty\\s*\\(",
+      "cwe_id": "CWE-264",
+      "cwe_name": "Permissions, Privileges, and Access Controls",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.76
+    },
+    {
+      "id": "csv-java-cwe-287-parse",
+      "language": "java",
+      "title": "Dataset-derived risky call: parse",
+      "pattern": "\\bparse\\s*\\(",
+      "cwe_id": "CWE-287",
+      "cwe_name": "Improper Authentication",
+      "severity": "High",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-java-cwe-306-parse",
+      "language": "java",
+      "title": "Dataset-derived risky call: parse",
+      "pattern": "\\bparse\\s*\\(",
+      "cwe_id": "CWE-306",
+      "cwe_name": "Missing Authentication for Critical Function",
+      "severity": "Medium",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "source": "dataset:13870382",
+      "confidence": 0.62
+    },
+    {
+      "id": "csv-java-cwe-347-parse",
+      "language": "java",
+      "title": "Dataset-derived risky call: parse",
+      "pattern": "\\bparse\\s*\\(",
+      "cwe_id": "CWE-347",
+      "cwe_name": "Improper Verification of Cryptographic Signature",
+      "severity": "Medium",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "source": "dataset:13870382",
+      "confidence": 0.66
+    },
+    {
+      "id": "csv-java-cwe-502-deserialize",
+      "language": "java",
+      "title": "Dataset-derived risky call: deserialize",
+      "pattern": "\\bdeserialize\\s*\\(",
+      "cwe_id": "CWE-502",
+      "cwe_name": "Deserialization of Untrusted Data",
+      "severity": "Critical",
+      "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-java-cwe-502-readobject",
+      "language": "java",
+      "title": "Dataset-derived risky call: readObject",
+      "pattern": "\\breadObject\\s*\\(",
+      "cwe_id": "CWE-502",
+      "cwe_name": "Deserialization of Untrusted Data",
+      "severity": "Critical",
+      "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+      "source": "dataset:13870382",
+      "confidence": 0.78
+    },
+    {
+      "id": "csv-java-cwe-502-writeobject",
+      "language": "java",
+      "title": "Dataset-derived risky call: writeObject",
+      "pattern": "\\bwriteObject\\s*\\(",
+      "cwe_id": "CWE-502",
+      "cwe_name": "Deserialization of Untrusted Data",
+      "severity": "Critical",
+      "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+      "source": "dataset:13870382",
+      "confidence": 0.66
+    },
+    {
+      "id": "seed-java-cwe-502-9645",
+      "language": "java",
+      "title": "Potential unsafe deserialization",
+      "pattern": "ObjectInputStream\\s*\\(",
+      "cwe_id": "CWE-502",
+      "cwe_name": "Deserialization of Untrusted Data",
+      "severity": "Critical",
+      "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "csv-java-cwe-611-evaluate",
+      "language": "java",
+      "title": "Dataset-derived risky call: evaluate",
+      "pattern": "\\bevaluate\\s*\\(",
+      "cwe_id": "CWE-611",
+      "cwe_name": "Improper Restriction of XML External Entity Reference",
+      "severity": "High",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-java-cwe-611-getruntime",
+      "language": "java",
+      "title": "Dataset-derived risky call: getRuntime",
+      "pattern": "\\bgetRuntime\\s*\\(",
+      "cwe_id": "CWE-611",
+      "cwe_name": "Improper Restriction of XML External Entity Reference",
+      "severity": "High",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.66
+    },
+    {
+      "id": "csv-java-cwe-611-newinstance",
+      "language": "java",
+      "title": "Dataset-derived risky call: newInstance",
+      "pattern": "\\bnewInstance\\s*\\(",
+      "cwe_id": "CWE-611",
+      "cwe_name": "Improper Restriction of XML External Entity Reference",
+      "severity": "High",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.98
+    },
+    {
+      "id": "csv-java-cwe-611-parse",
+      "language": "java",
+      "title": "Dataset-derived risky call: parse",
+      "pattern": "\\bparse\\s*\\(",
+      "cwe_id": "CWE-611",
+      "cwe_name": "Improper Restriction of XML External Entity Reference",
+      "severity": "High",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.98
+    },
+    {
+      "id": "csv-java-cwe-611-setproperty",
+      "language": "java",
+      "title": "Dataset-derived risky call: setProperty",
+      "pattern": "\\bsetProperty\\s*\\(",
+      "cwe_id": "CWE-611",
+      "cwe_name": "Improper Restriction of XML External Entity Reference",
+      "severity": "High",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.6799999999999999
+    },
+    {
+      "id": "csv-java-cwe-668-parse",
+      "language": "java",
+      "title": "Dataset-derived risky call: parse",
+      "pattern": "\\bparse\\s*\\(",
+      "cwe_id": "CWE-668",
+      "cwe_name": "Exposure of Resource to Wrong Sphere",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.64
+    },
+    {
+      "id": "csv-java-cwe-74-evaluate",
+      "language": "java",
+      "title": "Dataset-derived risky call: evaluate",
+      "pattern": "\\bevaluate\\s*\\(",
+      "cwe_id": "CWE-74",
+      "cwe_name": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-java-cwe-755-parse",
+      "language": "java",
+      "title": "Dataset-derived risky call: parse",
+      "pattern": "\\bparse\\s*\\(",
+      "cwe_id": "CWE-755",
+      "cwe_name": "Improper Handling of Exceptional Conditions",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.66
+    },
+    {
+      "id": "seed-java-cwe-78-20634",
+      "language": "java",
+      "title": "Command execution sink",
+      "pattern": "Runtime\\.getRuntime\\s*\\(\\s*\\)\\s*\\.\\s*exec\\s*\\(",
+      "cwe_id": "CWE-78",
+      "cwe_name": "OS Command Injection",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "csv-java-cwe-79-parse",
+      "language": "java",
+      "title": "Dataset-derived risky call: parse",
+      "pattern": "\\bparse\\s*\\(",
+      "cwe_id": "CWE-79",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.64
+    },
+    {
+      "id": "csv-java-cwe-79-setproperty",
+      "language": "java",
+      "title": "Dataset-derived risky call: setProperty",
+      "pattern": "\\bsetProperty\\s*\\(",
+      "cwe_id": "CWE-79",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.66
+    },
+    {
+      "id": "csv-java-cwe-863-parse",
+      "language": "java",
+      "title": "Dataset-derived risky call: parse",
+      "pattern": "\\bparse\\s*\\(",
+      "cwe_id": "CWE-863",
+      "cwe_name": "Incorrect Authorization",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.62
+    },
+    {
+      "id": "csv-java-cwe-89-createstatement",
+      "language": "java",
+      "title": "Dataset-derived risky call: createStatement",
+      "pattern": "\\bcreateStatement\\s*\\(",
+      "cwe_id": "CWE-89",
+      "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.98
+    },
+    {
+      "id": "csv-java-cwe-89-forname",
+      "language": "java",
+      "title": "Dataset-derived risky call: forName",
+      "pattern": "\\bforName\\s*\\(",
+      "cwe_id": "CWE-89",
+      "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.64
+    },
+    {
+      "id": "csv-java-cwe-89-getconnection",
+      "language": "java",
+      "title": "Dataset-derived risky call: getConnection",
+      "pattern": "\\bgetConnection\\s*\\(",
+      "cwe_id": "CWE-89",
+      "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.9
+    },
+    {
+      "id": "csv-java-cwe-89-newinstance",
+      "language": "java",
+      "title": "Dataset-derived risky call: newInstance",
+      "pattern": "\\bnewInstance\\s*\\(",
+      "cwe_id": "CWE-89",
+      "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-java-cwe-89-preparestatement",
+      "language": "java",
+      "title": "Dataset-derived risky call: prepareStatement",
+      "pattern": "\\bprepareStatement\\s*\\(",
+      "cwe_id": "CWE-89",
+      "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.9
+    },
+    {
+      "id": "seed-java-cwe-89-51688",
+      "language": "java",
+      "title": "Potential SQL injection sink",
+      "pattern": "Statement\\s*\\.\\s*execute(Query|Update)?\\s*\\(",
+      "cwe_id": "CWE-89",
+      "cwe_name": "SQL Injection",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "csv-java-cwe-91-readobject",
+      "language": "java",
+      "title": "Dataset-derived risky call: readObject",
+      "pattern": "\\breadObject\\s*\\(",
+      "cwe_id": "CWE-91",
+      "cwe_name": "XML Injection (aka Blind XPath Injection)",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.64
+    },
+    {
+      "id": "csv-java-cwe-91-writeobject",
+      "language": "java",
+      "title": "Dataset-derived risky call: writeObject",
+      "pattern": "\\bwriteObject\\s*\\(",
+      "cwe_id": "CWE-91",
+      "cwe_name": "XML Injection (aka Blind XPath Injection)",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-java-cwe-94-evaluate",
+      "language": "java",
+      "title": "Dataset-derived risky call: evaluate",
+      "pattern": "\\bevaluate\\s*\\(",
+      "cwe_id": "CWE-94",
+      "cwe_name": "Improper Control of Generation of Code ('Code Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-java-cwe-94-parse",
+      "language": "java",
+      "title": "Dataset-derived risky call: parse",
+      "pattern": "\\bparse\\s*\\(",
+      "cwe_id": "CWE-94",
+      "cwe_name": "Improper Control of Generation of Code ('Code Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.62
+    },
+    {
+      "id": "csv-python-cwe-125-compile",
+      "language": "python",
+      "title": "Dataset-derived risky call: compile",
+      "pattern": "\\bcompile\\s*\\(",
+      "cwe_id": "CWE-125",
+      "cwe_name": "Out-of-bounds Read",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.7
+    },
+    {
+      "id": "csv-python-cwe-125-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-125",
+      "cwe_name": "Out-of-bounds Read",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-python-cwe-20-load",
+      "language": "python",
+      "title": "Dataset-derived risky call: load",
+      "pattern": "\\bload\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-python-cwe-20-loads",
+      "language": "python",
+      "title": "Dataset-derived risky call: loads",
+      "pattern": "\\bloads\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-python-cwe-20-mktemp",
+      "language": "python",
+      "title": "Dataset-derived risky call: mktemp",
+      "pattern": "\\bmktemp\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-python-cwe-20-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.8200000000000001
+    },
+    {
+      "id": "csv-python-cwe-20-popen",
+      "language": "python",
+      "title": "Dataset-derived risky call: Popen",
+      "pattern": "\\bPopen\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.66
+    },
+    {
+      "id": "csv-python-cwe-20-run",
+      "language": "python",
+      "title": "Dataset-derived risky call: run",
+      "pattern": "\\brun\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "seed-python-cwe-20-12125",
+      "language": "python",
+      "title": "Unvalidated user input via input()",
+      "pattern": "\\binput\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-python-cwe-20-32341",
+      "language": "python",
+      "title": "Unvalidated command-line argument access",
+      "pattern": "\\bsys\\.argv\\b",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-python-cwe-20-68370",
+      "language": "python",
+      "title": "Unsafe YAML load",
+      "pattern": "\\byaml\\.load\\s*\\(",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-python-cwe-20-85530",
+      "language": "python",
+      "title": "Unvalidated web request input accessed directly",
+      "pattern": "\\brequest\\.(args|form|json|data|values|files)\\b",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-python-cwe-20-887",
+      "language": "python",
+      "title": "Unvalidated environment variable access",
+      "pattern": "\\bos\\.environ\\b",
+      "cwe_id": "CWE-20",
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "csv-python-cwe-21-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-21",
+      "cwe_name": "DEPRECATED: Pathname Traversal and Equivalence Errors",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-python-cwe-22-call",
+      "language": "python",
+      "title": "Dataset-derived risky call: call",
+      "pattern": "\\bcall\\s*\\(",
+      "cwe_id": "CWE-22",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.66
+    },
+    {
+      "id": "csv-python-cwe-22-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-22",
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.9199999999999999
+    },
+    {
+      "id": "csv-python-cwe-264-load",
+      "language": "python",
+      "title": "Dataset-derived risky call: load",
+      "pattern": "\\bload\\s*\\(",
+      "cwe_id": "CWE-264",
+      "cwe_name": "Permissions, Privileges, and Access Controls",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-python-cwe-264-mktemp",
+      "language": "python",
+      "title": "Dataset-derived risky call: mktemp",
+      "pattern": "\\bmktemp\\s*\\(",
+      "cwe_id": "CWE-264",
+      "cwe_name": "Permissions, Privileges, and Access Controls",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-python-cwe-264-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-264",
+      "cwe_name": "Permissions, Privileges, and Access Controls",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-python-cwe-269-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-269",
+      "cwe_name": "Improper Privilege Management",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-python-cwe-287-loads",
+      "language": "python",
+      "title": "Dataset-derived risky call: loads",
+      "pattern": "\\bloads\\s*\\(",
+      "cwe_id": "CWE-287",
+      "cwe_name": "Improper Authentication",
+      "severity": "High",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "source": "dataset:13870382",
+      "confidence": 0.62
+    },
+    {
+      "id": "csv-python-cwe-295-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-295",
+      "cwe_name": "Improper Certificate Validation",
+      "severity": "High",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-python-cwe-331-compile",
+      "language": "python",
+      "title": "Dataset-derived risky call: compile",
+      "pattern": "\\bcompile\\s*\\(",
+      "cwe_id": "CWE-331",
+      "cwe_name": "Insufficient Entropy",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.62
+    },
+    {
+      "id": "csv-python-cwe-352-loads",
+      "language": "python",
+      "title": "Dataset-derived risky call: loads",
+      "pattern": "\\bloads\\s*\\(",
+      "cwe_id": "CWE-352",
+      "cwe_name": "Cross-Site Request Forgery (CSRF)",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.98
+    },
+    {
+      "id": "csv-python-cwe-352-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-352",
+      "cwe_name": "Cross-Site Request Forgery (CSRF)",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-python-cwe-36-run",
+      "language": "python",
+      "title": "Dataset-derived risky call: run",
+      "pattern": "\\brun\\s*\\(",
+      "cwe_id": "CWE-36",
+      "cwe_name": "Absolute Path Traversal",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.62
+    },
+    {
+      "id": "csv-python-cwe-400-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-400",
+      "cwe_name": "Uncontrolled Resource Consumption",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.6
+    },
+    {
+      "id": "csv-python-cwe-427-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-427",
+      "cwe_name": "Uncontrolled Search Path Element",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-python-cwe-502-load",
+      "language": "python",
+      "title": "Dataset-derived risky call: load",
+      "pattern": "\\bload\\s*\\(",
+      "cwe_id": "CWE-502",
+      "cwe_name": "Deserialization of Untrusted Data",
+      "severity": "Critical",
+      "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+      "source": "dataset:13870382",
+      "confidence": 0.7
+    },
+    {
+      "id": "csv-python-cwe-502-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-502",
+      "cwe_name": "Deserialization of Untrusted Data",
+      "severity": "Critical",
+      "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+      "source": "dataset:13870382",
+      "confidence": 0.72
+    },
+    {
+      "id": "seed-python-cwe-502-91828",
+      "language": "python",
+      "title": "Unsafe deserialization",
+      "pattern": "\\bpickle\\.loads\\s*\\(",
+      "cwe_id": "CWE-502",
+      "cwe_name": "Deserialization of Untrusted Data",
+      "severity": "Critical",
+      "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "csv-python-cwe-59-load",
+      "language": "python",
+      "title": "Dataset-derived risky call: load",
+      "pattern": "\\bload\\s*\\(",
+      "cwe_id": "CWE-59",
+      "cwe_name": "Improper Link Resolution Before File Access ('Link Following')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.6
+    },
+    {
+      "id": "csv-python-cwe-59-mktemp",
+      "language": "python",
+      "title": "Dataset-derived risky call: mktemp",
+      "pattern": "\\bmktemp\\s*\\(",
+      "cwe_id": "CWE-59",
+      "cwe_name": "Improper Link Resolution Before File Access ('Link Following')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.66
+    },
+    {
+      "id": "csv-python-cwe-59-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-59",
+      "cwe_name": "Improper Link Resolution Before File Access ('Link Following')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.7
+    },
+    {
+      "id": "csv-python-cwe-59-popen",
+      "language": "python",
+      "title": "Dataset-derived risky call: Popen",
+      "pattern": "\\bPopen\\s*\\(",
+      "cwe_id": "CWE-59",
+      "cwe_name": "Improper Link Resolution Before File Access ('Link Following')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.6
+    },
+    {
+      "id": "csv-python-cwe-601-mktemp",
+      "language": "python",
+      "title": "Dataset-derived risky call: mktemp",
+      "pattern": "\\bmktemp\\s*\\(",
+      "cwe_id": "CWE-601",
+      "cwe_name": "URL Redirection to Untrusted Site ('Open Redirect')",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-python-cwe-770-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-770",
+      "cwe_name": "Allocation of Resources Without Limits or Throttling",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.64
+    },
+    {
+      "id": "csv-python-cwe-78-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-78",
+      "cwe_name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.6
+    },
+    {
+      "id": "csv-python-cwe-78-run",
+      "language": "python",
+      "title": "Dataset-derived risky call: run",
+      "pattern": "\\brun\\s*\\(",
+      "cwe_id": "CWE-78",
+      "cwe_name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.64
+    },
+    {
+      "id": "csv-python-cwe-78-system",
+      "language": "python",
+      "title": "Dataset-derived risky call: system",
+      "pattern": "\\bsystem\\s*\\(",
+      "cwe_id": "CWE-78",
+      "cwe_name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.62
+    },
+    {
+      "id": "seed-python-cwe-78-10074",
+      "language": "python",
+      "title": "OS command execution sink",
+      "pattern": "\\bos\\.system\\s*\\(",
+      "cwe_id": "CWE-78",
+      "cwe_name": "OS Command Injection",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "csv-python-cwe-79-call",
+      "language": "python",
+      "title": "Dataset-derived risky call: call",
+      "pattern": "\\bcall\\s*\\(",
+      "cwe_id": "CWE-79",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-python-cwe-79-loads",
+      "language": "python",
+      "title": "Dataset-derived risky call: loads",
+      "pattern": "\\bloads\\s*\\(",
+      "cwe_id": "CWE-79",
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-python-cwe-843-run",
+      "language": "python",
+      "title": "Dataset-derived risky call: run",
+      "pattern": "\\brun\\s*\\(",
+      "cwe_id": "CWE-843",
+      "cwe_name": "Access of Resource Using Incompatible Type ('Type Confusion')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "source": "dataset:13870382",
+      "confidence": 0.98
+    },
+    {
+      "id": "csv-python-cwe-918-compile",
+      "language": "python",
+      "title": "Dataset-derived risky call: compile",
+      "pattern": "\\bcompile\\s*\\(",
+      "cwe_id": "CWE-918",
+      "cwe_name": "Server-Side Request Forgery (SSRF)",
+      "severity": "Critical",
+      "owasp_category": "A10:2021 - Server-Side Request Forgery (SSRF)",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "csv-python-cwe-918-loads",
+      "language": "python",
+      "title": "Dataset-derived risky call: loads",
+      "pattern": "\\bloads\\s*\\(",
+      "cwe_id": "CWE-918",
+      "cwe_name": "Server-Side Request Forgery (SSRF)",
+      "severity": "Critical",
+      "owasp_category": "A10:2021 - Server-Side Request Forgery (SSRF)",
+      "source": "dataset:13870382",
+      "confidence": 0.64
+    },
+    {
+      "id": "csv-python-cwe-94-loads",
+      "language": "python",
+      "title": "Dataset-derived risky call: loads",
+      "pattern": "\\bloads\\s*\\(",
+      "cwe_id": "CWE-94",
+      "cwe_name": "Improper Control of Generation of Code ('Code Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.56
+    },
+    {
+      "id": "csv-python-cwe-94-open",
+      "language": "python",
+      "title": "Dataset-derived risky call: open",
+      "pattern": "\\bopen\\s*\\(",
+      "cwe_id": "CWE-94",
+      "cwe_name": "Improper Control of Generation of Code ('Code Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "dataset:13870382",
+      "confidence": 0.58
+    },
+    {
+      "id": "seed-python-cwe-94-73721",
+      "language": "python",
+      "title": "Unsafe exec usage",
+      "pattern": "\\bexec\\s*\\(",
+      "cwe_id": "CWE-94",
+      "cwe_name": "Code Injection",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    },
+    {
+      "id": "seed-python-cwe-94-97228",
+      "language": "python",
+      "title": "Dangerous dynamic evaluation",
+      "pattern": "\\beval\\s*\\(",
+      "cwe_id": "CWE-94",
+      "cwe_name": "Code Injection",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "source": "seed",
+      "confidence": 0.99
+    }
+  ],
+  "cwe_catalog": {
+    "CWE-22": {
+      "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 255,
+      "source": "dataset:13870382"
+    },
+    "CWE-59": {
+      "cwe_name": "Improper Link Resolution Before File Access ('Link Following')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 62,
+      "source": "dataset:13870382"
+    },
+    "CWE-20": {
+      "cwe_name": "Improper Input Validation",
+      "severity": "Medium",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 209,
+      "source": "dataset:13870382"
+    },
+    "CWE-79": {
+      "cwe_name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 309,
+      "source": "dataset:13870382"
+    },
+    "CWE-264": {
+      "cwe_name": "Permissions, Privileges, and Access Controls",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 73,
+      "source": "dataset:13870382"
+    },
+    "CWE-310": {
+      "cwe_name": "Cryptographic Issues",
+      "severity": "Medium",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "samples": 8,
+      "source": "dataset:13870382"
+    },
+    "CWE-78": {
+      "cwe_name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 81,
+      "source": "multiple"
+    },
+    "CWE-255": {
+      "cwe_name": "Credentials Management Errors",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 6,
+      "source": "dataset:13870382"
+    },
+    "CWE-94": {
+      "cwe_name": "Improper Control of Generation of Code ('Code Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 165,
+      "source": "dataset:13870382"
+    },
+    "CWE-200": {
+      "cwe_name": "Exposure of Sensitive Information to an Unauthorized Actor",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 141,
+      "source": "dataset:13870382"
+    },
+    "CWE-89": {
+      "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 322,
+      "source": "dataset:13870382"
+    },
+    "CWE-330": {
+      "cwe_name": "Use of Insufficiently Random Values",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 20,
+      "source": "dataset:13870382"
+    },
+    "CWE-119": {
+      "cwe_name": "Improper Restriction of Operations within the Bounds of a Memory Buffer",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 55,
+      "source": "dataset:13870382"
+    },
+    "CWE-269": {
+      "cwe_name": "Improper Privilege Management",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 37,
+      "source": "dataset:13870382"
+    },
+    "CWE-352": {
+      "cwe_name": "Cross-Site Request Forgery (CSRF)",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 220,
+      "source": "dataset:13870382"
+    },
+    "CWE-74": {
+      "cwe_name": "Improper Neutralization of Special Elements in Output Used by a Downstream Component ('Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 179,
+      "source": "dataset:13870382"
+    },
+    "CWE-203": {
+      "cwe_name": "Observable Discrepancy",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 24,
+      "source": "dataset:13870382"
+    },
+    "CWE-116": {
+      "cwe_name": "Improper Encoding or Escaping of Output",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 12,
+      "source": "dataset:13870382"
+    },
+    "CWE-19": {
+      "cwe_name": "Data Processing Errors",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 4,
+      "source": "dataset:13870382"
+    },
+    "CWE-295": {
+      "cwe_name": "Improper Certificate Validation",
+      "severity": "High",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "samples": 19,
+      "source": "dataset:13870382"
+    },
+    "CWE-254": {
+      "cwe_name": "7PK - Security Features",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 6,
+      "source": "dataset:13870382"
+    },
+    "CWE-601": {
+      "cwe_name": "URL Redirection to Untrusted Site ('Open Redirect')",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 125,
+      "source": "dataset:13870382"
+    },
+    "CWE-21": {
+      "cwe_name": "DEPRECATED: Pathname Traversal and Equivalence Errors",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 19,
+      "source": "dataset:13870382"
+    },
+    "CWE-611": {
+      "cwe_name": "Improper Restriction of XML External Entity Reference",
+      "severity": "High",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 241,
+      "source": "dataset:13870382"
+    },
+    "CWE-502": {
+      "cwe_name": "Deserialization of Untrusted Data",
+      "severity": "Critical",
+      "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+      "samples": 541,
+      "source": "dataset:13870382"
+    },
+    "CWE-134": {
+      "cwe_name": "Use of Externally-Controlled Format String",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 34,
+      "source": "multiple"
+    },
+    "CWE-77": {
+      "cwe_name": "Improper Neutralization of Special Elements used in a Command ('Command Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 27,
+      "source": "dataset:13870382"
+    },
+    "CWE-287": {
+      "cwe_name": "Improper Authentication",
+      "severity": "High",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "samples": 181,
+      "source": "dataset:13870382"
+    },
+    "CWE-93": {
+      "cwe_name": "Improper Neutralization of CRLF Sequences ('CRLF Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 6,
+      "source": "dataset:13870382"
+    },
+    "CWE-613": {
+      "cwe_name": "Insufficient Session Expiration",
+      "severity": "Medium",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "samples": 114,
+      "source": "dataset:13870382"
+    },
+    "CWE-285": {
+      "cwe_name": "Improper Authorization",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 2,
+      "source": "dataset:13870382"
+    },
+    "CWE-863": {
+      "cwe_name": "Incorrect Authorization",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 75,
+      "source": "dataset:13870382"
+    },
+    "CWE-436": {
+      "cwe_name": "Interpretation Conflict",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 17,
+      "source": "dataset:13870382"
+    },
+    "CWE-918": {
+      "cwe_name": "Server-Side Request Forgery (SSRF)",
+      "severity": "Critical",
+      "owasp_category": "A10:2021 - Server-Side Request Forgery (SSRF)",
+      "samples": 372,
+      "source": "dataset:13870382"
+    },
+    "CWE-362": {
+      "cwe_name": "Concurrent Execution using Shared Resource with Improper Synchronization ('Race Condition')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 39,
+      "source": "dataset:13870382"
+    },
+    "CWE-346": {
+      "cwe_name": "Origin Validation Error",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 6,
+      "source": "dataset:13870382"
+    },
+    "CWE-787": {
+      "cwe_name": "Out-of-bounds Write",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 468,
+      "source": "dataset:13870382"
+    },
+    "CWE-532": {
+      "cwe_name": "Insertion of Sensitive Information into Log File",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 19,
+      "source": "dataset:13870382"
+    },
+    "CWE-684": {
+      "cwe_name": "Incorrect Provision of Specified Functionality",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 3,
+      "source": "dataset:13870382"
+    },
+    "CWE-674": {
+      "cwe_name": "Uncontrolled Recursion",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 16,
+      "source": "dataset:13870382"
+    },
+    "CWE-331": {
+      "cwe_name": "Insufficient Entropy",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 6,
+      "source": "dataset:13870382"
+    },
+    "CWE-400": {
+      "cwe_name": "Uncontrolled Resource Consumption",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 189,
+      "source": "multiple"
+    },
+    "CWE-770": {
+      "cwe_name": "Allocation of Resources Without Limits or Throttling",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 67,
+      "source": "dataset:13870382"
+    },
+    "CWE-252": {
+      "cwe_name": "Unchecked Return Value",
+      "severity": "Low",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 4,
+      "source": "dataset:13870382"
+    },
+    "CWE-125": {
+      "cwe_name": "Out-of-bounds Read",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 442,
+      "source": "dataset:13870382"
+    },
+    "CWE-172": {
+      "cwe_name": "Encoding Error",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 2,
+      "source": "dataset:13870382"
+    },
+    "CWE-475": {
+      "cwe_name": "Undefined Behavior for Input to API",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-476": {
+      "cwe_name": "NULL Pointer Dereference",
+      "severity": "Medium",
+      "owasp_category": "A04:2021 - Insecure Design",
+      "samples": 95,
+      "source": "multiple"
+    },
+    "CWE-617": {
+      "cwe_name": "Reachable Assertion",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 104,
+      "source": "multiple"
+    },
+    "CWE-190": {
+      "cwe_name": "Integer Overflow or Wraparound",
+      "severity": "High",
+      "owasp_category": "A04:2021 - Insecure Design",
+      "samples": 159,
+      "source": "multiple"
+    },
+    "CWE-369": {
+      "cwe_name": "Divide By Zero",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 53,
+      "source": "multiple"
+    },
+    "CWE-835": {
+      "cwe_name": "Loop with Unreachable Exit Condition ('Infinite Loop')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 33,
+      "source": "dataset:13870382"
+    },
+    "CWE-824": {
+      "cwe_name": "Access of Uninitialized Pointer",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 6,
+      "source": "dataset:13870382"
+    },
+    "CWE-662": {
+      "cwe_name": "Improper Synchronization",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-843": {
+      "cwe_name": "Access of Resource Using Incompatible Type ('Type Confusion')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 72,
+      "source": "multiple"
+    },
+    "CWE-415": {
+      "cwe_name": "Double Free",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 47,
+      "source": "multiple"
+    },
+    "CWE-312": {
+      "cwe_name": "Cleartext Storage of Sensitive Information",
+      "severity": "Medium",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "samples": 21,
+      "source": "dataset:13870382"
+    },
+    "CWE-755": {
+      "cwe_name": "Improper Handling of Exceptional Conditions",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 60,
+      "source": "dataset:13870382"
+    },
+    "CWE-80": {
+      "cwe_name": "Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic XSS)",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-1333": {
+      "cwe_name": "Inefficient Regular Expression Complexity",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 8,
+      "source": "dataset:13870382"
+    },
+    "CWE-444": {
+      "cwe_name": "Inconsistent Interpretation of HTTP Requests ('HTTP Request/Response Smuggling')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 109,
+      "source": "dataset:13870382"
+    },
+    "CWE-113": {
+      "cwe_name": "Improper Neutralization of CRLF Sequences in HTTP Headers ('HTTP Request/Response Splitting')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 4,
+      "source": "dataset:13870382"
+    },
+    "CWE-668": {
+      "cwe_name": "Exposure of Resource to Wrong Sphere",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 117,
+      "source": "dataset:13870382"
+    },
+    "CWE-326": {
+      "cwe_name": "Inadequate Encryption Strength",
+      "severity": "Medium",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "samples": 23,
+      "source": "dataset:13870382"
+    },
+    "CWE-88": {
+      "cwe_name": "Improper Neutralization of Argument Delimiters in a Command ('Argument Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-1236": {
+      "cwe_name": "Improper Neutralization of Formula Elements in a CSV File",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 3,
+      "source": "dataset:13870382"
+    },
+    "CWE-284": {
+      "cwe_name": "Improper Access Control",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 6,
+      "source": "dataset:13870382"
+    },
+    "CWE-209": {
+      "cwe_name": "Generation of Error Message Containing Sensitive Information",
+      "severity": "Low",
+      "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
+      "samples": 21,
+      "source": "dataset:13870382"
+    },
+    "CWE-23": {
+      "cwe_name": "Relative Path Traversal",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 33,
+      "source": "multiple"
+    },
+    "CWE-404": {
+      "cwe_name": "Improper Resource Shutdown or Release",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 47,
+      "source": "multiple"
+    },
+    "CWE-29": {
+      "cwe_name": "Path Traversal: '\\..\\filename'",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 4,
+      "source": "dataset:13870382"
+    },
+    "CWE-36": {
+      "cwe_name": "Absolute Path Traversal",
+      "severity": "High",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 32,
+      "source": "multiple"
+    },
+    "CWE-359": {
+      "cwe_name": "Exposure of Private Personal Information to an Unauthorized Actor",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 34,
+      "source": "dataset:13870382"
+    },
+    "CWE-862": {
+      "cwe_name": "Missing Authorization",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 72,
+      "source": "dataset:13870382"
+    },
+    "CWE-290": {
+      "cwe_name": "Authentication Bypass by Spoofing",
+      "severity": "Medium",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "samples": 17,
+      "source": "dataset:13870382"
+    },
+    "CWE-620": {
+      "cwe_name": "Unverified Password Change",
+      "severity": "Medium",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-367": {
+      "cwe_name": "Time-of-check Time-of-use (TOCTOU) Race Condition",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 7,
+      "source": "dataset:13870382"
+    },
+    "CWE-697": {
+      "cwe_name": "Incorrect Comparison",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 10,
+      "source": "dataset:13870382"
+    },
+    "CWE-670": {
+      "cwe_name": "Always-Incorrect Control Flow Implementation",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 9,
+      "source": "dataset:13870382"
+    },
+    "CWE-789": {
+      "cwe_name": "Memory Allocation with Excessive Size Value",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 32,
+      "source": "multiple"
+    },
+    "CWE-212": {
+      "cwe_name": "Improper Removal of Sensitive Information Before Storage or Transfer",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 2,
+      "source": "dataset:13870382"
+    },
+    "CWE-754": {
+      "cwe_name": "Improper Check for Unusual or Exceptional Conditions",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 4,
+      "source": "dataset:13870382"
+    },
+    "CWE-327": {
+      "cwe_name": "Use of a Broken or Risky Cryptographic Algorithm",
+      "severity": "Medium",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "samples": 8,
+      "source": "dataset:13870382"
+    },
+    "CWE-1021": {
+      "cwe_name": "Improper Restriction of Rendered UI Layers or Frames",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 3,
+      "source": "dataset:13870382"
+    },
+    "CWE-311": {
+      "cwe_name": "Missing Encryption of Sensitive Data",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 8,
+      "source": "dataset:13870382"
+    },
+    "CWE-521": {
+      "cwe_name": "Weak Password Requirements",
+      "severity": "Medium",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "samples": 27,
+      "source": "dataset:13870382"
+    },
+    "CWE-306": {
+      "cwe_name": "Missing Authentication for Critical Function",
+      "severity": "Medium",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "samples": 27,
+      "source": "dataset:13870382"
+    },
+    "CWE-75": {
+      "cwe_name": "Failure to Sanitize Special Elements into a Different Plane (Special Element Injection)",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 7,
+      "source": "dataset:13870382"
+    },
+    "CWE-522": {
+      "cwe_name": "Insufficiently Protected Credentials",
+      "severity": "Medium",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "samples": 6,
+      "source": "dataset:13870382"
+    },
+    "CWE-427": {
+      "cwe_name": "Uncontrolled Search Path Element",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 34,
+      "source": "multiple"
+    },
+    "CWE-707": {
+      "cwe_name": "Improper Neutralization",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-377": {
+      "cwe_name": "Insecure Temporary File",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 35,
+      "source": "dataset:13870382"
+    },
+    "CWE-732": {
+      "cwe_name": "Incorrect Permission Assignment for Critical Resource",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 12,
+      "source": "dataset:13870382"
+    },
+    "CWE-347": {
+      "cwe_name": "Improper Verification of Cryptographic Signature",
+      "severity": "Medium",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "samples": 48,
+      "source": "dataset:13870382"
+    },
+    "CWE-693": {
+      "cwe_name": "Protection Mechanism Failure",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 31,
+      "source": "dataset:13870382"
+    },
+    "CWE-378": {
+      "cwe_name": "Creation of Temporary File With Insecure Permissions",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 17,
+      "source": "dataset:13870382"
+    },
+    "CWE-379": {
+      "cwe_name": "Creation of Temporary File in Directory with Insecure Permissions",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 17,
+      "source": "dataset:13870382"
+    },
+    "CWE-354": {
+      "cwe_name": "Improper Validation of Integrity Check Value",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 4,
+      "source": "dataset:13870382"
+    },
+    "CWE-345": {
+      "cwe_name": "Insufficient Verification of Data Authenticity",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 14,
+      "source": "dataset:13870382"
+    },
+    "CWE-61": {
+      "cwe_name": "UNIX Symbolic Link (Symlink) Following",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-335": {
+      "cwe_name": "Incorrect Usage of Seeds in Pseudo-Random Number Generator (PRNG)",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-338": {
+      "cwe_name": "Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)",
+      "severity": "Medium",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "samples": 6,
+      "source": "dataset:13870382"
+    },
+    "CWE-798": {
+      "cwe_name": "Use of Hard-coded Credentials",
+      "severity": "Critical",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "samples": 2,
+      "source": "dataset:13870382"
+    },
+    "CWE-428": {
+      "cwe_name": "Unquoted Search Path or Element",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 2,
+      "source": "dataset:13870382"
+    },
+    "CWE-665": {
+      "cwe_name": "Improper Initialization",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 24,
+      "source": "multiple"
+    },
+    "CWE-241": {
+      "cwe_name": "Improper Handling of Unexpected Data Type",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 3,
+      "source": "dataset:13870382"
+    },
+    "CWE-552": {
+      "cwe_name": "Files or Directories Accessible to External Parties",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 9,
+      "source": "dataset:13870382"
+    },
+    "CWE-610": {
+      "cwe_name": "Externally Controlled Reference to a Resource in Another Sphere",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-90": {
+      "cwe_name": "Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection')",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 31,
+      "source": "multiple"
+    },
+    "CWE-434": {
+      "cwe_name": "Unrestricted Upload of File with Dangerous Type",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 6,
+      "source": "dataset:13870382"
+    },
+    "CWE-538": {
+      "cwe_name": "Insertion of Sensitive Information into Externally-Accessible File or Directory",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-916": {
+      "cwe_name": "Use of Password Hash With Insufficient Computational Effort",
+      "severity": "Medium",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "samples": 5,
+      "source": "dataset:13870382"
+    },
+    "CWE-681": {
+      "cwe_name": "Incorrect Conversion between Numeric Types",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 15,
+      "source": "dataset:13870382"
+    },
+    "CWE-1321": {
+      "cwe_name": "Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-640": {
+      "cwe_name": "Weak Password Recovery Mechanism for Forgotten Password",
+      "severity": "Medium",
+      "owasp_category": "A07:2021 - Identification and Authentication Failures",
+      "samples": 21,
+      "source": "dataset:13870382"
+    },
+    "CWE-459": {
+      "cwe_name": "Incomplete Cleanup",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 14,
+      "source": "dataset:13870382"
+    },
+    "CWE-214": {
+      "cwe_name": "Invocation of Process Using Visible Sensitive Information",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 2,
+      "source": "dataset:13870382"
+    },
+    "CWE-91": {
+      "cwe_name": "XML Injection (aka Blind XPath Injection)",
+      "severity": "Critical",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 44,
+      "source": "dataset:13870382"
+    },
+    "CWE-829": {
+      "cwe_name": "Inclusion of Functionality from Untrusted Control Sphere",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-401": {
+      "cwe_name": "Missing Release of Memory after Effective Lifetime",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 38,
+      "source": "multiple"
+    },
+    "CWE-776": {
+      "cwe_name": "Improper Restriction of Recursive Entity References in DTDs ('XML Entity Expansion')",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 32,
+      "source": "dataset:13870382"
+    },
+    "CWE-639": {
+      "cwe_name": "Authorization Bypass Through User-Controlled Key",
+      "severity": "Medium",
+      "owasp_category": "A01:2021 - Broken Access Control",
+      "samples": 31,
+      "source": "dataset:13870382"
+    },
+    "CWE-416": {
+      "cwe_name": "Use After Free",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 52,
+      "source": "multiple"
+    },
+    "CWE-189": {
+      "cwe_name": "Numeric Errors",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 6,
+      "source": "dataset:13870382"
+    },
+    "CWE-16": {
+      "cwe_name": "Configuration",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-399": {
+      "cwe_name": "Resource Management Errors",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 17,
+      "source": "dataset:13870382"
+    },
+    "CWE-120": {
+      "cwe_name": "Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 24,
+      "source": "dataset:13870382"
+    },
+    "CWE-763": {
+      "cwe_name": "Release of Invalid Pointer or Reference",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 4,
+      "source": "dataset:13870382"
+    },
+    "CWE-834": {
+      "cwe_name": "Excessive Iteration",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-122": {
+      "cwe_name": "Heap-based Buffer Overflow",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 36,
+      "source": "multiple"
+    },
+    "CWE-426": {
+      "cwe_name": "Untrusted Search Path",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 17,
+      "source": "multiple"
+    },
+    "CWE-943": {
+      "cwe_name": "Improper Neutralization of Special Elements in Data Query Logic",
+      "severity": "Low",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-494": {
+      "cwe_name": "Download of Code Without Integrity Check",
+      "severity": "Medium",
+      "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+      "samples": 2,
+      "source": "dataset:13870382"
+    },
+    "CWE-1187": {
+      "cwe_name": "DEPRECATED: Use of Uninitialized Resource",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 2,
+      "source": "dataset:13870382"
+    },
+    "CWE-908": {
+      "cwe_name": "Use of Uninitialized Resource",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 9,
+      "source": "dataset:13870382"
+    },
+    "CWE-1284": {
+      "cwe_name": "Improper Validation of Specified Quantity in Input",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 2,
+      "source": "dataset:13870382"
+    },
+    "CWE-131": {
+      "cwe_name": "Incorrect Calculation of Buffer Size",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 10,
+      "source": "dataset:13870382"
+    },
+    "CWE-704": {
+      "cwe_name": "Incorrect Type Conversion or Cast",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-388": {
+      "cwe_name": "7PK - Errors",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:13870382"
+    },
+    "CWE-672": {
+      "cwe_name": "Operation on a Resource after Expiration or Release",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 10,
+      "source": "multiple"
+    },
+    "CWE-913": {
+      "cwe_name": "Improper Control of Dynamically-Managed Code Resources",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 10,
+      "source": "dataset:13870382"
+    },
+    "CWE-129": {
+      "cwe_name": "Improper Validation of Array Index",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 2,
+      "source": "dataset:13870382"
+    },
+    "CWE-761": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-464": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 4,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-259": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 8,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-563": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-588": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 4,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-15": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 4,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-321": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 8,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-123": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 12,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-500": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 1,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-114": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-773": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 12,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-680": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-319": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A02:2021 - Cryptographic Failures",
+      "samples": 16,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-675": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 16,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-256": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 8,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-775": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 12,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-606": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-591": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 8,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-176": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 4,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-762": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-191": {
+      "cwe_name": "Juliet testcases",
+      "severity": "High",
+      "owasp_category": "A04:2021 - Insecure Design",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-124": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-690": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-126": {
+      "cwe_name": "Juliet testcases",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-457": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 2,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-590": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-121": {
+      "cwe_name": "Juliet testcases",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-127": {
+      "cwe_name": "Juliet testcases",
+      "severity": "High",
+      "owasp_category": "A03:2021 - Injection",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-197": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-195": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    },
+    "CWE-194": {
+      "cwe_name": "Juliet testcases",
+      "severity": "Medium",
+      "owasp_category": "A05:2021 - Security Misconfiguration",
+      "samples": 30,
+      "source": "dataset:juliet-cpp"
+    }
+  }
+}

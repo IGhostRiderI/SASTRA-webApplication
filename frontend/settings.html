@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SASTRA – Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-start: #c8e6e0;
+      --bg-mid:   #dde8f0;
+      --bg-end:   #e8ddf0;
+      --text-primary: #0a0a0a;
+      --text-muted: #6b7280;
+      --text-light: #9ca3af;
+      --card-bg: rgba(255,255,255,0.52);
+      --card-border: rgba(255,255,255,0.85);
+      --card-hover: rgba(255,255,255,0.72);
+      --input-bg: #e5e7eb;
+      --btn-dark: #0a0a0a;
+      --btn-dark-text: #ffffff;
+      --accent-red: #ef4444;
+      --accent-green: #10b981;
+      --nav-height: 72px;
+    }
+
+    html, body { min-height: 100vh; font-family: 'DM Sans', sans-serif; }
+
+    body {
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    .blob { position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.28; pointer-events: none; z-index: 0; }
+    .blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, #a7f3d0, transparent 70%); top: -120px; right: 60px; animation: drift 14s ease-in-out infinite alternate; }
+    .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, #c4b5fd, transparent 70%); bottom: -100px; left: 100px; animation: drift 18s 3s ease-in-out infinite alternate; }
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(24px,18px) scale(1.05); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ══ NAV ══ */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav-height);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.7);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+      animation: slideDown 0.5s ease both;
+    }
+
+    .nav-left { display: flex; align-items: center; gap: 36px; }
+
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.05rem;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-primary);
+      text-decoration: none; flex-shrink: 0;
+    }
+    .logo svg { width: 22px; height: 22px; }
+
+    .nav-links { display: flex; align-items: center; gap: 6px; }
+
+    .nav-link {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 999px; border: 1.5px solid transparent;
+      cursor: pointer; transition: all 0.18s ease; color: var(--text-muted);
+      background: transparent; text-decoration: none;
+    }
+    .nav-link:hover { background: rgba(255,255,255,0.6); color: var(--text-primary); border-color: rgba(0,0,0,0.1); }
+    .nav-link.active { background: rgba(255,255,255,0.75); color: var(--text-primary); border-color: rgba(0,0,0,0.14); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+
+    .nav-welcome { font-size: 0.85rem; color: var(--text-muted); }
+    .nav-welcome span { font-weight: 600; color: var(--text-primary); }
+
+    .btn-nav-user {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 999px;
+      border: 1.5px solid rgba(0,0,0,0.14); background: rgba(255,255,255,0.65);
+      color: var(--text-primary); cursor: pointer; transition: all 0.18s ease;
+    }
+    .btn-nav-user:hover { background: rgba(255,255,255,0.9); box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+
+    .btn-logout {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+      padding: 9px 20px; border-radius: 999px;
+      background: var(--btn-dark); color: var(--btn-dark-text);
+      border: none; cursor: pointer; transition: all 0.18s ease;
+    }
+    .btn-logout:hover { background: #222; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
+
+    /* ══ MAIN ══ */
+    .main {
+      position: relative; z-index: 5;
+      padding: 44px 40px 60px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Page header */
+    .page-header {
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .page-header h1 {
+      font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .page-header p { font-size: 0.92rem; color: var(--text-muted); margin-top: 6px; }
+
+    /* ── Settings Card ── */
+    .settings-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+      overflow: hidden;
+      animation: fadeUp 0.6s 0.18s ease both;
+      margin-bottom: 20px;
+    }
+
+    .card-section {
+      padding: 32px 36px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .card-section:last-child { border-bottom: none; }
+
+    .section-heading {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700;
+      margin-bottom: 28px; color: var(--text-primary);
+    }
+    .section-heading svg { width: 18px; height: 18px; opacity: 0.75; }
+
+    /* ── Form Grid ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px 28px;
+    }
+
+    .form-grid.single { grid-template-columns: 1fr; max-width: 420px; }
+
+    .field { display: flex; flex-direction: column; gap: 8px; }
+
+    .field label {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+      color: var(--text-primary); letter-spacing: 0.01em;
+    }
+
+    .field input {
+      background: var(--input-bg);
+      border: 1.5px solid transparent;
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      color: var(--text-primary); outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .field input::placeholder { color: var(--text-light); }
+
+    .field input:focus {
+      background: rgba(255,255,255,0.8);
+      border-color: rgba(0,0,0,0.2);
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+    }
+
+    .field input.error {
+      border-color: var(--accent-red);
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
+    }
+
+    /* ── Buttons row ── */
+    .btn-row {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 28px; flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 600;
+      padding: 11px 26px; border-radius: 999px; cursor: pointer;
+      transition: all 0.18s ease; letter-spacing: 0.01em;
+    }
+
+    .btn-save {
+      background: var(--btn-dark); color: var(--btn-dark-text);
+      border: 1.5px solid var(--btn-dark);
+    }
+    .btn-save:hover { background: #222; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
+
+    .btn-discard {
+      background: rgba(255,255,255,0.6); color: var(--text-primary);
+      border: 1.5px solid rgba(0,0,0,0.14);
+      backdrop-filter: blur(6px);
+    }
+    .btn-discard:hover { background: rgba(255,255,255,0.85); box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+
+    /* Toast */
+    .toast {
+      display: none; align-items: center; gap: 8px;
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+      padding: 10px 18px; border-radius: 999px;
+      background: rgba(16,185,129,0.15); color: #059669;
+      border: 1px solid rgba(16,185,129,0.3);
+      margin-top: 16px; width: fit-content;
+      animation: fadeUp 0.3s ease both;
+    }
+    .toast.show { display: flex; }
+    .toast svg { width: 15px; height: 15px; }
+
+    /* ── Danger Zone ── */
+    .danger-zone {
+      background: rgba(239,68,68,0.07);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 16px;
+      padding: 24px 28px;
+      animation: fadeUp 0.6s 0.26s ease both;
+    }
+
+    .danger-heading {
+      display: flex; align-items: center; gap: 9px;
+      font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: #dc2626; margin-bottom: 10px;
+    }
+    .danger-heading svg { width: 17px; height: 17px; }
+
+    .danger-desc {
+      font-size: 0.88rem; color: #6b7280; line-height: 1.55;
+      max-width: 440px; margin-bottom: 20px;
+    }
+
+    .btn-delete {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700;
+      padding: 11px 24px; border-radius: 999px; cursor: pointer;
+      background: #dc2626; color: #fff;
+      border: none; transition: all 0.18s ease;
+    }
+    .btn-delete:hover { background: #b91c1c; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(220,38,38,0.3); }
+    .btn-delete svg { width: 15px; height: 15px; }
+
+    /* Delete confirm modal */
+    .overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.25); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+    }
+    .overlay.show { display: flex; }
+
+    .modal {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 22px;
+      padding: 40px 44px;
+      max-width: 420px; width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      animation: fadeUp 0.3s ease both;
+    }
+
+    .modal-icon {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: rgba(239,68,68,0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px;
+    }
+    .modal-icon svg { width: 26px; height: 26px; color: #dc2626; }
+
+    .modal h2 { font-family: 'Sora', sans-serif; font-size: 1.2rem; font-weight: 800; margin-bottom: 10px; }
+    .modal p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 28px; }
+
+    .modal-btns { display: flex; gap: 12px; justify-content: center; }
+
+    .btn-cancel {
+      font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 600;
+      padding: 11px 26px; border-radius: 999px; cursor: pointer;
+      background: rgba(255,255,255,0.7); color: var(--text-primary);
+      border: 1.5px solid rgba(0,0,0,0.14); transition: all 0.18s ease;
+    }
+    .btn-cancel:hover { background: rgba(255,255,255,0.95); }
+
+    .btn-confirm-delete {
+      font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700;
+      padding: 11px 26px; border-radius: 999px; cursor: pointer;
+      background: #dc2626; color: #fff; border: none; transition: all 0.18s ease;
+    }
+    .btn-confirm-delete:hover { background: #b91c1c; box-shadow: 0 4px 16px rgba(220,38,38,0.3); }
+
+    @media (max-width: 640px) {
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .main { padding: 28px 16px 48px; }
+      .card-section { padding: 24px 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .modal { padding: 30px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- ══ NAV ══ -->
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="sastra-landing.html" class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+        </svg>
+        SASTRA
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="new-scan.html" class="nav-link">New Scan</a>
+        <a href="scan-history.html" class="nav-link">Scan History</a>
+        <a href="settings.html" class="nav-link active">Settings</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <p class="nav-welcome">Welcome, <span id="nav-username">User</span></p>
+      <button class="btn-nav-user" id="username-btn">Username</button>
+      <button class="btn-logout" onclick="window.location.href='signin.html'">Log out</button>
+    </div>
+  </nav>
+
+  <!-- ══ MAIN ══ -->
+  <main class="main">
+
+    <div class="page-header">
+      <h1>Settings</h1>
+      <p>Manage your profile and account preferences</p>
+    </div>
+
+    <!-- Profile Settings Card -->
+    <div class="settings-card">
+      <div class="card-section">
+        <div class="section-heading">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile Settings
+        </div>
+
+        <div class="form-grid single">
+          <div class="field">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username"/>
+          </div>
+        </div>
+
+        <div class="form-grid" style="margin-top: 22px;">
+          <div class="field">
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" placeholder="Enter new password"/>
+          </div>
+          <div class="field">
+            <label for="confirm-password">Confirm New Password</label>
+            <input type="password" id="confirm-password" placeholder="Confirm new password"/>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-save" onclick="saveChanges()">Save Changes</button>
+          <button class="btn btn-discard" onclick="discardChanges()">Discard Changes</button>
+        </div>
+
+        <div class="toast" id="save-toast">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Changes saved successfully!
+        </div>
+      </div>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="danger-zone">
+      <div class="danger-heading">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Account Deletion
+      </div>
+      <p class="danger-desc">Deleting your account is permanent and cannot be undone. All your scan history, saved data, and settings will be permanently removed.</p>
+      <button class="btn-delete" onclick="document.getElementById('delete-overlay').classList.add('show')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        Delete Account
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Delete Confirm Modal -->
+  <div class="overlay" id="delete-overlay">
+    <div class="modal">
+      <div class="modal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <h2>Delete Account?</h2>
+      <p>This action is permanent and cannot be undone. All your data, scan history, and settings will be lost forever.</p>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="document.getElementById('delete-overlay').classList.remove('show')">Cancel</button>
+        <button class="btn-confirm-delete" onclick="window.location.href='signin.html'">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function loadUser() {
+      const response = await fetch('/api/auth/me', { credentials: 'include' });
+      if (!response.ok) {
+        window.location.href = 'signin.html';
+        return;
+      }
+      const payload = await response.json();
+      const username = payload.user?.username || 'User';
+      sessionStorage.setItem('sastra_user', username);
+      document.getElementById('nav-username').textContent = username;
+      document.getElementById('username-btn').textContent = username;
+      document.getElementById('username').value = username;
+    }
+
+    const originalUsername = sessionStorage.getItem('sastra_user') || '';
+
+    function saveChanges() {
+      const username = document.getElementById('username').value.trim();
+      const newPwd   = document.getElementById('new-password').value;
+      const confPwd  = document.getElementById('confirm-password').value;
+
+      // Clear errors
+      document.querySelectorAll('input').forEach(i => i.classList.remove('error'));
+
+      if (!username) {
+        document.getElementById('username').classList.add('error');
+        return;
+      }
+      if (newPwd && newPwd !== confPwd) {
+        document.getElementById('confirm-password').classList.add('error');
+        return;
+      }
+
+      sessionStorage.setItem('sastra_user', username);
+      document.getElementById('nav-username').textContent = username;
+      document.getElementById('username-btn').textContent = username;
+
+      // Show toast
+      const toast = document.getElementById('save-toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+
+      // Clear password fields
+      document.getElementById('new-password').value = '';
+      document.getElementById('confirm-password').value = '';
+    }
+
+    function discardChanges() {
+      document.getElementById('username').value = sessionStorage.getItem('sastra_user') || '';
+      document.getElementById('new-password').value = '';
+      document.getElementById('confirm-password').value = '';
+      document.querySelectorAll('input').forEach(i => i.classList.remove('error'));
+    }
+
+    // Close modal on overlay click
+    document.getElementById('delete-overlay').addEventListener('click', function(e) {
+      if (e.target === this) this.classList.remove('show');
+    });
+
+    document.querySelector('.btn-logout').onclick = async () => {
+      await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+      sessionStorage.removeItem('sastra_user');
+      window.location.href = 'signin.html';
+    };
+    loadUser();
+  </script>
+</body>
+</html>

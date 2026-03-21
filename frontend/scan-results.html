@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SASTRA – Scan Results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-start: #c8e6e0;
+      --bg-mid:   #dde8f0;
+      --bg-end:   #e8ddf0;
+      --text-primary: #0a0a0a;
+      --text-muted: #6b7280;
+      --text-light: #9ca3af;
+      --card-bg: rgba(255,255,255,0.55);
+      --card-border: rgba(255,255,255,0.88);
+      --btn-dark: #0a0a0a;
+      --btn-dark-text: #ffffff;
+      --col-critical: #dc2626;
+      --col-high:     #ea580c;
+      --col-medium:   #d97706;
+      --col-low:      #059669;
+      --nav-height: 72px;
+    }
+
+    html, body { min-height: 100vh; font-family: 'DM Sans', sans-serif; }
+    body {
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
+      background-attachment: fixed; color: var(--text-primary); overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    .blob { position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.28; pointer-events: none; z-index: 0; }
+    .blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, #a7f3d0, transparent 70%); top: -120px; right: 60px; animation: drift 14s ease-in-out infinite alternate; }
+    .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, #c4b5fd, transparent 70%); bottom: -100px; left: 100px; animation: drift 18s 3s ease-in-out infinite alternate; }
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(24px,18px) scale(1.05); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes countUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fillBar { from { width: 0; } to { width: var(--target-width); } }
+    @keyframes drawPie { from { stroke-dashoffset: 440; } to { stroke-dashoffset: var(--target-offset); } }
+
+    /* ══ NAV ══ */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav-height);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.7);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+      animation: slideDown 0.5s ease both;
+    }
+    .nav-left { display: flex; align-items: center; gap: 36px; }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.05rem;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-primary);
+      text-decoration: none; flex-shrink: 0;
+    }
+    .logo svg { width: 22px; height: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 6px; }
+    .nav-link {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 999px; border: 1.5px solid transparent;
+      cursor: pointer; transition: all 0.18s ease; color: var(--text-muted);
+      background: transparent; text-decoration: none;
+    }
+    .nav-link:hover { background: rgba(255,255,255,0.6); color: var(--text-primary); border-color: rgba(0,0,0,0.1); }
+    .nav-link.active { background: rgba(255,255,255,0.75); color: var(--text-primary); border-color: rgba(0,0,0,0.14); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .nav-welcome { font-size: 0.85rem; color: var(--text-muted); }
+    .nav-welcome span { font-weight: 600; color: var(--text-primary); }
+    .btn-nav-user {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 999px;
+      border: 1.5px solid rgba(0,0,0,0.14); background: rgba(255,255,255,0.65);
+      color: var(--text-primary); cursor: pointer; transition: all 0.18s ease;
+    }
+    .btn-nav-user:hover { background: rgba(255,255,255,0.9); }
+    .btn-logout {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+      padding: 9px 20px; border-radius: 999px;
+      background: var(--btn-dark); color: var(--btn-dark-text);
+      border: none; cursor: pointer; transition: all 0.18s ease;
+    }
+    .btn-logout:hover { background: #222; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
+
+    /* ══ MAIN ══ */
+    .main { position: relative; z-index: 5; padding: 44px 40px 70px; max-width: 1200px; margin: 0 auto; }
+
+    /* Page Header */
+    .page-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 32px; flex-wrap: wrap; gap: 16px;
+      animation: fadeUp 0.5s 0.05s ease both;
+    }
+    .page-header-left {}
+    .page-header h1 { font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; }
+    .page-header p { font-size: 0.9rem; color: var(--text-muted); margin-top: 5px; }
+
+    .header-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+    .btn-action {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600;
+      padding: 11px 22px; border-radius: 12px; cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .btn-action svg { width: 15px; height: 15px; }
+    .btn-dark-action { background: var(--btn-dark); color: #fff; border: none; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+    .btn-dark-action:hover { background: #222; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .btn-outline-action { background: rgba(255,255,255,0.6); color: var(--text-primary); border: 1.5px solid rgba(0,0,0,0.13); backdrop-filter: blur(8px); }
+    .btn-outline-action:hover { background: rgba(255,255,255,0.85); box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+
+    /* ── TOP 3 CARDS ROW ── */
+    .top-row {
+      display: grid; grid-template-columns: 1fr 1.4fr 1fr;
+      gap: 18px; margin-bottom: 24px;
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      padding: 28px 26px;
+    }
+
+    .card-title {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--text-muted); margin-bottom: 22px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card-title svg { width: 14px; height: 14px; }
+
+    /* Summary Grid */
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .summary-item {
+      background: rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.75);
+      border-radius: 13px; padding: 13px 15px;
+      transition: background 0.15s ease;
+    }
+    .summary-item:hover { background: rgba(255,255,255,0.65); }
+    .summary-item-label { font-size: 0.73rem; color: var(--text-light); margin-bottom: 5px; font-weight: 500; }
+    .summary-item-val { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; line-height: 1; }
+    .summary-item-val.danger { color: var(--col-critical); }
+    .summary-item-val.text-sm { font-size: 0.9rem; font-weight: 700; word-break: break-all; }
+    .summary-item-col { grid-column: span 2; }
+
+    .export-btn {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Sora', sans-serif; font-size: 0.84rem; font-weight: 700;
+      padding: 11px 20px; border-radius: 12px; cursor: pointer;
+      background: var(--btn-dark); color: #fff; border: none;
+      transition: all 0.18s ease; margin-top: 18px; width: 100%;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.14);
+    }
+    .export-btn:hover { background: #1e1e1e; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .export-btn svg { width: 15px; height: 15px; }
+
+    /* Pie Chart */
+    .chart-area {
+      display: flex; align-items: center; justify-content: center; gap: 32px;
+    }
+    .pie-wrap { position: relative; width: 160px; height: 160px; flex-shrink: 0; }
+    .pie-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+
+    .pie-legend { display: flex; flex-direction: column; gap: 12px; }
+    .legend-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .legend-left { display: flex; align-items: center; gap: 8px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .legend-label { font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
+    .legend-count { font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 800; }
+
+    /* CWE / OWASP */
+    .rankings-wrap { display: flex; flex-direction: column; gap: 22px; }
+    .ranking-group {}
+    .ranking-title { font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-light); margin-bottom: 12px; }
+    .rank-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+    .rank-label { font-family: 'Sora', sans-serif; font-size: 0.76rem; font-weight: 600; color: var(--text-muted); width: 68px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .rank-bar-wrap { flex: 1; height: 7px; background: rgba(0,0,0,0.07); border-radius: 999px; overflow: hidden; }
+    .rank-bar { height: 100%; border-radius: 999px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+    .rank-count { font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 800; width: 28px; text-align: right; flex-shrink: 0; }
+
+    /* ── FINDINGS TABLE ── */
+    .findings-section {
+      animation: fadeUp 0.6s 0.35s ease both;
+    }
+
+    .findings-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 18px; flex-wrap: wrap; gap: 12px;
+    }
+    .findings-title { font-family: 'Sora', sans-serif; font-size: 1.15rem; font-weight: 800; }
+    .findings-count {
+      font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 600;
+      color: var(--text-muted); background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(0,0,0,0.1); padding: 5px 13px; border-radius: 999px;
+    }
+
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-chip {
+      font-family: 'Sora', sans-serif; font-size: 0.76rem; font-weight: 600;
+      padding: 7px 15px; border-radius: 999px; cursor: pointer;
+      border: 1.5px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.5);
+      color: var(--text-muted); transition: all 0.16s ease;
+    }
+    .filter-chip:hover { background: rgba(255,255,255,0.8); color: var(--text-primary); }
+    .filter-chip.active { background: var(--btn-dark); color: #fff; border-color: var(--btn-dark); }
+    .filter-chip.critical-chip.active { background: #dc2626; border-color: #dc2626; }
+    .filter-chip.high-chip.active     { background: #ea580c; border-color: #ea580c; }
+    .filter-chip.medium-chip.active   { background: #d97706; border-color: #d97706; }
+    .filter-chip.low-chip.active      { background: #059669; border-color: #059669; }
+
+    .findings-table-wrap {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--card-border);
+      border-radius: 22px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    .tbl-head {
+      display: grid;
+      grid-template-columns: 110px 90px 130px 150px 80px 1fr 1fr;
+      padding: 13px 24px;
+      background: rgba(255,255,255,0.28);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .th {
+      font-family: 'Sora', sans-serif; font-size: 0.68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-light);
+    }
+
+    .finding-row {
+      display: grid;
+      grid-template-columns: 110px 90px 130px 150px 80px 1fr 1fr;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      align-items: start;
+      background: rgba(255,255,255,0.28);
+      cursor: pointer;
+      transition: background 0.16s ease;
+    }
+    .finding-row:last-child { border-bottom: none; }
+    .finding-row:hover { background: rgba(255,255,255,0.58); }
+
+    /* Severity badge */
+    .sev-badge {
+      display: inline-flex; flex-direction: column; align-items: flex-start; gap: 6px;
+    }
+    .sev-pill {
+      font-family: 'Sora', sans-serif; font-size: 0.76rem; font-weight: 800;
+      padding: 5px 13px; border-radius: 999px; color: #fff; letter-spacing: 0.02em;
+    }
+    .sev-pill.critical { background: var(--col-critical); }
+    .sev-pill.high     { background: var(--col-high); }
+    .sev-pill.medium   { background: var(--col-medium); }
+    .sev-pill.low      { background: var(--col-low); }
+
+    .confidence-tag {
+      font-size: 0.68rem; color: var(--text-light); font-weight: 500;
+      background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.08);
+      padding: 2px 8px; border-radius: 999px;
+    }
+
+    .cell-code {
+      font-family: 'Sora', sans-serif; font-size: 0.76rem; font-weight: 600;
+      color: var(--text-muted); line-height: 1.5;
+    }
+
+    .cell-owasp { font-family: 'Sora', sans-serif; font-size: 0.74rem; font-weight: 600; color: var(--text-muted); line-height: 1.6; }
+
+    .cell-file { font-family: 'DM Mono', monospace; font-size: 0.76rem; color: var(--text-primary); font-weight: 500; }
+
+    .cell-loc {
+      font-family: 'DM Mono', monospace; font-size: 0.8rem; font-weight: 600;
+      background: rgba(255,255,255,0.55); border: 1px solid rgba(0,0,0,0.08);
+      padding: 3px 9px; border-radius: 7px; width: fit-content;
+    }
+
+    .cell-issue {}
+    .issue-title {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 4px;
+    }
+    .issue-fix { font-size: 0.76rem; color: var(--text-muted); line-height: 1.5; }
+    .issue-fix strong { font-weight: 600; color: #059669; }
+
+    .cell-snippet {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      color: var(--text-muted); line-height: 1.6;
+      word-break: break-all;
+      background: rgba(0,0,0,0.03); border-radius: 8px; padding: 8px 10px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* Empty */
+    .no-findings {
+      display: none; flex-direction: column; align-items: center;
+      padding: 64px 32px; text-align: center; gap: 12px;
+    }
+    .no-findings.show { display: flex; }
+    .no-findings-icon { width: 56px; height: 56px; border-radius: 16px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); display: flex; align-items: center; justify-content: center; }
+    .no-findings-icon svg { width: 26px; height: 26px; color: #059669; }
+    .no-findings-title { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 800; }
+    .no-findings-sub { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* Expand modal */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.22); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal-box {
+      background: rgba(248,249,251,0.97); backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.9); border-radius: 24px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.14);
+      padding: 36px 38px; max-width: 620px; width: 100%;
+      animation: fadeUp 0.28s ease both; position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 18px; right: 18px;
+      width: 32px; height: 32px; border-radius: 9px;
+      background: rgba(0,0,0,0.07); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; color: var(--text-muted);
+      transition: background 0.15s;
+    }
+    .modal-close:hover { background: rgba(0,0,0,0.13); }
+    .modal-close svg { width: 14px; height: 14px; }
+    .modal-sev { margin-bottom: 14px; }
+    .modal-title { font-family: 'Sora', sans-serif; font-size: 1.15rem; font-weight: 800; margin-bottom: 6px; padding-right: 40px; }
+    .modal-meta { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 22px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .modal-meta span { display: flex; align-items: center; gap: 5px; }
+    .modal-section-title { font-family: 'Sora', sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-light); margin-bottom: 8px; margin-top: 18px; }
+    .modal-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; }
+    .code-block {
+      background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px;
+      padding: 14px 16px; font-family: 'DM Mono', monospace; font-size: 0.78rem;
+      color: var(--text-primary); line-height: 1.7; overflow-x: auto; white-space: pre;
+    }
+    .fix-tag { display: inline-flex; align-items: center; gap: 5px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: #059669; font-size: 0.78rem; font-weight: 600; padding: 4px 12px; border-radius: 999px; margin-top: 6px; }
+    .fix-tag svg { width: 12px; height: 12px; }
+
+    @media (max-width: 1000px) {
+      .top-row { grid-template-columns: 1fr 1fr; }
+      .top-row .glass-card:last-child { grid-column: span 2; }
+      .tbl-head, .finding-row { grid-template-columns: 100px 80px 130px 1fr 70px 1fr; }
+      .snippet-col { display: none; }
+    }
+    @media (max-width: 680px) {
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .main { padding: 28px 16px 48px; }
+      .top-row { grid-template-columns: 1fr; }
+      .top-row .glass-card:last-child { grid-column: span 1; }
+      .tbl-head, .finding-row { grid-template-columns: 90px 1fr 80px; }
+      .col-cwe, .col-owasp, .col-file, .col-issue { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="sastra-landing.html" class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+      </svg>
+      SASTRA
+    </a>
+    <div class="nav-links">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="new-scan.html" class="nav-link active">New Scan</a>
+      <a href="scan-history.html" class="nav-link">Scan History</a>
+      <a href="settings.html" class="nav-link">Settings</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <p class="nav-welcome">Welcome, <span id="nav-username">User</span></p>
+    <button class="btn-nav-user" id="username-btn">Username</button>
+    <button class="btn-logout" onclick="window.location.href='signin.html'">Log out</button>
+  </div>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-header-left">
+      <h1>Scan Results</h1>
+      <p id="result-subtitle">Completed scan for <strong id="result-filename">auth-service.py</strong> · <span id="result-timestamp"></span></p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-action btn-outline-action" onclick="window.location.href='new-scan.html'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        New Scan
+      </button>
+      <button class="btn-action btn-dark-action" onclick="exportPDF()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- ── TOP ROW ── -->
+  <div class="top-row" style="animation: fadeUp 0.6s 0.12s ease both;">
+
+    <!-- Summary -->
+    <div class="glass-card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Summary
+      </div>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="summary-item-label">Total Findings</div>
+          <div class="summary-item-val danger" id="sum-total">12</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-label">Risk Score</div>
+          <div class="summary-item-val" id="sum-risk">78</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-label">Files Scanned</div>
+          <div class="summary-item-val" id="sum-files">1</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-label">False Positives</div>
+          <div class="summary-item-val" id="sum-fp">0</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-label">File</div>
+          <div class="summary-item-val text-sm" id="sum-file">auth-service.py</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-label">Language</div>
+          <div class="summary-item-val text-sm" id="sum-lang">Python</div>
+        </div>
+      </div>
+      <button class="export-btn" onclick="exportPDF()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export PDF
+      </button>
+    </div>
+
+    <!-- Severity Breakdown Chart -->
+    <div class="glass-card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
+        Severity Breakdown
+      </div>
+      <div class="chart-area">
+        <div class="pie-wrap">
+          <svg viewBox="0 0 160 160" id="pie-svg">
+            <circle cx="80" cy="80" r="62" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="28"/>
+            <!-- segments drawn by JS -->
+          </svg>
+        </div>
+        <div class="pie-legend" id="pie-legend"></div>
+      </div>
+    </div>
+
+    <!-- CWE / OWASP -->
+    <div class="glass-card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Top References
+      </div>
+      <div class="rankings-wrap" id="rankings-wrap"></div>
+    </div>
+
+  </div>
+
+  <!-- ── FINDINGS ── -->
+  <div class="findings-section">
+    <div class="findings-header">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div class="findings-title">Findings</div>
+        <div class="findings-count" id="findings-count">12 issues</div>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-chip active" onclick="filterFindings('all', this)">All</button>
+        <button class="filter-chip critical-chip" onclick="filterFindings('critical', this)">Critical</button>
+        <button class="filter-chip high-chip" onclick="filterFindings('high', this)">High</button>
+        <button class="filter-chip medium-chip" onclick="filterFindings('medium', this)">Medium</button>
+        <button class="filter-chip low-chip" onclick="filterFindings('low', this)">Low</button>
+      </div>
+    </div>
+
+    <div class="findings-table-wrap">
+      <div class="tbl-head">
+        <div class="th">Severity</div>
+        <div class="th col-cwe">CWE</div>
+        <div class="th col-owasp">OWASP</div>
+        <div class="th col-file">File</div>
+        <div class="th">Line</div>
+        <div class="th col-issue">Issue</div>
+        <div class="th snippet-col">Snippet</div>
+      </div>
+      <div id="findings-list"></div>
+      <div class="no-findings" id="no-findings">
+        <div class="no-findings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="no-findings-title">No issues found</div>
+        <div class="no-findings-sub">Great — no findings match this filter.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Finding Detail Modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box" id="modal-box">
+    <button class="modal-close" onclick="closeModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+  let allFindings = [];
+  let activeFilter = 'all';
+  let currentScanId = null;
+
+  function closeModal() { document.getElementById('modal-overlay').classList.remove('show'); }
+
+  async function initResults() {
+    const meRes = await fetch('/api/auth/me', { credentials: 'include' });
+    if (!meRes.ok) { window.location.href = 'signin.html'; return; }
+    const me = await meRes.json();
+    const username = me.user?.username || 'User';
+    sessionStorage.setItem('sastra_user', username);
+    document.getElementById('nav-username').textContent = username;
+    document.getElementById('username-btn').textContent = username;
+
+    const params = new URLSearchParams(window.location.search);
+    const scanId = params.get('scan_id');
+    currentScanId = scanId;
+    if (!scanId) return;
+
+    const scanRes = await fetch(`/api/scans/${scanId}`, { credentials: 'include' });
+    if (!scanRes.ok) return;
+    const scan = await scanRes.json();
+
+    document.getElementById('result-filename').textContent = scan.filename || '-';
+    document.getElementById('result-timestamp').textContent = new Date(scan.created_at).toLocaleString();
+    document.getElementById('sum-file').textContent = scan.filename || '-';
+    document.getElementById('sum-lang').textContent = scan.language || '-';
+    document.getElementById('sum-total').textContent = scan.total_findings || 0;
+    document.getElementById('sum-risk').textContent = scan.risk_score || 0;
+    document.getElementById('sum-files').textContent = 1;
+    document.getElementById('sum-fp').textContent = 0;
+
+    allFindings = (scan.scan_output?.findings || []).map((f, idx) => ({
+      id: idx + 1,
+      sev: String(f.severity || 'low').toLowerCase(),
+      cwe: f.cwe_id || '-',
+      owasp: f.owasp_category || '-',
+      file: f.source_path || scan.filename || '-',
+      line: String(f.line_number || '-'),
+      title: f.title || f.rule_name || 'Finding',
+      desc: f.description || '',
+      snippet: f.snippet || '',
+      fix: f.recommendation || '',
+      confidence: Math.round((f.ml_confidence || 0) * 100),
+    }));
+    renderFindings();
+  }
+
+  function filterFindings(f, btn) {
+    activeFilter = f;
+    document.querySelectorAll('.filter-chip').forEach((c) => c.classList.remove('active'));
+    btn.classList.add('active');
+    renderFindings();
+  }
+
+  function renderFindings() {
+    const list = document.getElementById('findings-list');
+    const noF = document.getElementById('no-findings');
+    const countEl = document.getElementById('findings-count');
+    list.innerHTML = '';
+    const filtered = activeFilter === 'all' ? allFindings : allFindings.filter((f) => f.sev === activeFilter);
+    countEl.textContent = `${filtered.length} issues`;
+    if (!filtered.length) { noF.classList.add('show'); return; }
+    noF.classList.remove('show');
+    filtered.forEach((f) => {
+      const row = document.createElement('div');
+      row.className = 'finding-row';
+      row.innerHTML = `<div><span class="sev-pill ${f.sev}">${f.sev}</span></div><div class="cell-code col-cwe">${f.cwe}</div><div class="cell-owasp col-owasp">${f.owasp}</div><div class="cell-file col-file">${f.file}</div><div><span class="cell-loc">${f.line}</span></div><div class="cell-issue col-issue"><div class="issue-title">${f.title}</div><div class="issue-fix">${f.fix || '-'}</div></div><div class="cell-snippet snippet-col">${(f.snippet || '').replace(/</g, '&lt;')}</div>`;
+      list.appendChild(row);
+    });
+  }
+
+  function exportPDF() {
+    if (!currentScanId) return;
+    window.open(`/api/scans/${currentScanId}/report.pdf`, '_blank');
+  }
+
+  document.querySelector('.btn-logout').onclick = async () => {
+    await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+    sessionStorage.removeItem('sastra_user');
+    window.location.href = 'signin.html';
+  };
+  initResults();
+</script>
+</body>
+</html>
