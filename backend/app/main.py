@@ -50,6 +50,7 @@ from .db import (
     list_users,
     purge_old_scans,
     save_scan,
+    update_user_credentials,
     update_user_role,
 )
 from .pdf_report import build_pdf_report
@@ -143,6 +144,11 @@ class CreateUserPayload(BaseModel):
 
 class UpdateRolePayload(BaseModel):
     role: str
+
+
+class UpdateSelfPayload(BaseModel):
+    username: Optional[str] = None
+    password: Optional[str] = None
 
 
 class LLMFixRequest(BaseModel):
@@ -552,6 +558,52 @@ async def auth_me(current_user: dict = Depends(_require_user)) -> JSONResponse:
 @app.get("/api/me")
 async def auth_me_compat(current_user: dict = Depends(_require_user)) -> JSONResponse:
     return JSONResponse({"ok": True, "user": _user_public(current_user)})
+
+
+@app.patch("/api/auth/me")
+async def auth_me_update(
+    payload: UpdateSelfPayload,
+    current_user: dict = Depends(_require_user),
+) -> JSONResponse:
+    try:
+        updated = update_user_credentials(
+            int(current_user["id"]),
+            username=payload.username,
+            password=payload.password,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    if updated is None:
+        raise HTTPException(status_code=404, detail="User not found.")
+
+    logger.info("User updated account settings — username: %s", updated["username"])
+    return JSONResponse({"ok": True, "user": _user_public(updated)})
+
+
+@app.patch("/api/me")
+async def auth_me_update_compat(
+    payload: UpdateSelfPayload,
+    current_user: dict = Depends(_require_user),
+) -> JSONResponse:
+    return await auth_me_update(payload, current_user)
+
+
+@app.delete("/api/auth/me")
+async def auth_me_delete(current_user: dict = Depends(_require_user)) -> JSONResponse:
+    if current_user.get("role") == ROLE_SUPERADMIN:
+        raise HTTPException(status_code=403, detail="Superadmin account cannot be deleted.")
+
+    delete_user_and_data(int(current_user["id"]))
+    logger.info("User deleted their account — id: %s", current_user["id"])
+    response = JSONResponse({"ok": True})
+    _clear_session_cookie(response)
+    return response
+
+
+@app.delete("/api/me")
+async def auth_me_delete_compat(current_user: dict = Depends(_require_user)) -> JSONResponse:
+    return await auth_me_delete(current_user)
 
 
 # ── admin — user management ────────────────────────────────────────────────────

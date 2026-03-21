@@ -337,6 +337,45 @@ def update_user_role(user_id: int, role: str) -> Optional[Dict[str, object]]:
         return user.to_dict()
 
 
+def update_user_credentials(
+    user_id: int,
+    *,
+    username: Optional[str] = None,
+    password: Optional[str] = None,
+) -> Optional[Dict[str, object]]:
+    clean_username: Optional[str] = None
+    clean_password: Optional[str] = None
+
+    if username is not None:
+        clean_username = _clean_username(username)
+    if password is not None:
+        clean_password = _validate_password(password)
+
+    if clean_username is None and clean_password is None:
+        raise ValueError("Provide username and/or password to update.")
+
+    with _get_session() as session:
+        user = session.get(User, user_id)
+        if user is None:
+            return None
+
+        if clean_username is not None:
+            existing = (
+                session.query(User)
+                .filter(func.lower(User.username) == func.lower(clean_username), User.id != user_id)
+                .first()
+            )
+            if existing is not None:
+                raise ValueError("Username already exists.")
+            user.username = clean_username
+
+        if clean_password is not None:
+            user.password_hash = _hash_password(clean_password)
+
+        session.flush()
+        return user.to_dict()
+
+
 def delete_user_and_data(user_id: int) -> None:
     """
     Delete a user and all their associated scans and findings.

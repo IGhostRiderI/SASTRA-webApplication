@@ -413,12 +413,14 @@
       <p>This action is permanent and cannot be undone. All your data, scan history, and settings will be lost forever.</p>
       <div class="modal-btns">
         <button class="btn-cancel" onclick="document.getElementById('delete-overlay').classList.remove('show')">Cancel</button>
-        <button class="btn-confirm-delete" onclick="window.location.href='signin.html'">Yes, Delete</button>
+        <button class="btn-confirm-delete" onclick="deleteAccount()">Yes, Delete</button>
       </div>
     </div>
   </div>
 
   <script>
+    let originalUsername = '';
+
     async function loadUser() {
       const response = await fetch('/api/auth/me', { credentials: 'include' });
       if (!response.ok) {
@@ -427,15 +429,14 @@
       }
       const payload = await response.json();
       const username = payload.user?.username || 'User';
+      originalUsername = username;
       sessionStorage.setItem('sastra_user', username);
       document.getElementById('nav-username').textContent = username;
       document.getElementById('username-btn').textContent = username;
       document.getElementById('username').value = username;
     }
 
-    const originalUsername = sessionStorage.getItem('sastra_user') || '';
-
-    function saveChanges() {
+    async function saveChanges() {
       const username = document.getElementById('username').value.trim();
       const newPwd   = document.getElementById('new-password').value;
       const confPwd  = document.getElementById('confirm-password').value;
@@ -452,9 +453,32 @@
         return;
       }
 
-      sessionStorage.setItem('sastra_user', username);
-      document.getElementById('nav-username').textContent = username;
-      document.getElementById('username-btn').textContent = username;
+      const body = {};
+      if (username !== originalUsername) body.username = username;
+      if (newPwd) body.password = newPwd;
+
+      if (!body.username && !body.password) {
+        return;
+      }
+
+      const response = await fetch('/api/auth/me', {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        alert(payload.detail || 'Unable to save changes.');
+        return;
+      }
+
+      const updatedUsername = payload.user?.username || username;
+      originalUsername = updatedUsername;
+      sessionStorage.setItem('sastra_user', updatedUsername);
+      document.getElementById('nav-username').textContent = updatedUsername;
+      document.getElementById('username-btn').textContent = updatedUsername;
+      document.getElementById('username').value = updatedUsername;
 
       // Show toast
       const toast = document.getElementById('save-toast');
@@ -467,10 +491,24 @@
     }
 
     function discardChanges() {
-      document.getElementById('username').value = sessionStorage.getItem('sastra_user') || '';
+      document.getElementById('username').value = originalUsername;
       document.getElementById('new-password').value = '';
       document.getElementById('confirm-password').value = '';
       document.querySelectorAll('input').forEach(i => i.classList.remove('error'));
+    }
+
+    async function deleteAccount() {
+      const response = await fetch('/api/auth/me', {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        alert(payload.detail || 'Unable to delete account.');
+        return;
+      }
+      sessionStorage.removeItem('sastra_user');
+      window.location.href = 'signin.html';
     }
 
     // Close modal on overlay click
