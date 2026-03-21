@@ -1,0 +1,9 @@
+backend/.venv/
+backend/app/__pycache__/
+backend/app/**/__pycache__/
+backend/tests/__pycache__/
+backend/app/data/sast.db
+backend/app/data/backups/
+backend/app/data/logs/
+*.pyc
+.DS_Store
