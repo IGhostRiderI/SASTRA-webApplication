@@ -414,7 +414,14 @@ def _serve_frontend_page(page_name: str) -> FileResponse:
     path = FRONTEND_DIR / page_name
     if not path.exists():
         raise HTTPException(status_code=404, detail=f"Frontend page '{page_name}' not found")
-    return FileResponse(path)
+    return FileResponse(
+        path,
+        headers={
+            "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+            "Pragma": "no-cache",
+            "Expires": "0",
+        },
+    )
 
 
 @app.get("/sastra-landing.html", response_class=HTMLResponse)

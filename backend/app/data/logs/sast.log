@@ -297,3 +297,88 @@ weighted avg       0.76      0.76      0.76      2334
 2026-03-20 17:46:16 [INFO] sast: User signed in — username: Nadinak  role: superadmin
 2026-03-20 17:46:46 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
 2026-03-20 17:47:56 [INFO] sast: Scan #49 complete — user: 'Nadinak'  findings: 206  risk: 6.59
+2026-03-21 11:59:39 [INFO] sast: SAST application starting up
+2026-03-21 11:59:39 [INFO] sast: Database initialised
+2026-03-21 11:59:40 [INFO] sast.backup: Database backed up → sast_20260321T115939Z.db
+2026-03-21 11:59:40 [INFO] sast.backup: Pruned old backup: sast_20260320T162049Z.db
+2026-03-21 11:59:40 [INFO] sast: Startup backup created: sast_20260321T115939Z.db
+2026-03-21 11:59:40 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 11:59:40 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 11:59:48 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 11:59:48 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 11:59:48 [INFO] sast: SAST application ready
+2026-03-21 12:00:25 [INFO] sast: New user registered — username: ghostrider
+2026-03-21 12:01:00 [INFO] sast: File scan by 'ghostrider' — deepseek_java_20260307_403f13.java  lang: java
+2026-03-21 12:01:11 [INFO] sast: Scan #50 complete — user: 'ghostrider'  findings: 29  risk: 6.59
+2026-03-21 12:03:32 [INFO] sast: SAST application shutting down
+2026-03-21 12:04:43 [INFO] sast: SAST application starting up
+2026-03-21 12:04:43 [INFO] sast: Database initialised
+2026-03-21 12:04:43 [INFO] sast.backup: Database backed up → sast_20260321T120443Z.db
+2026-03-21 12:04:43 [INFO] sast.backup: Pruned old backup: sast_20260320T162923Z.db
+2026-03-21 12:04:43 [INFO] sast: Startup backup created: sast_20260321T120443Z.db
+2026-03-21 12:04:43 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 12:04:44 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 12:04:47 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:04:47 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:04:47 [INFO] sast: SAST application ready
+2026-03-21 12:09:50 [INFO] sast: SAST application starting up
+2026-03-21 12:09:50 [INFO] sast: Database initialised
+2026-03-21 12:09:50 [INFO] sast.backup: Database backed up → sast_20260321T120950Z.db
+2026-03-21 12:09:50 [INFO] sast.backup: Pruned old backup: sast_20260320T162543Z.db
+2026-03-21 12:09:50 [INFO] sast: Startup backup created: sast_20260321T120950Z.db
+2026-03-21 12:09:50 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 12:09:50 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 12:09:55 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:09:55 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:09:55 [INFO] sast: SAST application ready
+2026-03-21 12:10:40 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:10:50 [INFO] sast: File scan by 'ghostrider' — deepseek_java_20260307_403f13.java  lang: java
+2026-03-21 12:11:00 [INFO] sast: Scan #51 complete — user: 'ghostrider'  findings: 29  risk: 6.59
+2026-03-21 12:12:52 [INFO] sast: SAST application shutting down
+2026-03-21 12:14:29 [INFO] sast: SAST application starting up
+2026-03-21 12:14:29 [INFO] sast: Database initialised
+2026-03-21 12:14:29 [INFO] sast.backup: Database backed up → sast_20260321T121429Z.db
+2026-03-21 12:14:29 [INFO] sast.backup: Pruned old backup: sast_20260320T163844Z.db
+2026-03-21 12:14:29 [INFO] sast: Startup backup created: sast_20260321T121429Z.db
+2026-03-21 12:14:29 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 12:14:29 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 12:14:31 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:14:31 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:14:31 [INFO] sast: SAST application ready
+2026-03-21 12:15:38 [INFO] sast: SAST application shutting down
+2026-03-21 12:16:26 [INFO] sast: SAST application starting up
+2026-03-21 12:16:26 [INFO] sast: Database initialised
+2026-03-21 12:16:26 [INFO] sast.backup: Database backed up → sast_20260321T121626Z.db
+2026-03-21 12:16:26 [INFO] sast.backup: Pruned old backup: sast_20260320T171921Z.db
+2026-03-21 12:16:26 [INFO] sast: Startup backup created: sast_20260321T121626Z.db
+2026-03-21 12:16:26 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 12:16:26 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 12:16:32 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:16:32 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:16:32 [INFO] sast: SAST application ready
+2026-03-21 12:16:59 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:17:39 [INFO] sast: File scan by 'ghostrider' — test.py  lang: python
+2026-03-21 12:18:29 [INFO] sast: Scan #52 complete — user: 'ghostrider'  findings: 142  risk: 5.76
+2026-03-21 12:20:04 [INFO] sast: PDF report generated for scan #52 by 'ghostrider'
+2026-03-21 12:20:36 [INFO] sast: User signed out
+2026-03-21 12:20:42 [WARNING] sast: Failed login attempt — username: ghostrider
+2026-03-21 12:20:50 [WARNING] sast: Failed login attempt — username: ghostrider
+2026-03-21 12:20:56 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:21:58 [INFO] sast: SAST application shutting down
+2026-03-21 12:25:32 [INFO] sast: SAST application starting up
+2026-03-21 12:25:32 [INFO] sast: Database initialised
+2026-03-21 12:25:32 [INFO] sast.backup: Database backed up → sast_20260321T122532Z.db
+2026-03-21 12:25:32 [INFO] sast.backup: Pruned old backup: sast_20260320T164330Z.db
+2026-03-21 12:25:32 [INFO] sast: Startup backup created: sast_20260321T122532Z.db
+2026-03-21 12:25:32 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 12:25:32 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 12:25:36 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:25:36 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:25:36 [INFO] sast: SAST application ready
+2026-03-21 12:25:57 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:28:47 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:29:07 [INFO] sast: File scan by 'ghostrider' — deepseek_java_20260307_403f13.java  lang: java
+2026-03-21 12:29:17 [INFO] sast: Scan #53 complete — user: 'ghostrider'  findings: 29  risk: 6.59
+2026-03-21 12:29:30 [INFO] sast: User signed out
+2026-03-21 12:38:36 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:38:47 [INFO] sast: SAST application shutting down

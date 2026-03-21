@@ -621,7 +621,16 @@
         label.textContent = '100%';
         sub.textContent = steps[6];
         sessionStorage.setItem('sastra_scan_result', JSON.stringify(payload));
-        window.location.href = `scan-results.html?scan_id=${payload.id}`;
+        const createdScanId =
+          payload?.scan_id ??
+          payload?.id ??
+          payload?.scan?.scan_id ??
+          payload?.result?.scan_id ??
+          payload?.data?.scan_id;
+        if (!createdScanId) {
+          throw new Error('Scan completed but no scan ID was returned');
+        }
+        window.location.href = `scan-results.html?scan_id=${createdScanId}`;
       } catch (error) {
         alert(error.message || 'Scan failed');
       } finally {

@@ -542,6 +542,90 @@
   let activeFilter = 'all';
   let currentScanId = null;
 
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function renderSeverityChart(severity = {}) {
+    const pieSvg = document.getElementById('pie-svg');
+    const legend = document.getElementById('pie-legend');
+    if (!pieSvg || !legend) return;
+
+    pieSvg.querySelectorAll('.pie-segment').forEach((node) => node.remove());
+    legend.innerHTML = '';
+
+    const items = [
+      { label: 'Critical', key: 'Critical', color: '#dc2626' },
+      { label: 'High', key: 'High', color: '#ea580c' },
+      { label: 'Medium', key: 'Medium', color: '#d97706' },
+      { label: 'Low', key: 'Low', color: '#059669' },
+    ].map((it) => ({ ...it, count: Number(severity[it.key] || 0) }));
+
+    const total = items.reduce((sum, it) => sum + it.count, 0);
+    const circumference = 2 * Math.PI * 62;
+    let offset = 0;
+
+    items.forEach((it) => {
+      const legendRow = document.createElement('div');
+      legendRow.className = 'legend-row';
+      legendRow.innerHTML = `<div class="legend-left"><span class="legend-dot" style="background:${it.color}"></span><span class="legend-label">${it.label}</span></div><span class="legend-count">${it.count}</span>`;
+      legend.appendChild(legendRow);
+
+      if (total <= 0 || it.count <= 0) return;
+
+      const segLen = (it.count / total) * circumference;
+      const seg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      seg.setAttribute('class', 'pie-segment');
+      seg.setAttribute('cx', '80');
+      seg.setAttribute('cy', '80');
+      seg.setAttribute('r', '62');
+      seg.setAttribute('fill', 'none');
+      seg.setAttribute('stroke', it.color);
+      seg.setAttribute('stroke-width', '28');
+      seg.setAttribute('stroke-linecap', 'butt');
+      seg.setAttribute('stroke-dasharray', `${segLen} ${circumference - segLen}`);
+      seg.setAttribute('stroke-dashoffset', `${-offset}`);
+      pieSvg.appendChild(seg);
+      offset += segLen;
+    });
+  }
+
+  function renderTopReferences(topCwe = [], topOwasp = []) {
+    const wrap = document.getElementById('rankings-wrap');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+
+    const buildGroup = (title, rows, color) => {
+      const group = document.createElement('div');
+      group.className = 'ranking-group';
+      const safeRows = Array.isArray(rows) ? rows.slice(0, 4) : [];
+      const maxCount = Math.max(1, ...safeRows.map((r) => Number(r?.[1] || 0)));
+
+      const rowsHtml = safeRows.length
+        ? safeRows.map((row) => {
+            const label = escapeHtml(row?.[0] || '-');
+            const count = Number(row?.[1] || 0);
+            const width = Math.round((count / maxCount) * 100);
+            return `<div class="rank-row"><span class="rank-label" title="${label}">${label}</span><div class="rank-bar-wrap"><div class="rank-bar" style="width:${width}%;background:${color}"></div></div><span class="rank-count">${count}</span></div>`;
+          }).join('')
+        : '<div class="rank-row"><span class="rank-label">-</span><div class="rank-bar-wrap"><div class="rank-bar" style="width:0;background:' + color + '"></div></div><span class="rank-count">0</span></div>';
+
+      group.innerHTML = `<div class="ranking-title">${title}</div>${rowsHtml}`;
+      wrap.appendChild(group);
+    };
+
+    buildGroup('Top CWE', topCwe, '#4f46e5');
+    buildGroup('Top OWASP', topOwasp, '#0ea5e9');
+  }
+
+  function renderOverview(summary = {}) {
+    renderSeverityChart(summary.severity || {});
+    renderTopReferences(summary.top_cwe || [], summary.top_owasp || []);
+  }
+
   function closeModal() { document.getElementById('modal-overlay').classList.remove('show'); }
 
   async function initResults() {
@@ -554,7 +638,15 @@
     document.getElementById('username-btn').textContent = username;
 
     const params = new URLSearchParams(window.location.search);
-    const scanId = params.get('scan_id');
+    let scanId = params.get('scan_id') || params.get('id');
+    if (!scanId) {
+      try {
+        const cached = JSON.parse(sessionStorage.getItem('sastra_scan_result') || '{}');
+        scanId = cached.scan_id || cached.id || null;
+      } catch {
+        scanId = null;
+      }
+    }
     currentScanId = scanId;
     if (!scanId) return;
 
@@ -562,16 +654,19 @@
     if (!scanRes.ok) return;
     const scan = await scanRes.json();
 
-    document.getElementById('result-filename').textContent = scan.filename || '-';
-    document.getElementById('result-timestamp').textContent = new Date(scan.created_at).toLocaleString();
-    document.getElementById('sum-file').textContent = scan.filename || '-';
-    document.getElementById('sum-lang').textContent = scan.language || '-';
-    document.getElementById('sum-total').textContent = scan.total_findings || 0;
-    document.getElementById('sum-risk').textContent = scan.risk_score || 0;
-    document.getElementById('sum-files').textContent = 1;
+    currentScanId = scan.scan_id || currentScanId;
+    const summary = scan.summary || {};
+
+    document.getElementById('result-filename').textContent = scan.filename || summary.filename || '-';
+    document.getElementById('result-timestamp').textContent = scan.scanned_at ? new Date(scan.scanned_at).toLocaleString() : '-';
+    document.getElementById('sum-file').textContent = scan.filename || summary.filename || '-';
+    document.getElementById('sum-lang').textContent = scan.language || summary.language || '-';
+    document.getElementById('sum-total').textContent = summary.total_findings || 0;
+    document.getElementById('sum-risk').textContent = summary.risk_score || 0;
+    document.getElementById('sum-files').textContent = summary.files_scanned || 1;
     document.getElementById('sum-fp').textContent = 0;
 
-    allFindings = (scan.scan_output?.findings || []).map((f, idx) => ({
+    allFindings = (scan.findings || []).map((f, idx) => ({
       id: idx + 1,
       sev: String(f.severity || 'low').toLowerCase(),
       cwe: f.cwe_id || '-',
@@ -584,6 +679,7 @@
       fix: f.recommendation || '',
       confidence: Math.round((f.ml_confidence || 0) * 100),
     }));
+    renderOverview(summary);
     renderFindings();
   }
 
@@ -606,7 +702,7 @@
     filtered.forEach((f) => {
       const row = document.createElement('div');
       row.className = 'finding-row';
-      row.innerHTML = `<div><span class="sev-pill ${f.sev}">${f.sev}</span></div><div class="cell-code col-cwe">${f.cwe}</div><div class="cell-owasp col-owasp">${f.owasp}</div><div class="cell-file col-file">${f.file}</div><div><span class="cell-loc">${f.line}</span></div><div class="cell-issue col-issue"><div class="issue-title">${f.title}</div><div class="issue-fix">${f.fix || '-'}</div></div><div class="cell-snippet snippet-col">${(f.snippet || '').replace(/</g, '&lt;')}</div>`;
+      row.innerHTML = `<div><span class="sev-pill ${escapeHtml(f.sev)}">${escapeHtml(f.sev)}</span></div><div class="cell-code col-cwe">${escapeHtml(f.cwe)}</div><div class="cell-owasp col-owasp">${escapeHtml(f.owasp)}</div><div class="cell-file col-file">${escapeHtml(f.file)}</div><div><span class="cell-loc">${escapeHtml(f.line)}</span></div><div class="cell-issue col-issue"><div class="issue-title">${escapeHtml(f.title)}</div><div class="issue-fix">${escapeHtml(f.fix || '-')}</div></div><div class="cell-snippet snippet-col">${escapeHtml(f.snippet)}</div>`;
       list.appendChild(row);
     });
   }

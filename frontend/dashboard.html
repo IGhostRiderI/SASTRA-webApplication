@@ -251,6 +251,17 @@
     .sev-medium   { background: rgba(180,83,9,0.12); color: #92400e; border: 1px solid rgba(180,83,9,0.25); }
     .sev-low      { background: rgba(16,185,129,0.12); color: #047857; border: 1px solid rgba(16,185,129,0.25); }
 
+    .empty-recent {
+      border: 1px dashed rgba(0,0,0,0.12);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.26);
+      padding: 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 900px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -360,104 +371,95 @@
         <a href="scan-history.html" class="view-all">View All →</a>
       </div>
 
-      <!-- Row 1 -->
-      <div class="scan-row">
-        <div class="scan-left">
-          <div class="scan-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <div class="scan-info">
-            <div class="scan-name">auth-service.py <span class="badge badge-completed">completed</span></div>
-            <div class="scan-meta"><span>2 days ago</span><span class="dot"></span><span>Python</span><span class="dot"></span><span>45 KB</span></div>
-          </div>
-        </div>
-        <div class="scan-right">
-          <div class="scan-count">
-            <div class="scan-count-num">12</div>
-            <div class="scan-count-label">issues found</div>
-          </div>
-          <div class="severity-tags">
-            <span class="sev sev-critical">2 Critical</span>
-            <span class="sev sev-high">4 High</span>
-            <span class="sev sev-medium">4 Medium</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 2 -->
-      <div class="scan-row">
-        <div class="scan-left">
-          <div class="scan-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <div class="scan-info">
-            <div class="scan-name">payment-handler.java <span class="badge badge-completed">completed</span></div>
-            <div class="scan-meta"><span>3 days ago</span><span class="dot"></span><span>Java</span><span class="dot"></span><span>78 KB</span></div>
-          </div>
-        </div>
-        <div class="scan-right">
-          <div class="scan-count">
-            <div class="scan-count-num">8</div>
-            <div class="scan-count-label">issues found</div>
-          </div>
-          <div class="severity-tags">
-            <span class="sev sev-critical">1 Critical</span>
-            <span class="sev sev-high">3 High</span>
-            <span class="sev sev-medium">3 Medium</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 3 -->
-      <div class="scan-row">
-        <div class="scan-left">
-          <div class="scan-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#9333ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <div class="scan-info">
-            <div class="scan-name">user-api.cpp <span class="badge badge-completed">completed</span></div>
-            <div class="scan-meta"><span>5 days ago</span><span class="dot"></span><span>C++</span><span class="dot"></span><span>112 KB</span></div>
-          </div>
-        </div>
-        <div class="scan-right">
-          <div class="scan-count">
-            <div class="scan-count-num">15</div>
-            <div class="scan-count-label">issues found</div>
-          </div>
-          <div class="severity-tags">
-            <span class="sev sev-critical">5 Critical</span>
-            <span class="sev sev-high">6 High</span>
-            <span class="sev sev-medium">4 Medium</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 4 -->
-      <div class="scan-row">
-        <div class="scan-left">
-          <div class="scan-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <div class="scan-info">
-            <div class="scan-name">session-manager.py <span class="badge badge-running">running</span></div>
-            <div class="scan-meta"><span>Just now</span><span class="dot"></span><span>Python</span><span class="dot"></span><span>29 KB</span></div>
-          </div>
-        </div>
-        <div class="scan-right">
-          <div class="scan-count">
-            <div class="scan-count-num" style="color:var(--text-muted)">—</div>
-            <div class="scan-count-label">in progress</div>
-          </div>
-          <div class="severity-tags">
-            <span class="sev" style="background:rgba(59,130,246,0.1);color:#2563eb;border:1px solid rgba(59,130,246,0.25)">Scanning…</span>
-          </div>
-        </div>
-      </div>
+      <div id="recent-scans-list"></div>
 
     </div><!-- /section-card -->
   </main>
 
   <script>
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function formatRelativeTime(value) {
+      if (!value) return 'Unknown time';
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return 'Unknown time';
+      const diffMs = Date.now() - d.getTime();
+      if (diffMs < 60 * 1000) return 'Just now';
+      const mins = Math.floor(diffMs / (60 * 1000));
+      if (mins < 60) return `${mins} minute${mins === 1 ? '' : 's'} ago`;
+      const hours = Math.floor(mins / 60);
+      if (hours < 24) return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+      const days = Math.floor(hours / 24);
+      return `${days} day${days === 1 ? '' : 's'} ago`;
+    }
+
+    function iconStrokeForLanguage(language) {
+      const l = String(language || '').toLowerCase();
+      if (l.includes('java')) return '#2563eb';
+      if (l.includes('c++') || l.includes('cpp') || l === 'c') return '#9333ea';
+      return '#059669';
+    }
+
+    function renderRecentScans(scans) {
+      const host = document.getElementById('recent-scans-list');
+      if (!host) return;
+
+      const now = Date.now();
+      const cutoff = now - (90 * 24 * 60 * 60 * 1000);
+      const recent = (scans || [])
+        .filter((s) => {
+          const ts = new Date(s.scanned_at || 0).getTime();
+          return Number.isFinite(ts) && ts >= cutoff;
+        })
+        .sort((a, b) => new Date(b.scanned_at || 0).getTime() - new Date(a.scanned_at || 0).getTime())
+        .slice(0, 4);
+
+      if (!recent.length) {
+        host.innerHTML = '<div class="empty-recent">No scans found in the last 90 days.</div>';
+        return;
+      }
+
+      host.innerHTML = recent.map((s) => {
+        const stroke = iconStrokeForLanguage(s.language);
+        const critical = Number(s.critical_count || 0);
+        const high = Number(s.high_count || 0);
+        const medium = Number(s.medium_count || 0);
+        const low = Number(s.low_count || 0);
+        const sevTags = [
+          critical > 0 ? `<span class="sev sev-critical">${critical} Critical</span>` : '',
+          high > 0 ? `<span class="sev sev-high">${high} High</span>` : '',
+          medium > 0 ? `<span class="sev sev-medium">${medium} Medium</span>` : '',
+          low > 0 ? `<span class="sev sev-low">${low} Low</span>` : '',
+        ].filter(Boolean).join('') || '<span class="sev" style="background:rgba(0,0,0,0.06);color:#4b5563;border:1px solid rgba(0,0,0,0.12)">No findings</span>';
+
+        return `<div class="scan-row" onclick="window.location.href='scan-results.html?scan_id=${encodeURIComponent(String(s.id))}'">
+          <div class="scan-left">
+            <div class="scan-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div class="scan-info">
+              <div class="scan-name">${escapeHtml(s.filename || 'unnamed')} <span class="badge badge-completed">completed</span></div>
+              <div class="scan-meta"><span>${escapeHtml(formatRelativeTime(s.scanned_at))}</span><span class="dot"></span><span>${escapeHtml(s.language || '-')}</span></div>
+            </div>
+          </div>
+          <div class="scan-right">
+            <div class="scan-count">
+              <div class="scan-count-num">${Number(s.total_findings || 0)}</div>
+              <div class="scan-count-label">issues found</div>
+            </div>
+            <div class="severity-tags">${sevTags}</div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
     async function loadDashboard() {
       const meRes = await fetch('/api/auth/me', { credentials: 'include' });
       if (!meRes.ok) {
@@ -485,6 +487,7 @@
       if (statValues[2]) statValues[2].textContent = String(criticalHigh);
       const statFile = document.querySelector('.stat-file');
       if (statFile) statFile.textContent = latest?.filename || 'No scans yet';
+      renderRecentScans(items);
     }
 
     document.querySelector('.btn-logout').onclick = async () => {
