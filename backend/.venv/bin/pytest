@@ -1,4 +1,4 @@
-#!/workspaces/Applied-project-testing-new-frontend-/backend/.venv/bin/python3
+#!/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys
