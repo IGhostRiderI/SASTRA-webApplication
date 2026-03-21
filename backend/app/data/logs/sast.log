@@ -471,3 +471,62 @@ weighted avg       0.76      0.76      0.76      2334
 2026-03-21 13:34:30 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
 2026-03-21 13:34:30 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
 2026-03-21 13:34:30 [INFO] sast: SAST application ready
+2026-03-21 13:43:24 [INFO] sast: SAST application shutting down
+2026-03-21 13:44:04 [INFO] sast: SAST application starting up
+2026-03-21 13:44:04 [INFO] sast: Database initialised
+2026-03-21 13:44:04 [INFO] sast.backup: Database backed up → sast_20260321T134404Z.db
+2026-03-21 13:44:04 [INFO] sast.backup: Pruned old backup: sast_20260321T122532Z.db
+2026-03-21 13:44:04 [INFO] sast: Startup backup created: sast_20260321T134404Z.db
+2026-03-21 13:44:04 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 13:44:04 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 13:44:08 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:44:08 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:44:08 [INFO] sast: SAST application ready
+2026-03-21 13:50:22 [INFO] sast: SAST application starting up
+2026-03-21 13:50:22 [INFO] sast: Database initialised
+2026-03-21 13:50:22 [INFO] sast.backup: Database backed up → sast_20260321T135022Z.db
+2026-03-21 13:50:22 [INFO] sast.backup: Pruned old backup: sast_20260321T125619Z.db
+2026-03-21 13:50:22 [INFO] sast: Startup backup created: sast_20260321T135022Z.db
+2026-03-21 13:50:22 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 13:50:22 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 13:50:30 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:50:30 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:50:30 [INFO] sast: SAST application ready
+2026-03-21 13:51:50 [INFO] sast: New user registered — username: Nigga
+2026-03-21 13:52:41 [INFO] sast: ZIP scan by 'Nigga' — Applied-Project-main.zip  files: 9
+2026-03-21 13:53:52 [INFO] sast: Scan #58 complete — user: 'Nigga'  findings: 206  risk: 6.59
+2026-03-21 13:56:02 [INFO] sast: Paste scan by 'Nigga' — snippet.py  lang: python
+2026-03-21 13:56:04 [INFO] sast: Scan #59 complete — user: 'Nigga'  findings: 4  risk: 7.5
+2026-03-21 13:56:41 [INFO] sast: PDF report generated for scan #59 by 'Nigga'
+2026-03-21 13:58:59 [INFO] sast: ZIP scan by 'Nigga' — Cryptography-Projects-main.zip  files: 4
+2026-03-21 13:59:01 [INFO] sast: Scan #60 complete — user: 'Nigga'  findings: 4  risk: 5.0
+2026-03-21 13:59:23 [INFO] sast: User signed out
+2026-03-21 13:59:29 [WARNING] sast: Failed login attempt — username: nadina
+2026-03-21 13:59:43 [WARNING] sast: Failed login attempt — username: nigga
+2026-03-21 13:59:57 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 13:59:58 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 13:59:58 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:00:00 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:00:00 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:00:01 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:00:01 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:00:02 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:01:24 [INFO] sast: Paste scan by 'Nigga' — snippet.py  lang: python
+2026-03-21 14:01:24 [INFO] sast: Scan #61 complete — user: 'Nigga'  findings: 0  risk: 0
+2026-03-21 14:03:29 [INFO] sast: ZIP scan by 'Nigga' — Sast--main.zip  files: 7
+2026-03-21 14:03:52 [INFO] sast: Scan #62 complete — user: 'Nigga'  findings: 68  risk: 6.09
+2026-03-21 14:10:49 [INFO] sast: SAST application shutting down
+2026-03-21 17:21:52 [INFO] sast: SAST application starting up
+2026-03-21 17:21:52 [INFO] sast: Database initialised
+2026-03-21 17:21:52 [INFO] sast.backup: Database backed up → sast_20260321T172152Z.db
+2026-03-21 17:21:52 [INFO] sast.backup: Pruned old backup: sast_20260321T130830Z.db
+2026-03-21 17:21:52 [INFO] sast: Startup backup created: sast_20260321T172152Z.db
+2026-03-21 17:21:52 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 17:21:52 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-21 17:21:58 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:21:58 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:21:58 [INFO] sast: SAST application ready
+2026-03-21 17:22:14 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 17:23:16 [INFO] sast: File scan by 'ghostrider' — test.py  lang: python
+2026-03-21 17:23:32 [INFO] sast: Scan #63 complete — user: 'ghostrider'  findings: 47  risk: 6.28
+2026-03-21 17:24:15 [INFO] sast: SAST application shutting down

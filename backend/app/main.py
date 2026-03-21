@@ -30,7 +30,7 @@ from .config import (
     SUPPORTED_LANGUAGES,
 )
 from .backup import backup_database
-from .dataset_rules import load_or_generate_rules
+from .rules import build_rules_catalog
 from .mappings import severity_score
 from .db import (
     ROLE_ADMIN,
@@ -188,7 +188,7 @@ async def lifespan(_: FastAPI):
     except Exception:
         logger.exception("Startup purge failed — continuing without purging")
 
-    catalog = load_or_generate_rules(force=False)
+    catalog = build_rules_catalog()
     app_state["catalog"] = catalog
     app_state["scanner"] = ScannerEngine(catalog)
     logger.info(
