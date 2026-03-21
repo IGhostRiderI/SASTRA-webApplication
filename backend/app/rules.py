@@ -8,6 +8,7 @@ This lets the active backend use the previous-version rules source
 from __future__ import annotations
 
 import importlib.util
+from datetime import datetime, timezone
 from pathlib import Path
 from types import ModuleType
 from typing import Dict
@@ -42,8 +43,6 @@ def build_rules_catalog() -> Dict:
     if all_rules is None:
         raise RuntimeError("Rules module must define build_rules_catalog() or ALL_RULES")
 
-    from datetime import datetime, timezone
-
     cwe_catalog = {}
     for rule in all_rules:
         cwe = rule.get("cwe_id", "")
@@ -71,7 +70,6 @@ Dataset-generated rules (generated_rules.json) are used ONLY for ML training
 (severity prediction and false positive filtering) — NOT for detection.
 """
 
-from datetime import datetime, timezone
 from typing import Dict, List
 
 # ──────────────────────────────────────────────────────────────────────────────

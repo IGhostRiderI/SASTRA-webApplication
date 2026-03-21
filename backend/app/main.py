@@ -12,7 +12,6 @@ from typing import Optional
 from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
 import requests
-import os
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
@@ -412,7 +411,7 @@ def _filter_false_positives(scan_output: dict) -> dict:
 # ── page routes ────────────────────────────────────────────────────────────────
 
 @app.get("/", response_class=HTMLResponse)
-async def index(request: Request) -> HTMLResponse:
+async def index() -> HTMLResponse:
     return RedirectResponse(url="/sastra-landing.html", status_code=307)
 
 
@@ -536,7 +535,7 @@ async def login_compat(payload: AuthPayload) -> JSONResponse:
 
 
 @app.post("/api/auth/logout")
-async def logout(request: Request) -> JSONResponse:
+async def logout() -> JSONResponse:
     # JWT is stateless — no server-side record to delete.
     # Simply clear the HttpOnly cookie on the client.
     logger.info("User signed out")
@@ -546,8 +545,8 @@ async def logout(request: Request) -> JSONResponse:
 
 
 @app.post("/api/logout")
-async def logout_compat(request: Request) -> JSONResponse:
-    return await logout(request)
+async def logout_compat() -> JSONResponse:
+    return await logout()
 
 
 @app.get("/api/auth/me")
