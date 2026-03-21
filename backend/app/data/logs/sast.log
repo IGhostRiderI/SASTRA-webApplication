@@ -530,3 +530,26 @@ weighted avg       0.76      0.76      0.76      2334
 2026-03-21 17:23:16 [INFO] sast: File scan by 'ghostrider' — test.py  lang: python
 2026-03-21 17:23:32 [INFO] sast: Scan #63 complete — user: 'ghostrider'  findings: 47  risk: 6.28
 2026-03-21 17:24:15 [INFO] sast: SAST application shutting down
+2026-03-21 17:36:39 [INFO] sast: SAST application starting up
+2026-03-21 17:36:39 [INFO] sast: Database initialised
+2026-03-21 17:36:39 [INFO] sast.backup: Database backed up → sast_20260321T173639Z.db
+2026-03-21 17:36:39 [INFO] sast.backup: Pruned old backup: sast_20260321T131413Z.db
+2026-03-21 17:36:39 [INFO] sast: Startup backup created: sast_20260321T173639Z.db
+2026-03-21 17:36:39 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 17:36:39 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-21 17:36:41 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:36:41 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:36:41 [INFO] sast: SAST application ready
+2026-03-21 17:36:54 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 17:38:14 [INFO] sast: SAST application shutting down
+2026-03-21 17:40:56 [INFO] sast: SAST application starting up
+2026-03-21 17:40:56 [INFO] sast: Database initialised
+2026-03-21 17:40:57 [INFO] sast.backup: Database backed up → sast_20260321T174056Z.db
+2026-03-21 17:40:57 [INFO] sast.backup: Pruned old backup: sast_20260321T131658Z.db
+2026-03-21 17:40:57 [INFO] sast: Startup backup created: sast_20260321T174056Z.db
+2026-03-21 17:40:57 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 17:40:57 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-21 17:40:59 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:40:59 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:40:59 [INFO] sast: SAST application ready
+2026-03-21 17:41:19 [INFO] sast: User signed in — username: ghostrider  role: user

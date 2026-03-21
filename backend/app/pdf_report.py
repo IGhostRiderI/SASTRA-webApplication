@@ -157,17 +157,19 @@ def build_pdf_report(scan_payload: Dict[str, object]) -> bytes:
         c.drawString(text_x, text_y - 8 * mm, _text(f"OWASP: {finding['owasp_category']}"))
         c.drawString(text_x, text_y - 12 * mm, _text(f"Code: {finding['snippet']}", 128))
 
-        # ML severity prediction
-        ml_sev  = finding.get("ml_severity", "")
-        ml_conf = finding.get("ml_severity_confidence", 0.0)
+        # ML confidence for this finding, displayed as a dedicated line.
+        ml_sev = finding.get("ml_severity", "")
+        ml_conf = finding.get("ml_confidence", finding.get("ml_severity_confidence", 0.0))
         try:
             ml_conf = float(ml_conf)
         except (TypeError, ValueError):
             ml_conf = 0.0
+        ml_conf_percent = (ml_conf * 100.0) if ml_conf <= 1 else ml_conf
+        ml_conf_percent = max(0.0, min(100.0, ml_conf_percent))
         if ml_sev:
-            ml_line = f"ML Severity: {ml_sev} ({ml_conf:.0%} confidence)"
+            ml_line = f"ML Confidence: {ml_conf_percent:.0f}% (Severity: {ml_sev})"
         else:
-            ml_line = "ML Severity: not available"
+            ml_line = f"ML Confidence: {ml_conf_percent:.0f}%"
         c.drawString(text_x, text_y - 16 * mm, _text(ml_line, 128))
 
         # Rule-based recommendation + FP flag
