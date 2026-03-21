@@ -222,6 +222,7 @@ def init_db() -> None:
         "ALTER TABLE findings ADD COLUMN ml_severity_confidence  REAL    NOT NULL DEFAULT 0",
         "ALTER TABLE findings ADD COLUMN fp_flag                 INTEGER NOT NULL DEFAULT 0",
         "ALTER TABLE findings ADD COLUMN fp_label                TEXT    NOT NULL DEFAULT ''",
+        "ALTER TABLE findings ADD COLUMN llm_fix                 TEXT    NOT NULL DEFAULT ''",
     ]
 
     with engine.connect() as conn:
@@ -632,3 +633,23 @@ def get_finding(
             },
             "finding": finding.to_dict(),
         }
+
+
+def save_finding_fix(
+    finding_id: int,
+    fix_text: str,
+    *,
+    requester_user_id: int,
+) -> bool:
+    """Persist the LLM-generated fix for a finding. Returns True on success."""
+    with _get_session() as session:
+        finding = (
+            session.query(Finding)
+            .join(Scan, Scan.id == Finding.scan_id)
+            .filter(Finding.id == finding_id, Scan.user_id == requester_user_id)
+            .first()
+        )
+        if finding is None:
+            return False
+        finding.llm_fix = fix_text
+        return True

@@ -108,6 +108,7 @@ class Finding(Base):
     confidence      = Column(Float, nullable=False)
     fp_flag         = Column(Integer, nullable=False, default=0)
     fp_label        = Column(Text, nullable=False, default="")
+    llm_fix         = Column(Text, nullable=False, default="")
 
     scan = relationship("Scan", back_populates="findings")
 
@@ -134,4 +135,5 @@ class Finding(Base):
             "confidence":       self.confidence,
             "fp_flag":          bool(self.fp_flag),
             "fp_label":         self.fp_label,
+            "llm_fix":          self.llm_fix or "",
         }

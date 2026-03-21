@@ -336,6 +336,68 @@
       word-break: break-all;
       background: rgba(0,0,0,0.03); border-radius: 8px; padding: 8px 10px;
       border: 1px solid rgba(0,0,0,0.06);
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .snippet-code { white-space: pre-wrap; }
+    .btn-fix-now {
+      align-self: flex-start; margin-top: 4px;
+      font-family: 'Sora', sans-serif; font-size: 0.7rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 999px; border: 1.5px solid #7c3aed;
+      color: #7c3aed; background: rgba(124,58,237,0.07);
+      cursor: pointer; transition: all 0.15s ease;
+    }
+    .btn-fix-now:hover { background: rgba(124,58,237,0.15); }
+    .btn-fix-now:disabled { opacity: 0.5; cursor: not-allowed; }
+    .fix-bubble {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(5,150,105,0.08); border: 1px solid rgba(5,150,105,0.25);
+      border-radius: 8px; padding: 6px 10px; margin-top: 2px;
+      font-family: 'DM Mono', monospace; font-size: 0.68rem; color: #065f46;
+      cursor: pointer; transition: all 0.2s ease; max-height: 28px; overflow: hidden;
+    }
+    .fix-bubble.expanded { max-height: 400px; white-space: pre-wrap; align-items: flex-start; flex-direction: column; }
+    .fix-bubble-label { font-family: 'Sora', sans-serif; font-size: 0.65rem; font-weight: 700; color: #059669; flex-shrink: 0; }
+    .fix-bubble-code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .fix-bubble.expanded .fix-bubble-code { white-space: pre-wrap; overflow: visible; }
+
+    /* Fix popup overlay */
+    .fix-popup-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.35); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+    }
+    .fix-popup-overlay.show { opacity: 1; pointer-events: auto; }
+    .fix-popup {
+      background: #fff; border-radius: 20px; padding: 28px 32px;
+      max-width: 680px; width: 90%; box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+      transform: translateY(16px); transition: transform 0.25s ease;
+      max-height: 80vh; overflow-y: auto;
+    }
+    .fix-popup-overlay.show .fix-popup { transform: translateY(0); }
+    .fix-popup-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .fix-popup-title { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1rem; }
+    .fix-popup-close { background: none; border: none; cursor: pointer; font-size: 1.4rem; color: #6b7280; line-height: 1; padding: 0 4px; }
+    .fix-popup-generating { display: flex; align-items: center; gap: 10px; color: #7c3aed; font-size: 0.85rem; padding: 32px 0; justify-content: center; }
+    .fix-spinner { width: 20px; height: 20px; border: 2px solid rgba(124,58,237,0.2); border-top-color: #7c3aed; border-radius: 50%; animation: spin 0.7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .fix-popup-code {
+      background: #0f172a; color: #e2e8f0; border-radius: 12px;
+      padding: 20px; font-family: 'DM Mono', monospace; font-size: 0.8rem;
+      line-height: 1.7; white-space: pre-wrap; word-break: break-all;
+      margin-bottom: 16px;
+    }
+    .fix-popup-actions { display: flex; gap: 10px; justify-content: flex-end; }
+    .btn-copy-fix {
+      font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 600;
+      padding: 8px 20px; border-radius: 999px; border: 1.5px solid #0a0a0a;
+      background: #0a0a0a; color: #fff; cursor: pointer; transition: opacity 0.15s;
+    }
+    .btn-copy-fix:hover { opacity: 0.85; }
+    .btn-dismiss-fix {
+      font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 600;
+      padding: 8px 20px; border-radius: 999px; border: 1.5px solid rgba(0,0,0,0.15);
+      background: transparent; color: #374151; cursor: pointer;
     }
 
     /* Empty */
@@ -717,7 +779,9 @@
     document.getElementById('sum-fp').textContent = 0;
 
     allFindings = (scan.findings || []).map((f, idx) => ({
+      _idx: idx,
       id: idx + 1,
+      finding_id: f.finding_id || null,
       sev: String(f.severity || 'low').toLowerCase(),
       cwe: f.cwe_id || '-',
       owasp: f.owasp_category || '-',
@@ -726,9 +790,12 @@
       title: f.title || f.rule_name || 'Finding',
       desc: f.description || '',
       snippet: f.snippet || '',
+      language: f.language || scan.language || '',
       fix: f.recommendation || '',
+      llm_fix: f.llm_fix || '',
       confidence: formatConfidencePercent(f.ml_confidence ?? f.ml_severity_confidence ?? 0),
     }));
+    window.allFindings = allFindings;
     renderOverview(summary);
     renderFindings();
   }
@@ -750,10 +817,14 @@
     if (!filtered.length) { noF.classList.add('show'); return; }
     noF.classList.remove('show');
     filtered.forEach((f) => {
+      const i = f._idx;
       const row = document.createElement('div');
       row.className = 'finding-row';
       const confClass = confidenceClass(f.confidence);
-      row.innerHTML = `<div class="sev-badge"><span class="sev-pill ${escapeHtml(f.sev)}">${escapeHtml(severityLabel(f.sev))}</span><span class="confidence-tag ${confClass}">ML Confidence ${f.confidence}%</span></div><div class="cell-code col-cwe">${escapeHtml(f.cwe)}</div><div class="cell-owasp col-owasp">${escapeHtml(f.owasp)}</div><div class="cell-file col-file">${escapeHtml(f.file)}</div><div><span class="cell-loc">${escapeHtml(f.line)}</span></div><div class="cell-issue col-issue"><div class="issue-title">${escapeHtml(f.title)}</div><div class="issue-fix">${escapeHtml(f.fix || '-')}</div></div><div class="cell-snippet snippet-col">${escapeHtml(f.snippet)}</div>`;
+      const fixAreaHtml = f.llm_fix
+        ? `<div class="fix-bubble" id="fix-bubble-${i}" onclick="toggleFixBubble(${i})"><span class="fix-bubble-label">✓ AI Fix</span><span class="fix-bubble-code">${escapeHtml(f.llm_fix)}</span></div>`
+        : `<button class="btn-fix-now" id="fix-btn-${i}" onclick="openFixPopup(${i})">Fix now</button>`;
+      row.innerHTML = `<div class="sev-badge"><span class="sev-pill ${escapeHtml(f.sev)}">${escapeHtml(severityLabel(f.sev))}</span><span class="confidence-tag ${confClass}">ML Confidence ${f.confidence}%</span></div><div class="cell-code col-cwe">${escapeHtml(f.cwe)}</div><div class="cell-owasp col-owasp">${escapeHtml(f.owasp)}</div><div class="cell-file col-file">${escapeHtml(f.file)}</div><div><span class="cell-loc">${escapeHtml(f.line)}</span></div><div class="cell-issue col-issue"><div class="issue-title">${escapeHtml(f.title)}</div><div class="issue-fix">${escapeHtml(f.fix || '-')}</div></div><div class="cell-snippet snippet-col"><span class="snippet-code">${escapeHtml(f.snippet)}</span><div id="fix-area-${i}">${fixAreaHtml}</div></div>`;
       list.appendChild(row);
     });
   }
@@ -769,6 +840,143 @@
     window.location.href = 'signin.html';
   };
   initResults();
+</script>
+
+<!-- LLM Fix Popup -->
+<div class="fix-popup-overlay" id="fix-popup-overlay">
+  <div class="fix-popup">
+    <div class="fix-popup-header">
+      <div class="fix-popup-title">AI-Generated Fix</div>
+      <button class="fix-popup-close" id="fix-popup-close">&times;</button>
+    </div>
+    <div id="fix-popup-body">
+      <div class="fix-popup-generating" id="fix-generating">
+        <div class="fix-spinner"></div>
+        Generating secure fix&hellip;
+      </div>
+      <div id="fix-result" style="display:none">
+        <pre class="fix-popup-code" id="fix-popup-code"></pre>
+        <div class="fix-popup-actions">
+          <button class="btn-dismiss-fix" id="fix-dismiss">Close</button>
+          <button class="btn-copy-fix" id="fix-copy">Copy Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const overlay   = document.getElementById('fix-popup-overlay');
+  const closeBtn  = document.getElementById('fix-popup-close');
+  const dismissBtn= document.getElementById('fix-dismiss');
+  const copyBtn   = document.getElementById('fix-copy');
+  const generating= document.getElementById('fix-generating');
+  const fixResult = document.getElementById('fix-result');
+  const fixCode   = document.getElementById('fix-popup-code');
+
+  let _activeFindingIdx = null;
+
+  function closePopup() {
+    overlay.classList.remove('show');
+    _activeFindingIdx = null;
+  }
+  closeBtn.onclick = closePopup;
+  dismissBtn.onclick = closePopup;
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closePopup(); });
+
+  copyBtn.onclick = () => {
+    navigator.clipboard.writeText(fixCode.textContent).then(() => {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(() => { copyBtn.textContent = 'Copy Code'; }, 1800);
+    });
+  };
+
+  window.openFixPopup = async function(findingIdx) {
+    _activeFindingIdx = findingIdx;
+    const f = window.allFindings[findingIdx];
+
+    // If already saved, just show it
+    if (f.llm_fix) {
+      fixCode.textContent = f.llm_fix;
+      generating.style.display = 'none';
+      fixResult.style.display  = 'block';
+      overlay.classList.add('show');
+      return;
+    }
+
+    // Show popup in loading state
+    generating.style.display = 'flex';
+    fixResult.style.display  = 'none';
+    overlay.classList.add('show');
+
+    // Disable the button
+    const btn = document.getElementById(`fix-btn-${findingIdx}`);
+    if (btn) { btn.disabled = true; btn.textContent = 'Generating…'; }
+
+    try {
+      const res = await fetch('/api/llm/codefix', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          snippet:        f.snippet,
+          cwe_id:         f.cwe,
+          language:       f.language,
+          recommendation: f.fix,
+        }),
+      });
+      if (!res.ok) throw new Error('API error');
+      const data = await res.json();
+      const fixText = data.text || '';
+
+      // Update in-memory
+      f.llm_fix = fixText;
+
+      // Save to DB (fire and forget)
+      if (f.finding_id) {
+        fetch(`/api/findings/${f.finding_id}/fix`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fix_text: fixText }),
+        }).catch(() => {});
+      }
+
+      // Show result in popup
+      fixCode.textContent = fixText;
+      generating.style.display = 'none';
+      fixResult.style.display  = 'block';
+
+      // Update the bubble in the row
+      renderFixBubble(findingIdx);
+    } catch {
+      generating.innerHTML = '<span style="color:#dc2626">Failed to generate fix. Check your API key.</span>';
+      if (btn) { btn.disabled = false; btn.textContent = 'Fix now'; }
+    }
+  };
+
+  function renderFixBubble(idx) {
+    const f = window.allFindings[idx];
+    const container = document.getElementById(`fix-area-${idx}`);
+    if (!container) return;
+    if (f.llm_fix) {
+      container.innerHTML = `<div class="fix-bubble" id="fix-bubble-${idx}" onclick="toggleFixBubble(${idx})">
+        <span class="fix-bubble-label">✓ AI Fix</span>
+        <span class="fix-bubble-code">${escapeHtml(f.llm_fix)}</span>
+      </div>`;
+    } else {
+      container.innerHTML = `<button class="btn-fix-now" id="fix-btn-${idx}" onclick="openFixPopup(${idx})">Fix now</button>`;
+    }
+  }
+
+  window.renderFixBubble = renderFixBubble;
+
+  window.toggleFixBubble = function(idx) {
+    const bubble = document.getElementById(`fix-bubble-${idx}`);
+    if (bubble) bubble.classList.toggle('expanded');
+  };
+})();
 </script>
 </body>
 </html>

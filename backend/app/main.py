@@ -43,6 +43,7 @@ from .db import (
     decode_access_token,
     delete_user_and_data,
     get_finding,
+    save_finding_fix,
     get_scan,
     get_user_by_id,
     init_db,
@@ -784,7 +785,7 @@ async def llm_codefix(
                 "Accept": "application/json",
             },
             json={
-                "model": "meta/llama-4-maverick-17b-128e-instruct",
+                "model": "meta/llama-3.1-405b-instruct",
                 "messages": [
                     {
                         "role": "system",
@@ -810,6 +811,26 @@ async def llm_codefix(
         raise HTTPException(status_code=502, detail="NVIDIA API error.")
 
     return JSONResponse({"ok": True, "text": text})
+
+
+class LLMFixSaveRequest(BaseModel):
+    fix_text: str
+
+
+@app.post("/api/findings/{finding_id}/fix")
+async def save_llm_fix(
+    finding_id: int,
+    payload: LLMFixSaveRequest,
+    current_user: dict = Depends(_require_user),
+) -> JSONResponse:
+    ok = save_finding_fix(
+        finding_id,
+        payload.fix_text,
+        requester_user_id=current_user["user_id"],
+    )
+    if not ok:
+        raise HTTPException(status_code=404, detail="Finding not found.")
+    return JSONResponse({"ok": True})
 
 
 # ── scan endpoints ─────────────────────────────────────────────────────────────
