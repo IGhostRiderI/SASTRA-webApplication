@@ -130,8 +130,6 @@ class ScannerEngine:
         language_rules = self.rules_by_language.get(language, [])
 
         for line_number, clean_line in enumerate(clean_lines, start=1):
-            if len(findings) >= MAX_FINDINGS_PER_SCAN:
-                break
             if not clean_line.strip():
                 continue
 
@@ -142,8 +140,6 @@ class ScannerEngine:
             )
 
             for rule in language_rules:
-                if len(findings) >= MAX_FINDINGS_PER_SCAN:
-                    break
                 for match in rule.regex.finditer(clean_line):
                     key = (line_number, rule.id, match.start())
                     if key in seen:
@@ -283,10 +279,6 @@ class ScannerEngine:
             # Fallback — regex only (Java without javalang, or C/C++ without libclang)
             all_findings = regex_findings
 
-        # Enforce global cap after merging
-        if len(all_findings) > MAX_FINDINGS_PER_SCAN:
-            all_findings = all_findings[:MAX_FINDINGS_PER_SCAN]
-
         # Sort: highest severity first, then by line number ascending
         all_findings.sort(
             key=lambda f: (-f["severity_score"], f["line_number"])
@@ -330,8 +322,6 @@ class ScannerEngine:
             key=lambda item: (item["severity_score"], item["source_path"], item["line_number"]),
             reverse=True,
         )
-        if len(all_findings) > MAX_FINDINGS_PER_SCAN:
-            all_findings = all_findings[:MAX_FINDINGS_PER_SCAN]
 
         language_label = (
             "mixed" if len(languages) > 1

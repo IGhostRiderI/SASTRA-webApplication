@@ -44,7 +44,7 @@
 
     .blob { position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.28; pointer-events: none; z-index: 0; }
     .blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, #a7f3d0, transparent 70%); top: -120px; right: 60px; animation: drift 14s ease-in-out infinite alternate; }
-    .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, #c4b5fd, transparent 70%); bottom: -100px; left: 100px; animation: drift 18s 3s ease-in-out infinite alternate; }
+    .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, #bfdbfe, transparent 70%); bottom: -100px; left: 100px; animation: drift 18s 3s ease-in-out infinite alternate; }
     @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(24px,18px) scale(1.05); } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
@@ -312,6 +312,35 @@
       .form-grid { grid-template-columns: 1fr; }
       .modal { padding: 30px 24px; }
     }
+  
+    /* ── FLOATING CHATBOT BUBBLE ── */
+    .chat-bubble-btn { position: fixed; bottom: 28px; right: 28px; z-index: 9999; height: 50px; padding: 0 22px 0 16px; border-radius: 999px; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: none; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 28px rgba(37,99,235,0.38); transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease; white-space: nowrap; }
+    .chat-bubble-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 36px rgba(37,99,235,0.48); }
+    .chat-bubble-btn svg { width: 20px; height: 20px; color: #fff; flex-shrink: 0; }
+    .chat-bubble-label { font-family: 'Sora', sans-serif; font-size: 0.84rem; font-weight: 700; color: #fff; letter-spacing: 0.01em; }
+    .chat-bubble-btn .icon-close { display: none; }
+    .chat-bubble-btn.open .icon-chat { display: none; }
+    .chat-bubble-btn.open .icon-close { display: block; }
+    .chat-bubble-btn.open .chat-bubble-label { display: none; }
+    .chat-bubble-notif { position: absolute; top: 10px; right: 18px; width: 10px; height: 10px; border-radius: 50%; background: #10b981; border: 2px solid #fff; pointer-events: none; }
+    .chat-panel { position: fixed; bottom: 92px; right: 28px; z-index: 9998; width: 340px; height: 460px; background: rgba(248,249,251,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.85); border-radius: 22px; box-shadow: 0 20px 60px rgba(0,0,0,0.16); display: flex; flex-direction: column; overflow: hidden; transform: scale(0.88) translateY(16px); transform-origin: bottom right; opacity: 0; pointer-events: none; transition: transform 0.26s cubic-bezier(0.34,1.56,0.64,1), opacity 0.22s ease; }
+    .chat-panel.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+    .chat-panel-header { display: flex; align-items: center; gap: 10px; padding: 15px 18px; background: linear-gradient(135deg, #2563eb, #1d4ed8); flex-shrink: 0; }
+    .chat-panel-avatar { width: 34px; height: 34px; border-radius: 10px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; }
+    .chat-panel-avatar svg { width: 16px; height: 16px; color: #fff; }
+    .chat-panel-title { font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 700; color: #fff; }
+    .chat-panel-sub { font-size: 0.7rem; color: rgba(255,255,255,0.72); margin-top: 1px; }
+    .chat-panel-status { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 2px rgba(255,255,255,0.3); }
+    .chat-panel-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 28px 24px; text-align: center; }
+    .chat-panel-body-icon { width: 56px; height: 56px; border-radius: 18px; background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(29,78,216,0.12)); border: 1px solid rgba(37,99,235,0.18); display: flex; align-items: center; justify-content: center; }
+    .chat-panel-body-icon svg { width: 26px; height: 26px; color: #2563eb; opacity: 0.7; }
+    .chat-panel-coming { font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700; color: #0a0a0a; }
+    .chat-panel-coming-sub { font-size: 0.78rem; color: #6b7280; line-height: 1.55; max-width: 240px; }
+    .chat-panel-input-row { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-top: 1px solid rgba(0,0,0,0.07); background: rgba(255,255,255,0.4); flex-shrink: 0; }
+    .chat-panel-input { flex: 1; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 9px 13px; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; background: rgba(255,255,255,0.8); color: #0a0a0a; outline: none; }
+    .chat-panel-input::placeholder { color: #aaa; }
+    .chat-panel-send { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: none; cursor: not-allowed; opacity: 0.55; display: flex; align-items: center; justify-content: center; }
+    .chat-panel-send svg { width: 14px; height: 14px; color: #fff; }
   </style>
 </head>
 <body>
@@ -553,5 +582,30 @@
     };
     loadUser();
   </script>
+
+<!-- ── FLOATING CHATBOT BUBBLE ── -->
+<button class="chat-bubble-btn" id="chatBubbleBtn" onclick="toggleChatPanel()" aria-label="Open AI assistant">
+  <svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span class="chat-bubble-label">SASTRA AI</span>
+  <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  <span class="chat-bubble-notif"></span>
+</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-panel-header">
+    <div class="chat-panel-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+    <div><div class="chat-panel-title">SASTRA AI</div><div class="chat-panel-sub">Security assistant</div></div>
+    <div class="chat-panel-status"></div>
+  </div>
+  <div class="chat-panel-body">
+    <div class="chat-panel-body-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div class="chat-panel-coming">Coming Soon</div>
+    <div class="chat-panel-coming-sub">Ask about vulnerabilities, get fix suggestions, and understand your security posture — AI-powered answers are on the way.</div>
+  </div>
+  <div class="chat-panel-input-row">
+    <input class="chat-panel-input" type="text" placeholder="Ask anything about security…" disabled/>
+    <button class="chat-panel-send" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+<script>function toggleChatPanel(){const b=document.getElementById("chatBubbleBtn"),p=document.getElementById("chatPanel");b.classList.toggle("open");p.classList.toggle("open");}</script>
 </body>
 </html>

@@ -152,16 +152,12 @@ _PY_CALL_RULES: Dict[Tuple[Optional[str], str], Tuple[str, str, str]] = {
     (None, "exec"):    ("CWE-94",  "Code Injection",                        "Unsafe exec() usage"),
     (None, "compile"): ("CWE-94",  "Code Injection",                        "Dynamic code compilation via compile()"),
     (None, "input"):   ("CWE-20",  "Improper Input Validation",             "Unvalidated user input via input()"),
-    (None, "open"):    ("CWE-22",  "Path Traversal",                        "Unvalidated file path passed to open()"),
-    # os module
+    # open() — only flagged when argument is not a string literal (handled below via _ast_check_open)
+    # os module — os.system always dangerous (no safe usage pattern)
     ("os", "system"):  ("CWE-78",  "OS Command Injection",                  "OS command execution via os.system()"),
     ("os", "popen"):   ("CWE-78",  "OS Command Injection",                  "OS command execution via os.popen()"),
-    # subprocess module
-    ("subprocess", "Popen"):        ("CWE-78", "OS Command Injection",      "Command execution via subprocess.Popen()"),
-    ("subprocess", "call"):         ("CWE-78", "OS Command Injection",      "Command execution via subprocess.call()"),
-    ("subprocess", "run"):          ("CWE-78", "OS Command Injection",      "Command execution via subprocess.run()"),
-    ("subprocess", "check_output"): ("CWE-78", "OS Command Injection",      "Command execution via subprocess.check_output()"),
-    ("subprocess", "check_call"):   ("CWE-78", "OS Command Injection",      "Command execution via subprocess.check_call()"),
+    # subprocess — only flagged when shell=True (handled below via _ast_check_subprocess)
+
     # pickle / marshal / shelve
     ("pickle",     "loads"):   ("CWE-502", "Deserialization of Untrusted Data", "Unsafe deserialization via pickle.loads()"),
     ("pickle",     "load"):    ("CWE-502", "Deserialization of Untrusted Data", "Unsafe deserialization via pickle.load()"),
@@ -181,9 +177,7 @@ _PY_CALL_RULES: Dict[Tuple[Optional[str], str], Tuple[str, str, str]] = {
     ("random", "seed"):        ("CWE-330", "Use of Insufficiently Random Values", "Predictable RNG seed via random.seed()"),
     # tempfile
     ("tempfile", "mktemp"):    ("CWE-377", "Insecure Temporary File",  "Insecure temp file creation via tempfile.mktemp()"),
-    # SQL
-    (None, "execute"):         ("CWE-89",  "SQL Injection", "Potential SQL injection via execute()"),
-    (None, "executemany"):     ("CWE-89",  "SQL Injection", "Potential SQL injection via executemany()"),
+    # SQL — execute() only flagged when query is NOT parameterized (handled below via _ast_check_execute)
 }
 
 _PY_SECRET_KWARG_NAMES = frozenset({
@@ -239,10 +233,45 @@ def ast_scan_python(
             lineno = getattr(node, "lineno", 0)
             col    = getattr(node, "col_offset", 0)
 
-            rule = _PY_CALL_RULES.get((module, func_name)) or _PY_CALL_RULES.get((None, func_name))
+            rule = _PY_CALL_RULES.get((module, func_name)) or (
+                _PY_CALL_RULES.get((None, func_name)) if module is None else None
+            )
             if rule:
                 cwe_id, cwe_name, title = rule
                 findings.append(_make_finding(lineno, col, cwe_id, cwe_name, title, _snip(lineno), "python", _ctx(lineno)))
+
+            # execute() — only flag when first arg is NOT a parameterized call
+            # (parameterized = has a second positional argument, e.g. cursor.execute(sql, params))
+            if func_name in ("execute", "executemany") and node.args:
+                first_arg = node.args[0]
+                has_params = len(node.args) >= 2  # second arg = parameters tuple/list
+                # Only dangerous when: first arg is a string built with format/concat AND no params
+                if not has_params and isinstance(first_arg, (ast.JoinedStr, ast.BinOp)):
+                    findings.append(_make_finding(lineno, col,
+                        "CWE-89", "SQL Injection",
+                        "Potential SQL injection via execute() with dynamic query (no parameterization)",
+                        _snip(lineno), "python", _ctx(lineno)))
+
+            # open() — only flag when first arg is NOT a string literal
+            if func_name == "open" and module is None and node.args:
+                first_arg = node.args[0]
+                if not isinstance(first_arg, ast.Constant):
+                    findings.append(_make_finding(lineno, col,
+                        "CWE-22", "Path Traversal",
+                        "Unvalidated file path passed to open()",
+                        _snip(lineno), "python", _ctx(lineno)))
+
+            # subprocess — only flag when shell=True is explicitly set
+            if module == "subprocess" and func_name in ("run", "call", "Popen", "check_output", "check_call"):
+                shell_true = any(
+                    isinstance(kw.value, ast.Constant) and kw.value.value is True
+                    for kw in node.keywords if kw.arg == "shell"
+                )
+                if shell_true:
+                    findings.append(_make_finding(lineno, col,
+                        "CWE-78", "OS Command Injection",
+                        f"Command execution via subprocess.{func_name}() with shell=True",
+                        _snip(lineno), "python", _ctx(lineno)))
 
             # 1a. Keyword argument secrets
             for kw in node.keywords:

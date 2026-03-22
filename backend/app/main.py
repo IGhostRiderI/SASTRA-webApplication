@@ -749,6 +749,31 @@ async def ml_retrain(current_user: dict = Depends(_require_admin)) -> JSONRespon
 
 # ── LLM code-fix helper ────────────────────────────────────────────────────────
 
+import re as _re
+
+_EXPLANATION_MARKERS = _re.compile(
+    r'(?i)^(becomes|fixed(\s+code)?|secure(\s+version)?|result|output|here\s+is|fix\:?)\s*:?\s*$'
+)
+_CODE_FENCE = _re.compile(r'^```[^\n]*\n?|^```$', _re.MULTILINE)
+_IMPORT_LINE = _re.compile(r'^\s*(import\s+\w+|from\s+\w+\s+import\b)')
+
+def _extract_code_only(text: str) -> str:
+    """Strip explanation prose, 'becomes' markers, code fences, and stray imports."""
+    # Remove code fences
+    text = _CODE_FENCE.sub('', text).strip()
+    lines = text.splitlines()
+    # If there's a "becomes" style split, take everything after the last marker
+    last_marker = -1
+    for i, line in enumerate(lines):
+        if _EXPLANATION_MARKERS.match(line.strip()):
+            last_marker = i
+    if last_marker >= 0:
+        lines = lines[last_marker + 1:]
+    # Strip stray import lines — we only want the fixed code, not added imports
+    lines = [l for l in lines if not _IMPORT_LINE.match(l)]
+    return '\n'.join(lines).strip()
+
+
 @app.post("/api/llm/codefix")
 async def llm_codefix(
     payload: LLMFixRequest,
@@ -758,11 +783,14 @@ async def llm_codefix(
     if not config.NVIDIA_API_KEY:
         raise HTTPException(status_code=503, detail="NVIDIA_API_KEY not configured.")
 
+    snippet_lines = payload.snippet.strip().splitlines()
+    line_count = len(snippet_lines)
+    rec_hint = f"\nFix guidance: {payload.recommendation}" if payload.recommendation else ""
     prompt = (
-        f"Fix this vulnerable {payload.language} line for {payload.cwe_id}:\n"
-        f"{payload.snippet}\n\n"
-        "Reply with ONLY the fixed line of code. "
-        "One line. No explanation. No markdown. No code fences. No extra lines."
+        f"Security vulnerability: {payload.cwe_id} in {payload.language}.{rec_hint}\n\n"
+        f"VULNERABLE ({line_count} line{'s' if line_count != 1 else ''}):\n{payload.snippet}\n\n"
+        f"FIXED (output EXACTLY {line_count} line{'s' if line_count != 1 else ''} — "
+        f"the same code with only the vulnerability fixed, nothing added or removed):"
     )
 
     logger.info(
@@ -783,22 +811,24 @@ async def llm_codefix(
                     {
                         "role": "system",
                         "content": (
-                            "You are a code security expert. "
-                            "You output ONLY the single fixed line of code. "
-                            "Never explain. Never use markdown or code fences. "
-                            "Never output more than one line."
+                            "You are a code security tool. "
+                            "You receive vulnerable code and output ONLY that exact code with the vulnerability fixed. "
+                            "STRICT RULES: same number of lines as input, no new functions, no imports, "
+                            "no explanations, no comments, no markdown, no code fences. "
+                            "Only change what is necessary to fix the vulnerability. Nothing else."
                         ),
                     },
                     {"role": "user", "content": prompt},
                 ],
-                "max_tokens": 100,
+                "max_tokens": 300,
                 "temperature": 0.1,
                 "top_p": 0.9,
                 "stream": False,
             },
         )
         response.raise_for_status()
-        text = response.json()["choices"][0]["message"]["content"].strip()
+        raw = response.json()["choices"][0]["message"]["content"].strip()
+        text = _extract_code_only(raw)
         logger.info("LLM code-fix returned for CWE: %s", payload.cwe_id)
     except Exception:
         logger.exception("NVIDIA API call failed — CWE: %s", payload.cwe_id)

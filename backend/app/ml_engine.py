@@ -58,9 +58,9 @@ logger = logging.getLogger("sast.ml")
 # The rule confidence (0.45–0.99) is a reliable signal derived from how
 # frequently the pattern appeared in real vulnerable code; the ML model
 # provides an additional code-semantic signal.
-FP_THRESHOLD  = 0.60
-ML_WEIGHT     = 0.35
-RULE_WEIGHT   = 0.65
+FP_THRESHOLD  = 0.55
+ML_WEIGHT     = 0.55
+RULE_WEIGHT   = 0.45
 
 
 def _build_feature_text(language: str, cwe: str, code: str) -> str:
