@@ -118,7 +118,8 @@ def build_pdf_report(scan_payload: Dict[str, object]) -> bytes:
     y -= 5 * mm
 
     for index, finding in enumerate(findings, start=1):
-        card_h = 30 * mm
+        llm_fix = (finding.get("llm_fix") or "").strip()
+        card_h = 34 * mm if llm_fix else 30 * mm
         if y - card_h < 16 * mm:
             c.showPage()
             c.setFillColor(colors.HexColor("#0F766E"))
@@ -178,6 +179,12 @@ def build_pdf_report(scan_payload: Dict[str, object]) -> bytes:
         fp_label = finding.get("fp_label", "")
         suffix   = f"  ⚠ {fp_label}" if fp_flag and fp_label else ("  ⚠ Potential false positive" if fp_flag else "")
         c.drawString(text_x, text_y - 20 * mm, _text(f"Fix: {rule_fix}{suffix}", 128))
+
+        # LLM-generated fix
+        if llm_fix:
+            c.setFillColor(colors.HexColor("#1B4F72"))
+            c.drawString(text_x, text_y - 24 * mm, _text(f"AI Fix: {llm_fix}", 128))
+            c.setFillColor(colors.HexColor("#37474F"))
 
         y -= card_h + 3 * mm
 
