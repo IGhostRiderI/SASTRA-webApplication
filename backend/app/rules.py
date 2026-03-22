@@ -2,7 +2,6 @@
 Hardcoded regex-based vulnerability detection rules.
 """
 
-from datetime import datetime, timezone
 from typing import Dict, List
 
 # ──────────────────────────────────────────────────────────────────────────────

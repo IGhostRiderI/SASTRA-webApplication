@@ -219,6 +219,20 @@
       animation: fadeUp 0.6s 0.28s ease both;
     }
 
+    .history-scroll {
+      max-height: min(78vh, 980px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    .history-scroll::-webkit-scrollbar { width: 10px; }
+    .history-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.2); }
+    .history-scroll::-webkit-scrollbar-thumb {
+      background: rgba(100,116,139,0.35);
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.4);
+    }
+    .history-scroll::-webkit-scrollbar-thumb:hover { background: rgba(100,116,139,0.5); }
+
     .table-header {
       display: grid;
       grid-template-columns: 2.8fr 0.9fr 0.9fr 1.2fr 1fr 48px;
@@ -557,13 +571,15 @@
       <div></div>
     </div>
 
-    <div id="scan-list"></div>
-    <div class="empty-state" id="empty-state">
-      <div class="empty-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <div class="history-scroll">
+      <div id="scan-list"></div>
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="empty-title">No scans found</div>
+        <div class="empty-sub">Try adjusting your search or filters to find what you're looking for.</div>
       </div>
-      <div class="empty-title">No scans found</div>
-      <div class="empty-sub">Try adjusting your search or filters to find what you're looking for.</div>
     </div>
   </div>
 
@@ -602,7 +618,7 @@
   let scans = [];
   let activeFilter = 'all';
   let currentPage = 1;
-  const perPage = 8;
+  const perPage = 10;
 
   function formatRelativeSince(value) {
     if (!value) return '-';
@@ -710,12 +726,9 @@
     emptyEl.classList.remove('show');
 
     const total = list.length;
-    const totalPages = Math.ceil(total / perPage);
-    if (currentPage > totalPages) currentPage = 1;
-    const start = (currentPage - 1) * perPage;
-    const paged = list.slice(start, start + perPage);
+    const visibleCount = Math.min(total, perPage);
 
-    paged.forEach((s) => {
+    list.forEach((s) => {
       const row = document.createElement('div');
       row.className = 'scan-row';
       row.innerHTML = `
@@ -728,7 +741,9 @@
       container.appendChild(row);
     });
 
-    pageInfo.textContent = `Showing ${start + 1}-${Math.min(start + perPage, total)} of ${total} scans`;
+    pageInfo.textContent = total > perPage
+      ? `Showing first ${visibleCount} of ${total} scans in this section (scroll to see the rest)`
+      : `Showing ${total} of ${total} scans`;
     pageCtrls.innerHTML = '';
   }
 
