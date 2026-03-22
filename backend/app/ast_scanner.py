@@ -81,6 +81,7 @@ def _make_finding(
     title: str,
     snippet: str,
     language: str,
+    ml_context: str = "",
 ) -> Dict[str, object]:
     """Build a finding dict in the same shape as regex-scanner findings."""
     sev = severity_for_cwe(cwe_id, cwe_name)
@@ -96,6 +97,7 @@ def _make_finding(
         "line_number":      line_number,
         "column_number":    col_offset + 1,
         "snippet":          snippet[:300],
+        "ml_context":       ml_context or snippet[:600],
         "source_path":      "",          # stamped by scanner.py
         "recommendation":   _recommendation(cwe_id),
         "source":           "ast",
@@ -130,6 +132,13 @@ def _recommendation(cwe_id: str) -> str:
 def _safe_snippet(source_lines: List[str], lineno: int) -> str:
     idx = lineno - 1
     return source_lines[idx] if 0 <= idx < len(source_lines) else ""
+
+
+def _ml_context(source_lines: List[str], lineno: int) -> str:
+    """Return surrounding lines for ML inference (matches training scale)."""
+    start = max(0, lineno - 4)
+    end   = min(len(source_lines), lineno + 15)
+    return "\n".join(source_lines[start:end])[:600]
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -219,6 +228,9 @@ def ast_scan_python(
     def _snip(lineno: int) -> str:
         return _safe_snippet(source_lines, lineno)
 
+    def _ctx(lineno: int) -> str:
+        return _ml_context(source_lines, lineno)
+
     for node in ast.walk(tree):
 
         # 1. Dangerous function calls
@@ -230,7 +242,7 @@ def ast_scan_python(
             rule = _PY_CALL_RULES.get((module, func_name)) or _PY_CALL_RULES.get((None, func_name))
             if rule:
                 cwe_id, cwe_name, title = rule
-                findings.append(_make_finding(lineno, col, cwe_id, cwe_name, title, _snip(lineno), "python"))
+                findings.append(_make_finding(lineno, col, cwe_id, cwe_name, title, _snip(lineno), "python", _ctx(lineno)))
 
             # 1a. Keyword argument secrets
             for kw in node.keywords:
@@ -246,7 +258,7 @@ def ast_scan_python(
                         kw_line, 0,
                         "CWE-798", "Use of Hard-coded Credentials",
                         f"Hardcoded credential passed as keyword argument '{kw.arg}'",
-                        _snip(kw_line), "python",
+                        _snip(kw_line), "python", _ctx(kw_line),
                     ))
 
         # 2. Hardcoded credential assignments  (password = "secret123")
@@ -269,7 +281,7 @@ def ast_scan_python(
                         lineno, 0,
                         "CWE-798", "Use of Hard-coded Credentials",
                         f"Hardcoded credential assigned to variable '{name}'",
-                        _snip(lineno), "python",
+                        _snip(lineno), "python", _ctx(lineno),
                     ))
 
         # 3. Annotated assignments  (password: str = "secret")
@@ -293,7 +305,7 @@ def ast_scan_python(
                     lineno, 0,
                     "CWE-798", "Use of Hard-coded Credentials",
                     f"Hardcoded credential in annotated assignment '{name}'",
-                    _snip(lineno), "python",
+                    _snip(lineno), "python", _ctx(lineno),
                 ))
 
         # 4. Security assertions stripped in optimised builds
@@ -305,7 +317,7 @@ def ast_scan_python(
                     lineno, 0,
                     "CWE-617", "Reachable Assertion",
                     "Security check implemented via assert — removed in optimised builds",
-                    _snip(lineno), "python",
+                    _snip(lineno), "python", _ctx(lineno),
                 ))
 
     return findings
@@ -398,6 +410,9 @@ def ast_scan_java(
     def _snip(lineno: int) -> str:
         return _safe_snippet(source_lines, lineno)
 
+    def _ctx(lineno: int) -> str:
+        return _ml_context(source_lines, lineno)
+
     # ── 1. Method invocations ──────────────────────────────────────────────────
     for _, node in tree.filter(javalang.tree.MethodInvocation):
         method_name = node.member
@@ -419,7 +434,7 @@ def ast_scan_java(
                 else:
                     continue       # no literal argument — skip to avoid noise
 
-            findings.append(_make_finding(lineno, 0, cwe_id, cwe_name, title, _snip(lineno), "java"))
+            findings.append(_make_finding(lineno, 0, cwe_id, cwe_name, title, _snip(lineno), "java", _ctx(lineno)))
 
         # 1a. java.util.Random non-secure RNG usage
         if method_name in _JAVA_RANDOM_METHODS:
@@ -431,7 +446,7 @@ def ast_scan_java(
                     lineno, 0,
                     "CWE-330", "Use of Insufficiently Random Values",
                     f"Non-cryptographic RNG via Random.{method_name}() — use SecureRandom",
-                    _snip(lineno), "java",
+                    _snip(lineno), "java", _ctx(lineno),
                 ))
 
     # ── 2. Object creation — detect new Random() and new ObjectInputStream() ──
@@ -444,7 +459,7 @@ def ast_scan_java(
                 lineno, 0,
                 "CWE-330", "Use of Insufficiently Random Values",
                 "Non-cryptographic RNG: new Random() — use SecureRandom for security-sensitive values",
-                _snip(lineno), "java",
+                _snip(lineno), "java", _ctx(lineno),
             ))
 
         elif type_name == "ObjectInputStream":
@@ -452,7 +467,7 @@ def ast_scan_java(
                 lineno, 0,
                 "CWE-502", "Deserialization of Untrusted Data",
                 "Unsafe deserialization: new ObjectInputStream() wraps untrusted data",
-                _snip(lineno), "java",
+                _snip(lineno), "java", _ctx(lineno),
             ))
 
     # ── 3. Hardcoded credential field declarations ─────────────────────────────
@@ -475,7 +490,7 @@ def ast_scan_java(
                 lineno, 0,
                 "CWE-798", "Use of Hard-coded Credentials",
                 f"Hardcoded credential in variable declaration '{node.name}'",
-                _snip(lineno), "java",
+                _snip(lineno), "java", _ctx(lineno),
             ))
 
     # ── 4. Empty / permissive TrustManager (certificate validation disabled) ──
@@ -500,7 +515,7 @@ def ast_scan_java(
                     lineno, 0,
                     "CWE-295", "Improper Certificate Validation",
                     f"Empty {method.name}() in X509TrustManager disables certificate validation",
-                    _snip(lineno), "java",
+                    _snip(lineno), "java", _ctx(lineno),
                 ))
 
     return findings
@@ -654,6 +669,9 @@ def ast_scan_cpp(
     def _snip(lineno: int) -> str:
         return _safe_snippet(source_lines, lineno)
 
+    def _ctx(lineno: int) -> str:
+        return _ml_context(source_lines, lineno)
+
     def _walk(cursor) -> None:
         loc = cursor.location
         # Skip nodes from system headers — only analyse our file
@@ -675,7 +693,7 @@ def ast_scan_cpp(
                 f = _make_finding(
                     lineno, col, cwe_id, cwe_name,
                     f"Unsafe call to {func_name}()",
-                    _snip(lineno), "cpp",
+                    _snip(lineno), "cpp", _ctx(lineno),
                 )
                 f["recommendation"] = rec
                 findings.append(f)
@@ -699,7 +717,7 @@ def ast_scan_cpp(
                         lineno, col,
                         "CWE-798", "Use of Hard-coded Credentials",
                         f"Hardcoded credential in variable '{var_name}'",
-                        _snip(lineno), "cpp",
+                        _snip(lineno), "cpp", _ctx(lineno),
                     )
                     f["recommendation"] = (
                         "Do not hardcode credentials — load secrets from "

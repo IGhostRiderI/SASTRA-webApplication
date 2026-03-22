@@ -822,7 +822,7 @@
       row.className = 'finding-row';
       const confClass = confidenceClass(f.confidence);
       const fixAreaHtml = f.llm_fix
-        ? `<div class="fix-bubble" id="fix-bubble-${i}" onclick="toggleFixBubble(${i})"><span class="fix-bubble-label">✓ AI Fix</span><span class="fix-bubble-code">${escapeHtml(f.llm_fix)}</span></div>`
+        ? `<div class="fix-bubble" id="fix-bubble-${i}" onclick="toggleFixBubble(${i})"><span class="fix-bubble-label">✓ LLM Fix</span><span class="fix-bubble-code">${escapeHtml(f.llm_fix)}</span></div>`
         : `<button class="btn-fix-now" id="fix-btn-${i}" onclick="openFixPopup(${i})">Fix now</button>`;
       row.innerHTML = `<div class="sev-badge"><span class="sev-pill ${escapeHtml(f.sev)}">${escapeHtml(severityLabel(f.sev))}</span><span class="confidence-tag ${confClass}">ML Confidence ${f.confidence}%</span></div><div class="cell-code col-cwe">${escapeHtml(f.cwe)}</div><div class="cell-owasp col-owasp">${escapeHtml(f.owasp)}</div><div class="cell-file col-file">${escapeHtml(f.file)}</div><div><span class="cell-loc">${escapeHtml(f.line)}</span></div><div class="cell-issue col-issue"><div class="issue-title">${escapeHtml(f.title)}</div><div class="issue-fix">${escapeHtml(f.fix || '-')}</div></div><div class="cell-snippet snippet-col"><span class="snippet-code">${escapeHtml(f.snippet)}</span><div id="fix-area-${i}">${fixAreaHtml}</div></div>`;
       list.appendChild(row);
@@ -962,7 +962,7 @@
     if (!container) return;
     if (f.llm_fix) {
       container.innerHTML = `<div class="fix-bubble" id="fix-bubble-${idx}" onclick="toggleFixBubble(${idx})">
-        <span class="fix-bubble-label">✓ AI Fix</span>
+        <span class="fix-bubble-label">✓ LLM Fix</span>
         <span class="fix-bubble-code">${escapeHtml(f.llm_fix)}</span>
       </div>`;
     } else {

@@ -8,7 +8,6 @@ JULIET_TESTCASES_DIR = DATASETS_ROOT / "C" / "testcases"
 
 APP_DIR = Path(__file__).resolve().parent
 APP_DATA_DIR = APP_DIR / "data"
-RULES_CACHE_PATH = APP_DATA_DIR / "generated_rules.json"
 DB_PATH = APP_DATA_DIR / "sast.db"
 ML_ENGINE_PATH = APP_DATA_DIR / "ml_engine.pkl.gz"
 

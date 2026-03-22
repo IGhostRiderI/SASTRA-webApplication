@@ -49,12 +49,38 @@ from .config import (
     ML_MIN_DF,
 )
 from .mappings import normalize_cwe, severity_for_cwe
+from . import cwe_dataset_loader
 
 logger = logging.getLogger("sast.ml")
 
-# Findings whose vuln_probability falls below this threshold are flagged
-# as likely false positives.
-FP_THRESHOLD = 0.40
+# Combined FP score threshold.  A finding is flagged when:
+#   ml_vuln_prob * ML_WEIGHT + rule_confidence * RULE_WEIGHT < FP_THRESHOLD
+# The rule confidence (0.45–0.99) is a reliable signal derived from how
+# frequently the pattern appeared in real vulnerable code; the ML model
+# provides an additional code-semantic signal.
+FP_THRESHOLD  = 0.60
+ML_WEIGHT     = 0.35
+RULE_WEIGHT   = 0.65
+
+
+def _build_feature_text(language: str, cwe: str, code: str) -> str:
+    """
+    Build the ML input string used at both training and inference time.
+
+    Structure:
+      {language} {cwe_id} {cwe_enrichment} {code[:600]}
+
+    The CWE enrichment text (description + consequence tokens + CVE signal +
+    detection method token) comes from the CWE mapping dataset and gives the
+    TF-IDF vectorizer semantic signal that the bare CWE ID alone cannot provide.
+
+    IMPORTANT: training and inference must call this function identically —
+    any change here requires deleting ml_engine.pkl.gz to force a retrain.
+    """
+    enrichment = cwe_dataset_loader.get_enrichment_text(cwe)
+    if enrichment:
+        return f"{language} {cwe} {enrichment} {code[:600]}"
+    return f"{language} {cwe} {code[:600]}"
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -111,13 +137,13 @@ def _load_language_samples(
                 severity = severity_for_cwe(cwe)
 
                 # Vulnerable entry
-                texts.append(f"{language} {cwe} {vul_code[:600]}")
+                texts.append(_build_feature_text(language, cwe, vul_code))
                 severity_labels.append(severity)
                 fp_labels.append(1)
 
                 # Patched/safe entry (if available and meaningfully different)
                 if patch and patch != vul_code and len(texts) < max_samples:
-                    texts.append(f"{language} {cwe} {patch[:600]}")
+                    texts.append(_build_feature_text(language, cwe, patch))
                     severity_labels.append(severity)
                     fp_labels.append(0)
 
@@ -176,7 +202,7 @@ class MLEngine:
         never breaks a scan.
         """
         try:
-            text  = f"{language} {cwe_id} {snippet[:600]}"
+            text  = _build_feature_text(language, cwe_id, snippet)
             vec   = self.vectorizer.transform([text])
             proba = self.severity_model.predict_proba(vec)[0]
             idx   = int(np.argmax(proba))
@@ -202,7 +228,7 @@ class MLEngine:
             }
         """
         try:
-            text  = f"{language} {cwe_id} {snippet[:600]}"
+            text  = _build_feature_text(language, cwe_id, snippet)
             vec   = self.vectorizer.transform([text])
             proba = self.fp_model.predict_proba(vec)[0]
             # sklearn class order: [0=not_vulnerable, 1=vulnerable]
@@ -232,7 +258,10 @@ class MLEngine:
         """
         findings = scan_output.get("findings", [])
         for finding in findings:
-            snippet  = finding.get("snippet",  "")
+            # Use ml_context (surrounding lines) if available — it matches the
+            # function-body scale the models were trained on. Fall back to the
+            # single-line display snippet only when ml_context is absent.
+            snippet  = finding.get("ml_context") or finding.get("snippet", "")
             cwe_id   = finding.get("cwe_id",   "")
             language = finding.get("language", "")
 
@@ -242,13 +271,19 @@ class MLEngine:
             finding["ml_severity_confidence"] = sev["confidence"]
 
             # False positive classification
+            # Combined score: ML output (code-semantic signal) weighted with
+            # rule confidence (frequency-based signal from dataset).
+            # Rule confidence is more reliable with current training data, so
+            # it gets higher weight.
             fp = self.predict_fp(snippet, cwe_id, language)
-            finding["ml_confidence"] = fp["vuln_prob"]
-            if fp["is_fp"]:
+            rule_conf    = float(finding.get("confidence", 0.75))
+            combined     = fp["vuln_prob"] * ML_WEIGHT + rule_conf * RULE_WEIGHT
+            finding["ml_confidence"] = round(combined, 3)
+            if combined < FP_THRESHOLD:
                 finding["fp_flag"]  = True
                 finding["fp_label"] = (
-                    f"ML classifier: likely false positive "
-                    f"(vulnerability probability {fp['vuln_prob']:.0%})"
+                    f"Low confidence finding — combined score {combined:.0%} "
+                    f"(ML: {fp['vuln_prob']:.0%}, rule: {rule_conf:.0%})"
                 )
 
         return scan_output
@@ -371,10 +406,14 @@ def _train(
     )
 
     # ── FP classifier (trained on all samples) ─────────────────────────────────
+    # Note: isotonic calibration was removed — it collapsed the RF's already-
+    # narrow output range (~0.63–0.69) into a constant (~0.536).  The raw RF
+    # predict_proba is more spread and is combined with rule confidence at
+    # inference time (see enrich_scan_output) which is a better FP signal.
     X_fp_tr, X_fp_te, y_fp_tr, y_fp_te = train_test_split(
         X, all_fp, test_size=0.2, random_state=42, stratify=all_fp,
     )
-    _fp_rf = RandomForestClassifier(
+    fp_model = RandomForestClassifier(
         n_estimators     = 300,
         max_depth        = None,
         min_samples_leaf = 2,
@@ -382,13 +421,12 @@ def _train(
         random_state     = 42,
         n_jobs           = -1,
     )
-    _fp_rf.fit(X_fp_tr, y_fp_tr)
+    fp_model.fit(X_fp_tr, y_fp_tr)
     logger.info(
         "FP classifier eval (20%% hold-out):\n%s",
-        classification_report(y_fp_te, _fp_rf.predict(X_fp_te), zero_division=0),
+        classification_report(y_fp_te, fp_model.predict(X_fp_te), zero_division=0),
     )
-    # Calibrate on full data using cross-validation
-    fp_model = CalibratedClassifierCV(_fp_rf, method="isotonic", cv=3)
+    # Refit on full dataset for better generalisation
     fp_model.fit(X, all_fp)
     unique, counts = np.unique(all_fp, return_counts=True)
     logger.info(

@@ -1,5 +1,6 @@
 import re
 from typing import Dict
+from . import cwe_dataset_loader  # CWE hierarchy for OWASP fallback
 
 OWASP_BY_CWE: Dict[str, str] = {
     "CWE-22": "A01:2021 - Broken Access Control",
@@ -110,10 +111,19 @@ def normalize_cwe(cwe_id: str) -> str:
 
 def map_cwe_to_owasp(cwe_id: str, cwe_name: str = "") -> str:
     cwe = normalize_cwe(cwe_id)
-    direct = OWASP_BY_CWE.get(cwe)
-    if direct:
-        return direct
 
+    # 1. Check the CWE itself and walk up the hierarchy using the dataset's
+    #    parent-child tree until we find an ancestor that has a known 2021 mapping.
+    current = cwe
+    visited: set = set()
+    while current and current not in visited:
+        direct = OWASP_BY_CWE.get(current)
+        if direct:
+            return direct
+        visited.add(current)
+        current = cwe_dataset_loader.get_parent(current)
+
+    # 2. Name-based heuristic (last resort for CWEs with no hierarchy path)
     name = (cwe_name or "").lower()
     if any(k in name for k in ["xss", "sql", "inject", "command", "deserialize"]):
         return "A03:2021 - Injection"

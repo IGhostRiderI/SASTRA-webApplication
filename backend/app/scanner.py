@@ -150,6 +150,14 @@ class ScannerEngine:
                         continue
                     seen.add(key)
 
+                    # Capture surrounding lines for ML context (matches
+                    # the function-body scale used during training).
+                    ctx_start = max(0, line_number - 3)
+                    ctx_end   = min(len(original_lines), line_number + 15)
+                    ml_context = "\n".join(
+                        original_lines[ctx_start:ctx_end]
+                    )[:600]
+
                     findings.append(
                         {
                             "rule_id":          rule.id,
@@ -163,6 +171,7 @@ class ScannerEngine:
                             "line_number":      line_number,
                             "column_number":    match.start() + 1,
                             "snippet":          original_line[:300],
+                            "ml_context":       ml_context,
                             "source_path":      path_value,
                             "recommendation":   recommendation_for_cwe(rule.cwe_id),
                             "source":           rule.source,

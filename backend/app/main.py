@@ -760,16 +760,10 @@ async def llm_codefix(
         raise HTTPException(status_code=503, detail="NVIDIA_API_KEY not configured.")
 
     prompt = (
-        "You are a security assistant. Given a vulnerable code snippet, "
-        "produce a concrete patched example in the same language.\n\n"
-        f"Vulnerable Code:\n{payload.snippet}\n\n"
-        f"CWE: {payload.cwe_id}\nLanguage: {payload.language}\n"
-    )
-    if payload.recommendation:
-        prompt += f"Rule recommendation: {payload.recommendation}\n"
-    prompt += (
-        "\nReturn ONLY the fixed code with no comments, no explanations, "
-        "no markdown formatting, and no code blocks."
+        f"Vulnerable {payload.language} snippet ({payload.cwe_id}):\n"
+        f"{payload.snippet}\n\n"
+        "Return ONLY the fixed version of that exact snippet — nothing else. "
+        "No explanations, no extra imports, no surrounding code, no markdown, no code fences."
     )
 
     logger.info(
