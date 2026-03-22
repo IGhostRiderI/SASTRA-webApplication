@@ -759,10 +759,10 @@ async def llm_codefix(
         raise HTTPException(status_code=503, detail="NVIDIA_API_KEY not configured.")
 
     prompt = (
-        f"Vulnerable {payload.language} snippet ({payload.cwe_id}):\n"
+        f"Fix this vulnerable {payload.language} line for {payload.cwe_id}:\n"
         f"{payload.snippet}\n\n"
-        "Return ONLY the fixed version of that exact snippet — nothing else. "
-        "No explanations, no extra imports, no surrounding code, no markdown, no code fences."
+        "Reply with ONLY the fixed line of code. "
+        "One line. No explanation. No markdown. No code fences. No extra lines."
     )
 
     logger.info(
@@ -783,15 +783,17 @@ async def llm_codefix(
                     {
                         "role": "system",
                         "content": (
-                            "You are a code security expert. Return only code "
-                            "with no comments, no explanations, and no markdown."
+                            "You are a code security expert. "
+                            "You output ONLY the single fixed line of code. "
+                            "Never explain. Never use markdown or code fences. "
+                            "Never output more than one line."
                         ),
                     },
                     {"role": "user", "content": prompt},
                 ],
-                "max_tokens": 200,
-                "temperature": 1.00,
-                "top_p": 1.00,
+                "max_tokens": 100,
+                "temperature": 0.1,
+                "top_p": 0.9,
                 "stream": False,
             },
         )
@@ -819,7 +821,7 @@ async def save_llm_fix(
     ok = save_finding_fix(
         finding_id,
         payload.fix_text,
-        requester_user_id=current_user["user_id"],
+        requester_user_id=current_user["id"],
     )
     if not ok:
         raise HTTPException(status_code=404, detail="Finding not found.")
