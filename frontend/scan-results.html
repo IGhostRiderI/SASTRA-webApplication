@@ -860,7 +860,6 @@
   </div>
   <div class="nav-right">
     <p class="nav-welcome">Welcome, <span id="nav-username">User</span></p>
-    <button class="btn-nav-user" id="username-btn">Username</button>
     <button class="btn-logout" onclick="window.location.href='signin.html'">Log out</button>
   </div>
 </nav>
@@ -1174,7 +1173,6 @@
     const username = me.user?.username || 'User';
     sessionStorage.setItem('sastra_user', username);
     document.getElementById('nav-username').textContent = username;
-    document.getElementById('username-btn').textContent = username;
 
     const params = new URLSearchParams(window.location.search);
     let scanId = params.get('scan_id') || params.get('id');
@@ -1221,10 +1219,8 @@
       confidence: formatConfidencePercent(f.ml_confidence ?? f.ml_severity_confidence ?? 0),
     }));
     window.allFindings = allFindings;
-    // Load previously saved fixed state, then also auto-mark findings that have LLM fixes
+    // Load previously saved fixed state
     loadFixedFromStorage();
-    allFindings.forEach((f) => { if (f.llm_fix) fixedFindings.add(f._idx); });
-    saveFixedToStorage();
     const fpCount = allFindings.filter((f) => isFalsePositive(f.confidence)).length;
     document.getElementById('sum-fp').textContent = fpCount;
     renderOverview(summary);
@@ -1273,6 +1269,7 @@
       if (lbl) lbl.textContent = checked ? 'Fixed' : 'Mark fixed';
     }
     renderProgressTracker();
+    buildRemediationQueue(allFindings);
     if (hideFixed && checked) renderFindings();
   }
 
@@ -1403,7 +1400,7 @@
     if (!list) return;
 
     // Score each finding: severity × exploitability proxy (rule confidence)
-    const genuine = findings.filter((f) => !isFalsePositive(f.confidence));
+    const genuine = findings.filter((f) => !isFalsePositive(f.confidence) && !fixedFindings.has(f._idx));
     if (!genuine.length) {
       list.innerHTML = `<div class="rq-empty">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -1524,7 +1521,7 @@
 <div class="fix-popup-overlay" id="fix-popup-overlay">
   <div class="fix-popup">
     <div class="fix-popup-header">
-      <div class="fix-popup-title">AI-Generated Fix</div>
+      <div class="fix-popup-title">Secured Code</div>
       <button class="fix-popup-close" id="fix-popup-close">&times;</button>
     </div>
     <div id="fix-popup-body">
@@ -1631,9 +1628,8 @@
       generating.style.display = 'none';
       fixResult.style.display  = 'block';
 
-      // Update the bubble in the row and auto-mark as fixed
+      // Update the bubble in the row
       renderFixBubble(findingIdx);
-      markFixed(findingIdx, true);
     } catch {
       generating.innerHTML = '<span style="color:#dc2626">Failed to generate fix. Check your API key.</span>';
       if (btn) { btn.disabled = false; btn.textContent = 'Fix now'; }

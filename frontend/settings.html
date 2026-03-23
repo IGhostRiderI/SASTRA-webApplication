@@ -366,7 +366,6 @@
     </div>
     <div class="nav-right">
       <p class="nav-welcome">Welcome, <span id="nav-username">User</span></p>
-      <button class="btn-nav-user" id="username-btn">Username</button>
       <button class="btn-logout" onclick="window.location.href='signin.html'">Log out</button>
     </div>
   </nav>
@@ -483,7 +482,6 @@
       originalUsername = username;
       sessionStorage.setItem('sastra_user', username);
       document.getElementById('nav-username').textContent = username;
-      document.getElementById('username-btn').textContent = username;
       document.getElementById('username').value = username;
     }
 
@@ -528,7 +526,6 @@
       originalUsername = updatedUsername;
       sessionStorage.setItem('sastra_user', updatedUsername);
       document.getElementById('nav-username').textContent = updatedUsername;
-      document.getElementById('username-btn').textContent = updatedUsername;
       document.getElementById('username').value = updatedUsername;
 
       // Show toast

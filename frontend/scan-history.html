@@ -510,7 +510,6 @@
   </div>
   <div class="nav-right">
     <p class="nav-welcome">Welcome, <span id="nav-username">User</span></p>
-    <button class="btn-nav-user" id="username-btn">Username</button>
     <button class="btn-logout" onclick="window.location.href='signin.html'">Log out</button>
   </div>
 </nav>
@@ -690,7 +689,6 @@
     const username = me.user?.username || 'User';
     sessionStorage.setItem('sastra_user', username);
     document.getElementById('nav-username').textContent = username;
-    document.getElementById('username-btn').textContent = username;
 
     const scansRes = await fetch('/api/scans', { credentials: 'include' });
     const scansPayload = await scansRes.json();
