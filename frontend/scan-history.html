@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SASTRA – Scan History</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+    <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem("sastra-theme");
+        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (_error) {}
+    })();
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -486,6 +497,8 @@
     .chat-panel-send { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: none; cursor: not-allowed; opacity: 0.55; display: flex; align-items: center; justify-content: center; }
     .chat-panel-send svg { width: 14px; height: 14px; color: #fff; }
   </style>
+  <link rel="stylesheet" href="/static/theme.css"/>
+  <script src="/static/theme.js" defer></script>
 </head>
 <body>
 

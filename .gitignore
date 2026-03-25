@@ -7,3 +7,6 @@ backend/app/data/backups/
 backend/app/data/logs/
 *.pyc
 .DS_Store
+clause.md
+readme_nk.md
+dataset_tools/

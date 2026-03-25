@@ -35,7 +35,9 @@ pip install -r requirements.txt
 ```bash
 cd /Users/nadinak/Projects/SASTRAV2/SASTRA/backend
 source .venv/bin/activate
+export NVIDIA_API_KEY="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"
 uvicorn app.main:app --host 127.0.0.1 --port 8000
+
 ```
 
 Open: `http://127.0.0.1:8000`

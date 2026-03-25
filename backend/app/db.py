@@ -4,15 +4,6 @@ Database access layer.
 Authentication
 --------------
 Session tokens stored in SQLite are replaced by stateless JWT tokens.
-- ``create_access_token(user_id)``  — issues a signed JWT valid for 7 days.
-- ``decode_access_token(token)``    — verifies and returns the user_id, or
-                                      None if the token is expired/invalid.
-No sessions table is created or used.
-
-ORM
----
-All database access goes through SQLAlchemy ORM sessions (see database.py).
-Raw sqlite3 is no longer used anywhere in this module.
 """
 
 import hashlib

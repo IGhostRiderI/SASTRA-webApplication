@@ -28,6 +28,7 @@ a single compressed joblib file so loading is one call.
 
 import csv
 import logging
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -52,6 +53,9 @@ from .mappings import normalize_cwe, severity_for_cwe
 from . import cwe_dataset_loader
 
 logger = logging.getLogger("sast.ml")
+
+# Use at most 80% of available CPU cores for training/inference
+_N_JOBS = max(1, int((os.cpu_count() or 1) * 0.8))
 
 # Combined FP score threshold.  A finding is flagged when:
 #   ml_vuln_prob * ML_WEIGHT + rule_confidence * RULE_WEIGHT < FP_THRESHOLD
@@ -83,6 +87,13 @@ def _build_feature_text(language: str, cwe: str, code: str) -> str:
     return f"{language} {cwe} {code[:600]}"
 
 
+def _build_feature_text_no_cwe(language: str, code: str) -> str:
+    """Feature text with CWE stripped out — used only for severity eval.
+    Forces the eval to measure whether the model learned code patterns,
+    not just the CWE→severity lookup that causes 1.00 accuracy."""
+    return f"{language} {code[:600]}"
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # DATA LOADING
 # ══════════════════════════════════════════════════════════════════════════════
@@ -91,7 +102,7 @@ def _load_language_samples(
     csv_path: Path,
     language: str,
     max_samples: int,
-) -> Tuple[List[str], List[str], List[int]]:
+) -> Tuple[List[str], List[str], List[int], List[str]]:
     """
     Load training samples from one vulnerability CSV file.
 
@@ -103,14 +114,16 @@ def _load_language_samples(
     safe code patterns.  The severity model uses only the vulnerable
     entries (label 1).
 
-    Returns three parallel lists:
+    Returns four parallel lists:
       texts           — combined feature string: "{language} {cwe} {code[:600]}"
       severity_labels — severity derived from the CWE ID via severity_for_cwe()
       fp_labels       — 1 = vulnerable, 0 = patched/safe
+      code_only_texts — feature string WITHOUT CWE, used for honest severity eval
     """
     texts:           List[str] = []
     severity_labels: List[str] = []
     fp_labels:       List[int] = []
+    code_only_texts: List[str] = []
 
     if not csv_path.exists():
         logger.warning("Dataset file not found — skipping: %s", csv_path)
@@ -140,12 +153,14 @@ def _load_language_samples(
                 texts.append(_build_feature_text(language, cwe, vul_code))
                 severity_labels.append(severity)
                 fp_labels.append(1)
+                code_only_texts.append(_build_feature_text_no_cwe(language, vul_code))
 
                 # Patched/safe entry (if available and meaningfully different)
                 if patch and patch != vul_code and len(texts) < max_samples:
                     texts.append(_build_feature_text(language, cwe, patch))
                     severity_labels.append(severity)
                     fp_labels.append(0)
+                    code_only_texts.append(_build_feature_text_no_cwe(language, patch))
 
     except Exception:
         logger.exception("Error reading dataset: %s", csv_path)
@@ -155,7 +170,7 @@ def _load_language_samples(
         "Loaded %d samples from %-20s  (vulnerable: %d  patched: %d)",
         len(texts), csv_path.name, vuln_count, len(fp_labels) - vuln_count,
     )
-    return texts, severity_labels, fp_labels
+    return texts, severity_labels, fp_labels, code_only_texts
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -302,17 +317,19 @@ def _train(
     Train the TF-IDF vectorizer, severity model, and FP classifier
     from scratch using the CSV vulnerability datasets.
     """
-    all_texts:    List[str] = []
-    all_severity: List[str] = []
-    all_fp:       List[int] = []
+    all_texts:      List[str] = []
+    all_severity:   List[str] = []
+    all_fp:         List[int] = []
+    all_code_only:  List[str] = []
 
     for language, csv_path in LANGUAGE_TO_CSV.items():
-        texts, severity, fp = _load_language_samples(
+        texts, severity, fp, code_only = _load_language_samples(
             csv_path, language, max_samples_per_language
         )
         all_texts.extend(texts)
         all_severity.extend(severity)
         all_fp.extend(fp)
+        all_code_only.extend(code_only)
 
     if not all_texts:
         raise RuntimeError(
@@ -370,32 +387,45 @@ def _train(
     X_vuln = X[vuln_idx]
     y_sev  = [all_severity[i] for i in vuln_idx]
 
-    # Train/test split for severity evaluation logging
-    X_sev_tr, X_sev_te, y_sev_tr, y_sev_te = train_test_split(
-        X_vuln, y_sev, test_size=0.2, random_state=42, stratify=y_sev
-        if len(set(y_sev)) > 1 else None
+    # Build no-CWE feature matrix for honest severity eval
+    # (avoids the trivial CWE→severity lookup that produces 1.00 accuracy)
+    vuln_code_only = [all_code_only[i] for i in vuln_idx]
+    X_vuln_no_cwe  = vectorizer.transform(vuln_code_only)
+
+    # Train/test split — train on full features, eval on no-CWE features
+    idx_tr, idx_te = train_test_split(
+        range(len(y_sev)), test_size=0.2, random_state=42,
+        stratify=y_sev if len(set(y_sev)) > 1 else None,
     )
+    X_sev_tr = X_vuln[list(idx_tr)]
+    X_sev_te = X_vuln_no_cwe[list(idx_te)]   # eval without CWE
+    y_sev_tr = [y_sev[i] for i in idx_tr]
+    y_sev_te = [y_sev[i] for i in idx_te]
+
     _sev_rf = RandomForestClassifier(
-        n_estimators  = 300,
-        max_depth     = None,   # unlimited — let trees grow fully with more data
-        min_samples_leaf = 2,
-        class_weight  = "balanced",
-        random_state  = 42,
-        n_jobs        = -1,
+        n_estimators     = 300,
+        max_depth        = 40,   # cap depth to prevent memorising synthetic templates
+        min_samples_leaf = 5,    # require more evidence per leaf
+        max_features     = "sqrt",
+        class_weight     = "balanced",
+        random_state     = 42,
+        n_jobs           = _N_JOBS,
     )
     _sev_rf.fit(X_sev_tr, y_sev_tr)
     logger.info(
-        "Severity model eval (20%% hold-out):\n%s",
+        "Severity model eval — code-only features, 20%% hold-out "
+        "(CWE excluded so score reflects code-pattern learning):\n%s",
         classification_report(y_sev_te, _sev_rf.predict(X_sev_te), zero_division=0),
     )
     # Final model: refit on all vulnerable samples, then calibrate
     _sev_rf_full = RandomForestClassifier(
-        n_estimators  = 300,
-        max_depth     = None,
-        min_samples_leaf = 2,
-        class_weight  = "balanced",
-        random_state  = 42,
-        n_jobs        = -1,
+        n_estimators     = 300,
+        max_depth        = 40,
+        min_samples_leaf = 5,
+        max_features     = "sqrt",
+        class_weight     = "balanced",
+        random_state     = 42,
+        n_jobs           = _N_JOBS,
     )
     _sev_rf_full.fit(X_vuln, y_sev)
     severity_model = CalibratedClassifierCV(_sev_rf_full, method="isotonic", cv=3)
@@ -415,11 +445,12 @@ def _train(
     )
     fp_model = RandomForestClassifier(
         n_estimators     = 300,
-        max_depth        = None,
-        min_samples_leaf = 2,
+        max_depth        = 40,
+        min_samples_leaf = 5,
+        max_features     = "sqrt",
         class_weight     = "balanced",
         random_state     = 42,
-        n_jobs           = -1,
+        n_jobs           = _N_JOBS,
     )
     fp_model.fit(X_fp_tr, y_fp_tr)
     logger.info(

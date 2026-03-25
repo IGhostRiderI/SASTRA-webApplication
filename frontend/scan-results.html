@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SASTRA – Scan Results</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem("sastra-theme");
+        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (_error) {}
+    })();
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -225,6 +236,14 @@
     .rq-list {
       flex: 1; padding: 12px 14px; display: flex; flex-direction: column;
       gap: 8px; overflow-y: auto; min-height: 0;
+    }
+    .rq-highlight {
+      animation: rq-flash 2s ease-out;
+    }
+    @keyframes rq-flash {
+      0%   { outline: 3px solid #6c63ff; background: rgba(108,99,255,0.12); }
+      60%  { outline: 3px solid #6c63ff; background: rgba(108,99,255,0.06); }
+      100% { outline: none; background: transparent; }
     }
     .rq-item {
       background: rgba(255,255,255,0.55);
@@ -836,6 +855,8 @@
       .col-cwe, .col-owasp, .col-issue { display: none; }
     }
   </style>
+  <link rel="stylesheet" href="/static/theme.css"/>
+  <script src="/static/theme.js" defer></script>
 </head>
 <body>
 
@@ -1432,7 +1453,7 @@
       const effort = effortKey ? EFFORT_MAP[effortKey] : DEFAULT_EFFORT;
       const sevCls = f.sev || 'medium';
       return `
-        <div class="rq-item">
+        <div class="rq-item" data-idx="${f._idx}" onclick="scrollToFinding(${f._idx})" style="cursor:pointer">
           <div class="rq-item-top">
             <div class="rq-rank">${i + 1}</div>
             <div class="rq-item-title">${f.title || f.cwe || 'Unknown Issue'}</div>
@@ -1451,6 +1472,22 @@
           </div>
         </div>`;
     }).join('');
+  }
+
+  function scrollToFinding(idx) {
+    // If the finding is filtered out, clear the filter first then re-render
+    const existing = document.querySelector(`.finding-row[data-idx="${idx}"]`);
+    if (!existing) {
+      activeFilter = 'all';
+      searchQuery = '';
+      hideFixed = false;
+      renderFindings();
+    }
+    const row = document.querySelector(`.finding-row[data-idx="${idx}"]`);
+    if (!row) return;
+    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    row.classList.add('rq-highlight');
+    setTimeout(() => row.classList.remove('rq-highlight'), 2000);
   }
 
   function renderFindings() {

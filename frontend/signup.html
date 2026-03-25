@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SASTRA – Sign Up</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+    <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem("sastra-theme");
+        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (_error) {}
+    })();
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -181,6 +192,8 @@
       .card { padding: 36px 24px 32px; }
     }
   </style>
+  <link rel="stylesheet" href="/static/theme.css"/>
+  <script src="/static/theme.js" defer></script>
 </head>
 <body>
 

@@ -14,90 +14,40 @@ Lightweight SAST web application with a FastAPI backend and static frontend page
 - `pip`
 - Git
 
-## 1) Clone the repository
-
-```bash
-git clone https://github.com/IGhostRiderI/Applied-project-testing-new-frontend-.git
-cd Applied-project-testing-new-frontend-
-```
-
-## 2) Create and activate virtual environment
-
-### Linux/macOS
+## 1) Install dependencies
 
 ```bash
 cd backend
-python3 -m venv --copies .venv
-source .venv/bin/activate
-```
-
-### Windows PowerShell
-
-```powershell
-cd backend
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-## 3) Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-## 4) (Optional) Set NVIDIA key for LLM code-fix endpoint
-
-Only needed for `POST /api/llm/codefix`.
-
-### Linux/macOS
-
-```bash
-export NVIDIA_API_KEY="your-api-key"
-```
-
-### Windows PowerShell
-
-```powershell
-$env:NVIDIA_API_KEY="your-api-key"
-```
-
-## 5) Run the application
-
-From `backend/` with virtualenv activated:
-
-```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000
-```
-
-Open in browser:
-
-- `http://127.0.0.1:8000`
-
-## 6) Stop the server
-
-Press `Ctrl + C` in terminal.
-
-## Quick Start (copy/paste)
-
-### Linux/macOS
-
-```bash
-cd backend
-python3 -m venv --copies .venv
+python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-### Windows PowerShell
+## 2) Run app (local)
 
-```powershell
+```bash
 cd backend
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-uvicorn app.main:app --host 0.0.0.0 --port 8000
+source .venv/bin/activate
+export NVIDIA_API_KEY="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"
+uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
+
+Open: `http://127.0.0.1:8000`
+
+> **Note:** On first run (or if `ml_engine.pkl.gz` is deleted), the ML model will train automatically on startup. This may take a few minutes. The app is ready once `Application startup complete` appears in the terminal.
+
+## 3) Run on GitHub Codespaces
+
+```bash
+cd /workspaces/SASTRA/SASTRA/backend
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+export NVIDIA_API_KEY="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"
+uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+Then open the Codespaces `Ports` tab, forward port `8000`, and open the forwarded URL.
 
 ## Common Issues
 
