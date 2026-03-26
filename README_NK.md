@@ -36,6 +36,7 @@ pip install -r requirements.txt
 cd /Users/nadinak/Projects/SASTRAV2/SASTRA/backend
 source .venv/bin/activate
 export NVIDIA_API_KEY="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"
+export NVIDIA_CHAT_API_KEY="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"
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 
 ```

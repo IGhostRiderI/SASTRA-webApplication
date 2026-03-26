@@ -45,6 +45,8 @@ ML_MIN_DF = 2
 
 # NVIDIA API key for LLM-powered code fixes
 NVIDIA_API_KEY = os.environ.get("NVIDIA_API_KEY", "")
+# NVIDIA API key for the SASTRA AI chatbot (separate key / model)
+NVIDIA_CHAT_API_KEY = os.environ.get("NVIDIA_CHAT_API_KEY", "")
 COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "false").strip().lower() in {"1", "true", "yes", "on"}
 
 # ── JWT configuration ──────────────────────────────────────────────────────────

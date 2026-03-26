@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Optional
 
 from fastapi import Depends, FastAPI, File, Form, HTTPException, Request, UploadFile
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response, StreamingResponse
 import requests
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -836,6 +836,73 @@ async def llm_codefix(
         raise HTTPException(status_code=502, detail="NVIDIA API error.")
 
     return JSONResponse({"ok": True, "text": text})
+
+
+# ── SASTRA AI Chatbot ──────────────────────────────────────────────────────────
+
+class ChatRequest(BaseModel):
+    message: str
+    history: list[dict] = []
+
+
+@app.post("/api/chat")
+async def chat_with_ai(
+    payload: ChatRequest,
+    current_user: dict = Depends(_require_user),
+):
+    """Stream a security-focused chat response using NVIDIA Llama 3.3 70B."""
+    from . import config
+    try:
+        from openai import OpenAI
+    except ImportError:
+        raise HTTPException(status_code=503, detail="openai package not installed. Run: pip install openai")
+
+    if not config.NVIDIA_CHAT_API_KEY:
+        raise HTTPException(status_code=503, detail="NVIDIA_CHAT_API_KEY not configured.")
+
+    system_prompt = (
+        "You are SASTRA AI, a security assistant for the SASTRA static application "
+        "security testing platform. Help users understand code vulnerabilities, "
+        "CWE and OWASP Top 10 issues, secure coding practices for Python, Java, and C/C++, "
+        "and how to interpret scan results and severity levels. "
+        "IMPORTANT: Match your response length strictly to the complexity of the question. "
+        "For simple or short questions give 1-3 sentences. "
+        "For detailed technical questions give a short focused answer with no padding. "
+        "Never add unnecessary explanations, preamble, or filler. Be direct."
+    )
+
+    messages: list[dict] = [{"role": "system", "content": system_prompt}]
+    for msg in payload.history[-10:]:
+        if msg.get("role") in ("user", "assistant") and msg.get("content"):
+            messages.append({"role": msg["role"], "content": str(msg["content"])[:2000]})
+    messages.append({"role": "user", "content": str(payload.message)[:4000]})
+
+    logger.info("Chat request from '%s'", current_user["username"])
+
+    def _stream():
+        import json as _json
+        try:
+            client = OpenAI(
+                base_url="https://integrate.api.nvidia.com/v1",
+                api_key=config.NVIDIA_CHAT_API_KEY,
+            )
+            completion = client.chat.completions.create(
+                model="meta/llama-3.3-70b-instruct",
+                messages=messages,
+                temperature=0.2,
+                top_p=0.7,
+                max_tokens=512,
+                stream=True,
+            )
+            for chunk in completion:
+                if chunk.choices and chunk.choices[0].delta.content is not None:
+                    yield f"data: {_json.dumps({'token': chunk.choices[0].delta.content})}\n\n"
+        except Exception:
+            logger.exception("Chat API failed for user: %s", current_user["username"])
+            yield f"data: {_json.dumps({'token': ' ⚠ AI service unavailable. Please try again.'})}\n\n"
+        yield "data: [DONE]\n\n"
+
+    return StreamingResponse(_stream(), media_type="text/event-stream")
 
 
 class LLMFixSaveRequest(BaseModel):

@@ -18,6 +18,14 @@ html[data-theme="dark"] {
   --row-hover: rgba(20, 39, 80, 0.96);
   --btn-dark: #0a0a0a;
   --btn-dark-text: #ffffff;
+  --popup-bg: rgba(10, 24, 56, 0.97);
+  --popup-border: rgba(132, 160, 209, 0.34);
+  --popup-cancel-bg: rgba(16, 35, 74, 0.9);
+  --popup-cancel-bg-hover: rgba(24, 49, 98, 0.96);
+  --popup-cancel-border-color: rgba(132, 160, 209, 0.36);
+  --popup-cancel-color: #eaf1ff;
+  --popup-confirm-bg: #e8eefb;
+  --popup-confirm-color: #0a0f1e;
 }
 
 .theme-toggle-btn {
@@ -347,6 +355,12 @@ html[data-theme="dark"] .scanning-overlay {
   -webkit-backdrop-filter: blur(12px) !important;
 }
 
+html[data-theme="dark"] .modal {
+  background: var(--popup-bg) !important;
+  border: 1px solid var(--popup-border) !important;
+  box-shadow: 0 24px 64px rgba(1, 8, 24, 0.5) !important;
+}
+
 html[data-theme="dark"] .scanning-modal {
   background: rgba(10, 24, 56, 0.96) !important;
   border-color: rgba(132, 160, 209, 0.36) !important;
@@ -402,6 +416,34 @@ html[data-theme="dark"] .btn-dismiss-fix {
   background: rgba(16, 35, 74, 0.9) !important;
   border-color: rgba(132, 160, 209, 0.36) !important;
   color: #eaf1ff !important;
+}
+
+/* ── Logout popup: global fixes ── */
+.logout-popup-btn { white-space: nowrap; }
+
+html[data-theme="dark"] .logout-popup {
+  background: var(--popup-bg) !important;
+  border: 1px solid var(--popup-border) !important;
+  box-shadow: 0 8px 32px rgba(1, 8, 24, 0.55) !important;
+}
+html[data-theme="dark"] .logout-popup p {
+  color: #f4f9ff !important;
+}
+html[data-theme="dark"] .logout-popup-cancel {
+  background: var(--popup-cancel-bg) !important;
+  border-color: var(--popup-cancel-border-color) !important;
+  color: var(--popup-cancel-color) !important;
+}
+html[data-theme="dark"] .logout-popup-cancel:hover {
+  background: var(--popup-cancel-bg-hover) !important;
+}
+html[data-theme="dark"] .logout-popup-confirm {
+  background: var(--popup-confirm-bg) !important;
+  color: var(--popup-confirm-color) !important;
+  box-shadow: 0 2px 8px rgba(1, 8, 24, 0.35) !important;
+}
+html[data-theme="dark"] .logout-popup-confirm:hover {
+  filter: brightness(1.08);
 }
 
 @media (max-width: 760px) {

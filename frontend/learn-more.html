@@ -207,6 +207,7 @@
     }
   </style>
   <link rel="stylesheet" href="/static/theme.css"/>
+  <link rel="stylesheet" href="/static/chat.css"/>
   <script src="/static/theme.js" defer></script>
 </head>
 <body>
@@ -400,17 +401,18 @@
       <div><div class="chat-panel-title">SASTRA AI</div><div class="chat-panel-sub">Security assistant</div></div>
       <div class="chat-panel-status"></div>
     </div>
-    <div class="chat-panel-body">
-      <div class="chat-panel-body-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <div class="chat-panel-coming">Coming Soon</div>
-      <div class="chat-panel-coming-sub">Ask about vulnerabilities, get fix suggestions, and understand your security posture — AI-powered answers are on the way.</div>
+    <div class="chat-panel-body" id="chatMessages">
+      <div class="chat-msg chat-msg-ai">
+        <div class="chat-msg-bubble">Hi! I'm SASTRA AI — your security assistant. Ask me about vulnerabilities, secure coding practices, or your scan results.</div>
+      </div>
     </div>
     <div class="chat-panel-input-row">
-      <input class="chat-panel-input" type="text" placeholder="Ask anything about security…" disabled/>
-      <button class="chat-panel-send" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      <input class="chat-panel-input" id="chatInput" type="text" placeholder="Ask anything about security…"/>
+      <button class="chat-panel-send" id="chatSend" onclick="sendChatMessage()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
     </div>
   </div>
   <script>function toggleChatPanel(){const b=document.getElementById("chatBubbleBtn"),p=document.getElementById("chatPanel");b.classList.toggle("open");p.classList.toggle("open");}</script>
+  <script src="/static/chat.js" defer></script>
 
 </body>
 </html>
