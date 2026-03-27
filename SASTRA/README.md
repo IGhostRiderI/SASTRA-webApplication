@@ -1,6 +1,6 @@
-# Applied-project-testing-new-frontend-
+# SASTRA — Static Application Security Testing and Remediation Assistant
 
-Lightweight SAST web application with a FastAPI backend and static frontend pages served by the backend.
+Lightweight SAST web application with a FastAPI backend and static frontend pages. Supports Python, Java, and C/C++ code scanning with ML-based severity prediction and optional LLM-powered remediation.
 
 ## Repository Structure
 
@@ -28,7 +28,7 @@ pip install -r requirements.txt
 ```bash
 cd backend
 source .venv/bin/activate
-export NVIDIA_API_KEY="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"
+export NVIDIA_API_KEY="your-nvidia-api-key"   # optional — only needed for LLM code fixes
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
@@ -43,8 +43,7 @@ cd /workspaces/SASTRA/SASTRA/backend
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-export NVIDIA_API_KEY="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"
-NVIDIA_CHAT_API_KEY="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"
+export NVIDIA_API_KEY="your-nvidia-api-key"   # optional
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
