@@ -42,8 +42,9 @@ Open: `http://127.0.0.1:8000`
 cd /workspaces/SASTRA/SASTRA/backend
 python3 -m venv .venv
 source .venv/bin/activate
+export NVIDIA_API_KEY="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"
+export NVIDIA_CHAT_API_KEY="nvapi-1eZ6e97_-52NxsWmtNGakmQofEvQovEpSvpXr
 pip install -r requirements.txt
-export NVIDIA_API_KEY="your-nvidia-api-key"   # optional
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
