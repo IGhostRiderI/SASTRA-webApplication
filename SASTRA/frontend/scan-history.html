@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SASTRA – Scan History</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+    <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem("sastra-theme");
+        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (_error) {}
+    })();
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-start: #c8e6e0;
+      --bg-mid:   #dde8f0;
+      --bg-end:   #e8ddf0;
+      --text-primary: #0a0a0a;
+      --text-muted: #6b7280;
+      --text-light: #9ca3af;
+      --card-bg: rgba(255,255,255,0.52);
+      --card-border: rgba(255,255,255,0.85);
+      --row-bg: rgba(255,255,255,0.32);
+      --row-hover: rgba(255,255,255,0.62);
+      --btn-dark: #0a0a0a;
+      --btn-dark-text: #ffffff;
+      --nav-height: 72px;
+    }
+
+    html, body { min-height: 100vh; font-family: 'DM Sans', sans-serif; }
+
+    body {
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    .blob { position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.28; pointer-events: none; z-index: 0; }
+    .blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, #a7f3d0, transparent 70%); top: -120px; right: 60px; animation: drift 14s ease-in-out infinite alternate; }
+    .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, #bfdbfe, transparent 70%); bottom: -100px; left: 100px; animation: drift 18s 3s ease-in-out infinite alternate; }
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(24px,18px) scale(1.05); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes shimmer { from { background-position: -600px 0; } to { background-position: 600px 0; } }
+
+    /* ══ NAV ══ */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav-height);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.7);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+      animation: slideDown 0.5s ease both;
+    }
+    .nav-left { display: flex; align-items: center; gap: 36px; }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.05rem;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-primary);
+      text-decoration: none; flex-shrink: 0;
+    }
+    .logo svg { width: 22px; height: 22px; }
+    .nav-links { display: flex; align-items: center; gap: 6px; }
+    .nav-link {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 999px; border: 1.5px solid transparent;
+      cursor: pointer; transition: all 0.18s ease; color: var(--text-muted);
+      background: transparent; text-decoration: none;
+    }
+    .nav-link:hover { background: rgba(255,255,255,0.6); color: var(--text-primary); border-color: rgba(0,0,0,0.1); }
+    .nav-link.active { background: rgba(255,255,255,0.75); color: var(--text-primary); border-color: rgba(0,0,0,0.14); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .nav-welcome { font-size: 0.85rem; color: var(--text-muted); }
+    .nav-welcome span { font-weight: 600; color: var(--text-primary); }
+    .btn-nav-user {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 999px;
+      border: 1.5px solid rgba(0,0,0,0.14); background: rgba(255,255,255,0.65);
+      color: var(--text-primary); cursor: pointer; transition: all 0.18s ease;
+    }
+    .btn-nav-user:hover { background: rgba(255,255,255,0.9); box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .btn-logout {
+      font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+      padding: 9px 20px; border-radius: 999px;
+      background: var(--btn-dark); color: var(--btn-dark-text);
+      border: none; cursor: pointer; transition: all 0.18s ease;
+    }
+    .btn-logout:hover { background: #222; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
+
+    /* ── Logout popup ── */
+    .logout-popup-wrap { position: relative; }
+    .logout-popup {
+      display: none; position: absolute;
+      top: calc(100% + 8px); right: 0;
+      background: var(--popup-bg, rgba(255,255,255,0.95));
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--popup-border, rgba(0,0,0,0.1));
+      border-radius: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+      padding: 14px 16px; min-width: 190px;
+      z-index: 200;
+      animation: fadeUp 0.15s ease both;
+    }
+    .logout-popup.show { display: block; }
+    .logout-popup p { font-size: 0.82rem; font-weight: 600; font-family: 'Sora', sans-serif; color: var(--text-primary); margin-bottom: 10px; }
+    .logout-popup-actions { display: flex; gap: 8px; }
+    .logout-popup-btn { flex: 1; font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 600; padding: 7px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; transition: all 0.15s ease; }
+    .logout-popup-cancel { background: var(--popup-cancel-bg, rgba(0,0,0,0.06)); color: var(--popup-cancel-color, var(--text-muted)); border: 1.5px solid var(--popup-cancel-border-color, rgba(0,0,0,0.1)); }
+    .logout-popup-cancel:hover { background: var(--popup-cancel-bg-hover, rgba(0,0,0,0.10)); }
+    .logout-popup-confirm { background: var(--popup-confirm-bg, var(--btn-dark)); color: var(--popup-confirm-color, var(--btn-dark-text)); border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+    .logout-popup-confirm:hover { filter: brightness(1.1); }
+
+    /* ══ MAIN ══ */
+    .main {
+      position: relative; z-index: 5;
+      padding: 44px 40px 60px;
+      max-width: 1100px; margin: 0 auto;
+    }
+
+    /* ── Page Header ── */
+    .page-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s 0.1s ease both;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .page-header h1 {
+      font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .page-header p { font-size: 0.92rem; color: var(--text-muted); margin-top: 6px; }
+
+    .btn-new-scan {
+      display: flex; align-items: center; gap: 9px;
+      font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700;
+      padding: 12px 24px; border-radius: 12px;
+      background: var(--btn-dark); color: var(--btn-dark-text);
+      border: none; cursor: pointer; flex-shrink: 0;
+      transition: all 0.18s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+    }
+    .btn-new-scan:hover { background: #1a1a1a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.22); }
+    .btn-new-scan svg { width: 16px; height: 16px; }
+
+    /* ── Summary Strip ── */
+    .summary-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s 0.16s ease both;
+    }
+
+    .summary-pill {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .summary-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.09); }
+
+    .pill-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .pill-icon svg { width: 18px; height: 18px; }
+    .pill-icon.blue   { background: rgba(59,130,246,0.12); color: #2563eb; }
+    .pill-icon.green  { background: rgba(16,185,129,0.12); color: #059669; }
+    .pill-icon.red    { background: rgba(239,68,68,0.12);  color: #dc2626; }
+    .pill-icon.amber  { background: rgba(245,158,11,0.12); color: #d97706; }
+
+    .pill-text {}
+    .pill-val { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; line-height: 1; }
+    .pill-label { font-size: 0.76rem; color: var(--text-muted); margin-top: 3px; }
+
+    /* ── Filter / Search Bar ── */
+    .toolbar {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.22s ease both;
+    }
+
+    .search-wrap {
+      flex: 1; min-width: 220px;
+      position: relative;
+    }
+    .search-wrap svg {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      width: 16px; height: 16px; color: var(--text-light); pointer-events: none;
+    }
+    .search-input {
+      width: 100%; padding: 11px 16px 11px 40px;
+      background: rgba(255,255,255,0.55);
+      border: 1.5px solid rgba(255,255,255,0.8);
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--text-primary);
+      outline: none; transition: all 0.18s ease;
+      backdrop-filter: blur(8px);
+    }
+    .search-input::placeholder { color: var(--text-light); }
+    .search-input:focus { background: rgba(255,255,255,0.78); border-color: rgba(0,0,0,0.18); box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
+
+    .filter-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .filter-btn {
+      font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 600;
+      padding: 9px 16px; border-radius: 999px; cursor: pointer;
+      border: 1.5px solid rgba(0,0,0,0.12); background: rgba(255,255,255,0.5);
+      color: var(--text-muted); transition: all 0.16s ease;
+    }
+    .filter-btn:hover { background: rgba(255,255,255,0.8); color: var(--text-primary); }
+    .filter-btn.active { background: var(--btn-dark); color: #fff; border-color: var(--btn-dark); }
+
+    .sort-select {
+      font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 600;
+      padding: 9px 14px; border-radius: 12px;
+      border: 1.5px solid rgba(0,0,0,0.12); background: rgba(255,255,255,0.55);
+      color: var(--text-muted); cursor: pointer; outline: none;
+      backdrop-filter: blur(8px);
+      transition: all 0.16s ease;
+    }
+    .sort-select:focus { background: rgba(255,255,255,0.8); border-color: rgba(0,0,0,0.18); }
+
+    /* ── History Table ── */
+    .history-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      overflow: hidden;
+      animation: fadeUp 0.6s 0.28s ease both;
+    }
+
+    .history-scroll {
+      max-height: min(78vh, 980px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    .history-scroll::-webkit-scrollbar { width: 10px; }
+    .history-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.2); }
+    .history-scroll::-webkit-scrollbar-thumb {
+      background: rgba(100,116,139,0.35);
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.4);
+    }
+    .history-scroll::-webkit-scrollbar-thumb:hover { background: rgba(100,116,139,0.5); }
+
+    .table-header {
+      display: grid;
+      grid-template-columns: 2.8fr 0.9fr 0.9fr 1.2fr 1fr 48px;
+      align-items: center;
+      padding: 14px 24px;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      background: rgba(255,255,255,0.25);
+    }
+    .th {
+      font-family: 'Sora', sans-serif; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-light);
+      user-select: none; cursor: pointer; display: flex; align-items: center; gap: 4px;
+      transition: color 0.15s ease;
+    }
+    .th:hover { color: var(--text-muted); }
+    .th svg { width: 11px; height: 11px; }
+
+    /* Scan Row */
+    .scan-row {
+      display: grid;
+      grid-template-columns: 2.8fr 0.9fr 0.9fr 1.2fr 1fr 48px;
+      align-items: center;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      background: var(--row-bg);
+      transition: background 0.18s ease, transform 0.15s ease;
+      cursor: pointer;
+    }
+    .scan-row:last-child { border-bottom: none; }
+    .scan-row:hover { background: var(--row-hover); }
+
+    /* File cell */
+    .file-cell { display: flex; align-items: center; gap: 12px; }
+    .file-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: rgba(255,255,255,0.65); border: 1px solid rgba(0,0,0,0.07);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .file-icon svg { width: 16px; height: 16px; }
+    .file-icon.py   { color: #3b82f6; }
+    .file-icon.java { color: #f97316; }
+    .file-icon.cpp  { color: #8b5cf6; }
+
+    .file-info {}
+    .file-name { font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700; color: var(--text-primary); }
+    .file-meta { font-size: 0.75rem; color: var(--text-light); margin-top: 2px; }
+
+    /* Status badge */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.72rem; font-weight: 600; padding: 4px 10px;
+      border-radius: 999px; letter-spacing: 0.02em; width: fit-content;
+    }
+    .badge-dot { width: 5px; height: 5px; border-radius: 50%; }
+    .badge-completed { background: rgba(16,185,129,0.13); color: #059669; border: 1px solid rgba(16,185,129,0.28); }
+    .badge-completed .badge-dot { background: #10b981; }
+    .badge-failed    { background: rgba(239,68,68,0.11); color: #dc2626; border: 1px solid rgba(239,68,68,0.24); }
+    .badge-failed .badge-dot    { background: #ef4444; }
+
+    /* Lang pill */
+    .lang-pill {
+      font-family: 'Sora', sans-serif; font-size: 0.72rem; font-weight: 600;
+      padding: 4px 11px; border-radius: 999px;
+      background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.1);
+      color: var(--text-muted); width: fit-content;
+    }
+
+    /* Severity tags */
+    .sev-group { display: flex; gap: 5px; flex-wrap: wrap; }
+    .sev {
+      font-size: 0.68rem; font-weight: 700; padding: 3px 9px;
+      border-radius: 999px; white-space: nowrap;
+    }
+    .sev-critical { background: rgba(239,68,68,0.13); color: #dc2626; border: 1px solid rgba(239,68,68,0.25); }
+    .sev-high     { background: rgba(249,115,22,0.13); color: #ea580c; border: 1px solid rgba(249,115,22,0.25); }
+    .sev-medium   { background: rgba(180,83,9,0.11);  color: #92400e; border: 1px solid rgba(180,83,9,0.22); }
+    .sev-low      { background: rgba(16,185,129,0.11); color: #047857; border: 1px solid rgba(16,185,129,0.22); }
+    .sev-none     { background: rgba(107,114,128,0.1); color: #6b7280; border: 1px solid rgba(107,114,128,0.2); }
+
+    /* Issues count */
+    .issues-cell { font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 700; }
+    .issues-zero { color: var(--text-light); font-weight: 500; }
+
+    /* Action btn */
+    .action-btn {
+      width: 32px; height: 32px; border-radius: 9px;
+      background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.09);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.15s ease;
+      color: var(--text-muted);
+    }
+    .action-btn:hover { background: rgba(255,255,255,0.9); color: var(--text-primary); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .action-btn svg { width: 14px; height: 14px; }
+
+    /* Empty state */
+    .empty-state {
+      display: none; flex-direction: column; align-items: center;
+      padding: 72px 32px; text-align: center; gap: 14px;
+    }
+    .empty-state.show { display: flex; }
+    .empty-icon {
+      width: 64px; height: 64px; border-radius: 18px;
+      background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.08);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 4px;
+    }
+    .empty-icon svg { width: 28px; height: 28px; color: var(--text-light); }
+    .empty-title { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700; }
+    .empty-sub { font-size: 0.85rem; color: var(--text-muted); max-width: 300px; line-height: 1.55; }
+
+    /* Pagination */
+    .pagination {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px 0; flex-wrap: wrap; gap: 12px;
+      animation: fadeUp 0.6s 0.34s ease both;
+    }
+    .page-info { font-size: 0.82rem; color: var(--text-muted); }
+    .page-controls { display: flex; gap: 6px; }
+    .page-btn {
+      font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 600;
+      width: 34px; height: 34px; border-radius: 9px; cursor: pointer;
+      border: 1.5px solid rgba(0,0,0,0.11); background: rgba(255,255,255,0.55);
+      color: var(--text-muted); transition: all 0.15s ease;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .page-btn:hover { background: rgba(255,255,255,0.85); color: var(--text-primary); }
+    .page-btn.active { background: var(--btn-dark); color: #fff; border-color: var(--btn-dark); }
+    .page-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* Detail drawer */
+    .drawer-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.2); backdrop-filter: blur(4px);
+    }
+    .drawer-overlay.show { display: block; }
+
+    .drawer {
+      position: fixed; right: 0; top: 0; bottom: 0; z-index: 201;
+      width: 420px; max-width: 95vw;
+      background: rgba(245,246,248,0.97);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(255,255,255,0.8);
+      box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+      transform: translateX(100%);
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+      overflow-y: auto;
+      padding: 32px 28px;
+    }
+    .drawer.open { transform: translateX(0); }
+
+    .drawer-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 32px; height: 32px; border-radius: 9px;
+      background: rgba(0,0,0,0.07); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s ease; color: var(--text-muted);
+    }
+    .drawer-close:hover { background: rgba(0,0,0,0.13); }
+    .drawer-close svg { width: 14px; height: 14px; }
+
+    .drawer-title { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; padding-right: 40px; }
+    .drawer-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 26px; }
+
+    .drawer-section { margin-bottom: 22px; }
+    .drawer-section-title {
+      font-family: 'Sora', sans-serif; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-light);
+      margin-bottom: 10px;
+    }
+
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .detail-item {
+      background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 12px; padding: 12px 14px;
+    }
+    .detail-label { font-size: 0.72rem; color: var(--text-light); margin-bottom: 4px; font-weight: 500; }
+    .detail-val { font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700; }
+
+    .vuln-list { display: flex; flex-direction: column; gap: 8px; }
+    .vuln-item {
+      background: rgba(255,255,255,0.6); border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 12px; padding: 12px 14px;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .vuln-sev-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px;
+    }
+    .dot-critical { background: #dc2626; }
+    .dot-high     { background: #ea580c; }
+    .dot-medium   { background: #d97706; }
+    .dot-low      { background: #059669; }
+
+    .vuln-name { font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 700; }
+    .vuln-line { font-size: 0.76rem; color: var(--text-muted); margin-top: 2px; }
+
+    .drawer-btn {
+      width: 100%; padding: 13px;
+      font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700;
+      border-radius: 12px; cursor: pointer; margin-top: 6px;
+      transition: all 0.18s ease;
+    }
+    .drawer-btn-dark {
+      background: var(--btn-dark); color: #fff; border: none;
+    }
+    .drawer-btn-dark:hover { background: #222; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transform: translateY(-1px); }
+    .drawer-btn-outline {
+      background: rgba(255,255,255,0.65); color: var(--text-primary);
+      border: 1.5px solid rgba(0,0,0,0.14); margin-top: 8px;
+    }
+    .drawer-btn-outline:hover { background: rgba(255,255,255,0.9); }
+
+    @media (max-width: 900px) {
+      .summary-strip { grid-template-columns: repeat(2, 1fr); }
+      .table-header, .scan-row { grid-template-columns: 2.2fr 0.8fr 1fr 48px; }
+      .col-lang, .col-issues { display: none; }
+    }
+    @media (max-width: 640px) {
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .main { padding: 28px 16px 48px; }
+      .table-header, .scan-row { grid-template-columns: 1fr auto 48px; }
+      .col-status, .col-lang, .col-issues { display: none; }
+      .drawer { width: 100%; max-width: 100%; }
+    }
+  
+    /* ── FLOATING CHATBOT BUBBLE ── */
+    .chat-bubble-btn { position: fixed; bottom: 28px; right: 28px; z-index: 9999; height: 50px; padding: 0 22px 0 16px; border-radius: 999px; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: none; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 28px rgba(37,99,235,0.38); transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease; white-space: nowrap; }
+    .chat-bubble-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 36px rgba(37,99,235,0.48); }
+    .chat-bubble-btn svg { width: 20px; height: 20px; color: #fff; flex-shrink: 0; }
+    .chat-bubble-label { font-family: 'Sora', sans-serif; font-size: 0.84rem; font-weight: 700; color: #fff; letter-spacing: 0.01em; }
+    .chat-bubble-btn .icon-close { display: none; }
+    .chat-bubble-btn.open .icon-chat { display: none; }
+    .chat-bubble-btn.open .icon-close { display: block; }
+    .chat-bubble-btn.open .chat-bubble-label { display: none; }
+    .chat-bubble-notif { position: absolute; top: 10px; right: 18px; width: 10px; height: 10px; border-radius: 50%; background: #10b981; border: 2px solid #fff; pointer-events: none; }
+    .chat-panel { position: fixed; bottom: 92px; right: 28px; z-index: 9998; width: 340px; height: 460px; background: rgba(248,249,251,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.85); border-radius: 22px; box-shadow: 0 20px 60px rgba(0,0,0,0.16); display: flex; flex-direction: column; overflow: hidden; transform: scale(0.88) translateY(16px); transform-origin: bottom right; opacity: 0; pointer-events: none; transition: transform 0.26s cubic-bezier(0.34,1.56,0.64,1), opacity 0.22s ease; }
+    .chat-panel.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+    .chat-panel-header { display: flex; align-items: center; gap: 10px; padding: 15px 18px; background: linear-gradient(135deg, #2563eb, #1d4ed8); flex-shrink: 0; }
+    .chat-panel-avatar { width: 34px; height: 34px; border-radius: 10px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; }
+    .chat-panel-avatar svg { width: 16px; height: 16px; color: #fff; }
+    .chat-panel-title { font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 700; color: #fff; }
+    .chat-panel-sub { font-size: 0.7rem; color: rgba(255,255,255,0.72); margin-top: 1px; }
+    .chat-panel-status { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 2px rgba(255,255,255,0.3); }
+    .chat-panel-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 28px 24px; text-align: center; }
+    .chat-panel-body-icon { width: 56px; height: 56px; border-radius: 18px; background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(29,78,216,0.12)); border: 1px solid rgba(37,99,235,0.18); display: flex; align-items: center; justify-content: center; }
+    .chat-panel-body-icon svg { width: 26px; height: 26px; color: #2563eb; opacity: 0.7; }
+    .chat-panel-coming { font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700; color: #0a0a0a; }
+    .chat-panel-coming-sub { font-size: 0.78rem; color: #6b7280; line-height: 1.55; max-width: 240px; }
+    .chat-panel-input-row { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-top: 1px solid rgba(0,0,0,0.07); background: rgba(255,255,255,0.4); flex-shrink: 0; }
+    .chat-panel-input { flex: 1; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 9px 13px; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; background: rgba(255,255,255,0.8); color: #0a0a0a; outline: none; }
+    .chat-panel-input::placeholder { color: #aaa; }
+    .chat-panel-send { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: none; cursor: not-allowed; opacity: 0.55; display: flex; align-items: center; justify-content: center; }
+    .chat-panel-send svg { width: 14px; height: 14px; color: #fff; }
+  </style>
+  <link rel="stylesheet" href="/static/theme.css"/>
+  <link rel="stylesheet" href="/static/chat.css"/>
+  <script src="/static/theme.js" defer></script>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="sastra-landing.html" class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+      </svg>
+      SASTRA
+    </a>
+    <div class="nav-links">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="new-scan.html" class="nav-link">New Scan</a>
+      <a href="scan-history.html" class="nav-link active">Scan History</a>
+      <a href="settings.html" class="nav-link">Settings</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <p class="nav-welcome">Welcome, <span id="nav-username">User</span></p>
+    <div class="logout-popup-wrap">
+      <button class="btn-logout" id="btn-logout">Log out</button>
+      <div class="logout-popup" id="logout-popup">
+        <p>Log out of SASTRA?</p>
+        <div class="logout-popup-actions">
+          <button class="logout-popup-btn logout-popup-cancel" id="logout-cancel">Cancel</button>
+          <button class="logout-popup-btn logout-popup-confirm" id="logout-confirm">Log out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h1>Scan History</h1>
+      <p>All your past scans and vulnerability reports in one place</p>
+    </div>
+    <button class="btn-new-scan" onclick="window.location.href='new-scan.html'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+      New Scan
+    </button>
+  </div>
+
+  <!-- Summary Strip -->
+  <div class="summary-strip">
+    <div class="summary-pill">
+      <div class="pill-icon blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div class="pill-text">
+        <div class="pill-val" id="hist-total-scans">0</div>
+        <div class="pill-label">Total Scans</div>
+      </div>
+    </div>
+    <div class="summary-pill">
+      <div class="pill-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="pill-text">
+        <div class="pill-val" id="hist-completed">0</div>
+        <div class="pill-label">Completed</div>
+      </div>
+    </div>
+    <div class="summary-pill">
+      <div class="pill-icon red">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div class="pill-text">
+        <div class="pill-val" id="hist-total-vulns">0</div>
+        <div class="pill-label">Total Vulnerabilities</div>
+      </div>
+    </div>
+    <div class="summary-pill">
+      <div class="pill-icon amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="pill-text">
+        <div class="pill-val" id="hist-last-scan">-</div>
+        <div class="pill-label">Last Scan</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" type="text" id="search-input" placeholder="Search by filename, language…" oninput="filterScans()"/>
+    </div>
+    <div class="filter-group">
+      <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+      <button class="filter-btn" onclick="setFilter('completed', this)">Completed</button>
+      <button class="filter-btn" onclick="setFilter('failed', this)">Failed</button>
+    </div>
+    <select class="sort-select" id="sort-select" onchange="filterScans()">
+      <option value="newest">Newest First</option>
+      <option value="oldest">Oldest First</option>
+      <option value="most-issues">Most Issues</option>
+      <option value="least-issues">Least Issues</option>
+    </select>
+  </div>
+
+  <!-- History Table -->
+  <div class="history-card">
+    <div class="table-header">
+      <div class="th">File</div>
+      <div class="th col-status">Status</div>
+      <div class="th col-lang">Language</div>
+      <div class="th col-issues">Severity</div>
+      <div class="th">Issues</div>
+      <div></div>
+    </div>
+
+    <div class="history-scroll">
+      <div id="scan-list"></div>
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="empty-title">No scans found</div>
+        <div class="empty-sub">Try adjusting your search or filters to find what you're looking for.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" id="pagination">
+    <div class="page-info" id="page-info">Showing 1–8 of 8 scans</div>
+    <div class="page-controls" id="page-controls"></div>
+  </div>
+
+</main>
+
+<!-- Detail Drawer -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="detail-drawer">
+  <button class="drawer-close" onclick="closeDrawer()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="drawer-title" id="drawer-title">auth-service.py</div>
+  <div class="drawer-sub" id="drawer-sub">Scanned 2 days ago · 45 KB</div>
+
+  <div class="drawer-section">
+    <div class="drawer-section-title">Scan Details</div>
+    <div class="detail-grid" id="drawer-details"></div>
+  </div>
+
+  <div class="drawer-section">
+    <div class="drawer-section-title">Vulnerabilities Found</div>
+    <div class="vuln-list" id="drawer-vulns"></div>
+  </div>
+
+  <button class="drawer-btn drawer-btn-dark">View Full Report</button>
+  <button class="drawer-btn drawer-btn-outline" onclick="window.location.href='new-scan.html'">Re-scan File</button>
+</div>
+
+<script>
+  let scans = [];
+  let activeFilter = 'all';
+  let currentPage = 1;
+  const perPage = 10;
+
+  function formatRelativeSince(value) {
+    if (!value) return '-';
+    const t = new Date(value).getTime();
+    if (!Number.isFinite(t)) return '-';
+    const diffMs = Date.now() - t;
+    const mins = Math.floor(diffMs / (60 * 1000));
+    if (mins < 1) return 'now';
+    if (mins < 60) return `${mins}m`;
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `${hours}h`;
+    const days = Math.floor(hours / 24);
+    return `${days}d`;
+  }
+
+  function renderSummary(items) {
+    const totalScans = items.length;
+    const completed = items.length;
+    const totalVulns = items.reduce((acc, s) => acc + Number(s.total_findings || 0), 0);
+    const latest = items[0];
+
+    const elTotal = document.getElementById('hist-total-scans');
+    const elCompleted = document.getElementById('hist-completed');
+    const elVulns = document.getElementById('hist-total-vulns');
+    const elLast = document.getElementById('hist-last-scan');
+
+    if (elTotal) elTotal.textContent = String(totalScans);
+    if (elCompleted) elCompleted.textContent = String(completed);
+    if (elVulns) elVulns.textContent = String(totalVulns);
+    if (elLast) elLast.textContent = latest ? formatRelativeSince(latest.scanned_at || latest.created_at) : '-';
+  }
+
+  async function initHistory() {
+    const meRes = await fetch('/api/auth/me', { credentials: 'include' });
+    if (!meRes.ok) {
+      window.location.href = 'signin.html';
+      return;
+    }
+    const me = await meRes.json();
+    const username = me.user?.username || 'User';
+    sessionStorage.setItem('sastra_user', username);
+    document.getElementById('nav-username').textContent = username;
+
+    const scansRes = await fetch('/api/scans', { credentials: 'include' });
+    const scansPayload = await scansRes.json();
+    const items = scansPayload.items || [];
+    renderSummary(items);
+    scans = items.map((s) => ({
+      id: s.id,
+      name: s.filename,
+      lang: (s.language || '').toUpperCase(),
+      size: '—',
+      status: 'completed',
+      date: new Date(s.scanned_at || s.created_at).toLocaleString(),
+      dateSort: new Date(s.scanned_at || s.created_at).getTime(),
+      issues: s.total_findings || 0,
+      critical: s.critical_count || 0,
+      high: s.high_count || 0,
+      medium: s.medium_count || 0,
+      low: s.low_count || 0,
+      raw: s,
+    }));
+
+    filterScans();
+  }
+
+  function setFilter(f, btn) {
+    activeFilter = f;
+    document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentPage = 1;
+    filterScans();
+  }
+
+  function filterScans() {
+    const q = document.getElementById('search-input').value.toLowerCase();
+    const sort = document.getElementById('sort-select').value;
+    let filtered = scans.filter((s) => {
+      const matchFilter = activeFilter === 'all' || s.status === activeFilter;
+      const matchSearch = !q || s.name.toLowerCase().includes(q) || s.lang.toLowerCase().includes(q);
+      return matchFilter && matchSearch;
+    });
+
+    if (sort === 'newest') filtered.sort((a, b) => b.dateSort - a.dateSort);
+    else if (sort === 'oldest') filtered.sort((a, b) => a.dateSort - b.dateSort);
+    else if (sort === 'most-issues') filtered.sort((a, b) => b.issues - a.issues);
+    else if (sort === 'least-issues') filtered.sort((a, b) => a.issues - b.issues);
+    renderScans(filtered);
+  }
+
+  function renderScans(list) {
+    const container = document.getElementById('scan-list');
+    const emptyEl = document.getElementById('empty-state');
+    const pageInfo = document.getElementById('page-info');
+    const pageCtrls = document.getElementById('page-controls');
+    container.innerHTML = '';
+
+    if (!list.length) {
+      emptyEl.classList.add('show');
+      pageInfo.textContent = '';
+      pageCtrls.innerHTML = '';
+      return;
+    }
+    emptyEl.classList.remove('show');
+
+    const total = list.length;
+    const visibleCount = Math.min(total, perPage);
+
+    list.forEach((s) => {
+      const row = document.createElement('div');
+      row.className = 'scan-row';
+      row.innerHTML = `
+        <div class="file-cell"><div class="file-info"><div class="file-name">${s.name}</div><div class="file-meta">${s.date}</div></div></div>
+        <div class="col-status"><span class="badge badge-completed"><span class="badge-dot"></span>completed</span></div>
+        <div class="col-lang"><span class="lang-pill">${s.lang || '-'}</span></div>
+        <div class="col-issues sev-group">${s.critical ? `<span class="sev sev-critical">${s.critical} Critical</span>` : ''}${s.high ? `<span class="sev sev-high">${s.high} High</span>` : ''}</div>
+        <div class="issues-cell">${s.issues}</div>
+        <div><button class="action-btn" onclick="window.location.href='scan-results.html?scan_id=${s.id}'">></button></div>`;
+      container.appendChild(row);
+    });
+
+    pageInfo.textContent = total > perPage
+      ? `Showing first ${visibleCount} of ${total} scans in this section (scroll to see the rest)`
+      : `Showing ${total} of ${total} scans`;
+    pageCtrls.innerHTML = '';
+  }
+
+  const btnLogout = document.getElementById('btn-logout');
+  const logoutPopup = document.getElementById('logout-popup');
+  btnLogout.onclick = e => { e.stopPropagation(); logoutPopup.classList.toggle('show'); };
+  document.getElementById('logout-cancel').onclick = () => logoutPopup.classList.remove('show');
+  document.getElementById('logout-confirm').onclick = async () => {
+    await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+    sessionStorage.removeItem('sastra_user');
+    window.location.href = 'signin.html';
+  };
+  document.addEventListener('click', e => {
+    if (!logoutPopup.contains(e.target) && e.target !== btnLogout) logoutPopup.classList.remove('show');
+  });
+
+  initHistory();
+</script>
+
+<!-- ── FLOATING CHATBOT BUBBLE ── -->
+<button class="chat-bubble-btn" id="chatBubbleBtn" onclick="toggleChatPanel()" aria-label="Open AI assistant">
+  <svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span class="chat-bubble-label">SASTRA AI</span>
+  <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  <span class="chat-bubble-notif"></span>
+</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-panel-header">
+    <div class="chat-panel-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+    <div><div class="chat-panel-title">SASTRA AI</div><div class="chat-panel-sub">Security assistant</div></div>
+    <div class="chat-panel-status"></div>
+  </div>
+  <div class="chat-panel-body" id="chatMessages">
+    <div class="chat-msg chat-msg-ai">
+      <div class="chat-msg-bubble">Hi! I'm SASTRA AI — your security assistant. Ask me about vulnerabilities, secure coding practices, or your scan results.</div>
+    </div>
+  </div>
+  <div class="chat-panel-input-row">
+    <input class="chat-panel-input" id="chatInput" type="text" placeholder="Ask anything about security…"/>
+    <button class="chat-panel-send" id="chatSend" onclick="sendChatMessage()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+<script>function toggleChatPanel(){const b=document.getElementById("chatBubbleBtn"),p=document.getElementById("chatPanel");b.classList.toggle("open");p.classList.toggle("open");}</script>
+<script src="/static/chat.js" defer></script>
+</body>
+</html>

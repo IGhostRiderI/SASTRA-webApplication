@@ -1,0 +1,12 @@
+backend/.venv/
+backend/app/__pycache__/
+backend/app/**/__pycache__/
+backend/tests/__pycache__/
+backend/app/data/backups/
+backend/app/data/logs/
+datasets/
+*.pyc
+.DS_Store
+readme_nk.md
+dataset_tools/
+CLAUDE.md
