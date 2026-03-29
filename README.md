@@ -28,7 +28,8 @@ pip install -r requirements.txt
 ```bash
 cd backend
 source .venv/bin/activate
-export NVIDIA_API_KEY="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"
+export NVIDIA_API_KEY="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"
+export NVIDIA_CHAT_API_KEY="$NVIDIA_API_KEY"
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
@@ -43,7 +44,8 @@ cd /workspaces/SASTRA/SASTRA/backend
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-export NVIDIA_API_KEY="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"
+export NVIDIA_API_KEY="your_nvidia_api_key_here"
+export NVIDIA_CHAT_API_KEY="$NVIDIA_API_KEY"
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
