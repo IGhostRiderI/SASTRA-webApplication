@@ -1,12 +1,29 @@
-backend/.venv/
-backend/app/__pycache__/
-backend/app/**/__pycache__/
-backend/tests/__pycache__/
+CLAUDE.md
+.claude/
+
+# Runtime artifacts
+SASTRA/backend/app/data/generated_rules.json
+SASTRA/backend/app/data/backups/
+SASTRA/backend/app/data/logs/
 backend/app/data/sast.db
 backend/app/data/backups/
 backend/app/data/logs/
+
+# Python
 *.pyc
+__pycache__/
+backend/app/__pycache__/
+backend/app/**/__pycache__/
+backend/tests/__pycache__/
+SASTRA/backend/.venv/
+backend/.venv/
+
+# macOS
 .DS_Store
+
+# Dataset tools and training data
+dataset_tools/
+SASTRA/datasets/
+
 clause.md
 readme_nk.md
-dataset_tools/
