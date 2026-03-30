@@ -396,6 +396,21 @@
       font-size: 0.8rem; color: var(--text-light); text-align: center; margin-top: 14px;
     }
 
+    .scan-error {
+      display: none;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(239,68,68,0.35);
+      background: rgba(239,68,68,0.08);
+      color: #991b1b;
+      font-size: 0.84rem;
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    .scan-error.show { display: block; }
+
     @media (max-width: 640px) {
       .nav { padding: 0 20px; }
       .nav-links { display: none; }
@@ -556,6 +571,7 @@
           Run Scan
         </button>
         <p class="hint">Supports Java, Python, and C++ · Max file size 10 MB</p>
+        <div class="scan-error" id="scan-error" role="alert" aria-live="polite"></div>
       </div>
 
     </div>
@@ -575,6 +591,18 @@
   </div>
 
   <script>
+    function setScanError(message) {
+      const el = document.getElementById('scan-error');
+      if (!el) return;
+      if (!message) {
+        el.classList.remove('show');
+        el.textContent = '';
+        return;
+      }
+      el.textContent = message;
+      el.classList.add('show');
+    }
+
     async function requireAuth() {
       const response = await fetch('/api/auth/me', { credentials: 'include' });
       if (!response.ok) {
@@ -645,6 +673,7 @@
     ];
 
     async function runScan() {
+      setScanError('');
       const method = document.querySelector('.toggle-btn.active').textContent.trim();
       const hasFile = document.getElementById('file-chosen').classList.contains('show');
       const hasCode = document.getElementById('code-input').value.trim().length > 0;
@@ -652,12 +681,14 @@
       if (method.includes('Upload') && !hasFile) {
         dropZone.style.borderColor = 'rgba(239,68,68,0.5)';
         dropZone.style.background = 'rgba(239,68,68,0.04)';
+        setScanError('Select a source file or ZIP archive before running a scan.');
         setTimeout(() => { dropZone.style.borderColor = ''; dropZone.style.background = ''; }, 1800);
         return;
       }
       if (method.includes('Paste') && !hasCode) {
         const ta = document.getElementById('code-input');
         ta.style.borderColor = 'rgba(239,68,68,0.45)';
+        setScanError('Paste source code before running a scan.');
         setTimeout(() => ta.style.borderColor = '', 1800);
         return;
       }
@@ -712,7 +743,7 @@
         }
         window.location.href = `scan-results.html?scan_id=${createdScanId}`;
       } catch (error) {
-        alert(error.message || 'Scan failed');
+        setScanError(error.message || 'Scan failed.');
       } finally {
         setTimeout(() => overlay.classList.remove('show'), 400);
       }

@@ -187,6 +187,22 @@
 
     .card-footer a:hover { opacity: 0.6; }
 
+    .form-error {
+      display: none;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(239,68,68,0.35);
+      background: rgba(239,68,68,0.08);
+      color: #991b1b;
+      font-size: 0.86rem;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    .form-error.show { display: block; }
+
     @media (max-width: 560px) {
       nav { padding: 20px 24px; }
       .card { padding: 36px 24px 32px; }
@@ -229,6 +245,8 @@
         <input type="password" id="confirm-password" placeholder="" autocomplete="new-password"/>
       </div>
 
+      <div class="form-error" id="form-error" role="alert" aria-live="polite"></div>
+
       <button class="btn-submit" onclick="handleSignup()">Create Account</button>
 
       <p class="card-footer">Already have an account? <a href="signin.html">Sign in</a></p>
@@ -236,17 +254,39 @@
   </div>
 
   <script>
+    function setFormError(message) {
+      const el = document.getElementById('form-error');
+      if (!el) return;
+      if (!message) {
+        el.classList.remove('show');
+        el.textContent = '';
+        return;
+      }
+      el.textContent = message;
+      el.classList.add('show');
+    }
+
     async function handleSignup() {
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
       const confirm  = document.getElementById('confirm-password').value.trim();
 
       document.querySelectorAll('input').forEach(i => i.style.boxShadow = '');
+      setFormError('');
 
-      if (!username) { document.getElementById('username').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)'; return; }
-      if (!password) { document.getElementById('password').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)'; return; }
+      if (!username) {
+        document.getElementById('username').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
+        setFormError('Enter a username.');
+        return;
+      }
+      if (!password) {
+        document.getElementById('password').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
+        setFormError('Enter a password.');
+        return;
+      }
       if (password !== confirm) {
         document.getElementById('confirm-password').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
+        setFormError('Passwords do not match.');
         return;
       }
       try {
@@ -264,7 +304,7 @@
         sessionStorage.setItem('sastra_user', payload.user?.username || username);
         window.location.href = 'dashboard.html';
       } catch (error) {
-        alert(error.message || 'Signup failed');
+        setFormError(error.message || 'Signup failed.');
       }
     }
   </script>

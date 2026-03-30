@@ -6,6 +6,7 @@ import sys
 import zipfile
 from collections import Counter
 from contextlib import asynccontextmanager
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -93,6 +94,12 @@ logger = logging.getLogger("sast")
 _error_counter: dict = {"count": 0}
 _ERROR_ALERT_THRESHOLD = 10  # warn after this many 5xx errors per session
 
+# Login hardening
+_LOGIN_ATTEMPTS: dict = {}
+_LOGIN_WINDOW = timedelta(minutes=15)
+_LOGIN_LOCKOUT = timedelta(minutes=15)
+_MAX_LOGIN_FAILURES = 5
+
 
 def _record_error(endpoint: str = "") -> None:
     """Increment the server-error counter and emit an alert if needed."""
@@ -106,6 +113,100 @@ def _record_error(endpoint: str = "") -> None:
         )
     elif count > _ERROR_ALERT_THRESHOLD and count % _ERROR_ALERT_THRESHOLD == 0:
         logger.warning("ALERT: server error count now %d", count)
+
+
+def _utc_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def _client_ip(request: Request) -> str:
+    client = getattr(request, "client", None)
+    host = getattr(client, "host", None)
+    return host or "unknown"
+
+
+def _login_attempt_key(username: str, request: Request) -> str:
+    normalized_username = (username or "").strip().lower() or "<empty>"
+    return f"{normalized_username}|{_client_ip(request)}"
+
+
+def _is_lockout_active(entry: dict, now: datetime) -> bool:
+    locked_until = entry.get("locked_until")
+    return isinstance(locked_until, datetime) and locked_until > now
+
+
+def _clear_expired_login_entry(key: str, now: datetime) -> None:
+    entry = _LOGIN_ATTEMPTS.get(key)
+    if not entry:
+        return
+
+    if _is_lockout_active(entry, now):
+        return
+
+    first_failed_at = entry.get("first_failed_at")
+    if isinstance(first_failed_at, datetime) and now - first_failed_at > _LOGIN_WINDOW:
+        _LOGIN_ATTEMPTS.pop(key, None)
+
+
+def _assert_login_allowed(username: str, request: Request) -> None:
+    now = _utc_now()
+    key = _login_attempt_key(username, request)
+    entry = _LOGIN_ATTEMPTS.get(key)
+    if not entry:
+        return
+
+    locked_until = entry.get("locked_until")
+    if isinstance(locked_until, datetime):
+        if locked_until > now:
+            retry_after = max(1, int((locked_until - now).total_seconds()))
+            raise HTTPException(
+                status_code=429,
+                detail=f"Too many failed login attempts. Try again in {retry_after} seconds.",
+                headers={"Retry-After": str(retry_after)},
+            )
+        _LOGIN_ATTEMPTS.pop(key, None)
+        return
+
+    _clear_expired_login_entry(key, now)
+
+
+def _register_failed_login(username: str, request: Request) -> None:
+    now = _utc_now()
+    key = _login_attempt_key(username, request)
+    entry = _LOGIN_ATTEMPTS.get(key)
+
+    if not entry:
+        _LOGIN_ATTEMPTS[key] = {
+            "failures": 1,
+            "first_failed_at": now,
+            "locked_until": None,
+        }
+        return
+
+    first_failed_at = entry.get("first_failed_at")
+    if not isinstance(first_failed_at, datetime) or now - first_failed_at > _LOGIN_WINDOW:
+        _LOGIN_ATTEMPTS[key] = {
+            "failures": 1,
+            "first_failed_at": now,
+            "locked_until": None,
+        }
+        return
+
+    failures = int(entry.get("failures", 0)) + 1
+    entry["failures"] = failures
+
+    if failures >= _MAX_LOGIN_FAILURES:
+        entry["locked_until"] = now + _LOGIN_LOCKOUT
+        logger.warning(
+            "Login lockout triggered for username '%s' from %s",
+            (username or "").strip() or "<empty>",
+            _client_ip(request),
+        )
+
+
+def _reset_failed_login(username: str, request: Request) -> None:
+    key = _login_attempt_key(username, request)
+    _LOGIN_ATTEMPTS.pop(key, None)
 
 
 # ── Unhandled exception hook ───────────────────────────────────────────────────
@@ -502,11 +603,16 @@ def _signup_response(payload: AuthPayload) -> JSONResponse:
     return response
 
 
-def _login_response(payload: AuthPayload) -> JSONResponse:
+def _login_response(payload: AuthPayload, request: Request) -> JSONResponse:
+    _assert_login_allowed(payload.username, request)
+
     user = authenticate_user(payload.username, payload.password)
     if user is None:
+        _register_failed_login(payload.username, request)
         logger.warning("Failed login attempt — username: %s", payload.username)
         raise HTTPException(status_code=401, detail="Invalid username or password.")
+
+    _reset_failed_login(payload.username, request)
 
     token = create_access_token(int(user["id"]))
     logger.info("User signed in — username: %s  role: %s", user["username"], user["role"])
@@ -526,13 +632,13 @@ async def signup_compat(payload: AuthPayload) -> JSONResponse:
 
 
 @app.post("/api/auth/login")
-async def login(payload: AuthPayload) -> JSONResponse:
-    return _login_response(payload)
+async def login(payload: AuthPayload, request: Request) -> JSONResponse:
+    return _login_response(payload, request)
 
 
 @app.post("/api/login")
-async def login_compat(payload: AuthPayload) -> JSONResponse:
-    return _login_response(payload)
+async def login_compat(payload: AuthPayload, request: Request) -> JSONResponse:
+    return _login_response(payload, request)
 
 
 @app.post("/api/auth/logout")

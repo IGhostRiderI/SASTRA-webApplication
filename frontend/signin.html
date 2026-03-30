@@ -190,6 +190,22 @@
 
     .card-footer a:hover { opacity: 0.6; }
 
+    .form-error {
+      display: none;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(239,68,68,0.35);
+      background: rgba(239,68,68,0.08);
+      color: #991b1b;
+      font-size: 0.86rem;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    .form-error.show { display: block; }
+
     @media (max-width: 560px) {
       nav { padding: 20px 24px; }
       .card { padding: 36px 24px 32px; }
@@ -227,6 +243,8 @@
         <input type="password" id="password" placeholder="" autocomplete="current-password"/>
       </div>
 
+      <div class="form-error" id="form-error" role="alert" aria-live="polite"></div>
+
       <button class="btn-submit" onclick="handleLogin()">Login</button>
 
       <p class="card-footer">Don't have an account? <a href="signup.html">Sign up</a></p>
@@ -234,12 +252,26 @@
   </div>
 
   <script>
+    function setFormError(message) {
+      const el = document.getElementById('form-error');
+      if (!el) return;
+      if (!message) {
+        el.classList.remove('show');
+        el.textContent = '';
+        return;
+      }
+      el.textContent = message;
+      el.classList.add('show');
+    }
+
     async function handleLogin() {
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
+      setFormError('');
       if (!username || !password) {
         document.getElementById('username').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
         document.getElementById('password').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
+        setFormError('Enter both username and password.');
         return;
       }
 
@@ -251,13 +283,14 @@
           body: JSON.stringify({ username, password }),
         });
         if (!response.ok) {
-          throw new Error('Invalid username or password');
+          const errorPayload = await response.json().catch(() => ({}));
+          throw new Error(errorPayload.detail || 'Invalid username or password.');
         }
         const payload = await response.json();
         sessionStorage.setItem('sastra_user', payload.user?.username || username);
         window.location.href = 'dashboard.html';
       } catch (error) {
-        alert(error.message || 'Login failed');
+        setFormError(error.message || 'Login failed.');
       }
     }
   </script>

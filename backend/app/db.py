@@ -43,6 +43,10 @@ SUPERADMIN_PASSWORD = os.environ.get("SUPERADMIN_PASSWORD", "Nadina")
 
 # ── password hashing (passlib PBKDF2-SHA256) ───────────────────────────────────
 USERNAME_REGEX = re.compile(r"^[A-Za-z0-9_.-]{3,32}$")
+PASSWORD_UPPER_REGEX = re.compile(r"[A-Z]")
+PASSWORD_LOWER_REGEX = re.compile(r"[a-z]")
+PASSWORD_DIGIT_REGEX = re.compile(r"\d")
+PASSWORD_SPECIAL_REGEX = re.compile(r"[^A-Za-z0-9]")
 
 # ── scan retention ─────────────────────────────────────────────────────────────
 # NFR-5: scan records older than this are automatically purged on startup
@@ -105,8 +109,18 @@ def _clean_username(username: str) -> str:
 
 def _validate_password(password: str) -> str:
     cleaned = (password or "").strip()
-    if len(cleaned) < 4:
-        raise ValueError("Password must be at least 4 characters.")
+    if len(cleaned) < 12:
+        raise ValueError("Password must be at least 12 characters.")
+    if any(ch.isspace() for ch in cleaned):
+        raise ValueError("Password must not contain whitespace.")
+    if PASSWORD_UPPER_REGEX.search(cleaned) is None:
+        raise ValueError("Password must include at least one uppercase letter.")
+    if PASSWORD_LOWER_REGEX.search(cleaned) is None:
+        raise ValueError("Password must include at least one lowercase letter.")
+    if PASSWORD_DIGIT_REGEX.search(cleaned) is None:
+        raise ValueError("Password must include at least one digit.")
+    if PASSWORD_SPECIAL_REGEX.search(cleaned) is None:
+        raise ValueError("Password must include at least one special character.")
     return cleaned
 
 
