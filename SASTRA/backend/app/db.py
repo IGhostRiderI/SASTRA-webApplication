@@ -34,12 +34,9 @@ ROLE_SUPERADMIN = "superadmin"
 VALID_ROLES     = {ROLE_USER, ROLE_ADMIN, ROLE_SUPERADMIN}
 
 # ── superadmin credentials ─────────────────────────────────────────────────────
-# Loaded from environment variables at startup.
-# Falls back to the defaults below ONLY for local development convenience.
-# In any real deployment set SUPERADMIN_USERNAME and SUPERADMIN_PASSWORD
-# as environment variables — never commit credentials to the repository.
-SUPERADMIN_USERNAME = os.environ.get("SUPERADMIN_USERNAME", "Nadinak")
-SUPERADMIN_PASSWORD = os.environ.get("SUPERADMIN_PASSWORD", "Nadina")
+# Must be set via SUPERADMIN_USERNAME and SUPERADMIN_PASSWORD environment variables.
+SUPERADMIN_USERNAME = os.environ.get("SUPERADMIN_USERNAME", "")
+SUPERADMIN_PASSWORD = os.environ.get("SUPERADMIN_PASSWORD", "")
 
 # ── password hashing (passlib PBKDF2-SHA256) ───────────────────────────────────
 USERNAME_REGEX = re.compile(r"^[A-Za-z0-9_.-]{3,32}$")

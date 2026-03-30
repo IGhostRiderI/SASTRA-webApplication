@@ -54,9 +54,6 @@ COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "false").strip().lower() in {"1"
 # The default value below is for local development convenience only.
 # Changing this secret invalidates all existing tokens — all users will
 # need to sign in again.
-JWT_SECRET = os.environ.get(
-    "JWT_SECRET",
-    "dev-secret-change-in-production-set-JWT_SECRET-env-var",
-)
+JWT_SECRET = os.environ.get("JWT_SECRET", "")
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRY_DAYS = 7

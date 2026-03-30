@@ -37,6 +37,9 @@ cd /Users/nadinak/Projects/SASTRA/SASTRA/backend
 source .venv/bin/activate
 export NVIDIA_API_KEY="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"
 export NVIDIA_CHAT_API_KEY="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"
+export SUPERADMIN_USERNAME="Nadinak"
+export SUPERADMIN_PASSWORD="Nadina"
+export JWT_SECRET="SASTRA_Applied_Project"
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 
 ```
@@ -45,14 +48,7 @@ Open: `http://127.0.0.1:8000`
 
 > **Note:** On first run (or if `ml_engine.pkl.gz` is deleted), the ML model will train automatically on startup. This may take a few minutes. The app will be ready once you see `Application startup complete` in the terminal. Subsequent startups load the saved model instantly.
 
-## 3) Run on GitHub Codespaces
 
-```bash
-cd /workspaces/SASTRA/SASTRA/backend
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
 Then open the Codespaces `Ports` tab, forward port `8000`, and open the forwarded URL.
