@@ -29,7 +29,7 @@ pip install -r requirements.txt
 cd backend
 source .venv/bin/activate
 export NVIDIA_API_KEY="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"
-export NVIDIA_CHAT_API_KEY="$NVIDIA_API_KEY"
+export NVIDIA_CHAT_API_KEY="$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"
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
@@ -40,7 +40,8 @@ Open: `http://127.0.0.1:8000`
 ## 3) Run on GitHub Codespaces
 
 ```bash
-cd /workspaces/SASTRA/SASTRA/backend
+
+cd /workspaces/Applied-project-testing-new-frontend-/backend
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
