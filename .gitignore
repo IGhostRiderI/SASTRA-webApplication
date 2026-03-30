@@ -1,19 +1,6 @@
 CLAUDE.md
 .claude/
 
-# Runtime artifacts
-SASTRA/backend/app/data/generated_rules.json
-
-
-
-# Python
-*.pyc
-__pycache__/
-backend/app/__pycache__/
-backend/app/**/__pycache__/
-backend/tests/__pycache__/
-SASTRA/backend/.venv/
-backend/.venv/
 
 # macOS
 .DS_Store
