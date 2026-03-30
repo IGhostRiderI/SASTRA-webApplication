@@ -1,0 +1,1940 @@
+2026-03-19 23:06:51 [INFO] sast: SAST application starting up
+2026-03-19 23:06:51 [INFO] sast: Database initialised
+2026-03-19 23:06:51 [INFO] sast.backup: Database backed up → sast_20260319T173651Z.db
+2026-03-19 23:06:51 [INFO] sast: Startup backup created: sast_20260319T173651Z.db
+2026-03-19 23:06:51 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-19 23:06:53 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-19 23:06:53 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:06:53 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:06:53 [INFO] sast: SAST application ready
+2026-03-19 23:07:14 [INFO] sast: SAST application starting up
+2026-03-19 23:07:14 [INFO] sast: Database initialised
+2026-03-19 23:07:14 [INFO] sast.backup: Database backed up → sast_20260319T173714Z.db
+2026-03-19 23:07:14 [INFO] sast: Startup backup created: sast_20260319T173714Z.db
+2026-03-19 23:07:14 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-19 23:07:14 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-19 23:07:14 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:07:14 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:07:14 [INFO] sast: SAST application ready
+2026-03-19 23:07:38 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-19 23:07:49 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-19 23:07:55 [INFO] sast: Scan #35 complete — user: 'Nadinak'  findings: 206  risk: 7.18
+2026-03-19 23:12:30 [INFO] sast: SAST application shutting down
+2026-03-19 23:12:45 [INFO] sast: SAST application starting up
+2026-03-19 23:12:45 [INFO] sast: Database initialised
+2026-03-19 23:12:45 [INFO] sast.backup: Database backed up → sast_20260319T174245Z.db
+2026-03-19 23:12:45 [INFO] sast: Startup backup created: sast_20260319T174245Z.db
+2026-03-19 23:12:45 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-19 23:12:45 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-19 23:12:45 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:12:45 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:12:45 [INFO] sast: SAST application ready
+2026-03-19 23:13:02 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-19 23:13:07 [INFO] sast: Scan #36 complete — user: 'Nadinak'  findings: 206  risk: 7.18
+2026-03-19 23:15:12 [INFO] sast: Superadmin 'Nadinak' changed role of 'admin' to 'admin'
+2026-03-19 23:15:13 [INFO] sast: Superadmin 'Nadinak' changed role of 'admin' to 'user'
+2026-03-19 23:16:42 [INFO] sast: SAST application shutting down
+2026-03-19 23:42:25 [INFO] sast: SAST application starting up
+2026-03-19 23:42:25 [INFO] sast: Database initialised
+2026-03-19 23:42:25 [INFO] sast.backup: Database backed up → sast_20260319T181225Z.db
+2026-03-19 23:42:25 [INFO] sast: Startup backup created: sast_20260319T181225Z.db
+2026-03-19 23:42:25 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-19 23:42:25 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-19 23:42:25 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:42:25 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:42:25 [INFO] sast: SAST application ready
+2026-03-19 23:45:40 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-19 23:45:49 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-19 23:47:20 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-19 23:53:48 [INFO] sast: SAST application starting up
+2026-03-19 23:53:48 [INFO] sast: Database initialised
+2026-03-19 23:53:48 [INFO] sast.backup: Database backed up → sast_20260319T182348Z.db
+2026-03-19 23:53:48 [INFO] sast: Startup backup created: sast_20260319T182348Z.db
+2026-03-19 23:53:48 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-19 23:53:48 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-19 23:53:48 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:53:48 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:53:48 [INFO] sast: SAST application ready
+2026-03-19 23:53:48 [INFO] sast: SAST application shutting down
+2026-03-19 23:54:10 [INFO] sast: SAST application starting up
+2026-03-19 23:54:10 [INFO] sast: Database initialised
+2026-03-19 23:54:10 [INFO] sast.backup: Database backed up → sast_20260319T182410Z.db
+2026-03-19 23:54:10 [INFO] sast: Startup backup created: sast_20260319T182410Z.db
+2026-03-19 23:54:10 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-19 23:54:10 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-19 23:54:11 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:54:11 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:54:11 [INFO] sast: SAST application ready
+2026-03-19 23:54:11 [INFO] sast: SAST application shutting down
+2026-03-19 23:55:01 [INFO] sast: SAST application starting up
+2026-03-19 23:55:01 [INFO] sast: Database initialised
+2026-03-19 23:55:01 [INFO] sast.backup: Database backed up → sast_20260319T182501Z.db
+2026-03-19 23:55:01 [INFO] sast: Startup backup created: sast_20260319T182501Z.db
+2026-03-19 23:55:01 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-19 23:55:01 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-19 23:55:01 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:55:01 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-19 23:55:01 [INFO] sast: SAST application ready
+2026-03-19 23:55:01 [INFO] sast: SAST application shutting down
+2026-03-19 23:55:34 [INFO] sast: File scan by 'Nadinak' — intentionally_vulnerable_app.py  lang: python
+2026-03-19 23:55:35 [INFO] sast: Scan #37 complete — user: 'Nadinak'  findings: 11  risk: 7.0
+2026-03-19 23:56:34 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-19 23:56:39 [INFO] sast: Scan #38 complete — user: 'Nadinak'  findings: 206  risk: 7.18
+2026-03-20 00:01:51 [INFO] sast: SAST application shutting down
+2026-03-20 00:01:52 [INFO] sast: SAST application starting up
+2026-03-20 00:01:52 [INFO] sast: Database initialised
+2026-03-20 00:01:52 [INFO] sast.backup: Database backed up → sast_20260319T183152Z.db
+2026-03-20 00:01:52 [INFO] sast.backup: Pruned old backup: sast_20260319T173651Z.db
+2026-03-20 00:01:52 [INFO] sast: Startup backup created: sast_20260319T183152Z.db
+2026-03-20 00:01:52 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 00:01:52 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 00:01:52 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:01:52 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:01:52 [INFO] sast: SAST application ready
+2026-03-20 00:01:55 [INFO] sast: SAST application shutting down
+2026-03-20 00:01:56 [INFO] sast: SAST application starting up
+2026-03-20 00:01:56 [INFO] sast: Database initialised
+2026-03-20 00:01:56 [INFO] sast.backup: Database backed up → sast_20260319T183156Z.db
+2026-03-20 00:01:56 [INFO] sast.backup: Pruned old backup: sast_20260319T173714Z.db
+2026-03-20 00:01:56 [INFO] sast: Startup backup created: sast_20260319T183156Z.db
+2026-03-20 00:01:56 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 00:01:56 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 00:01:56 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:01:56 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:01:56 [INFO] sast: SAST application ready
+2026-03-20 00:02:22 [INFO] sast: SAST application shutting down
+2026-03-20 00:02:23 [INFO] sast: SAST application starting up
+2026-03-20 00:02:23 [INFO] sast: Database initialised
+2026-03-20 00:02:23 [INFO] sast.backup: Database backed up → sast_20260319T183223Z.db
+2026-03-20 00:02:23 [INFO] sast.backup: Pruned old backup: sast_20260319T174245Z.db
+2026-03-20 00:02:23 [INFO] sast: Startup backup created: sast_20260319T183223Z.db
+2026-03-20 00:02:23 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 00:02:23 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 00:02:23 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:02:23 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:02:23 [INFO] sast: SAST application ready
+2026-03-20 00:02:25 [INFO] sast: SAST application shutting down
+2026-03-20 00:02:26 [INFO] sast: SAST application starting up
+2026-03-20 00:02:26 [INFO] sast: Database initialised
+2026-03-20 00:02:26 [INFO] sast.backup: Database backed up → sast_20260319T183226Z.db
+2026-03-20 00:02:26 [INFO] sast.backup: Pruned old backup: sast_20260319T181225Z.db
+2026-03-20 00:02:26 [INFO] sast: Startup backup created: sast_20260319T183226Z.db
+2026-03-20 00:02:26 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 00:02:26 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 00:02:26 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:02:26 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:02:26 [INFO] sast: SAST application ready
+2026-03-20 00:08:05 [INFO] sast: SAST application shutting down
+2026-03-20 00:08:06 [INFO] sast: SAST application starting up
+2026-03-20 00:08:06 [INFO] sast: Database initialised
+2026-03-20 00:08:06 [INFO] sast.backup: Database backed up → sast_20260319T183806Z.db
+2026-03-20 00:08:06 [INFO] sast.backup: Pruned old backup: sast_20260319T182348Z.db
+2026-03-20 00:08:06 [INFO] sast: Startup backup created: sast_20260319T183806Z.db
+2026-03-20 00:08:06 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 00:08:06 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 00:08:06 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:08:06 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:08:06 [INFO] sast: SAST application ready
+2026-03-20 00:21:05 [INFO] sast: ZIP scan by 'Nadinak' — Sast--main-V1.zip  files: 8
+2026-03-20 00:21:10 [INFO] sast: Scan #39 complete — user: 'Nadinak'  findings: 191  risk: 7.09
+2026-03-20 00:23:59 [INFO] sast: ZIP scan by 'Nadinak' — Sast--main-V1.zip  files: 8
+2026-03-20 00:24:05 [INFO] sast: Scan #40 complete — user: 'Nadinak'  findings: 191  risk: 7.09
+2026-03-20 00:24:21 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-03-20 00:24:22 [INFO] sast: Scan #41 complete — user: 'Nadinak'  findings: 15  risk: 6.33
+2026-03-20 00:27:26 [INFO] sast: SAST application shutting down
+2026-03-20 00:27:28 [INFO] sast: SAST application starting up
+2026-03-20 00:27:28 [INFO] sast: Database initialised
+2026-03-20 00:27:28 [INFO] sast.backup: Database backed up → sast_20260319T185728Z.db
+2026-03-20 00:27:28 [INFO] sast.backup: Pruned old backup: sast_20260319T182410Z.db
+2026-03-20 00:27:28 [INFO] sast: Startup backup created: sast_20260319T185728Z.db
+2026-03-20 00:27:28 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 00:27:28 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 00:27:28 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:27:28 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:27:28 [INFO] sast: SAST application ready
+2026-03-20 00:27:31 [INFO] sast: SAST application shutting down
+2026-03-20 00:27:32 [INFO] sast: SAST application starting up
+2026-03-20 00:27:33 [INFO] sast: Database initialised
+2026-03-20 00:27:33 [INFO] sast.backup: Database backed up → sast_20260319T185733Z.db
+2026-03-20 00:27:33 [INFO] sast.backup: Pruned old backup: sast_20260319T182501Z.db
+2026-03-20 00:27:33 [INFO] sast: Startup backup created: sast_20260319T185733Z.db
+2026-03-20 00:27:33 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 00:27:33 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 00:27:33 [INFO] sast.ml: ML engine loaded — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:27:33 [INFO] sast: ML engine ready — samples: 7500  vocab: 12000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Medium')]
+2026-03-20 00:27:33 [INFO] sast: SAST application ready
+2026-03-20 00:37:12 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-03-20 00:37:13 [INFO] sast: Scan #42 complete — user: 'Nadinak'  findings: 15  risk: 5.4
+2026-03-20 00:37:44 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-20 00:37:49 [INFO] sast: Scan #43 complete — user: 'Nadinak'  findings: 206  risk: 6.52
+2026-03-20 00:42:56 [INFO] sast: User signed out
+2026-03-20 00:43:19 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-20 00:43:20 [INFO] sast: User signed out
+2026-03-20 00:43:49 [INFO] sast: SAST application shutting down
+2026-03-20 21:50:49 [INFO] sast: SAST application starting up
+2026-03-20 21:50:49 [INFO] sast: Database initialised
+2026-03-20 21:50:49 [INFO] sast.backup: Database backed up → sast_20260320T162049Z.db
+2026-03-20 21:50:49 [INFO] sast.backup: Pruned old backup: sast_20260319T183152Z.db
+2026-03-20 21:50:49 [INFO] sast: Startup backup created: sast_20260320T162049Z.db
+2026-03-20 21:50:49 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 21:50:49 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 21:50:49 [INFO] sast.ml: Training ML engine from datasets (this may take a moment)...
+2026-03-20 21:50:49 [INFO] sast.ml: Loaded 4000 samples from data_Python.csv       (vulnerable: 2000  patched: 2000)
+2026-03-20 21:50:49 [INFO] sast.ml: Loaded 4000 samples from data_Java.csv         (vulnerable: 2000  patched: 2000)
+2026-03-20 21:50:49 [INFO] sast.ml: Loaded 3666 samples from data_C++.csv          (vulnerable: 1833  patched: 1833)
+2026-03-20 21:50:49 [INFO] sast.ml: Training on 11666 samples  (vulnerable: 5833  patched/safe: 5833)
+2026-03-20 21:50:54 [INFO] sast.ml: Vectorizer fitted — word vocab: 14000  char vocab: 6000  total features: 20000
+2026-03-20 21:50:55 [INFO] sast.ml: Severity model eval (20% hold-out):
+              precision    recall  f1-score   support
+
+    Critical       1.00      0.87      0.93       177
+        High       0.99      0.97      0.98       456
+         Low       1.00      1.00      1.00         4
+      Medium       0.93      0.99      0.96       530
+
+    accuracy                           0.96      1167
+   macro avg       0.98      0.96      0.97      1167
+weighted avg       0.96      0.96      0.96      1167
+
+2026-03-20 21:51:00 [INFO] sast.ml: Severity model trained — classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]  samples: 5833
+2026-03-20 21:51:05 [INFO] sast.ml: FP classifier eval (20% hold-out):
+              precision    recall  f1-score   support
+
+           0       0.78      0.73      0.75      1167
+           1       0.75      0.80      0.77      1167
+
+    accuracy                           0.76      2334
+   macro avg       0.76      0.76      0.76      2334
+weighted avg       0.76      0.76      0.76      2334
+
+2026-03-20 21:51:17 [INFO] sast.ml: FP classifier trained — class distribution: {0: 5833, 1: 5833}
+2026-03-20 21:51:20 [INFO] sast.ml: ML engine saved → ml_engine.pkl.gz
+2026-03-20 21:51:20 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 21:51:20 [INFO] sast: SAST application ready
+2026-03-20 21:51:35 [INFO] sast: SAST application shutting down
+2026-03-20 21:55:43 [INFO] sast: SAST application starting up
+2026-03-20 21:55:43 [INFO] sast: Database initialised
+2026-03-20 21:55:43 [INFO] sast.backup: Database backed up → sast_20260320T162543Z.db
+2026-03-20 21:55:43 [INFO] sast.backup: Pruned old backup: sast_20260319T183156Z.db
+2026-03-20 21:55:43 [INFO] sast: Startup backup created: sast_20260320T162543Z.db
+2026-03-20 21:55:43 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 21:55:43 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 21:55:44 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 21:55:44 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 21:55:44 [INFO] sast: SAST application ready
+2026-03-20 21:55:52 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-20 21:56:08 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-20 21:56:26 [INFO] sast: Scan #44 complete — user: 'Nadinak'  findings: 206  risk: 6.59
+2026-03-20 21:58:13 [INFO] sast: SAST application shutting down
+2026-03-20 21:59:23 [INFO] sast: SAST application starting up
+2026-03-20 21:59:23 [INFO] sast: Database initialised
+2026-03-20 21:59:23 [INFO] sast.backup: Database backed up → sast_20260320T162923Z.db
+2026-03-20 21:59:23 [INFO] sast.backup: Pruned old backup: sast_20260319T183223Z.db
+2026-03-20 21:59:23 [INFO] sast: Startup backup created: sast_20260320T162923Z.db
+2026-03-20 21:59:23 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 21:59:23 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 21:59:23 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 21:59:23 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 21:59:23 [INFO] sast: SAST application ready
+2026-03-20 22:01:04 [WARNING] sast: Failed login attempt — username: Nadinak
+2026-03-20 22:01:08 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-20 22:01:21 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-20 22:01:38 [INFO] sast: Scan #45 complete — user: 'Nadinak'  findings: 206  risk: 6.59
+2026-03-20 22:01:59 [INFO] sast: PDF report generated for scan #45 by 'Nadinak'
+2026-03-20 22:03:02 [INFO] sast: User signed out
+2026-03-20 22:03:18 [INFO] sast: New user registered — username: Nadina
+2026-03-20 22:03:56 [INFO] sast: ZIP scan by 'Nadina' — Sast--main-V1.zip  files: 8
+2026-03-20 22:04:12 [INFO] sast: Scan #46 complete — user: 'Nadina'  findings: 191  risk: 6.47
+2026-03-20 22:08:36 [INFO] sast: SAST application shutting down
+2026-03-20 22:08:44 [INFO] sast: SAST application starting up
+2026-03-20 22:08:44 [INFO] sast: Database initialised
+2026-03-20 22:08:44 [INFO] sast.backup: Database backed up → sast_20260320T163844Z.db
+2026-03-20 22:08:44 [INFO] sast.backup: Pruned old backup: sast_20260319T183226Z.db
+2026-03-20 22:08:44 [INFO] sast: Startup backup created: sast_20260320T163844Z.db
+2026-03-20 22:08:44 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 22:08:44 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 22:08:44 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 22:08:44 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 22:08:44 [INFO] sast: SAST application ready
+2026-03-20 22:11:17 [INFO] sast: SAST application shutting down
+2026-03-20 22:13:30 [INFO] sast: SAST application starting up
+2026-03-20 22:13:30 [INFO] sast: Database initialised
+2026-03-20 22:13:30 [INFO] sast.backup: Database backed up → sast_20260320T164330Z.db
+2026-03-20 22:13:30 [INFO] sast.backup: Pruned old backup: sast_20260319T183806Z.db
+2026-03-20 22:13:30 [INFO] sast: Startup backup created: sast_20260320T164330Z.db
+2026-03-20 22:13:30 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 22:13:30 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 22:13:31 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 22:13:31 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 22:13:31 [INFO] sast: SAST application ready
+2026-03-20 22:15:11 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-20 22:15:28 [INFO] sast: Scan #47 complete — user: 'Nadinak'  findings: 206  risk: 6.59
+2026-03-20 22:33:49 [INFO] sast: SAST application shutting down
+2026-03-20 22:49:21 [INFO] sast: SAST application starting up
+2026-03-20 22:49:21 [INFO] sast: Database initialised
+2026-03-20 22:49:21 [INFO] sast.backup: Database backed up → sast_20260320T171921Z.db
+2026-03-20 22:49:21 [INFO] sast.backup: Pruned old backup: sast_20260319T185728Z.db
+2026-03-20 22:49:21 [INFO] sast: Startup backup created: sast_20260320T171921Z.db
+2026-03-20 22:49:21 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 22:49:21 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 22:49:21 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 22:49:21 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 22:49:21 [INFO] sast: SAST application ready
+2026-03-20 22:50:40 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-20 22:50:58 [INFO] sast: Scan #48 complete — user: 'Nadinak'  findings: 206  risk: 6.59
+2026-03-20 17:45:09 [INFO] sast: SAST application starting up
+2026-03-20 17:45:09 [INFO] sast: Database initialised
+2026-03-20 17:45:10 [INFO] sast.backup: Database backed up → sast_20260320T174509Z.db
+2026-03-20 17:45:10 [INFO] sast.backup: Pruned old backup: sast_20260319T185733Z.db
+2026-03-20 17:45:10 [INFO] sast: Startup backup created: sast_20260320T174509Z.db
+2026-03-20 17:45:10 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-20 17:45:10 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-20 17:45:12 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 17:45:12 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-20 17:45:12 [INFO] sast: SAST application ready
+2026-03-20 17:46:05 [WARNING] sast: Failed login attempt — username: nadina
+2026-03-20 17:46:07 [WARNING] sast: Failed login attempt — username: nadina
+2026-03-20 17:46:16 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-20 17:46:46 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-20 17:47:56 [INFO] sast: Scan #49 complete — user: 'Nadinak'  findings: 206  risk: 6.59
+2026-03-21 11:59:39 [INFO] sast: SAST application starting up
+2026-03-21 11:59:39 [INFO] sast: Database initialised
+2026-03-21 11:59:40 [INFO] sast.backup: Database backed up → sast_20260321T115939Z.db
+2026-03-21 11:59:40 [INFO] sast.backup: Pruned old backup: sast_20260320T162049Z.db
+2026-03-21 11:59:40 [INFO] sast: Startup backup created: sast_20260321T115939Z.db
+2026-03-21 11:59:40 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 11:59:40 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 11:59:48 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 11:59:48 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 11:59:48 [INFO] sast: SAST application ready
+2026-03-21 12:00:25 [INFO] sast: New user registered — username: ghostrider
+2026-03-21 12:01:00 [INFO] sast: File scan by 'ghostrider' — deepseek_java_20260307_403f13.java  lang: java
+2026-03-21 12:01:11 [INFO] sast: Scan #50 complete — user: 'ghostrider'  findings: 29  risk: 6.59
+2026-03-21 12:03:32 [INFO] sast: SAST application shutting down
+2026-03-21 12:04:43 [INFO] sast: SAST application starting up
+2026-03-21 12:04:43 [INFO] sast: Database initialised
+2026-03-21 12:04:43 [INFO] sast.backup: Database backed up → sast_20260321T120443Z.db
+2026-03-21 12:04:43 [INFO] sast.backup: Pruned old backup: sast_20260320T162923Z.db
+2026-03-21 12:04:43 [INFO] sast: Startup backup created: sast_20260321T120443Z.db
+2026-03-21 12:04:43 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 12:04:44 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 12:04:47 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:04:47 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:04:47 [INFO] sast: SAST application ready
+2026-03-21 12:09:50 [INFO] sast: SAST application starting up
+2026-03-21 12:09:50 [INFO] sast: Database initialised
+2026-03-21 12:09:50 [INFO] sast.backup: Database backed up → sast_20260321T120950Z.db
+2026-03-21 12:09:50 [INFO] sast.backup: Pruned old backup: sast_20260320T162543Z.db
+2026-03-21 12:09:50 [INFO] sast: Startup backup created: sast_20260321T120950Z.db
+2026-03-21 12:09:50 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 12:09:50 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 12:09:55 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:09:55 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:09:55 [INFO] sast: SAST application ready
+2026-03-21 12:10:40 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:10:50 [INFO] sast: File scan by 'ghostrider' — deepseek_java_20260307_403f13.java  lang: java
+2026-03-21 12:11:00 [INFO] sast: Scan #51 complete — user: 'ghostrider'  findings: 29  risk: 6.59
+2026-03-21 12:12:52 [INFO] sast: SAST application shutting down
+2026-03-21 12:14:29 [INFO] sast: SAST application starting up
+2026-03-21 12:14:29 [INFO] sast: Database initialised
+2026-03-21 12:14:29 [INFO] sast.backup: Database backed up → sast_20260321T121429Z.db
+2026-03-21 12:14:29 [INFO] sast.backup: Pruned old backup: sast_20260320T163844Z.db
+2026-03-21 12:14:29 [INFO] sast: Startup backup created: sast_20260321T121429Z.db
+2026-03-21 12:14:29 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 12:14:29 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 12:14:31 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:14:31 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:14:31 [INFO] sast: SAST application ready
+2026-03-21 12:15:38 [INFO] sast: SAST application shutting down
+2026-03-21 12:16:26 [INFO] sast: SAST application starting up
+2026-03-21 12:16:26 [INFO] sast: Database initialised
+2026-03-21 12:16:26 [INFO] sast.backup: Database backed up → sast_20260321T121626Z.db
+2026-03-21 12:16:26 [INFO] sast.backup: Pruned old backup: sast_20260320T171921Z.db
+2026-03-21 12:16:26 [INFO] sast: Startup backup created: sast_20260321T121626Z.db
+2026-03-21 12:16:26 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 12:16:26 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 12:16:32 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:16:32 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:16:32 [INFO] sast: SAST application ready
+2026-03-21 12:16:59 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:17:39 [INFO] sast: File scan by 'ghostrider' — test.py  lang: python
+2026-03-21 12:18:29 [INFO] sast: Scan #52 complete — user: 'ghostrider'  findings: 142  risk: 5.76
+2026-03-21 12:20:04 [INFO] sast: PDF report generated for scan #52 by 'ghostrider'
+2026-03-21 12:20:36 [INFO] sast: User signed out
+2026-03-21 12:20:42 [WARNING] sast: Failed login attempt — username: ghostrider
+2026-03-21 12:20:50 [WARNING] sast: Failed login attempt — username: ghostrider
+2026-03-21 12:20:56 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:21:58 [INFO] sast: SAST application shutting down
+2026-03-21 12:25:32 [INFO] sast: SAST application starting up
+2026-03-21 12:25:32 [INFO] sast: Database initialised
+2026-03-21 12:25:32 [INFO] sast.backup: Database backed up → sast_20260321T122532Z.db
+2026-03-21 12:25:32 [INFO] sast.backup: Pruned old backup: sast_20260320T164330Z.db
+2026-03-21 12:25:32 [INFO] sast: Startup backup created: sast_20260321T122532Z.db
+2026-03-21 12:25:32 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 12:25:32 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 12:25:36 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:25:36 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:25:36 [INFO] sast: SAST application ready
+2026-03-21 12:25:57 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:28:47 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:29:07 [INFO] sast: File scan by 'ghostrider' — deepseek_java_20260307_403f13.java  lang: java
+2026-03-21 12:29:17 [INFO] sast: Scan #53 complete — user: 'ghostrider'  findings: 29  risk: 6.59
+2026-03-21 12:29:30 [INFO] sast: User signed out
+2026-03-21 12:38:36 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:38:47 [INFO] sast: SAST application shutting down
+2026-03-21 12:56:19 [INFO] sast: SAST application starting up
+2026-03-21 12:56:19 [INFO] sast: Database initialised
+2026-03-21 12:56:19 [INFO] sast.backup: Database backed up → sast_20260321T125619Z.db
+2026-03-21 12:56:19 [INFO] sast.backup: Pruned old backup: sast_20260320T174509Z.db
+2026-03-21 12:56:19 [INFO] sast: Startup backup created: sast_20260321T125619Z.db
+2026-03-21 12:56:19 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 12:56:19 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 12:56:21 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:56:21 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 12:56:21 [INFO] sast: SAST application ready
+2026-03-21 12:56:39 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:57:04 [INFO] sast: User updated account settings — username: ghostrider
+2026-03-21 12:57:09 [INFO] sast: User signed out
+2026-03-21 12:57:15 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 12:57:18 [INFO] sast: User signed out
+2026-03-21 12:57:24 [WARNING] sast: Failed login attempt — username: ghostrider
+2026-03-21 12:57:32 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 13:00:04 [INFO] sast: Paste scan by 'ghostrider' — snippet.py  lang: python
+2026-03-21 13:00:05 [INFO] sast: Scan #54 complete — user: 'ghostrider'  findings: 1  risk: 5.0
+2026-03-21 13:04:04 [INFO] sast: SAST application shutting down
+2026-03-21 13:08:30 [INFO] sast: SAST application starting up
+2026-03-21 13:08:30 [INFO] sast: Database initialised
+2026-03-21 13:08:30 [INFO] sast.backup: Database backed up → sast_20260321T130830Z.db
+2026-03-21 13:08:30 [INFO] sast.backup: Pruned old backup: sast_20260321T115939Z.db
+2026-03-21 13:08:30 [INFO] sast: Startup backup created: sast_20260321T130830Z.db
+2026-03-21 13:08:30 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 13:08:30 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 13:08:34 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:08:34 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:08:34 [INFO] sast: SAST application ready
+2026-03-21 13:08:48 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 13:10:38 [INFO] sast: File scan by 'ghostrider' — deepseek_java_20260307_403f13.java  lang: java
+2026-03-21 13:10:48 [INFO] sast: Scan #55 complete — user: 'ghostrider'  findings: 29  risk: 6.59
+2026-03-21 13:11:20 [INFO] sast: User signed out
+2026-03-21 13:11:22 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 13:12:59 [INFO] sast: SAST application shutting down
+2026-03-21 13:14:13 [INFO] sast: SAST application starting up
+2026-03-21 13:14:13 [INFO] sast: Database initialised
+2026-03-21 13:14:13 [INFO] sast.backup: Database backed up → sast_20260321T131413Z.db
+2026-03-21 13:14:13 [INFO] sast.backup: Pruned old backup: sast_20260321T120443Z.db
+2026-03-21 13:14:13 [INFO] sast: Startup backup created: sast_20260321T131413Z.db
+2026-03-21 13:14:13 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 13:14:13 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 13:14:15 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:14:15 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:14:15 [INFO] sast: SAST application ready
+2026-03-21 13:14:27 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 13:16:49 [INFO] sast: SAST application shutting down
+2026-03-21 13:16:57 [INFO] sast: SAST application starting up
+2026-03-21 13:16:58 [INFO] sast: Database initialised
+2026-03-21 13:16:58 [INFO] sast.backup: Database backed up → sast_20260321T131658Z.db
+2026-03-21 13:16:58 [INFO] sast.backup: Pruned old backup: sast_20260321T120950Z.db
+2026-03-21 13:16:58 [INFO] sast: Startup backup created: sast_20260321T131658Z.db
+2026-03-21 13:16:58 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 13:16:58 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 13:17:00 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:17:00 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:17:00 [INFO] sast: SAST application ready
+2026-03-21 13:17:20 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 13:17:37 [INFO] sast: User deleted their account — id: 5
+2026-03-21 13:17:40 [WARNING] sast: Failed login attempt — username: ghostrider
+2026-03-21 13:17:53 [INFO] sast: New user registered — username: ghostrider
+2026-03-21 13:19:39 [INFO] sast: SAST application shutting down
+2026-03-21 13:21:13 [INFO] sast: SAST application starting up
+2026-03-21 13:21:13 [INFO] sast: Database initialised
+2026-03-21 13:21:13 [INFO] sast.backup: Database backed up → sast_20260321T132113Z.db
+2026-03-21 13:21:13 [INFO] sast.backup: Pruned old backup: sast_20260321T121429Z.db
+2026-03-21 13:21:13 [INFO] sast: Startup backup created: sast_20260321T132113Z.db
+2026-03-21 13:21:13 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 13:21:13 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 13:21:16 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:21:16 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:21:16 [INFO] sast: SAST application ready
+2026-03-21 13:21:30 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 13:21:41 [INFO] sast: File scan by 'ghostrider' — deepseek_java_20260307_403f13.java  lang: java
+2026-03-21 13:21:51 [INFO] sast: Scan #56 complete — user: 'ghostrider'  findings: 29  risk: 6.59
+2026-03-21 13:23:35 [INFO] sast: File scan by 'ghostrider' — test.py  lang: python
+2026-03-21 13:24:24 [INFO] sast: Scan #57 complete — user: 'ghostrider'  findings: 142  risk: 5.76
+2026-03-21 13:28:40 [INFO] sast: SAST application shutting down
+2026-03-21 13:34:27 [INFO] sast: SAST application starting up
+2026-03-21 13:34:27 [INFO] sast: Database initialised
+2026-03-21 13:34:27 [INFO] sast.backup: Database backed up → sast_20260321T133427Z.db
+2026-03-21 13:34:27 [INFO] sast.backup: Pruned old backup: sast_20260321T121626Z.db
+2026-03-21 13:34:27 [INFO] sast: Startup backup created: sast_20260321T133427Z.db
+2026-03-21 13:34:27 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 13:34:27 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 13:34:30 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:34:30 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:34:30 [INFO] sast: SAST application ready
+2026-03-21 13:43:24 [INFO] sast: SAST application shutting down
+2026-03-21 13:44:04 [INFO] sast: SAST application starting up
+2026-03-21 13:44:04 [INFO] sast: Database initialised
+2026-03-21 13:44:04 [INFO] sast.backup: Database backed up → sast_20260321T134404Z.db
+2026-03-21 13:44:04 [INFO] sast.backup: Pruned old backup: sast_20260321T122532Z.db
+2026-03-21 13:44:04 [INFO] sast: Startup backup created: sast_20260321T134404Z.db
+2026-03-21 13:44:04 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 13:44:04 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 13:44:08 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:44:08 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:44:08 [INFO] sast: SAST application ready
+2026-03-21 13:50:22 [INFO] sast: SAST application starting up
+2026-03-21 13:50:22 [INFO] sast: Database initialised
+2026-03-21 13:50:22 [INFO] sast.backup: Database backed up → sast_20260321T135022Z.db
+2026-03-21 13:50:22 [INFO] sast.backup: Pruned old backup: sast_20260321T125619Z.db
+2026-03-21 13:50:22 [INFO] sast: Startup backup created: sast_20260321T135022Z.db
+2026-03-21 13:50:22 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 13:50:22 [INFO] sast: Rule catalog loaded — 196 rules, 173 CWEs
+2026-03-21 13:50:30 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:50:30 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 13:50:30 [INFO] sast: SAST application ready
+2026-03-21 13:51:50 [INFO] sast: New user registered — username: Nigga
+2026-03-21 13:52:41 [INFO] sast: ZIP scan by 'Nigga' — Applied-Project-main.zip  files: 9
+2026-03-21 13:53:52 [INFO] sast: Scan #58 complete — user: 'Nigga'  findings: 206  risk: 6.59
+2026-03-21 13:56:02 [INFO] sast: Paste scan by 'Nigga' — snippet.py  lang: python
+2026-03-21 13:56:04 [INFO] sast: Scan #59 complete — user: 'Nigga'  findings: 4  risk: 7.5
+2026-03-21 13:56:41 [INFO] sast: PDF report generated for scan #59 by 'Nigga'
+2026-03-21 13:58:59 [INFO] sast: ZIP scan by 'Nigga' — Cryptography-Projects-main.zip  files: 4
+2026-03-21 13:59:01 [INFO] sast: Scan #60 complete — user: 'Nigga'  findings: 4  risk: 5.0
+2026-03-21 13:59:23 [INFO] sast: User signed out
+2026-03-21 13:59:29 [WARNING] sast: Failed login attempt — username: nadina
+2026-03-21 13:59:43 [WARNING] sast: Failed login attempt — username: nigga
+2026-03-21 13:59:57 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 13:59:58 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 13:59:58 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:00:00 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:00:00 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:00:01 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:00:01 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:00:02 [INFO] sast: User signed in — username: Nigga  role: user
+2026-03-21 14:01:24 [INFO] sast: Paste scan by 'Nigga' — snippet.py  lang: python
+2026-03-21 14:01:24 [INFO] sast: Scan #61 complete — user: 'Nigga'  findings: 0  risk: 0
+2026-03-21 14:03:29 [INFO] sast: ZIP scan by 'Nigga' — Sast--main.zip  files: 7
+2026-03-21 14:03:52 [INFO] sast: Scan #62 complete — user: 'Nigga'  findings: 68  risk: 6.09
+2026-03-21 14:10:49 [INFO] sast: SAST application shutting down
+2026-03-21 17:21:52 [INFO] sast: SAST application starting up
+2026-03-21 17:21:52 [INFO] sast: Database initialised
+2026-03-21 17:21:52 [INFO] sast.backup: Database backed up → sast_20260321T172152Z.db
+2026-03-21 17:21:52 [INFO] sast.backup: Pruned old backup: sast_20260321T130830Z.db
+2026-03-21 17:21:52 [INFO] sast: Startup backup created: sast_20260321T172152Z.db
+2026-03-21 17:21:52 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 17:21:52 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-21 17:21:58 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:21:58 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:21:58 [INFO] sast: SAST application ready
+2026-03-21 17:22:14 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 17:23:16 [INFO] sast: File scan by 'ghostrider' — test.py  lang: python
+2026-03-21 17:23:32 [INFO] sast: Scan #63 complete — user: 'ghostrider'  findings: 47  risk: 6.28
+2026-03-21 17:24:15 [INFO] sast: SAST application shutting down
+2026-03-21 17:36:39 [INFO] sast: SAST application starting up
+2026-03-21 17:36:39 [INFO] sast: Database initialised
+2026-03-21 17:36:39 [INFO] sast.backup: Database backed up → sast_20260321T173639Z.db
+2026-03-21 17:36:39 [INFO] sast.backup: Pruned old backup: sast_20260321T131413Z.db
+2026-03-21 17:36:39 [INFO] sast: Startup backup created: sast_20260321T173639Z.db
+2026-03-21 17:36:39 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 17:36:39 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-21 17:36:41 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:36:41 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:36:41 [INFO] sast: SAST application ready
+2026-03-21 17:36:54 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 17:38:14 [INFO] sast: SAST application shutting down
+2026-03-21 17:40:56 [INFO] sast: SAST application starting up
+2026-03-21 17:40:56 [INFO] sast: Database initialised
+2026-03-21 17:40:57 [INFO] sast.backup: Database backed up → sast_20260321T174056Z.db
+2026-03-21 17:40:57 [INFO] sast.backup: Pruned old backup: sast_20260321T131658Z.db
+2026-03-21 17:40:57 [INFO] sast: Startup backup created: sast_20260321T174056Z.db
+2026-03-21 17:40:57 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 17:40:57 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-21 17:40:59 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:40:59 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 17:40:59 [INFO] sast: SAST application ready
+2026-03-21 17:41:19 [INFO] sast: User signed in — username: ghostrider  role: user
+2026-03-21 23:48:12 [INFO] sast: SAST application starting up
+2026-03-21 23:48:12 [INFO] sast: Database initialised
+2026-03-21 23:48:12 [INFO] sast.backup: Database backed up → sast_20260321T181812Z.db
+2026-03-21 23:48:12 [INFO] sast.backup: Pruned old backup: sast_20260321T132113Z.db
+2026-03-21 23:48:12 [INFO] sast: Startup backup created: sast_20260321T181812Z.db
+2026-03-21 23:48:12 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-21 23:48:12 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-21 23:48:12 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 23:48:12 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-21 23:48:12 [INFO] sast: SAST application ready
+2026-03-21 23:49:33 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-21 23:49:42 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-21 23:49:48 [INFO] sast: Scan #64 complete — user: 'Nadinak'  findings: 70  risk: 8.63
+2026-03-22 00:23:11 [INFO] sast: SAST application starting up
+2026-03-22 00:23:11 [INFO] sast: Database initialised
+2026-03-22 00:23:11 [INFO] sast.backup: Database backed up → sast_20260321T185311Z.db
+2026-03-22 00:23:11 [INFO] sast.backup: Pruned old backup: sast_20260321T133427Z.db
+2026-03-22 00:23:11 [INFO] sast: Startup backup created: sast_20260321T185311Z.db
+2026-03-22 00:23:11 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 00:23:11 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 00:23:12 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 00:23:12 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 00:23:12 [INFO] sast: SAST application ready
+2026-03-22 00:34:13 [INFO] sast: SAST application shutting down
+2026-03-22 00:37:29 [INFO] sast: SAST application starting up
+2026-03-22 00:37:29 [INFO] sast: Database initialised
+2026-03-22 00:37:29 [INFO] sast.backup: Database backed up → sast_20260321T190729Z.db
+2026-03-22 00:37:29 [INFO] sast.backup: Pruned old backup: sast_20260321T134404Z.db
+2026-03-22 00:37:29 [INFO] sast: Startup backup created: sast_20260321T190729Z.db
+2026-03-22 00:37:29 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 00:37:29 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 00:37:29 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 00:37:29 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 00:37:29 [INFO] sast: SAST application ready
+2026-03-22 00:37:42 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 00:37:59 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-22 00:38:05 [INFO] sast: Scan #65 complete — user: 'Nadinak'  findings: 70  risk: 8.63
+2026-03-22 00:56:19 [INFO] sast: SAST application shutting down
+2026-03-22 00:56:24 [INFO] sast: SAST application starting up
+2026-03-22 00:56:24 [INFO] sast: Database initialised
+2026-03-22 00:56:25 [INFO] sast.backup: Database backed up → sast_20260321T192624Z.db
+2026-03-22 00:56:25 [INFO] sast.backup: Pruned old backup: sast_20260321T135022Z.db
+2026-03-22 00:56:25 [INFO] sast: Startup backup created: sast_20260321T192624Z.db
+2026-03-22 00:56:25 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 00:56:25 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 00:56:25 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 00:56:25 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 00:56:25 [INFO] sast: SAST application ready
+2026-03-22 00:56:35 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 00:56:45 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-22 00:56:50 [INFO] sast: Scan #66 complete — user: 'Nadinak'  findings: 70  risk: 8.63
+2026-03-22 01:01:39 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 01:01:44 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 01:02:59 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 01:03:05 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 01:04:26 [INFO] sast: SAST application shutting down
+2026-03-22 01:15:27 [INFO] sast: SAST application starting up
+2026-03-22 01:15:27 [INFO] sast: Database initialised
+2026-03-22 01:15:27 [INFO] sast.backup: Database backed up → sast_20260321T194527Z.db
+2026-03-22 01:15:27 [INFO] sast.backup: Pruned old backup: sast_20260321T172152Z.db
+2026-03-22 01:15:27 [INFO] sast: Startup backup created: sast_20260321T194527Z.db
+2026-03-22 01:15:27 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 01:15:27 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 01:15:28 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 01:15:28 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 01:15:28 [INFO] sast: SAST application ready
+2026-03-22 01:15:37 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 01:15:48 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-22 01:15:54 [INFO] sast: Scan #67 complete — user: 'Nadinak'  findings: 70  risk: 8.63
+2026-03-22 01:16:29 [INFO] sast: SAST application shutting down
+2026-03-22 01:20:50 [INFO] sast: SAST application starting up
+2026-03-22 01:20:50 [INFO] sast: Database initialised
+2026-03-22 01:20:50 [INFO] sast.backup: Database backed up → sast_20260321T195050Z.db
+2026-03-22 01:20:50 [INFO] sast.backup: Pruned old backup: sast_20260321T173639Z.db
+2026-03-22 01:20:50 [INFO] sast: Startup backup created: sast_20260321T195050Z.db
+2026-03-22 01:20:50 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 01:20:50 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 01:20:51 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 01:20:51 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 01:20:51 [INFO] sast: SAST application ready
+2026-03-22 01:21:01 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 01:21:06 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 01:21:08 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 01:21:28 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 01:21:42 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 01:22:12 [INFO] sast: PDF report generated for scan #67 by 'Nadinak'
+2026-03-22 01:25:36 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-22 01:25:42 [INFO] sast: Scan #68 complete — user: 'Nadinak'  findings: 70  risk: 8.63
+2026-03-22 01:32:13 [INFO] sast: SAST application shutting down
+2026-03-22 01:45:39 [INFO] sast: SAST application starting up
+2026-03-22 01:45:39 [INFO] sast: Database initialised
+2026-03-22 01:45:39 [INFO] sast.backup: Database backed up → sast_20260321T201539Z.db
+2026-03-22 01:45:39 [INFO] sast.backup: Pruned old backup: sast_20260321T174056Z.db
+2026-03-22 01:45:39 [INFO] sast: Startup backup created: sast_20260321T201539Z.db
+2026-03-22 01:45:39 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 01:45:39 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 01:45:39 [INFO] sast.ml: Training ML engine from datasets (this may take a moment)...
+2026-03-22 01:45:39 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-22 01:45:39 [INFO] sast.ml: Loaded 4000 samples from data_Python.csv       (vulnerable: 2000  patched: 2000)
+2026-03-22 01:45:39 [INFO] sast.ml: Loaded 4000 samples from data_Java.csv         (vulnerable: 2000  patched: 2000)
+2026-03-22 01:45:39 [INFO] sast.ml: Loaded 3666 samples from data_C++.csv          (vulnerable: 1833  patched: 1833)
+2026-03-22 01:45:39 [INFO] sast.ml: Training on 11666 samples  (vulnerable: 5833  patched/safe: 5833)
+2026-03-22 01:45:45 [INFO] sast.ml: Vectorizer fitted — word vocab: 14000  char vocab: 6000  total features: 20000
+2026-03-22 01:45:46 [INFO] sast.ml: Severity model eval (20% hold-out):
+              precision    recall  f1-score   support
+
+    Critical       1.00      1.00      1.00       177
+        High       1.00      1.00      1.00       456
+         Low       1.00      1.00      1.00         4
+      Medium       1.00      1.00      1.00       530
+
+    accuracy                           1.00      1167
+   macro avg       1.00      1.00      1.00      1167
+weighted avg       1.00      1.00      1.00      1167
+
+2026-03-22 01:45:51 [INFO] sast.ml: Severity model trained — classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]  samples: 5833
+2026-03-22 01:46:00 [INFO] sast.ml: FP classifier eval (20% hold-out):
+              precision    recall  f1-score   support
+
+           0       0.90      0.80      0.84      1167
+           1       0.82      0.91      0.86      1167
+
+    accuracy                           0.85      2334
+   macro avg       0.86      0.85      0.85      2334
+weighted avg       0.86      0.85      0.85      2334
+
+2026-03-22 01:46:20 [INFO] sast.ml: FP classifier trained — class distribution: {0: 5833, 1: 5833}
+2026-03-22 01:46:22 [INFO] sast.ml: ML engine saved → ml_engine.pkl.gz
+2026-03-22 01:46:22 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 01:46:22 [INFO] sast: SAST application ready
+2026-03-22 01:46:36 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 01:46:52 [INFO] sast: File scan by 'Nadinak' — MegaVulnerableSystem.java  lang: java
+2026-03-22 01:47:18 [INFO] sast: Scan #69 complete — user: 'Nadinak'  findings: 300  risk: 5.96
+2026-03-22 01:47:54 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: java
+2026-03-22 01:47:56 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 01:50:48 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-209  language: java
+2026-03-22 01:50:49 [INFO] sast: LLM code-fix returned for CWE: CWE-209
+2026-03-22 01:56:28 [INFO] sast: SAST application shutting down
+2026-03-22 01:56:35 [INFO] sast: SAST application starting up
+2026-03-22 01:56:35 [INFO] sast: Database initialised
+2026-03-22 01:56:35 [INFO] sast.backup: Database backed up → sast_20260321T202635Z.db
+2026-03-22 01:56:35 [INFO] sast.backup: Pruned old backup: sast_20260321T181812Z.db
+2026-03-22 01:56:35 [INFO] sast: Startup backup created: sast_20260321T202635Z.db
+2026-03-22 01:56:35 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 01:56:35 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 01:56:35 [INFO] sast.ml: Training ML engine from datasets (this may take a moment)...
+2026-03-22 01:56:35 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-22 01:56:35 [INFO] sast.ml: Loaded 4000 samples from data_Python.csv       (vulnerable: 2000  patched: 2000)
+2026-03-22 01:56:35 [INFO] sast.ml: Loaded 4000 samples from data_Java.csv         (vulnerable: 2000  patched: 2000)
+2026-03-22 01:56:35 [INFO] sast.ml: Loaded 3666 samples from data_C++.csv          (vulnerable: 1833  patched: 1833)
+2026-03-22 01:56:35 [INFO] sast.ml: Training on 11666 samples  (vulnerable: 5833  patched/safe: 5833)
+2026-03-22 01:56:41 [INFO] sast.ml: Vectorizer fitted — word vocab: 14000  char vocab: 6000  total features: 20000
+2026-03-22 01:56:42 [INFO] sast.ml: Severity model eval (20% hold-out):
+              precision    recall  f1-score   support
+
+    Critical       1.00      1.00      1.00       177
+        High       1.00      1.00      1.00       456
+         Low       1.00      1.00      1.00         4
+      Medium       1.00      1.00      1.00       530
+
+    accuracy                           1.00      1167
+   macro avg       1.00      1.00      1.00      1167
+weighted avg       1.00      1.00      1.00      1167
+
+2026-03-22 01:56:46 [INFO] sast.ml: Severity model trained — classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]  samples: 5833
+2026-03-22 01:56:55 [INFO] sast.ml: FP classifier eval (20% hold-out):
+              precision    recall  f1-score   support
+
+           0       0.90      0.80      0.84      1167
+           1       0.82      0.91      0.86      1167
+
+    accuracy                           0.85      2334
+   macro avg       0.86      0.85      0.85      2334
+weighted avg       0.86      0.85      0.85      2334
+
+2026-03-22 01:57:14 [INFO] sast.ml: FP classifier trained — class distribution: {0: 5833, 1: 5833}
+2026-03-22 01:57:16 [INFO] sast.ml: ML engine saved → ml_engine.pkl.gz
+2026-03-22 01:57:16 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 01:57:16 [INFO] sast: SAST application ready
+2026-03-22 01:57:32 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 01:57:53 [INFO] sast: ZIP scan by 'Nadinak' — Sast--main-V1.zip  files: 8
+2026-03-22 01:57:59 [INFO] sast: Scan #70 complete — user: 'Nadinak'  findings: 60  risk: 8.77
+2026-03-22 02:06:32 [INFO] sast: PDF report generated for scan #70 by 'Nadinak'
+2026-03-22 02:06:44 [INFO] sast: ZIP scan by 'Nadinak' — Sast--main.zip  files: 7
+2026-03-22 02:06:46 [INFO] sast: Scan #71 complete — user: 'Nadinak'  findings: 13  risk: 8.54
+2026-03-22 02:08:55 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 02:08:57 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 12:11:55 [INFO] sast: SAST application starting up
+2026-03-22 12:11:55 [INFO] sast: Database initialised
+2026-03-22 12:11:55 [INFO] sast.backup: Database backed up → sast_20260322T064155Z.db
+2026-03-22 12:11:55 [INFO] sast.backup: Pruned old backup: sast_20260321T185311Z.db
+2026-03-22 12:11:55 [INFO] sast: Startup backup created: sast_20260322T064155Z.db
+2026-03-22 12:11:55 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 12:11:55 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 12:11:55 [INFO] sast.ml: Training ML engine from datasets (this may take a moment)...
+2026-03-22 12:11:55 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-22 12:11:55 [INFO] sast.ml: Loaded 4000 samples from data_Python.csv       (vulnerable: 2000  patched: 2000)
+2026-03-22 12:11:55 [INFO] sast.ml: Loaded 4000 samples from data_Java.csv         (vulnerable: 2000  patched: 2000)
+2026-03-22 12:11:55 [INFO] sast.ml: Loaded 3666 samples from data_C++.csv          (vulnerable: 1833  patched: 1833)
+2026-03-22 12:11:55 [INFO] sast.ml: Training on 11666 samples  (vulnerable: 5833  patched/safe: 5833)
+2026-03-22 12:12:01 [INFO] sast.ml: Vectorizer fitted — word vocab: 14000  char vocab: 6000  total features: 20000
+2026-03-22 12:12:02 [INFO] sast.ml: Severity model eval (20% hold-out):
+              precision    recall  f1-score   support
+
+    Critical       1.00      1.00      1.00       177
+        High       1.00      1.00      1.00       456
+         Low       1.00      1.00      1.00         4
+      Medium       1.00      1.00      1.00       530
+
+    accuracy                           1.00      1167
+   macro avg       1.00      1.00      1.00      1167
+weighted avg       1.00      1.00      1.00      1167
+
+2026-03-22 12:12:07 [INFO] sast.ml: Severity model trained — classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]  samples: 5833
+2026-03-22 12:12:14 [INFO] sast.ml: FP classifier eval (20% hold-out):
+              precision    recall  f1-score   support
+
+           0       0.90      0.80      0.84      1167
+           1       0.82      0.91      0.86      1167
+
+    accuracy                           0.85      2334
+   macro avg       0.86      0.85      0.85      2334
+weighted avg       0.86      0.85      0.85      2334
+
+2026-03-22 12:12:24 [INFO] sast.ml: FP classifier trained — class distribution: {0: 5833, 1: 5833}
+2026-03-22 12:12:25 [INFO] sast.ml: ML engine saved → ml_engine.pkl.gz
+2026-03-22 12:12:25 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 12:12:25 [INFO] sast: SAST application ready
+2026-03-22 12:12:38 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 12:13:00 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-22 12:13:04 [INFO] sast: Scan #72 complete — user: 'Nadinak'  findings: 70  risk: 8.77
+2026-03-22 12:14:13 [INFO] sast: SAST application shutting down
+2026-03-22 12:14:35 [INFO] sast: SAST application starting up
+2026-03-22 12:14:35 [INFO] sast: Database initialised
+2026-03-22 12:14:35 [INFO] sast.backup: Database backed up → sast_20260322T064435Z.db
+2026-03-22 12:14:35 [INFO] sast.backup: Pruned old backup: sast_20260321T190729Z.db
+2026-03-22 12:14:35 [INFO] sast: Startup backup created: sast_20260322T064435Z.db
+2026-03-22 12:14:35 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 12:14:35 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 12:14:35 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 12:14:35 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 12:14:35 [INFO] sast: SAST application ready
+2026-03-22 12:14:44 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 12:14:49 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 12:14:51 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 12:16:20 [INFO] sast: SAST application shutting down
+2026-03-22 12:21:27 [INFO] sast: SAST application starting up
+2026-03-22 12:21:27 [INFO] sast: Database initialised
+2026-03-22 12:21:27 [INFO] sast.backup: Database backed up → sast_20260322T065127Z.db
+2026-03-22 12:21:27 [INFO] sast.backup: Pruned old backup: sast_20260321T192624Z.db
+2026-03-22 12:21:27 [INFO] sast: Startup backup created: sast_20260322T065127Z.db
+2026-03-22 12:21:27 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 12:21:36 [INFO] sast: SAST application starting up
+2026-03-22 12:21:36 [INFO] sast: Database initialised
+2026-03-22 12:21:36 [INFO] sast.backup: Database backed up → sast_20260322T065136Z.db
+2026-03-22 12:21:36 [INFO] sast.backup: Pruned old backup: sast_20260321T194527Z.db
+2026-03-22 12:21:36 [INFO] sast: Startup backup created: sast_20260322T065136Z.db
+2026-03-22 12:21:36 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 12:22:16 [INFO] sast: SAST application starting up
+2026-03-22 12:22:16 [INFO] sast: Database initialised
+2026-03-22 12:22:16 [INFO] sast.backup: Database backed up → sast_20260322T065216Z.db
+2026-03-22 12:22:16 [INFO] sast.backup: Pruned old backup: sast_20260321T195050Z.db
+2026-03-22 12:22:16 [INFO] sast: Startup backup created: sast_20260322T065216Z.db
+2026-03-22 12:22:16 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 12:29:23 [INFO] sast: SAST application starting up
+2026-03-22 12:29:23 [INFO] sast: Database initialised
+2026-03-22 12:29:23 [INFO] sast.backup: Database backed up → sast_20260322T065923Z.db
+2026-03-22 12:29:23 [INFO] sast.backup: Pruned old backup: sast_20260321T201539Z.db
+2026-03-22 12:29:23 [INFO] sast: Startup backup created: sast_20260322T065923Z.db
+2026-03-22 12:29:23 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 12:29:23 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 12:29:24 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 12:29:24 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 12:29:24 [INFO] sast: SAST application ready
+2026-03-22 12:29:34 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 12:29:56 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-22 12:29:56 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-22 12:30:00 [INFO] sast: Scan #73 complete — user: 'Nadinak'  findings: 70  risk: 8.77
+2026-03-22 12:30:03 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 12:30:06 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 12:30:09 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 12:30:11 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 12:32:40 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 12:32:42 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 12:32:47 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 12:32:55 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 12:34:00 [INFO] sast: SAST application shutting down
+2026-03-22 12:34:17 [INFO] sast: SAST application starting up
+2026-03-22 12:34:17 [INFO] sast: Database initialised
+2026-03-22 12:34:17 [INFO] sast.backup: Database backed up → sast_20260322T070417Z.db
+2026-03-22 12:34:17 [INFO] sast.backup: Pruned old backup: sast_20260321T202635Z.db
+2026-03-22 12:34:17 [INFO] sast: Startup backup created: sast_20260322T070417Z.db
+2026-03-22 12:34:17 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 12:34:17 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 12:34:17 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 12:34:17 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 12:34:17 [INFO] sast: SAST application ready
+2026-03-22 12:34:23 [INFO] sast: SAST application shutting down
+2026-03-22 12:34:45 [INFO] sast: SAST application starting up
+2026-03-22 12:34:45 [INFO] sast: Database initialised
+2026-03-22 12:34:45 [INFO] sast.backup: Database backed up → sast_20260322T070445Z.db
+2026-03-22 12:34:45 [INFO] sast.backup: Pruned old backup: sast_20260322T064155Z.db
+2026-03-22 12:34:45 [INFO] sast: Startup backup created: sast_20260322T070445Z.db
+2026-03-22 12:34:45 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 12:34:45 [INFO] sast: Rule catalog loaded — 362 rules, 63 CWEs
+2026-03-22 12:34:45 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 12:34:45 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 12:34:45 [INFO] sast: SAST application ready
+2026-03-22 12:34:55 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 12:35:05 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 12:35:10 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 12:37:24 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 12:37:25 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 12:37:31 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 12:37:33 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 12:37:35 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 12:37:36 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 12:38:30 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 12:38:31 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 12:38:51 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 12:38:53 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 12:38:56 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 12:38:57 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 12:53:59 [INFO] sast: SAST application shutting down
+2026-03-22 13:01:15 [INFO] sast: SAST application starting up
+2026-03-22 13:01:15 [INFO] sast: Database initialised
+2026-03-22 13:01:15 [INFO] sast.backup: Database backed up → sast_20260322T073115Z.db
+2026-03-22 13:01:15 [INFO] sast.backup: Pruned old backup: sast_20260322T064435Z.db
+2026-03-22 13:01:15 [INFO] sast: Startup backup created: sast_20260322T073115Z.db
+2026-03-22 13:01:15 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 13:01:15 [INFO] sast: Rule catalog loaded — 385 rules, 75 CWEs
+2026-03-22 13:01:16 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 13:01:16 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 13:01:16 [INFO] sast: SAST application ready
+2026-03-22 13:01:28 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 13:03:30 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 13:03:37 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 13:13:11 [INFO] sast: SAST application shutting down
+2026-03-22 13:14:53 [INFO] sast: SAST application starting up
+2026-03-22 13:14:53 [INFO] sast: Database initialised
+2026-03-22 13:14:53 [INFO] sast.backup: Database backed up → sast_20260322T074453Z.db
+2026-03-22 13:14:53 [INFO] sast.backup: Pruned old backup: sast_20260322T065127Z.db
+2026-03-22 13:14:53 [INFO] sast: Startup backup created: sast_20260322T074453Z.db
+2026-03-22 13:14:53 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 13:14:53 [INFO] sast: Rule catalog loaded — 385 rules, 75 CWEs
+2026-03-22 13:14:54 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 13:14:54 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 13:14:54 [INFO] sast: SAST application ready
+2026-03-22 13:15:04 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 13:15:10 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 13:15:12 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 13:20:09 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 13:20:12 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 13:20:22 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 13:20:23 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 13:20:28 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 13:20:30 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 13:21:12 [INFO] sast: SAST application shutting down
+2026-03-22 13:28:14 [INFO] sast: SAST application starting up
+2026-03-22 13:28:14 [INFO] sast: Database initialised
+2026-03-22 13:28:14 [INFO] sast.backup: Database backed up → sast_20260322T075814Z.db
+2026-03-22 13:28:14 [INFO] sast.backup: Pruned old backup: sast_20260322T065136Z.db
+2026-03-22 13:28:14 [INFO] sast: Startup backup created: sast_20260322T075814Z.db
+2026-03-22 13:28:14 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 13:28:14 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-22 13:28:15 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 13:28:15 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 13:28:15 [INFO] sast: SAST application ready
+2026-03-22 13:29:54 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 13:30:00 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 13:30:59 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 13:31:03 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 13:31:31 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-03-22 13:31:32 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-22 13:31:45 [INFO] sast: Scan #74 complete — user: 'Nadinak'  findings: 43  risk: 7.23
+2026-03-22 13:32:00 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 13:32:04 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 13:33:39 [INFO] sast: File scan by 'Nadinak' — secure_login.cpp  lang: cpp
+2026-03-22 13:33:48 [INFO] sast: Scan #75 complete — user: 'Nadinak'  findings: 1  risk: 7.0
+2026-03-22 13:37:24 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-120  language: cpp
+2026-03-22 13:37:25 [INFO] sast: LLM code-fix returned for CWE: CWE-120
+2026-03-22 13:40:18 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-03-22 13:40:18 [INFO] sast: Scan #76 complete — user: 'Nadinak'  findings: 0  risk: 0
+2026-03-22 13:43:59 [INFO] sast: File scan by 'Nadinak' — secure_login.cpp  lang: cpp
+2026-03-22 13:43:59 [INFO] sast: Scan #77 complete — user: 'Nadinak'  findings: 1  risk: 7.0
+2026-03-22 13:53:40 [INFO] sast: SAST application starting up
+2026-03-22 13:53:40 [INFO] sast: Database initialised
+2026-03-22 13:53:40 [INFO] sast.backup: Database backed up → sast_20260322T082340Z.db
+2026-03-22 13:53:40 [INFO] sast.backup: Pruned old backup: sast_20260322T065216Z.db
+2026-03-22 13:53:40 [INFO] sast: Startup backup created: sast_20260322T082340Z.db
+2026-03-22 13:53:40 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 13:53:40 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-22 13:53:41 [INFO] sast.ml: ML engine loaded — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 13:53:41 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 13:53:41 [INFO] sast: SAST application ready
+2026-03-22 13:53:53 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 13:54:39 [INFO] sast: File scan by 'Nadinak' — secure_login.cpp  lang: cpp
+2026-03-22 13:54:39 [INFO] sast: Scan #78 complete — user: 'Nadinak'  findings: 0  risk: 0
+2026-03-22 13:54:56 [INFO] sast: ZIP scan by 'Nadinak' — Sast--main.zip  files: 7
+2026-03-22 13:54:56 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-22 13:54:57 [INFO] sast: Scan #79 complete — user: 'Nadinak'  findings: 13  risk: 8.54
+2026-03-22 13:55:02 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 13:55:04 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 13:59:01 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-22 13:59:04 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-22 13:59:26 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 13:59:31 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 14:00:39 [INFO] sast: File scan by 'Nadinak' — MegaVulnerableSystem.java  lang: java
+2026-03-22 14:00:57 [INFO] sast: Scan #80 complete — user: 'Nadinak'  findings: 300  risk: 5.96
+2026-03-22 14:01:04 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-22 14:01:05 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-22 14:01:11 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-22 14:01:12 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-22 14:03:49 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-03-22 14:03:51 [INFO] sast: Scan #81 complete — user: 'Nadinak'  findings: 26  risk: 6.54
+2026-03-22 14:04:51 [INFO] sast: PDF report generated for scan #81 by 'Nadinak'
+2026-03-22 14:04:57 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-03-22 14:05:02 [INFO] sast: Scan #82 complete — user: 'Nadinak'  findings: 89  risk: 6.62
+2026-03-22 14:05:32 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 14:05:33 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 14:07:46 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: python
+2026-03-22 14:07:50 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-22 14:09:19 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-03-22 14:09:19 [INFO] sast: Scan #83 complete — user: 'Nadinak'  findings: 6  risk: 8.33
+2026-03-22 14:13:37 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 14:13:39 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 14:20:16 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-03-22 14:20:16 [INFO] sast: Scan #84 complete — user: 'Nadinak'  findings: 6  risk: 8.33
+2026-03-22 14:22:46 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 14:22:47 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 14:54:20 [INFO] sast: ZIP scan by 'Nadinak' — Sast--main-V1.zip  files: 8
+2026-03-22 14:54:24 [INFO] sast: Scan #85 complete — user: 'Nadinak'  findings: 60  risk: 8.77
+2026-03-22 14:55:27 [INFO] sast: SAST application shutting down
+2026-03-22 14:55:50 [INFO] sast: SAST application starting up
+2026-03-22 14:55:50 [INFO] sast: Database initialised
+2026-03-22 14:55:50 [INFO] sast.backup: Database backed up → sast_20260322T092550Z.db
+2026-03-22 14:55:50 [INFO] sast.backup: Pruned old backup: sast_20260322T065923Z.db
+2026-03-22 14:55:50 [INFO] sast: Startup backup created: sast_20260322T092550Z.db
+2026-03-22 14:55:50 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 14:55:50 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-22 14:55:50 [INFO] sast.ml: Training ML engine from datasets (this may take a moment)...
+2026-03-22 14:55:50 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-22 14:55:50 [INFO] sast.ml: Loaded 4000 samples from data_Python.csv       (vulnerable: 2000  patched: 2000)
+2026-03-22 14:55:50 [INFO] sast.ml: Loaded 4000 samples from data_Java.csv         (vulnerable: 2000  patched: 2000)
+2026-03-22 14:55:50 [INFO] sast.ml: Loaded 3666 samples from data_C++.csv          (vulnerable: 1833  patched: 1833)
+2026-03-22 14:55:50 [INFO] sast.ml: Training on 11666 samples  (vulnerable: 5833  patched/safe: 5833)
+2026-03-22 14:55:56 [INFO] sast.ml: Vectorizer fitted — word vocab: 14000  char vocab: 6000  total features: 20000
+2026-03-22 14:55:57 [INFO] sast.ml: Severity model eval (20% hold-out):
+              precision    recall  f1-score   support
+
+    Critical       1.00      1.00      1.00       177
+        High       1.00      1.00      1.00       456
+         Low       1.00      1.00      1.00         4
+      Medium       1.00      1.00      1.00       530
+
+    accuracy                           1.00      1167
+   macro avg       1.00      1.00      1.00      1167
+weighted avg       1.00      1.00      1.00      1167
+
+2026-03-22 14:56:01 [INFO] sast.ml: Severity model trained — classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]  samples: 5833
+2026-03-22 14:56:09 [INFO] sast.ml: FP classifier eval (20% hold-out):
+              precision    recall  f1-score   support
+
+           0       0.90      0.80      0.84      1167
+           1       0.82      0.91      0.86      1167
+
+    accuracy                           0.85      2334
+   macro avg       0.86      0.85      0.85      2334
+weighted avg       0.86      0.85      0.85      2334
+
+2026-03-22 14:56:19 [INFO] sast.ml: FP classifier trained — class distribution: {0: 5833, 1: 5833}
+2026-03-22 14:56:20 [INFO] sast.ml: ML engine saved → ml_engine.pkl.gz
+2026-03-22 14:56:20 [INFO] sast: ML engine ready — samples: 11666  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 14:56:20 [INFO] sast: SAST application ready
+2026-03-22 15:04:24 [INFO] sast: SAST application shutting down
+2026-03-22 15:04:59 [INFO] sast: SAST application starting up
+2026-03-22 15:05:00 [INFO] sast: Database initialised
+2026-03-22 15:05:00 [INFO] sast.backup: Database backed up → sast_20260322T093500Z.db
+2026-03-22 15:05:00 [INFO] sast.backup: Pruned old backup: sast_20260322T070417Z.db
+2026-03-22 15:05:00 [INFO] sast: Startup backup created: sast_20260322T093500Z.db
+2026-03-22 15:05:00 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 15:05:00 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-22 15:05:00 [INFO] sast.ml: Training ML engine from datasets (this may take a moment)...
+2026-03-22 15:05:00 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-22 15:05:00 [INFO] sast.ml: Loaded 4370 samples from data_Python.csv       (vulnerable: 2185  patched: 2185)
+2026-03-22 15:05:00 [INFO] sast.ml: Loaded 5502 samples from data_Java.csv         (vulnerable: 2751  patched: 2751)
+2026-03-22 15:05:00 [INFO] sast.ml: Loaded 3666 samples from data_C++.csv          (vulnerable: 1833  patched: 1833)
+2026-03-22 15:05:00 [INFO] sast.ml: Training on 13538 samples  (vulnerable: 6769  patched/safe: 6769)
+2026-03-22 15:05:06 [INFO] sast.ml: Vectorizer fitted — word vocab: 14000  char vocab: 6000  total features: 20000
+2026-03-22 15:05:08 [INFO] sast.ml: Severity model eval (20% hold-out):
+              precision    recall  f1-score   support
+
+    Critical       1.00      1.00      1.00       296
+        High       1.00      1.00      1.00       480
+         Low       1.00      1.00      1.00         4
+      Medium       1.00      1.00      1.00       574
+
+    accuracy                           1.00      1354
+   macro avg       1.00      1.00      1.00      1354
+weighted avg       1.00      1.00      1.00      1354
+
+2026-03-22 15:05:12 [INFO] sast.ml: Severity model trained — classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]  samples: 6769
+2026-03-22 15:05:23 [INFO] sast.ml: FP classifier eval (20% hold-out):
+              precision    recall  f1-score   support
+
+           0       0.89      0.82      0.85      1354
+           1       0.83      0.90      0.86      1354
+
+    accuracy                           0.86      2708
+   macro avg       0.86      0.86      0.86      2708
+weighted avg       0.86      0.86      0.86      2708
+
+2026-03-22 15:05:36 [INFO] sast.ml: FP classifier trained — class distribution: {0: 6769, 1: 6769}
+2026-03-22 15:05:37 [INFO] sast.ml: ML engine saved → ml_engine.pkl.gz
+2026-03-22 15:05:37 [INFO] sast: ML engine ready — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 15:05:37 [INFO] sast: SAST application ready
+2026-03-22 15:05:50 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 15:06:02 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-22 15:06:02 [INFO] sast: Scan #86 complete — user: 'Nadinak'  findings: 3  risk: 8.33
+2026-03-22 15:06:16 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-502  language: python
+2026-03-22 15:06:17 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-03-22 15:14:46 [INFO] sast: PDF report generated for scan #86 by 'Nadinak'
+2026-03-22 15:15:08 [INFO] sast: File scan by 'Nadinak' — MegaVulnerableSystem.java  lang: java
+2026-03-22 15:15:26 [INFO] sast: Scan #87 complete — user: 'Nadinak'  findings: 300  risk: 5.96
+2026-03-22 15:15:33 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: java
+2026-03-22 15:15:34 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 15:16:31 [INFO] sast: User updated account settings — username: Nadinakk
+2026-03-22 15:16:35 [INFO] sast: User signed out
+2026-03-22 15:16:45 [INFO] sast: User signed in — username: Nadinakk  role: superadmin
+2026-03-22 15:17:03 [INFO] sast: User signed out
+2026-03-22 15:17:13 [WARNING] sast: Failed login attempt — username: Nadinak
+2026-03-22 15:17:19 [WARNING] sast: Failed login attempt — username: Nadinak
+2026-03-22 15:17:30 [INFO] sast: User signed in — username: Nadinakk  role: superadmin
+2026-03-22 15:17:45 [INFO] sast: User updated account settings — username: Nadinak
+2026-03-22 15:17:46 [INFO] sast: User signed out
+2026-03-22 15:18:09 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 15:22:33 [INFO] sast: User signed out
+2026-03-22 15:28:19 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 15:55:56 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 16:05:27 [INFO] sast: User signed out
+2026-03-22 16:21:49 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 16:31:03 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 16:32:24 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-209  language: java
+2026-03-22 16:32:26 [INFO] sast: LLM code-fix returned for CWE: CWE-209
+2026-03-22 16:32:30 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-209  language: java
+2026-03-22 16:32:32 [INFO] sast: LLM code-fix returned for CWE: CWE-209
+2026-03-22 16:32:37 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-22 16:32:38 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-22 17:21:49 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-03-22 17:21:49 [INFO] sast: Scan #88 complete — user: 'Nadinak'  findings: 0  risk: 0
+2026-03-22 17:36:46 [INFO] sast: SAST application starting up
+2026-03-22 17:36:46 [INFO] sast: Database initialised
+2026-03-22 17:36:46 [INFO] sast.backup: Database backed up → sast_20260322T120646Z.db
+2026-03-22 17:36:46 [INFO] sast.backup: Pruned old backup: sast_20260322T070445Z.db
+2026-03-22 17:36:46 [INFO] sast: Startup backup created: sast_20260322T120646Z.db
+2026-03-22 17:36:46 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 17:36:46 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-22 17:36:47 [INFO] sast.ml: ML engine loaded — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 17:36:47 [INFO] sast: ML engine ready — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 17:36:47 [INFO] sast: SAST application ready
+2026-03-22 17:37:51 [INFO] sast: New user registered — username: Hellooooo
+2026-03-22 17:38:09 [INFO] sast: ZIP scan by 'Hellooooo' — Applied-Project-main.zip  files: 9
+2026-03-22 17:38:09 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-22 17:38:09 [INFO] sast: Scan #89 complete — user: 'Hellooooo'  findings: 3  risk: 8.33
+2026-03-22 17:38:21 [INFO] sast: LLM code-fix requested by 'Hellooooo' — CWE: CWE-502  language: python
+2026-03-22 17:38:22 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-03-22 17:38:28 [INFO] sast: LLM code-fix requested by 'Hellooooo' — CWE: CWE-89  language: python
+2026-03-22 17:38:29 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 17:38:33 [INFO] sast: LLM code-fix requested by 'Hellooooo' — CWE: CWE-295  language: python
+2026-03-22 17:38:38 [INFO] sast: LLM code-fix returned for CWE: CWE-295
+2026-03-22 17:42:34 [INFO] sast: User updated account settings — username: Profile
+2026-03-22 17:42:38 [INFO] sast: User deleted their account — id: 8
+2026-03-22 17:42:44 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 17:44:01 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 17:44:02 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 17:44:27 [INFO] sast: PDF report generated for scan #48 by 'Nadinak'
+2026-03-22 17:46:38 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-295  language: python
+2026-03-22 17:46:39 [INFO] sast: LLM code-fix returned for CWE: CWE-295
+2026-03-22 17:52:18 [WARNING] sast: Failed login attempt — username: Nadina
+2026-03-22 17:53:12 [INFO] sast: New user registered — username: Nadina1
+2026-03-22 17:53:21 [INFO] sast: User signed out
+2026-03-22 17:53:56 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 17:57:23 [INFO] sast: ZIP scan by 'Nadinak' — Sast--main-V1.zip  files: 8
+2026-03-22 17:57:24 [INFO] sast: Scan #90 complete — user: 'Nadinak'  findings: 2  risk: 9.0
+2026-03-22 17:57:30 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-502  language: python
+2026-03-22 17:57:32 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-03-22 17:58:07 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-22 17:58:08 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-22 18:00:40 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-03-22 18:00:40 [INFO] sast: Scan #91 complete — user: 'Nadinak'  findings: 1  risk: 5.0
+2026-03-22 18:02:58 [INFO] sast: SAST application shutting down
+2026-03-22 18:03:19 [INFO] sast: SAST application starting up
+2026-03-22 18:03:19 [INFO] sast: Database initialised
+2026-03-22 18:03:19 [INFO] sast.backup: Database backed up → sast_20260322T123319Z.db
+2026-03-22 18:03:19 [INFO] sast.backup: Pruned old backup: sast_20260322T073115Z.db
+2026-03-22 18:03:19 [INFO] sast: Startup backup created: sast_20260322T123319Z.db
+2026-03-22 18:03:19 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-22 18:03:19 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-22 18:03:20 [INFO] sast.ml: ML engine loaded — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 18:03:20 [INFO] sast: ML engine ready — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-22 18:03:20 [INFO] sast: SAST application ready
+2026-03-22 18:04:40 [WARNING] sast: Failed login attempt — username: Sherath8
+2026-03-22 18:05:08 [INFO] sast: New user registered — username: Sherath8
+2026-03-22 18:06:04 [INFO] sast: User signed out
+2026-03-22 18:06:33 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 18:06:43 [WARNING] sast: Failed login attempt — username: ghostrider
+2026-03-22 18:06:52 [INFO] sast: User signed out
+2026-03-22 18:07:04 [WARNING] sast: Failed login attempt — username: Ghostrider
+2026-03-22 18:07:32 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 18:07:45 [INFO] sast: New user registered — username: Ghostrider123
+2026-03-22 18:08:21 [INFO] sast: New user registered — username: LManaybs
+2026-03-22 18:08:44 [INFO] sast: User signed out
+2026-03-22 18:09:45 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-22 18:11:38 [INFO] sast: New user registered — username: loqwt
+2026-03-22 18:24:52 [INFO] sast: Paste scan by 'loqwt' — snippet.py  lang: python
+2026-03-22 18:24:52 [INFO] sast: Scan #92 complete — user: 'loqwt'  findings: 0  risk: 0
+2026-03-22 18:44:34 [INFO] sast: SAST application shutting down
+2026-03-23 10:24:32 [INFO] sast: SAST application starting up
+2026-03-23 10:24:32 [INFO] sast: Database initialised
+2026-03-23 10:24:32 [INFO] sast.backup: Database backed up → sast_20260323T045432Z.db
+2026-03-23 10:24:32 [INFO] sast.backup: Pruned old backup: sast_20260322T074453Z.db
+2026-03-23 10:24:32 [INFO] sast: Startup backup created: sast_20260323T045432Z.db
+2026-03-23 10:24:32 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-23 10:24:32 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-23 10:24:32 [INFO] sast.ml: ML engine loaded — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-23 10:24:32 [INFO] sast: ML engine ready — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-23 10:24:32 [INFO] sast: SAST application ready
+2026-03-23 10:25:05 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-23 10:26:21 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-23 10:26:22 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-23 10:32:41 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-23 10:41:56 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-23 10:44:19 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-23 10:44:19 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-23 10:53:58 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-23 10:53:59 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-24 16:25:43 [INFO] sast: SAST application starting up
+2026-03-24 16:25:43 [INFO] sast: Database initialised
+2026-03-24 16:25:43 [INFO] sast.backup: Database backed up → sast_20260324T105543Z.db
+2026-03-24 16:25:43 [INFO] sast.backup: Pruned old backup: sast_20260322T075814Z.db
+2026-03-24 16:25:43 [INFO] sast: Startup backup created: sast_20260324T105543Z.db
+2026-03-24 16:25:43 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-24 16:25:43 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-24 16:25:43 [INFO] sast.ml: ML engine loaded — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-24 16:25:43 [INFO] sast: ML engine ready — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-24 16:25:43 [INFO] sast: SAST application ready
+2026-03-24 16:26:59 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-24 16:28:37 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-03-24 16:28:37 [INFO] sast: Scan #93 complete — user: 'Nadinak'  findings: 0  risk: 0
+2026-03-24 16:30:37 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: python
+2026-03-24 16:30:37 [ERROR] sast: NVIDIA API call failed — CWE: CWE-78
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='integrate.api.nvidia.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/app/main.py", line 802, in llm_codefix
+    response = requests.post(
+        "https://integrate.api.nvidia.com/v1/chat/completions",
+    ...<23 lines>...
+        },
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='integrate.api.nvidia.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)"))
+2026-03-24 16:30:38 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: python
+2026-03-24 16:30:38 [ERROR] sast: NVIDIA API call failed — CWE: CWE-78
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='integrate.api.nvidia.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/app/main.py", line 802, in llm_codefix
+    response = requests.post(
+        "https://integrate.api.nvidia.com/v1/chat/completions",
+    ...<23 lines>...
+        },
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='integrate.api.nvidia.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)"))
+2026-03-24 16:30:40 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: python
+2026-03-24 16:30:40 [ERROR] sast: NVIDIA API call failed — CWE: CWE-78
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='integrate.api.nvidia.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/app/main.py", line 802, in llm_codefix
+    response = requests.post(
+        "https://integrate.api.nvidia.com/v1/chat/completions",
+    ...<23 lines>...
+        },
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='integrate.api.nvidia.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)"))
+2026-03-24 16:30:43 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: python
+2026-03-24 16:30:43 [ERROR] sast: NVIDIA API call failed — CWE: CWE-78
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 759, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connection.py", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='integrate.api.nvidia.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/app/main.py", line 802, in llm_codefix
+    response = requests.post(
+        "https://integrate.api.nvidia.com/v1/chat/completions",
+    ...<23 lines>...
+        },
+    )
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='integrate.api.nvidia.com', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by NameResolutionError("HTTPSConnection(host='integrate.api.nvidia.com', port=443): Failed to resolve 'integrate.api.nvidia.com' ([Errno 8] nodename nor servname provided, or not known)"))
+2026-03-24 16:31:09 [INFO] sast: SAST application shutting down
+2026-03-24 16:33:56 [INFO] sast: SAST application starting up
+2026-03-24 16:33:56 [INFO] sast: Database initialised
+2026-03-24 16:33:56 [INFO] sast.backup: Database backed up → sast_20260324T110356Z.db
+2026-03-24 16:33:56 [INFO] sast.backup: Pruned old backup: sast_20260322T082340Z.db
+2026-03-24 16:33:56 [INFO] sast: Startup backup created: sast_20260324T110356Z.db
+2026-03-24 16:33:56 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-24 16:33:56 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-24 16:33:57 [INFO] sast.ml: ML engine loaded — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-24 16:33:57 [INFO] sast: ML engine ready — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-24 16:33:57 [INFO] sast: SAST application ready
+2026-03-24 16:34:13 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-24 16:34:34 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-24 16:34:35 [ERROR] sast: NVIDIA API call failed — CWE: CWE-78
+Traceback (most recent call last):
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/app/main.py", line 829, in llm_codefix
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/nadinak/Projects/SASTRAV2/SASTRA/backend/.venv/lib/python3.13/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://integrate.api.nvidia.com/v1/chat/completions
+2026-03-24 16:40:31 [INFO] sast: SAST application shutting down
+2026-03-24 16:40:39 [INFO] sast: SAST application starting up
+2026-03-24 16:40:39 [INFO] sast: Database initialised
+2026-03-24 16:40:39 [INFO] sast.backup: Database backed up → sast_20260324T111039Z.db
+2026-03-24 16:40:39 [INFO] sast.backup: Pruned old backup: sast_20260322T092550Z.db
+2026-03-24 16:40:39 [INFO] sast: Startup backup created: sast_20260324T111039Z.db
+2026-03-24 16:40:39 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-24 16:40:39 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-24 16:40:40 [INFO] sast.ml: ML engine loaded — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-24 16:40:40 [INFO] sast: ML engine ready — samples: 13538  vocab: 20000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-24 16:40:40 [INFO] sast: SAST application ready
+2026-03-24 16:40:48 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-24 16:41:01 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-24 16:41:03 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-24 16:41:26 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-24 16:41:27 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-24 16:41:57 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-24 16:41:58 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-24 16:42:50 [INFO] sast: PDF report generated for scan #80 by 'Nadinak'
+2026-03-24 16:43:27 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-24 16:43:29 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-24 16:50:35 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-24 16:50:36 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-24 16:56:13 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-24 16:56:15 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-24 16:57:51 [INFO] sast: SAST application shutting down
+2026-03-24 19:50:08 [INFO] sast: SAST application starting up
+2026-03-24 19:50:08 [INFO] sast: Database initialised
+2026-03-24 19:50:08 [INFO] sast.backup: Database backed up → sast_20260324T142008Z.db
+2026-03-24 19:50:08 [INFO] sast.backup: Pruned old backup: sast_20260322T093500Z.db
+2026-03-24 19:50:08 [INFO] sast: Startup backup created: sast_20260324T142008Z.db
+2026-03-24 19:50:08 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-24 19:50:08 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-24 19:50:08 [INFO] sast.ml: Training ML engine from datasets (this may take a moment)...
+2026-03-24 19:50:08 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-24 19:50:08 [INFO] sast.ml: Loaded 4370 samples from data_Python.csv       (vulnerable: 2185  patched: 2185)
+2026-03-24 19:50:09 [INFO] sast.ml: Loaded 56542 samples from data_Java.csv         (vulnerable: 28271  patched: 28271)
+2026-03-24 19:50:09 [INFO] sast.ml: Loaded 3666 samples from data_C++.csv          (vulnerable: 1833  patched: 1833)
+2026-03-24 19:50:09 [INFO] sast.ml: Training on 64578 samples  (vulnerable: 32289  patched/safe: 32289)
+2026-03-24 19:50:26 [INFO] sast.ml: Vectorizer fitted — word vocab: 28000  char vocab: 12000  total features: 40000
+2026-03-24 19:50:30 [INFO] sast.ml: Severity model eval (20% hold-out):
+              precision    recall  f1-score   support
+
+    Critical       1.00      1.00      1.00       450
+        High       1.00      1.00      1.00       700
+         Low       1.00      1.00      1.00        26
+      Medium       1.00      1.00      1.00      5282
+
+    accuracy                           1.00      6458
+   macro avg       1.00      1.00      1.00      6458
+weighted avg       1.00      1.00      1.00      6458
+
+2026-03-24 19:50:44 [INFO] sast.ml: Severity model trained — classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]  samples: 32289
+2026-03-24 19:51:17 [INFO] sast.ml: FP classifier eval (20% hold-out):
+              precision    recall  f1-score   support
+
+           0       0.97      0.95      0.96      6458
+           1       0.95      0.98      0.96      6458
+
+    accuracy                           0.96     12916
+   macro avg       0.96      0.96      0.96     12916
+weighted avg       0.96      0.96      0.96     12916
+
+2026-03-24 19:51:56 [INFO] sast.ml: FP classifier trained — class distribution: {0: 32289, 1: 32289}
+2026-03-24 19:51:57 [INFO] sast.ml: ML engine saved → ml_engine.pkl.gz
+2026-03-24 19:51:57 [INFO] sast: ML engine ready — samples: 64578  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-24 19:51:57 [INFO] sast: SAST application ready
+2026-03-24 19:52:10 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-24 19:52:23 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-24 19:52:23 [INFO] sast: Scan #94 complete — user: 'Nadinak'  findings: 3  risk: 8.33
+2026-03-24 19:52:27 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-502  language: python
+2026-03-24 19:52:29 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-03-24 19:52:36 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-295  language: python
+2026-03-24 19:52:38 [INFO] sast: LLM code-fix returned for CWE: CWE-295
+2026-03-24 19:52:53 [INFO] sast: File scan by 'Nadinak' — MegaVulnerableSystem.java  lang: java
+2026-03-24 19:53:13 [INFO] sast: Scan #95 complete — user: 'Nadinak'  findings: 319  risk: 6.01
+2026-03-24 20:27:35 [INFO] sast: SAST application shutting down
+2026-03-24 20:28:50 [INFO] sast: SAST application starting up
+2026-03-24 20:28:50 [INFO] sast: Database initialised
+2026-03-24 20:28:50 [INFO] sast.backup: Database backed up → sast_20260324T145850Z.db
+2026-03-24 20:28:50 [INFO] sast.backup: Pruned old backup: sast_20260322T120646Z.db
+2026-03-24 20:28:50 [INFO] sast: Startup backup created: sast_20260324T145850Z.db
+2026-03-24 20:28:50 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-24 20:28:50 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-24 20:28:50 [INFO] sast.ml: ML engine loaded — samples: 64578  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-24 20:28:50 [INFO] sast: ML engine ready — samples: 64578  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-24 20:28:50 [INFO] sast: SAST application ready
+2026-03-24 20:29:40 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-24 20:47:12 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-502  language: java
+2026-03-24 20:47:13 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-03-24 20:56:47 [INFO] sast: User signed out
+2026-03-24 20:58:27 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-24 20:58:42 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-24 21:10:33 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-24 21:10:34 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-24 21:10:34 [INFO] sast: Scan #96 complete — user: 'Nadinak'  findings: 3  risk: 8.33
+2026-03-24 21:10:40 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-24 21:10:40 [INFO] sast: Scan #97 complete — user: 'Nadinak'  findings: 3  risk: 8.33
+2026-03-24 21:10:50 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-24 21:10:51 [INFO] sast: Scan #98 complete — user: 'Nadinak'  findings: 3  risk: 8.33
+2026-03-24 21:11:52 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-24 21:11:52 [INFO] sast: Scan #99 complete — user: 'Nadinak'  findings: 3  risk: 8.33
+2026-03-24 21:13:03 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-24 21:13:03 [INFO] sast: Scan #100 complete — user: 'Nadinak'  findings: 3  risk: 8.33
+2026-03-24 21:13:19 [INFO] sast: PDF report generated for scan #100 by 'Nadinak'
+2026-03-24 21:18:58 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-24 21:23:35 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-209  language: java
+2026-03-24 21:23:37 [INFO] sast: LLM code-fix returned for CWE: CWE-209
+2026-03-24 21:24:01 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-24 21:24:02 [INFO] sast: Scan #101 complete — user: 'Nadinak'  findings: 3  risk: 8.33
+2026-03-24 21:39:04 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-24 21:39:04 [INFO] sast: Scan #102 complete — user: 'Nadinak'  findings: 3  risk: 8.33
+2026-03-24 22:05:45 [INFO] sast: SAST application shutting down
+2026-03-24 22:11:09 [INFO] sast: SAST application starting up
+2026-03-24 22:11:09 [INFO] sast: Database initialised
+2026-03-24 22:11:09 [INFO] sast.backup: Database backed up → sast_20260324T164109Z.db
+2026-03-24 22:11:09 [INFO] sast.backup: Pruned old backup: sast_20260322T123319Z.db
+2026-03-24 22:11:09 [INFO] sast: Startup backup created: sast_20260324T164109Z.db
+2026-03-24 22:11:09 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-24 22:11:09 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-24 22:11:09 [INFO] sast.ml: Training ML engine from datasets (this may take a moment)...
+2026-03-24 22:11:09 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-24 22:11:09 [INFO] sast.ml: Loaded 43570 samples from data_Python.csv       (vulnerable: 21785  patched: 21785)
+2026-03-24 22:11:10 [INFO] sast.ml: Loaded 107582 samples from data_Java.csv         (vulnerable: 53791  patched: 53791)
+2026-03-24 22:11:10 [INFO] sast.ml: Loaded 44266 samples from data_C++.csv          (vulnerable: 22133  patched: 22133)
+2026-03-24 22:11:10 [INFO] sast.ml: Training on 195418 samples  (vulnerable: 97709  patched/safe: 97709)
+2026-03-24 22:11:56 [INFO] sast.ml: Vectorizer fitted — word vocab: 28000  char vocab: 12000  total features: 40000
+2026-03-24 22:12:12 [INFO] sast.ml: Severity model eval (20% hold-out):
+              precision    recall  f1-score   support
+
+    Critical       1.00      1.00      1.00       824
+        High       1.00      1.00      1.00      1300
+         Low       1.00      0.98      0.99        88
+      Medium       1.00      1.00      1.00     17330
+
+    accuracy                           1.00     19542
+   macro avg       1.00      0.99      1.00     19542
+weighted avg       1.00      1.00      1.00     19542
+
+2026-03-24 22:12:58 [INFO] sast.ml: Severity model trained — classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]  samples: 97709
+2026-03-24 22:15:22 [INFO] sast.ml: FP classifier eval (20% hold-out):
+              precision    recall  f1-score   support
+
+           0       0.99      0.97      0.98     19542
+           1       0.97      0.99      0.98     19542
+
+    accuracy                           0.98     39084
+   macro avg       0.98      0.98      0.98     39084
+weighted avg       0.98      0.98      0.98     39084
+
+2026-03-24 22:17:29 [INFO] sast.ml: FP classifier trained — class distribution: {0: 97709, 1: 97709}
+2026-03-24 22:17:31 [INFO] sast.ml: ML engine saved → ml_engine.pkl.gz
+2026-03-24 22:17:31 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-24 22:17:31 [INFO] sast: SAST application ready
+2026-03-24 22:20:30 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-24 22:20:58 [INFO] sast: File scan by 'Nadinak' — MegaVulnerableSystem.java  lang: java
+2026-03-24 22:21:21 [INFO] sast: Scan #103 complete — user: 'Nadinak'  findings: 319  risk: 6.01
+2026-03-24 22:23:09 [INFO] sast: File scan by 'Nadinak' — intentionally_vulnerable_app.py  lang: python
+2026-03-24 22:23:09 [INFO] sast: Scan #104 complete — user: 'Nadinak'  findings: 5  risk: 8.2
+2026-03-24 22:23:23 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-798  language: python
+2026-03-24 22:23:24 [INFO] sast: LLM code-fix returned for CWE: CWE-798
+2026-03-24 22:25:09 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-798  language: python
+2026-03-24 22:25:18 [INFO] sast: LLM code-fix returned for CWE: CWE-798
+2026-03-24 23:01:14 [INFO] sast: SAST application shutting down
+2026-03-24 23:01:23 [INFO] sast: SAST application starting up
+2026-03-24 23:01:23 [INFO] sast: Database initialised
+2026-03-24 23:01:23 [INFO] sast.backup: Database backed up → sast_20260324T173123Z.db
+2026-03-24 23:01:23 [INFO] sast.backup: Pruned old backup: sast_20260323T045432Z.db
+2026-03-24 23:01:23 [INFO] sast: Startup backup created: sast_20260324T173123Z.db
+2026-03-24 23:01:23 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-24 23:01:23 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-24 23:01:23 [INFO] sast.ml: Training ML engine from datasets (this may take a moment)...
+2026-03-24 23:01:23 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-24 23:01:23 [INFO] sast.ml: Loaded 43570 samples from data_Python.csv       (vulnerable: 21785  patched: 21785)
+2026-03-24 23:01:23 [INFO] sast.ml: Loaded 107582 samples from data_Java.csv         (vulnerable: 53791  patched: 53791)
+2026-03-24 23:01:24 [INFO] sast.ml: Loaded 44266 samples from data_C++.csv          (vulnerable: 22133  patched: 22133)
+2026-03-24 23:01:24 [INFO] sast.ml: Training on 195418 samples  (vulnerable: 97709  patched/safe: 97709)
+2026-03-24 23:02:07 [INFO] sast.ml: Vectorizer fitted — word vocab: 28000  char vocab: 12000  total features: 40000
+2026-03-24 23:02:30 [INFO] sast.ml: Severity model eval — code-only features, 20% hold-out (CWE excluded so score reflects code-pattern learning):
+              precision    recall  f1-score   support
+
+    Critical       0.00      0.00      0.00       824
+        High       0.00      0.00      0.00      1300
+         Low       0.00      0.00      0.00        88
+      Medium       0.89      1.00      0.94     17330
+
+    accuracy                           0.89     19542
+   macro avg       0.22      0.25      0.24     19542
+weighted avg       0.79      0.89      0.83     19542
+
+2026-03-24 23:03:14 [INFO] sast.ml: Severity model trained — classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]  samples: 97709
+2026-03-24 23:05:05 [INFO] sast.ml: FP classifier eval (20% hold-out):
+              precision    recall  f1-score   support
+
+           0       0.99      0.97      0.98     19542
+           1       0.97      0.99      0.98     19542
+
+    accuracy                           0.98     39084
+   macro avg       0.98      0.98      0.98     39084
+weighted avg       0.98      0.98      0.98     39084
+
+2026-03-24 23:07:16 [INFO] sast.ml: FP classifier trained — class distribution: {0: 97709, 1: 97709}
+2026-03-24 23:07:18 [INFO] sast.ml: ML engine saved → ml_engine.pkl.gz
+2026-03-24 23:07:18 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-24 23:07:18 [INFO] sast: SAST application ready
+2026-03-24 23:09:21 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-24 23:09:57 [INFO] sast: File scan by 'Nadinak' — MegaVulnerableSystem.java  lang: java
+2026-03-24 23:10:19 [INFO] sast: Scan #105 complete — user: 'Nadinak'  findings: 319  risk: 6.01
+2026-03-24 23:15:48 [INFO] sast: File scan by 'Nadinak' — fp_test_upload.py  lang: python
+2026-03-24 23:15:49 [INFO] sast: Scan #106 complete — user: 'Nadinak'  findings: 10  risk: 7.8
+2026-03-24 23:16:29 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: python
+2026-03-24 23:16:30 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-25 21:37:53 [INFO] sast: SAST application starting up
+2026-03-25 21:37:53 [INFO] sast: Database initialised
+2026-03-25 21:37:53 [INFO] sast.backup: Database backed up → sast_20260325T160753Z.db
+2026-03-25 21:37:53 [INFO] sast.backup: Pruned old backup: sast_20260324T105543Z.db
+2026-03-25 21:37:53 [INFO] sast: Startup backup created: sast_20260325T160753Z.db
+2026-03-25 21:37:53 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-25 21:37:53 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-25 21:37:54 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-25 21:37:54 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-25 21:37:54 [INFO] sast: SAST application ready
+2026-03-25 21:38:49 [INFO] sast: SAST application starting up
+2026-03-25 21:38:49 [INFO] sast: Database initialised
+2026-03-25 21:38:49 [INFO] sast.backup: Database backed up → sast_20260325T160849Z.db
+2026-03-25 21:38:49 [INFO] sast.backup: Pruned old backup: sast_20260324T110356Z.db
+2026-03-25 21:38:49 [INFO] sast: Startup backup created: sast_20260325T160849Z.db
+2026-03-25 21:38:49 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-25 21:38:49 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-25 21:38:50 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-25 21:38:50 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-25 21:38:50 [INFO] sast: SAST application ready
+2026-03-25 21:39:02 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-25 21:44:43 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-25 21:44:51 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-25 21:45:13 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-25 21:45:15 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-25 21:45:20 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-25 21:45:22 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-25 21:45:26 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-25 21:45:27 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-25 21:45:33 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: java
+2026-03-25 21:45:34 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-03-25 22:11:12 [INFO] sast: User signed out
+2026-03-25 22:11:23 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-25 22:11:33 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-798  language: python
+2026-03-25 22:11:34 [INFO] sast: LLM code-fix returned for CWE: CWE-798
+2026-03-26 09:17:48 [INFO] sast: SAST application shutting down
+2026-03-26 11:09:27 [INFO] sast: SAST application starting up
+2026-03-26 11:09:27 [INFO] sast: Database initialised
+2026-03-26 11:09:27 [INFO] sast.backup: Database backed up → sast_20260326T053927Z.db
+2026-03-26 11:09:27 [INFO] sast.backup: Pruned old backup: sast_20260324T111039Z.db
+2026-03-26 11:09:27 [INFO] sast: Startup backup created: sast_20260326T053927Z.db
+2026-03-26 11:09:27 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-26 11:09:27 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-26 11:09:28 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-26 11:09:28 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-26 11:09:28 [INFO] sast: SAST application ready
+2026-03-26 11:14:37 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-26 11:28:44 [INFO] sast: User signed out
+2026-03-26 11:28:52 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-26 11:33:04 [INFO] sast: User signed out
+2026-03-26 11:38:01 [INFO] sast: User signed out
+2026-03-26 11:38:06 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-26 16:27:53 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-26 16:28:22 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-22  language: python
+2026-03-26 16:28:55 [INFO] sast: LLM code-fix returned for CWE: CWE-22
+2026-03-26 17:05:58 [INFO] sast: SAST application shutting down
+2026-03-26 17:06:09 [INFO] sast: SAST application starting up
+2026-03-26 17:06:09 [INFO] sast: Database initialised
+2026-03-26 17:06:09 [INFO] sast.backup: Database backed up → sast_20260326T113609Z.db
+2026-03-26 17:06:09 [INFO] sast.backup: Pruned old backup: sast_20260324T142008Z.db
+2026-03-26 17:06:09 [INFO] sast: Startup backup created: sast_20260326T113609Z.db
+2026-03-26 17:06:09 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-26 17:06:09 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-26 17:06:10 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-26 17:06:10 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-26 17:06:10 [INFO] sast: SAST application ready
+2026-03-26 17:06:20 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-26 17:06:40 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:06:41 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:07:09 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-502  language: python
+2026-03-26 17:07:11 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-03-26 17:07:31 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:07:32 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:08:57 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:08:58 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:09:06 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:09:06 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:09:18 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:09:18 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:09:29 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:09:29 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:09:47 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:09:47 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:10:01 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:10:01 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:11:50 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:11:51 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:11:54 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:11:54 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:11:59 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:12:00 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:12:08 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:12:09 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:12:32 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:12:33 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 17:12:56 [INFO] sast: Chat request from 'Nadinak'
+2026-03-26 17:12:57 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:23:22 [INFO] sast: SAST application starting up
+2026-03-26 20:23:22 [INFO] sast: Database initialised
+2026-03-26 20:23:22 [INFO] sast.backup: Database backed up → sast_20260326T145322Z.db
+2026-03-26 20:23:22 [INFO] sast.backup: Pruned old backup: sast_20260324T145850Z.db
+2026-03-26 20:23:22 [INFO] sast: Startup backup created: sast_20260326T145322Z.db
+2026-03-26 20:23:22 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-26 20:23:22 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-26 20:23:23 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-26 20:23:23 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-26 20:23:23 [INFO] sast: SAST application ready
+2026-03-26 20:23:51 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-26 20:30:02 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-26 21:34:44 [INFO] sast: SAST application shutting down
+2026-03-27 23:10:04 [INFO] sast: SAST application starting up
+2026-03-27 23:10:04 [INFO] sast: Database initialised
+2026-03-27 23:10:04 [INFO] sast.backup: Database backed up → sast_20260327T174004Z.db
+2026-03-27 23:10:04 [INFO] sast.backup: Pruned old backup: sast_20260324T164109Z.db
+2026-03-27 23:10:04 [INFO] sast: Startup backup created: sast_20260327T174004Z.db
+2026-03-27 23:10:04 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-27 23:10:04 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-27 23:10:04 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-27 23:10:04 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-27 23:10:04 [INFO] sast: SAST application ready
+2026-03-27 23:10:21 [INFO] sast: SAST application shutting down
+2026-03-27 23:10:42 [INFO] sast: SAST application starting up
+2026-03-27 23:10:42 [INFO] sast: Database initialised
+2026-03-27 23:10:42 [INFO] sast.backup: Database backed up → sast_20260327T174042Z.db
+2026-03-27 23:10:42 [INFO] sast.backup: Pruned old backup: sast_20260324T173123Z.db
+2026-03-27 23:10:42 [INFO] sast: Startup backup created: sast_20260327T174042Z.db
+2026-03-27 23:10:42 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-27 23:10:42 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-27 23:10:43 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-27 23:10:43 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-27 23:10:43 [INFO] sast: SAST application ready
+2026-03-27 23:10:54 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-27 23:11:20 [INFO] sast: Chat request from 'Nadinak'
+2026-03-27 23:11:22 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-27 23:11:24 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-03-27 23:13:26 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-03-28 00:32:37 [INFO] sast: SAST application shutting down
+2026-03-30 11:32:10 [INFO] sast: SAST application starting up
+2026-03-30 11:32:10 [INFO] sast: Database initialised
+2026-03-30 11:32:10 [INFO] sast.backup: Database backed up → sast_20260330T060210Z.db
+2026-03-30 11:32:10 [INFO] sast.backup: Pruned old backup: sast_20260325T160753Z.db
+2026-03-30 11:32:10 [INFO] sast: Startup backup created: sast_20260330T060210Z.db
+2026-03-30 11:32:10 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-30 11:32:10 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-30 11:32:11 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 11:32:11 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 11:32:11 [INFO] sast: SAST application ready
+2026-03-30 11:32:23 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-30 11:36:16 [INFO] sast: SAST application shutting down
+2026-03-30 11:36:21 [INFO] sast: SAST application starting up
+2026-03-30 11:36:21 [INFO] sast: Database initialised
+2026-03-30 11:36:21 [INFO] sast.backup: Database backed up → sast_20260330T060621Z.db
+2026-03-30 11:36:21 [INFO] sast.backup: Pruned old backup: sast_20260325T160849Z.db
+2026-03-30 11:36:21 [INFO] sast: Startup backup created: sast_20260330T060621Z.db
+2026-03-30 11:36:21 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-30 11:36:21 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-30 11:36:22 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 11:36:22 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 11:36:22 [INFO] sast: SAST application ready
+2026-03-30 11:36:42 [INFO] sast: SAST application shutting down
+2026-03-30 11:36:48 [INFO] sast: SAST application starting up
+2026-03-30 11:36:48 [INFO] sast: Database initialised
+2026-03-30 11:36:48 [INFO] sast.backup: Database backed up → sast_20260330T060648Z.db
+2026-03-30 11:36:48 [INFO] sast.backup: Pruned old backup: sast_20260326T053927Z.db
+2026-03-30 11:36:48 [INFO] sast: Startup backup created: sast_20260330T060648Z.db
+2026-03-30 11:36:48 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-30 11:36:48 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-30 11:36:48 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 11:36:48 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 11:36:48 [INFO] sast: SAST application ready
+2026-03-30 11:51:18 [INFO] sast: SAST application shutting down
+2026-03-30 11:51:23 [INFO] sast: SAST application starting up
+2026-03-30 11:51:23 [INFO] sast: Database initialised
+2026-03-30 11:51:23 [INFO] sast.backup: Database backed up → sast_20260330T062123Z.db
+2026-03-30 11:51:23 [INFO] sast.backup: Pruned old backup: sast_20260326T113609Z.db
+2026-03-30 11:51:23 [INFO] sast: Startup backup created: sast_20260330T062123Z.db
+2026-03-30 11:51:23 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-30 11:51:23 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-30 11:51:24 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 11:51:24 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 11:51:24 [INFO] sast: SAST application ready
+2026-03-30 11:51:33 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-30 11:56:08 [INFO] sast: SAST application shutting down
