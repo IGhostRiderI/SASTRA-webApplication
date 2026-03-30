@@ -3,11 +3,8 @@ CLAUDE.md
 
 # Runtime artifacts
 SASTRA/backend/app/data/generated_rules.json
-SASTRA/backend/app/data/backups/
-SASTRA/backend/app/data/logs/
-backend/app/data/sast.db
-backend/app/data/backups/
-backend/app/data/logs/
+
+
 
 # Python
 *.pyc
