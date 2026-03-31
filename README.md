@@ -44,7 +44,7 @@ Open: `http://127.0.0.1:8000`
 
 ```bash
 
-cd /workspaces/Applied-project-testing-new-frontend-/backend
+cd /workspaces/SASTRA-WEBAPPLICATION/backend
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
