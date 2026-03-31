@@ -17,7 +17,7 @@ Lightweight SAST web application with a FastAPI backend and static frontend page
 ## 1) Install dependencies
 
 ```bash
-cd backend
+cd SASTRA/backend
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
