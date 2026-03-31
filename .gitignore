@@ -5,6 +5,15 @@ CLAUDE.md
 # macOS
 .DS_Store
 
+# Python virtual environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+
+
 # Dataset tools and training data
 dataset_tools/
 SASTRA/datasets/
