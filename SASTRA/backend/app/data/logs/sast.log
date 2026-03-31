@@ -1938,3 +1938,126 @@ weighted avg       0.98      0.98      0.98     39084
 2026-03-30 11:51:24 [INFO] sast: SAST application ready
 2026-03-30 11:51:33 [INFO] sast: User signed in — username: Nadinak  role: superadmin
 2026-03-30 11:56:08 [INFO] sast: SAST application shutting down
+2026-03-30 12:17:43 [INFO] sast: SAST application starting up
+2026-03-30 12:17:43 [INFO] sast: Database initialised
+2026-03-30 12:17:43 [INFO] sast.backup: Database backed up → sast_20260330T064743Z.db
+2026-03-30 12:17:43 [INFO] sast.backup: Pruned old backup: sast_20260326T145322Z.db
+2026-03-30 12:17:43 [INFO] sast: Startup backup created: sast_20260330T064743Z.db
+2026-03-30 12:17:43 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-30 12:17:43 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-30 12:17:44 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 12:17:44 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 12:17:44 [INFO] sast: SAST application ready
+2026-03-30 12:18:07 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-30 12:55:23 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-30 12:55:56 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-918  language: python
+2026-03-30 12:56:40 [INFO] sast: LLM code-fix returned for CWE: CWE-918
+2026-03-30 12:57:04 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-918  language: python
+2026-03-30 12:58:29 [INFO] sast: LLM code-fix returned for CWE: CWE-918
+2026-03-30 13:00:13 [INFO] sast: SAST application starting up
+2026-03-30 13:00:13 [INFO] sast: Database initialised
+2026-03-30 13:00:13 [INFO] sast.backup: Database backed up → sast_20260330T073013Z.db
+2026-03-30 13:00:13 [INFO] sast.backup: Pruned old backup: sast_20260327T174004Z.db
+2026-03-30 13:00:13 [INFO] sast: Startup backup created: sast_20260330T073013Z.db
+2026-03-30 13:00:13 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-30 13:00:13 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-30 13:00:14 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 13:00:14 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-30 13:00:14 [INFO] sast: SAST application ready
+2026-03-30 13:00:22 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-30 13:00:54 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: python
+2026-03-30 13:00:55 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-30 13:02:24 [INFO] sast: ZIP scan by 'Nadinak' — Applied-Project-main.zip  files: 9
+2026-03-30 13:02:24 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-30 13:02:25 [INFO] sast: Scan #107 complete — user: 'Nadinak'  findings: 3  risk: 8.33
+2026-03-30 13:02:51 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-502  language: python
+2026-03-30 13:02:57 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-03-30 13:22:05 [INFO] sast: Chat request from 'Nadinak'
+2026-03-30 13:22:06 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 13:02:43 [INFO] sast: SAST application starting up
+2026-03-31 13:02:43 [INFO] sast: Database initialised
+2026-03-31 13:02:43 [INFO] sast.backup: Database backed up → sast_20260331T073243Z.db
+2026-03-31 13:02:43 [INFO] sast.backup: Pruned old backup: sast_20260327T174042Z.db
+2026-03-31 13:02:43 [INFO] sast: Startup backup created: sast_20260331T073243Z.db
+2026-03-31 13:02:43 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-31 13:02:43 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-31 13:02:44 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 13:02:44 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 13:02:44 [INFO] sast: SAST application ready
+2026-03-31 13:03:03 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 13:03:11 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-798  language: java
+2026-03-31 13:03:13 [INFO] sast: LLM code-fix returned for CWE: CWE-798
+2026-03-31 13:03:15 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: java
+2026-03-31 13:03:34 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-03-31 13:03:52 [INFO] sast: Chat request from 'Nadinak'
+2026-03-31 13:03:53 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 13:04:07 [INFO] sast: Chat request from 'Nadinak'
+2026-03-31 13:04:10 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 13:57:48 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 13:57:52 [INFO] sast: Chat request from 'Nadinak'
+2026-03-31 13:57:53 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 13:58:21 [INFO] sast: Chat request from 'Nadinak'
+2026-03-31 13:58:22 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 15:39:12 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 16:20:47 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 16:21:22 [INFO] sast: Chat request from 'Nadinak'
+2026-03-31 16:21:36 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-502  language: java
+2026-03-31 16:21:37 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-03-31 16:21:42 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 16:22:17 [INFO] sast: File scan by 'Nadinak' — fp_test_upload.py  lang: python
+2026-03-31 16:22:17 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-31 16:22:18 [INFO] sast: Scan #108 complete — user: 'Nadinak'  findings: 10  risk: 7.8
+2026-03-31 16:22:52 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-502  language: python
+2026-03-31 16:22:53 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-03-31 16:26:32 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 16:32:03 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 16:49:36 [INFO] sast: New user registered — username: Nigga1
+2026-03-31 16:50:27 [INFO] sast: Paste scan by 'Nigga1' — snippet.py  lang: python
+2026-03-31 16:50:27 [INFO] sast: Scan #109 complete — user: 'Nigga1'  findings: 2  risk: 7.0
+2026-03-31 16:50:32 [INFO] sast: LLM code-fix requested by 'Nigga1' — CWE: CWE-22  language: python
+2026-03-31 16:52:52 [INFO] sast: SAST application starting up
+2026-03-31 16:52:52 [INFO] sast: Database initialised
+2026-03-31 16:52:52 [INFO] sast.backup: Database backed up → sast_20260331T112252Z.db
+2026-03-31 16:52:52 [INFO] sast.backup: Pruned old backup: sast_20260330T060210Z.db
+2026-03-31 16:52:52 [INFO] sast: Startup backup created: sast_20260331T112252Z.db
+2026-03-31 16:52:52 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-31 16:52:52 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-31 16:52:53 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 16:52:53 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 16:52:53 [INFO] sast: SAST application ready
+2026-03-31 16:53:03 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 16:56:39 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 17:17:28 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 17:22:27 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 17:30:52 [WARNING] sast: Failed login attempt — username: NadinaK
+2026-03-31 17:31:01 [WARNING] sast: Failed login attempt — username: NadinaK
+2026-03-31 17:31:07 [WARNING] sast: Failed login attempt — username: NadinaK
+2026-03-31 17:31:38 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 17:33:50 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 17:35:31 [INFO] sast: New user registered — username: Mahith
+2026-03-31 17:36:03 [INFO] sast: ZIP scan by 'Mahith' — Sast--main-V1.zip  files: 8
+2026-03-31 17:36:03 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 924 entries, hierarchy: 964 parent links
+2026-03-31 17:36:03 [INFO] sast: Scan #110 complete — user: 'Mahith'  findings: 2  risk: 9.0
+2026-03-31 17:37:00 [INFO] sast: LLM code-fix requested by 'Mahith' — CWE: CWE-502  language: python
+2026-03-31 17:37:03 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-03-31 17:38:21 [INFO] sast: File scan by 'Mahith' — MegaVulnerableSystem.java  lang: java
+2026-03-31 17:38:38 [INFO] sast: Scan #111 complete — user: 'Mahith'  findings: 319  risk: 6.01
+2026-03-31 17:39:47 [INFO] sast: Chat request from 'Mahith'
+2026-03-31 17:39:49 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 17:44:40 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 17:45:20 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 17:48:36 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 17:53:32 [INFO] sast: SAST application shutting down
+2026-03-31 17:53:42 [INFO] sast: SAST application starting up
+2026-03-31 17:53:42 [INFO] sast: Database initialised
+2026-03-31 17:53:42 [INFO] sast.backup: Database backed up → sast_20260331T122342Z.db
+2026-03-31 17:53:42 [INFO] sast.backup: Pruned old backup: sast_20260330T060621Z.db
+2026-03-31 17:53:42 [INFO] sast: Startup backup created: sast_20260331T122342Z.db
+2026-03-31 17:53:42 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-31 17:53:42 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-31 17:53:42 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 17:53:42 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 17:53:42 [INFO] sast: SAST application ready
+2026-03-31 18:04:18 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-03-31 18:04:23 [INFO] sast: Chat request from 'Nadinak'
+2026-03-31 18:04:25 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"

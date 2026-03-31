@@ -5,8 +5,8 @@
 html[data-theme="dark"] {
   color-scheme: dark;
   --bg-start: #000000;
-  --bg-mid: #0a0a0a;
-  --bg-end: #111111;
+  --bg-mid: #060e1e;
+  --bg-end: #0B132B;
   --text-primary: #f5f5f5;
   --text-muted: #a8a8a8;
   --text-light: #707070;
@@ -131,6 +131,10 @@ html[data-theme="dark"] .nav-right .theme-toggle-slot {
 html[data-theme="dark"] body {
   color: var(--text-primary);
   background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
+}
+
+html[data-theme="dark"] body.landing-page {
+  background: linear-gradient(to right, #000000 0%, #0a0a0a 25%, #0B132B 65%, #131e3a 100%) !important;
 }
 
 html[data-theme="dark"] body::before {
@@ -451,4 +455,164 @@ html[data-theme="dark"] .logout-popup-confirm:hover {
     top: 12px;
     right: 12px;
   }
+}
+
+/* ── Dark mode: logout button → white bg, black text ── */
+html[data-theme="dark"] .btn-logout {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+html[data-theme="dark"] .btn-logout:hover {
+  background: #e8e8e8 !important;
+  color: #000000 !important;
+}
+
+/* ── Dark mode: new-scan method toggle active button ── */
+html[data-theme="dark"] .toggle-btn.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+/* ── Dark mode: language selector active button ── */
+html[data-theme="dark"] .lang-btn.active {
+  background: rgba(240, 240, 240, 0.22) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .lang-btn.active:hover {
+  background: rgba(240, 240, 240, 0.3) !important;
+}
+
+/* ── Dark mode: run scan button ── */
+html[data-theme="dark"] .btn-run-scan {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+html[data-theme="dark"] .btn-run-scan:hover {
+  background: #e8e8e8 !important;
+  color: #000000 !important;
+}
+
+/* ── Dark mode: settings save changes button ── */
+html[data-theme="dark"] .btn-save {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+html[data-theme="dark"] .btn-save:hover {
+  background: #e8e8e8 !important;
+  color: #000000 !important;
+}
+
+/* ── Dark mode: scan history active filter button ── */
+html[data-theme="dark"] .filter-btn.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+/* ── Dark mode: sign-in / sign-up submit button ── */
+html[data-theme="dark"] .btn-submit {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+html[data-theme="dark"] .btn-submit:hover {
+  background: #e8e8e8 !important;
+  color: #000000 !important;
+}
+
+/* ── Dark mode: new scan button (dashboard + scan history) ── */
+html[data-theme="dark"] .btn-new-scan {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+html[data-theme="dark"] .btn-new-scan:hover {
+  background: #e8e8e8 !important;
+  color: #000000 !important;
+}
+html[data-theme="dark"] .btn-new-scan svg {
+  color: #000000 !important;
+}
+
+/* ── Dark mode: paste code textarea ── */
+html[data-theme="dark"] textarea#code-input {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  color: #f0f0f0 !important;
+}
+html[data-theme="dark"] textarea#code-input:focus {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+html[data-theme="dark"] textarea#code-input::placeholder {
+  color: #888888 !important;
+}
+
+/* ── Dark mode: landing page overrides ── */
+html[data-theme="dark"] body.landing-page .btn-dark {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+  color: #000000 !important;
+}
+html[data-theme="dark"] body.landing-page .btn-dark:hover {
+  background: #e8e8e8 !important;
+  color: #000000 !important;
+}
+html[data-theme="dark"] body.landing-page .btn-outline,
+html[data-theme="dark"] body.landing-page .btn-secondary-cta,
+html[data-theme="dark"] body.landing-page .nav-login {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #f5f5f5 !important;
+}
+html[data-theme="dark"] body.landing-page .btn-outline:hover,
+html[data-theme="dark"] body.landing-page .btn-secondary-cta:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+html[data-theme="dark"] body.landing-page .logo {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] body.landing-page .hero-sub {
+  color: rgba(245, 245, 245, 0.9) !important;
+}
+html[data-theme="dark"] body.landing-page .typewriter-cursor {
+  background: #e0e0e0 !important;
+}
+html[data-theme="dark"] body.landing-page .blob-1 {
+  background: radial-gradient(circle, #444444, transparent 70%) !important;
+}
+html[data-theme="dark"] body.landing-page .blob-2 {
+  background: radial-gradient(circle, #333333, transparent 70%) !important;
+}
+html[data-theme="dark"] body.landing-page .blob-3 {
+  background: radial-gradient(circle, #555555, transparent 70%) !important;
+}
+html[data-theme="dark"] body.landing-page .chip {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #e8e8e8 !important;
+}
+html[data-theme="dark"] body.landing-page .chip:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border-color: rgba(255, 255, 255, 0.32) !important;
+}
+html[data-theme="dark"] body.landing-page .chip-dot {
+  background: rgba(220, 220, 220, 0.7) !important;
+}
+html[data-theme="dark"] body.landing-page .chips-ticker::before {
+  background: linear-gradient(to right, #000000 0%, transparent 100%) !important;
+}
+html[data-theme="dark"] body.landing-page .chips-ticker::after {
+  background: linear-gradient(to left, #0B132B 0%, transparent 100%) !important;
+}
+html[data-theme="dark"] body.landing-page .dash-preview {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+html[data-theme="dark"] body.landing-page .hero-col::before {
+  background: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3) !important;
 }
