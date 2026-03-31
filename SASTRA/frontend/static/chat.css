@@ -112,13 +112,16 @@
 
 /* ── Dark mode ── */
 html[data-theme="dark"] .chat-msg-ai .chat-msg-bubble {
-  background: rgba(37, 99, 235, 0.15) !important;
-  border-color: rgba(99, 149, 235, 0.22) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+html[data-theme="dark"] .chat-msg-user .chat-msg-bubble {
+  background: linear-gradient(135deg, #3a3a3a, #2a2a2a) !important;
 }
 html[data-theme="dark"] .chat-typing-wrap {
-  background: rgba(37, 99, 235, 0.15) !important;
-  border-color: rgba(99, 149, 235, 0.22) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
 }
 html[data-theme="dark"] .chat-typing-wrap span {
-  background: #7aa8f5;
+  background: #a0a0a0;
 }
