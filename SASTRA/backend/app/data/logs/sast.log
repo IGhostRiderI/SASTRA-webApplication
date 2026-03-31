@@ -2061,3 +2061,36 @@ weighted avg       0.98      0.98      0.98     39084
 2026-03-31 18:04:18 [INFO] sast: User signed in — username: Nadinak  role: superadmin
 2026-03-31 18:04:23 [INFO] sast: Chat request from 'Nadinak'
 2026-03-31 18:04:25 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 22:56:52 [INFO] sast: SAST application starting up
+2026-03-31 22:56:52 [INFO] sast: Database initialised
+2026-03-31 22:56:52 [INFO] sast.backup: Database backed up → sast_20260331T172652Z.db
+2026-03-31 22:56:52 [INFO] sast.backup: Pruned old backup: sast_20260330T060648Z.db
+2026-03-31 22:56:52 [INFO] sast: Startup backup created: sast_20260331T172652Z.db
+2026-03-31 22:56:52 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-31 22:56:52 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-31 22:56:53 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 22:56:53 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 22:56:53 [INFO] sast: SAST application ready
+2026-03-31 22:56:53 [INFO] sast: SAST application shutting down
+2026-03-31 22:57:04 [INFO] sast: SAST application starting up
+2026-03-31 22:57:04 [INFO] sast: Database initialised
+2026-03-31 22:57:04 [INFO] sast.backup: Database backed up → sast_20260331T172704Z.db
+2026-03-31 22:57:04 [INFO] sast.backup: Pruned old backup: sast_20260330T062123Z.db
+2026-03-31 22:57:04 [INFO] sast: Startup backup created: sast_20260331T172704Z.db
+2026-03-31 22:57:04 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-31 22:57:04 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-31 22:57:05 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 22:57:05 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 22:57:05 [INFO] sast: SAST application ready
+2026-03-31 22:57:05 [INFO] sast: SAST application shutting down
+2026-03-31 22:59:40 [INFO] sast: SAST application starting up
+2026-03-31 22:59:40 [INFO] sast: Database initialised
+2026-03-31 22:59:41 [INFO] sast.backup: Database backed up → sast_20260331T172940Z.db
+2026-03-31 22:59:41 [INFO] sast.backup: Pruned old backup: sast_20260330T064743Z.db
+2026-03-31 22:59:41 [INFO] sast: Startup backup created: sast_20260331T172940Z.db
+2026-03-31 22:59:41 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-03-31 22:59:41 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-03-31 22:59:41 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 22:59:41 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-03-31 22:59:41 [INFO] sast: SAST application ready
+2026-03-31 22:59:53 [INFO] sast: User signed in — username: Nadinak  role: superadmin
