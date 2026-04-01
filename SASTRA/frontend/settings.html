@@ -221,6 +221,27 @@
       box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
     }
 
+    .password-hint {
+      margin-top: 2px;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .field-error {
+      min-height: 1em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #b91c1c;
+    }
+
+    .form-error {
+      margin-top: 14px;
+      min-height: 1em;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #b91c1c;
+    }
+
     /* ── Buttons row ── */
     .btn-row {
       display: flex; align-items: center; gap: 12px;
@@ -436,6 +457,7 @@
           <div class="field">
             <label for="username">Username</label>
             <input type="text" id="username" placeholder="Enter your username"/>
+            <p class="field-error" id="username-error" role="alert" aria-live="polite"></p>
           </div>
         </div>
 
@@ -443,10 +465,13 @@
           <div class="field">
             <label for="new-password">New Password</label>
             <input type="password" id="new-password" placeholder="Enter new password"/>
+            <p class="password-hint">Use 8+ chars with upper, lower, number, and special character.</p>
+            <p class="field-error" id="new-password-error" role="alert" aria-live="polite"></p>
           </div>
           <div class="field">
             <label for="confirm-password">Confirm New Password</label>
             <input type="password" id="confirm-password" placeholder="Confirm new password"/>
+            <p class="field-error" id="confirm-password-error" role="alert" aria-live="polite"></p>
           </div>
         </div>
 
@@ -454,6 +479,8 @@
           <button class="btn btn-save" onclick="saveChanges()">Save Changes</button>
           <button class="btn btn-discard" onclick="discardChanges()">Discard Changes</button>
         </div>
+
+        <p class="form-error" id="settings-error" role="alert" aria-live="polite"></p>
 
         <div class="toast" id="save-toast">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -494,6 +521,49 @@
 
   <script>
     let originalUsername = '';
+    const MIN_PASSWORD_LENGTH = 8;
+
+    function passwordPolicyError(password) {
+      if (password.length < MIN_PASSWORD_LENGTH) {
+        return `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`;
+      }
+      if (/\s/.test(password)) {
+        return 'Password cannot contain spaces.';
+      }
+      if (!/[a-z]/.test(password)) {
+        return 'Password must include at least one lowercase letter.';
+      }
+      if (!/[A-Z]/.test(password)) {
+        return 'Password must include at least one uppercase letter.';
+      }
+      if (!/[0-9]/.test(password)) {
+        return 'Password must include at least one number.';
+      }
+      if (!/[^A-Za-z0-9]/.test(password)) {
+        return 'Password must include at least one special character.';
+      }
+      return '';
+    }
+
+    function clearFieldErrors() {
+      document.querySelectorAll('input').forEach(i => i.classList.remove('error'));
+      document.getElementById('username-error').textContent = '';
+      document.getElementById('new-password-error').textContent = '';
+      document.getElementById('confirm-password-error').textContent = '';
+    }
+
+    function clearFormError() {
+      document.getElementById('settings-error').textContent = '';
+    }
+
+    function setFieldError(inputId, errorId, message) {
+      document.getElementById(inputId).classList.add('error');
+      document.getElementById(errorId).textContent = message;
+    }
+
+    function setFormError(message) {
+      document.getElementById('settings-error').textContent = message;
+    }
 
     async function getErrorMessage(response, fallback) {
       let payload = null;
@@ -536,15 +606,29 @@
       const newPwd   = document.getElementById('new-password').value;
       const confPwd  = document.getElementById('confirm-password').value;
 
-      // Clear errors
-      document.querySelectorAll('input').forEach(i => i.classList.remove('error'));
+      clearFieldErrors();
+      clearFormError();
 
       if (!username) {
-        document.getElementById('username').classList.add('error');
+        setFieldError('username', 'username-error', 'Username is required.');
         return;
       }
+
+      if (newPwd) {
+        const policyError = passwordPolicyError(newPwd);
+        if (policyError) {
+          setFieldError('new-password', 'new-password-error', policyError);
+          return;
+        }
+      }
+
+      if (!newPwd && confPwd) {
+        setFieldError('new-password', 'new-password-error', 'Enter a new password first.');
+        return;
+      }
+
       if (newPwd && newPwd !== confPwd) {
-        document.getElementById('confirm-password').classList.add('error');
+        setFieldError('confirm-password', 'confirm-password-error', 'Passwords do not match.');
         return;
       }
 
@@ -553,6 +637,7 @@
       if (newPwd) body.password = newPwd;
 
       if (!body.username && !body.password) {
+        setFormError('No changes to save.');
         return;
       }
 
@@ -564,7 +649,7 @@
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
-        alert(payload.detail || 'Unable to save changes.');
+        setFormError(payload.detail || 'Unable to save changes.');
         return;
       }
 
@@ -579,6 +664,9 @@
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 3000);
 
+      clearFieldErrors();
+      clearFormError();
+
       // Clear password fields
       document.getElementById('new-password').value = '';
       document.getElementById('confirm-password').value = '';
@@ -588,7 +676,8 @@
       document.getElementById('username').value = originalUsername;
       document.getElementById('new-password').value = '';
       document.getElementById('confirm-password').value = '';
-      document.querySelectorAll('input').forEach(i => i.classList.remove('error'));
+      clearFieldErrors();
+      clearFormError();
     }
 
     async function deleteAccount() {

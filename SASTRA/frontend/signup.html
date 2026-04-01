@@ -147,6 +147,33 @@
       box-shadow: 0 0 0 2px rgba(10,10,10,0.15);
     }
 
+    .field input.error {
+      box-shadow: 0 0 0 2px rgba(239,68,68,0.45);
+    }
+
+    .password-hint {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .field-error {
+      margin-top: 8px;
+      min-height: 1em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #b91c1c;
+    }
+
+    .form-error {
+      margin-top: 14px;
+      min-height: 1em;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #b91c1c;
+      text-align: left;
+    }
+
     .btn-submit {
       width: 100%;
       margin-top: 16px;
@@ -222,11 +249,13 @@
       <div class="field">
         <label for="password">Password</label>
         <input type="password" id="password" placeholder="" autocomplete="new-password"/>
+        <p class="password-hint">Use 8+ chars with upper, lower, number, and special character.</p>
       </div>
 
       <div class="field">
         <label for="confirm-password">Confirm Password</label>
         <input type="password" id="confirm-password" placeholder="" autocomplete="new-password"/>
+        <p class="field-error" id="confirm-password-error" role="alert" aria-live="polite"></p>
       </div>
 
       <button class="btn-submit" onclick="handleSignup()">Create Account</button>
@@ -236,19 +265,74 @@
   </div>
 
   <script>
+    const MIN_PASSWORD_LENGTH = 8;
+
+    function passwordPolicyError(password) {
+      if (!password) {
+        return 'Password is required.';
+      }
+      if (password.length < MIN_PASSWORD_LENGTH) {
+        return `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`;
+      }
+      if (/\s/.test(password)) {
+        return 'Password cannot contain spaces.';
+      }
+      if (!/[a-z]/.test(password)) {
+        return 'Password must include at least one lowercase letter.';
+      }
+      if (!/[A-Z]/.test(password)) {
+        return 'Password must include at least one uppercase letter.';
+      }
+      if (!/[0-9]/.test(password)) {
+        return 'Password must include at least one number.';
+      }
+      if (!/[^A-Za-z0-9]/.test(password)) {
+        return 'Password must include at least one special character.';
+      }
+      return '';
+    }
+
+    function clearErrors() {
+      document.getElementById('confirm-password-error').textContent = '';
+      document.querySelectorAll('input').forEach(i => i.classList.remove('error'));
+    }
+
+    function setError(message, inputIds = []) {
+      inputIds.forEach((id) => {
+        const input = document.getElementById(id);
+        if (input) input.classList.add('error');
+      });
+      document.getElementById('confirm-password-error').textContent = message;
+    }
+
     async function handleSignup() {
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
       const confirm  = document.getElementById('confirm-password').value.trim();
 
-      document.querySelectorAll('input').forEach(i => i.style.boxShadow = '');
+      clearErrors();
 
-      if (!username) { document.getElementById('username').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)'; return; }
-      if (!password) { document.getElementById('password').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)'; return; }
-      if (password !== confirm) {
-        document.getElementById('confirm-password').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
+      if (!username) {
+        setError('Username is required.', ['username']);
         return;
       }
+
+      const passwordError = passwordPolicyError(password);
+      if (passwordError) {
+        setError(passwordError, ['password']);
+        return;
+      }
+
+      if (!confirm) {
+        setError('Please confirm your password.', ['confirm-password']);
+        return;
+      }
+
+      if (password !== confirm) {
+        setError('Passwords do not match.', ['password', 'confirm-password']);
+        return;
+      }
+
       try {
         const response = await fetch('/api/auth/signup', {
           method: 'POST',
@@ -258,13 +342,14 @@
         });
         if (!response.ok) {
           const errorPayload = await response.json().catch(() => ({}));
-          throw new Error(errorPayload.detail || 'Signup failed');
+          setError(errorPayload.detail || 'Signup failed.');
+          return;
         }
         const payload = await response.json();
         sessionStorage.setItem('sastra_user', payload.user?.username || username);
         window.location.href = 'dashboard.html';
       } catch (error) {
-        alert(error.message || 'Signup failed');
+        setError(error.message || 'Signup failed. Please try again.');
       }
     }
   </script>
