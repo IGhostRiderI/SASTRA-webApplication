@@ -622,7 +622,7 @@
           </svg>
           Run Scan
         </button>
-        <p class="hint">Supports Java, Python, and C++ · Max file size 10 MB</p>
+        <p class="hint">Supports Java, Python, and C++ · Max file size 2 MB (25 MB for ZIP)</p>
       </div>
 
     </div>
@@ -648,6 +648,9 @@
   </div>
 
   <script>
+    const MAX_SINGLE_FILE_BYTES = 2 * 1024 * 1024;
+    const MAX_ZIP_FILE_BYTES = 25 * 1024 * 1024;
+
     function showAppPopup(message) {
       const popup = document.getElementById('app-popup');
       const popupText = document.getElementById('app-popup-text');
@@ -687,11 +690,42 @@
     dropZone.addEventListener('drop', e => {
       e.preventDefault(); dropZone.classList.remove('dragover');
       const file = e.dataTransfer.files[0];
-      if (file) showFile(file);
+      if (!file) return;
+      if (!validateSelectedFileSize(file)) {
+        clearFileSelection();
+        return;
+      }
+      showFile(file);
     });
 
     function handleFileSelect(input) {
-      if (input.files[0]) showFile(input.files[0]);
+      if (!input.files[0]) return;
+      if (!validateSelectedFileSize(input.files[0])) {
+        clearFileSelection();
+        return;
+      }
+      showFile(input.files[0]);
+    }
+
+    function isZipFile(file) {
+      return (file?.name || '').toLowerCase().endsWith('.zip');
+    }
+
+    function validateSelectedFileSize(file) {
+      const isZip = isZipFile(file);
+      const limitBytes = isZip ? MAX_ZIP_FILE_BYTES : MAX_SINGLE_FILE_BYTES;
+      if (file.size <= limitBytes) return true;
+
+      const kindLabel = isZip ? 'ZIP archives' : 'Single files';
+      const limitLabel = isZip ? '25 MB' : '2 MB';
+      showAppPopup(`${kindLabel} can be up to ${limitLabel}. Please choose a smaller file.`);
+      return false;
+    }
+
+    function clearFileSelection() {
+      document.getElementById('file-input').value = '';
+      document.getElementById('upload-default').style.display = 'flex';
+      document.getElementById('file-chosen').classList.remove('show');
     }
 
     function showFile(file) {
@@ -705,9 +739,7 @@
 
     function clearFile(e) {
       e.stopPropagation();
-      document.getElementById('file-input').value = '';
-      document.getElementById('upload-default').style.display = 'flex';
-      document.getElementById('file-chosen').classList.remove('show');
+      clearFileSelection();
     }
 
     // Language selector
@@ -759,6 +791,13 @@
         const formData = new FormData();
         if (method.includes('Upload')) {
           const selectedFile = document.getElementById('file-input').files[0];
+          if (!selectedFile) {
+            throw new Error('Please select a file to scan.');
+          }
+          if (!validateSelectedFileSize(selectedFile)) {
+            clearFileSelection();
+            return;
+          }
           formData.append('file', selectedFile);
         } else {
           const lang = (document.querySelector('.lang-btn.active')?.textContent || 'Python').toLowerCase();
