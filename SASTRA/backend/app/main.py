@@ -3,8 +3,11 @@ import logging
 import logging.handlers
 import posixpath
 import sys
+import threading
+import time
 import zipfile
 from collections import Counter
+from collections import deque
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Optional
@@ -26,6 +29,12 @@ from .config import (
     MAX_ZIP_FILES,
     MAX_ZIP_MEMBER_SIZE_BYTES,
     MAX_ZIP_UPLOAD_SIZE_BYTES,
+    ALERT_WEBHOOK_URL,
+    ALERT_COOLDOWN_SECONDS,
+    ERROR_RATE_MIN_ERRORS,
+    ERROR_RATE_MIN_REQUESTS,
+    ERROR_RATE_THRESHOLD,
+    ERROR_RATE_WINDOW_SECONDS,
     SUPPORTED_LANGUAGES,
 )
 from .backup import backup_database
@@ -77,19 +86,27 @@ _root_logger = logging.getLogger()
 _root_logger.setLevel(logging.INFO)
 
 # Console handler — always present
-_console_handler = logging.StreamHandler(sys.stdout)
-_console_handler.setFormatter(logging.Formatter(_LOG_FORMAT, datefmt=_LOG_DATEFMT))
-_root_logger.addHandler(_console_handler)
+if not any(isinstance(handler, logging.StreamHandler) for handler in _root_logger.handlers):
+    _console_handler = logging.StreamHandler(sys.stdout)
+    _console_handler.setFormatter(logging.Formatter(_LOG_FORMAT, datefmt=_LOG_DATEFMT))
+    _root_logger.addHandler(_console_handler)
 
 # Rotating file handler — persists logs for post-incident review
-_file_handler = logging.handlers.RotatingFileHandler(
-    filename=str(LOG_DIR / "sast.log"),
-    maxBytes=10 * 1024 * 1024,  # 10 MB
-    backupCount=5,
-    encoding="utf-8",
+_log_file_path = str(LOG_DIR / "sast.log")
+_has_rotating_log = any(
+    isinstance(handler, logging.handlers.RotatingFileHandler)
+    and getattr(handler, "baseFilename", "") == _log_file_path
+    for handler in _root_logger.handlers
 )
-_file_handler.setFormatter(logging.Formatter(_LOG_FORMAT, datefmt=_LOG_DATEFMT))
-_root_logger.addHandler(_file_handler)
+if not _has_rotating_log:
+    _file_handler = logging.handlers.RotatingFileHandler(
+        filename=_log_file_path,
+        maxBytes=10 * 1024 * 1024,  # 10 MB
+        backupCount=5,
+        encoding="utf-8",
+    )
+    _file_handler.setFormatter(logging.Formatter(_LOG_FORMAT, datefmt=_LOG_DATEFMT))
+    _root_logger.addHandler(_file_handler)
 
 logger = logging.getLogger("sast")
 
@@ -97,6 +114,90 @@ logger = logging.getLogger("sast")
 # Counts 5xx errors and logs a warning when the rate looks elevated.
 _error_counter: dict = {"count": 0}
 _ERROR_ALERT_THRESHOLD = 10  # warn after this many 5xx errors per session
+_alert_state: dict = {"last_sent_at": 0.0}
+_requests_window: deque[float] = deque()
+_errors_window: deque[float] = deque()
+_window_lock = threading.Lock()
+
+
+def _send_alert(event: str, message: str, extra: Optional[dict] = None) -> None:
+    """Send alerts to logs and optionally to a webhook for external monitoring."""
+    payload = {
+        "service": "sastra-backend",
+        "event": event,
+        "message": message,
+        "timestamp": int(time.time()),
+    }
+    if extra:
+        payload["extra"] = extra
+
+    if not ALERT_WEBHOOK_URL:
+        return
+
+    try:
+        requests.post(ALERT_WEBHOOK_URL, json=payload, timeout=3)
+    except Exception:
+        logger.exception("Failed to deliver alert webhook")
+
+
+def _prune_window(now: float) -> None:
+    cutoff = now - max(1, ERROR_RATE_WINDOW_SECONDS)
+    while _requests_window and _requests_window[0] < cutoff:
+        _requests_window.popleft()
+    while _errors_window and _errors_window[0] < cutoff:
+        _errors_window.popleft()
+
+
+def _evaluate_error_rate_alert(endpoint: str = "") -> None:
+    now = time.time()
+    with _window_lock:
+        _prune_window(now)
+        request_count = len(_requests_window)
+        error_count = len(_errors_window)
+        if request_count <= 0:
+            return
+
+        error_rate = error_count / request_count
+        threshold_hit = (
+            request_count >= ERROR_RATE_MIN_REQUESTS
+            and error_count >= ERROR_RATE_MIN_ERRORS
+            and error_rate >= ERROR_RATE_THRESHOLD
+        )
+        cooldown_ok = (now - _alert_state["last_sent_at"]) >= max(1, ALERT_COOLDOWN_SECONDS)
+        if not (threshold_hit and cooldown_ok):
+            return
+
+        _alert_state["last_sent_at"] = now
+
+    message = (
+        "ALERT: high 5xx error rate detected "
+        f"({error_count}/{request_count} = {error_rate:.1%} in last {ERROR_RATE_WINDOW_SECONDS}s)"
+    )
+    logger.error("%s. Last endpoint: %s", message, endpoint)
+    _send_alert(
+        event="high_error_rate",
+        message=message,
+        extra={
+            "endpoint": endpoint,
+            "error_count": error_count,
+            "request_count": request_count,
+            "error_rate": round(error_rate, 4),
+            "window_seconds": ERROR_RATE_WINDOW_SECONDS,
+        },
+    )
+
+
+def _record_request(status_code: int, endpoint: str = "") -> None:
+    now = time.time()
+    with _window_lock:
+        _requests_window.append(now)
+        if status_code >= 500:
+            _errors_window.append(now)
+        _prune_window(now)
+
+    if status_code >= 500:
+        _record_error(endpoint)
+        _evaluate_error_rate_alert(endpoint)
 
 
 def _record_error(endpoint: str = "") -> None:
@@ -119,6 +220,7 @@ def _log_unhandled_exception(exc_type, exc_value, exc_tb):
         sys.__excepthook__(exc_type, exc_value, exc_tb)
         return
     logger.critical("Unhandled exception", exc_info=(exc_type, exc_value, exc_tb))
+    _send_alert("unhandled_exception", "Unhandled process-level exception captured")
 
 
 sys.excepthook = _log_unhandled_exception
@@ -229,6 +331,30 @@ FRONTEND_DIR = BASE_DIR.parent.parent / "frontend"
 STATIC_DIR = FRONTEND_DIR / "static"
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+
+@app.middleware("http")
+async def observability_middleware(request: Request, call_next):
+    start = time.perf_counter()
+    endpoint = request.url.path
+    method = request.method
+    try:
+        response = await call_next(request)
+    except Exception:
+        duration_ms = round((time.perf_counter() - start) * 1000, 2)
+        _record_request(500, endpoint)
+        logger.exception("Unhandled request failure — %s %s (%sms)", method, endpoint, duration_ms)
+        raise
+
+    status_code = response.status_code
+    duration_ms = round((time.perf_counter() - start) * 1000, 2)
+    _record_request(status_code, endpoint)
+
+    if status_code >= 500:
+        logger.error("Request failed — %s %s status=%d duration_ms=%s", method, endpoint, status_code, duration_ms)
+    else:
+        logger.info("Request served — %s %s status=%d duration_ms=%s", method, endpoint, status_code, duration_ms)
+    return response
 
 
 # ── helpers ────────────────────────────────────────────────────────────────────

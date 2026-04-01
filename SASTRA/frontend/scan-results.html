@@ -749,6 +749,31 @@
       padding: 2px 4px;
       flex-shrink: 0;
     }
+    .app-popup-close:hover { color: #111827; }
+
+    html[data-theme="dark"] .app-popup {
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(20,20,20,0.96);
+      box-shadow: 0 12px 34px rgba(0,0,0,0.48);
+    }
+    html[data-theme="dark"] .app-popup.error {
+      border-left-color: #f87171;
+      border-color: rgba(248,113,113,0.45);
+      background: rgba(69,10,10,0.92);
+    }
+    html[data-theme="dark"] .app-popup-icon {
+      background: rgba(248,113,113,0.22);
+      color: #fecaca;
+    }
+    html[data-theme="dark"] .app-popup-text {
+      color: #fee2e2;
+    }
+    html[data-theme="dark"] .app-popup-close {
+      color: #fca5a5;
+    }
+    html[data-theme="dark"] .app-popup-close:hover {
+      color: #fee2e2;
+    }
 
     /* Empty */
     .no-findings {

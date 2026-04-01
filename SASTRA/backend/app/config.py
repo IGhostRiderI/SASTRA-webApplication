@@ -49,6 +49,14 @@ NVIDIA_API_KEY = os.environ.get("NVIDIA_API_KEY", "")
 NVIDIA_CHAT_API_KEY = os.environ.get("NVIDIA_CHAT_API_KEY", "")
 COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "false").strip().lower() in {"1", "true", "yes", "on"}
 
+# ── Observability / alerting configuration ───────────────────────────────────
+ALERT_WEBHOOK_URL = os.environ.get("ALERT_WEBHOOK_URL", "").strip()
+ERROR_RATE_WINDOW_SECONDS = int(os.environ.get("ERROR_RATE_WINDOW_SECONDS", "300"))
+ERROR_RATE_MIN_REQUESTS = int(os.environ.get("ERROR_RATE_MIN_REQUESTS", "50"))
+ERROR_RATE_MIN_ERRORS = int(os.environ.get("ERROR_RATE_MIN_ERRORS", "10"))
+ERROR_RATE_THRESHOLD = float(os.environ.get("ERROR_RATE_THRESHOLD", "0.2"))
+ALERT_COOLDOWN_SECONDS = int(os.environ.get("ALERT_COOLDOWN_SECONDS", "300"))
+
 # ── JWT configuration ──────────────────────────────────────────────────────────
 # JWT_SECRET MUST be set as an environment variable in any real deployment.
 # The default value below is for local development convenience only.

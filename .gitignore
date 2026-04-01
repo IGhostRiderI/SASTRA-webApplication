@@ -13,6 +13,13 @@ __pycache__/
 *.pyo
 
 
+# SASTRA backend runtime artifacts
+SASTRA/backend/app/__pycache__/
+SASTRA/backend/app/data/logs/
+SASTRA/backend/app/data/backups/
+SASTRA/backend/app/data/*.db
+
+
 
 # Dataset tools and training data
 dataset_tools/
