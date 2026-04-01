@@ -286,19 +286,19 @@ class MLEngine:
             finding["ml_severity_confidence"] = sev["confidence"]
 
             # False positive classification
-            # Combined score: ML output (code-semantic signal) weighted with
-            # rule confidence (frequency-based signal from dataset).
-            # Rule confidence is more reliable with current training data, so
-            # it gets higher weight.
+            # Flag as FP when ML vuln_prob is at or below FP_THRESHOLD (0.60).
+            # The rule confidence is stored for display only and does not
+            # affect the FP decision — this ensures the ML score drives it.
             fp = self.predict_fp(snippet, cwe_id, language)
             rule_conf    = float(finding.get("confidence", 0.75))
-            combined     = fp["vuln_prob"] * ML_WEIGHT + rule_conf * RULE_WEIGHT
+            vuln_prob    = fp["vuln_prob"]
+            combined     = vuln_prob * ML_WEIGHT + rule_conf * RULE_WEIGHT
             finding["ml_confidence"] = round(combined, 3)
-            if combined < FP_THRESHOLD:
+            if combined <= FP_THRESHOLD:
                 finding["fp_flag"]  = True
                 finding["fp_label"] = (
                     f"Low confidence finding — combined score {combined:.0%} "
-                    f"(ML: {fp['vuln_prob']:.0%}, rule: {rule_conf:.0%})"
+                    f"(ML: {vuln_prob:.0%}, rule: {rule_conf:.0%})"
                 )
 
         return scan_output

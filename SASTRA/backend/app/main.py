@@ -397,17 +397,16 @@ def _promote_ml_severity(scan_output: dict) -> dict:
 
 def _filter_false_positives(scan_output: dict) -> dict:
     """
-    Separate FP-flagged findings from confirmed findings.
+    Keep ALL findings in scan_output["findings"] so they are visible in the UI.
+    FP-flagged findings retain fp_flag=True so the frontend can mark them visually.
 
-    - scan_output["findings"]        → real findings only (used for risk score / summary)
-    - scan_output["false_positives"] → FP-flagged findings shown separately in the UI
-    - scan_output["summary"]["fp_count"] → count of filtered FP findings
+    - scan_output["findings"]            → all findings (FP ones have fp_flag=True)
+    - scan_output["false_positives"]     → same FP subset, kept for backwards compat
+    - scan_output["summary"]["fp_count"] → count of FP-flagged findings
     """
     all_findings = scan_output.get("findings", [])
-    real_findings = [f for f in all_findings if not f.get("fp_flag")]
-    fp_findings   = [f for f in all_findings if f.get("fp_flag")]
+    fp_findings  = [f for f in all_findings if f.get("fp_flag")]
 
-    scan_output["findings"]        = real_findings
     scan_output["false_positives"] = fp_findings
     scan_output.setdefault("summary", {})["fp_count"] = len(fp_findings)
 

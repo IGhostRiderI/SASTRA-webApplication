@@ -2171,3 +2171,72 @@ weighted avg       0.98      0.98      0.98     39084
 2026-04-01 11:54:39 [INFO] sast: PDF report generated for scan #118 by 'Nadinak'
 2026-04-01 11:54:51 [INFO] sast: File scan by 'Nadinak' — intentionally_vulnerable_app.py  lang: python
 2026-04-01 11:54:51 [INFO] sast: Scan #119 complete — user: 'Nadinak'  findings: 5  risk: 5.0
+2026-04-01 12:00:48 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: cpp
+2026-04-01 12:01:18 [INFO] sast: Scan #120 complete — user: 'Nadinak'  findings: 343  risk: 5.0
+2026-04-01 12:02:47 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-04-01 12:02:47 [INFO] sast: Scan #121 complete — user: 'Nadinak'  findings: 3  risk: 5.0
+2026-04-01 12:03:06 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: cpp
+2026-04-01 12:03:31 [INFO] sast: Scan #122 complete — user: 'Nadinak'  findings: 343  risk: 5.0
+2026-04-01 12:04:03 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-04-01 12:04:03 [INFO] sast: Scan #123 complete — user: 'Nadinak'  findings: 3  risk: 5.0
+2026-04-01 12:04:11 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: cpp
+2026-04-01 12:04:36 [INFO] sast: Scan #124 complete — user: 'Nadinak'  findings: 343  risk: 5.0
+2026-04-01 12:07:37 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: cpp
+2026-04-01 12:08:02 [INFO] sast: Scan #125 complete — user: 'Nadinak'  findings: 343  risk: 5.0
+2026-04-01 12:10:32 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: cpp
+2026-04-01 12:10:57 [INFO] sast: Scan #126 complete — user: 'Nadinak'  findings: 343  risk: 5.0
+2026-04-01 12:12:53 [INFO] sast: SAST application shutting down
+2026-04-01 12:13:07 [INFO] sast: SAST application starting up
+2026-04-01 12:13:07 [INFO] sast: Database initialised
+2026-04-01 12:13:08 [INFO] sast.backup: Database backed up → sast_20260401T064307Z.db
+2026-04-01 12:13:08 [INFO] sast.backup: Pruned old backup: sast_20260331T122342Z.db
+2026-04-01 12:13:08 [INFO] sast: Startup backup created: sast_20260401T064307Z.db
+2026-04-01 12:13:08 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-04-01 12:13:08 [INFO] sast: Rule catalog loaded — 601 rules, 228 CWEs
+2026-04-01 12:13:09 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 12:13:09 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 12:13:09 [INFO] sast: SAST application ready
+2026-04-01 12:15:51 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-04-01 12:16:34 [INFO] sast: User signed out
+2026-04-01 12:16:46 [INFO] sast: New user registered — username: 834832ds
+2026-04-01 12:16:53 [INFO] sast: Paste scan by '834832ds' — snippet.py  lang: cpp
+2026-04-01 12:16:53 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 0 entries, hierarchy: 0 parent links
+2026-04-01 12:17:20 [INFO] sast: Scan #127 complete — user: '834832ds'  findings: 42  risk: 5.0
+2026-04-01 12:27:32 [INFO] sast: PDF report generated for scan #127 by '834832ds'
+2026-04-01 12:27:40 [INFO] sast: SAST application shutting down
+2026-04-01 12:27:53 [INFO] sast: SAST application starting up
+2026-04-01 12:27:53 [INFO] sast: Database initialised
+2026-04-01 12:27:53 [INFO] sast.backup: Database backed up → sast_20260401T065753Z.db
+2026-04-01 12:27:53 [INFO] sast.backup: Pruned old backup: sast_20260331T172652Z.db
+2026-04-01 12:27:53 [INFO] sast: Startup backup created: sast_20260401T065753Z.db
+2026-04-01 12:27:53 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-04-01 12:27:53 [INFO] sast: Rule catalog loaded — 601 rules, 228 CWEs
+2026-04-01 12:27:53 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 12:27:53 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 12:27:53 [INFO] sast: SAST application ready
+2026-04-01 12:28:03 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-04-01 12:28:34 [INFO] sast: User signed out
+2026-04-01 12:28:45 [INFO] sast: New user registered — username: hedged
+2026-04-01 12:28:54 [INFO] sast: Paste scan by 'hedged' — snippet.py  lang: cpp
+2026-04-01 12:28:54 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 0 entries, hierarchy: 0 parent links
+2026-04-01 12:29:32 [INFO] sast: Scan #128 complete — user: 'hedged'  findings: 448  risk: 5.0
+2026-04-01 12:35:29 [INFO] sast: SAST application shutting down
+2026-04-01 12:35:39 [INFO] sast: SAST application starting up
+2026-04-01 12:35:39 [INFO] sast: Database initialised
+2026-04-01 12:35:39 [INFO] sast.backup: Database backed up → sast_20260401T070539Z.db
+2026-04-01 12:35:39 [INFO] sast.backup: Pruned old backup: sast_20260331T172704Z.db
+2026-04-01 12:35:39 [INFO] sast: Startup backup created: sast_20260401T070539Z.db
+2026-04-01 12:35:39 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-04-01 12:35:39 [INFO] sast: Rule catalog loaded — 601 rules, 228 CWEs
+2026-04-01 12:35:40 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 12:35:40 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 12:35:40 [INFO] sast: SAST application ready
+2026-04-01 12:36:06 [INFO] sast: New user registered — username: nigga_ueyd
+2026-04-01 12:36:19 [INFO] sast: Paste scan by 'nigga_ueyd' — snippet.py  lang: cpp
+2026-04-01 12:36:19 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 0 entries, hierarchy: 0 parent links
+2026-04-01 12:36:46 [INFO] sast: Scan #129 complete — user: 'nigga_ueyd'  findings: 448  risk: 5.0
+2026-04-01 12:37:06 [INFO] sast: LLM code-fix requested by 'nigga_ueyd' — CWE: CWE-401  language: cpp
+2026-04-01 12:37:07 [INFO] sast: LLM code-fix returned for CWE: CWE-401
+2026-04-01 12:37:25 [INFO] sast: LLM code-fix requested by 'nigga_ueyd' — CWE: CWE-196  language: cpp
+2026-04-01 12:37:39 [INFO] sast: LLM code-fix returned for CWE: CWE-196
+2026-04-01 12:37:47 [INFO] sast: SAST application shutting down
