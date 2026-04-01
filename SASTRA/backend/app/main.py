@@ -32,9 +32,11 @@ from .backup import backup_database
 from .rules import build_rules_catalog
 from .mappings import severity_score
 from .db import (
+    LLM_RPM_LIMIT,
     ROLE_ADMIN,
     ROLE_SUPERADMIN,
     ROLE_USER,
+    SCAN_HOURLY_LIMIT,
     SCAN_RETENTION_DAYS,
     authenticate_user,
     create_access_token,
@@ -42,13 +44,16 @@ from .db import (
     decode_access_token,
     delete_user_and_data,
     get_finding,
+    get_llm_rpm_quota,
     save_finding_fix,
     get_scan,
+    get_hourly_scan_quota,
     get_user_by_id,
     init_db,
     list_scans,
     list_users,
     purge_old_scans,
+    record_llm_request,
     save_scan,
     update_user_credentials,
     update_user_role,
@@ -779,6 +784,21 @@ async def llm_codefix(
     payload: LLMFixRequest,
     current_user: dict = Depends(_require_user),
 ) -> JSONResponse:
+    quota = get_llm_rpm_quota(int(current_user["id"]))
+    if quota["remaining"] <= 0:
+        retry_after = max(1, quota["retry_after_seconds"])
+        raise HTTPException(
+            status_code=429,
+            detail={
+                "code": "LLM_RATE_LIMIT_REACHED",
+                "message": f"AI request limit reached. You can send up to {LLM_RPM_LIMIT} requests per minute.",
+                "limit": quota["limit"],
+                "retry_after_seconds": retry_after,
+            },
+            headers={"Retry-After": str(retry_after)},
+        )
+    record_llm_request(int(current_user["id"]), "/api/llm/codefix")
+
     from . import config
     if not config.NVIDIA_API_KEY:
         raise HTTPException(status_code=503, detail="NVIDIA_API_KEY not configured.")
@@ -851,6 +871,21 @@ async def chat_with_ai(
     current_user: dict = Depends(_require_user),
 ):
     """Stream a security-focused chat response using NVIDIA Llama 3.3 70B."""
+    quota = get_llm_rpm_quota(int(current_user["id"]))
+    if quota["remaining"] <= 0:
+        retry_after = max(1, quota["retry_after_seconds"])
+        raise HTTPException(
+            status_code=429,
+            detail={
+                "code": "LLM_RATE_LIMIT_REACHED",
+                "message": f"AI request limit reached. You can send up to {LLM_RPM_LIMIT} requests per minute.",
+                "limit": quota["limit"],
+                "retry_after_seconds": retry_after,
+            },
+            headers={"Retry-After": str(retry_after)},
+        )
+    record_llm_request(int(current_user["id"]), "/api/chat")
+
     from . import config
     try:
         from openai import OpenAI
@@ -937,6 +972,18 @@ async def scan_file(
 ) -> JSONResponse:
     if app_state.get("scanner") is None:
         raise HTTPException(status_code=503, detail="Scanner is still initializing.")
+
+    quota = get_hourly_scan_quota(int(current_user["id"]))
+    if quota["remaining"] <= 0:
+        raise HTTPException(
+            status_code=429,
+            detail={
+                "code": "SCAN_HOURLY_LIMIT_REACHED",
+                "message": f"Hourly quota has been reached. You can run up to {SCAN_HOURLY_LIMIT} scans per hour.",
+                "limit": quota["limit"],
+                "retry_after_seconds": quota["retry_after_seconds"],
+            },
+        )
 
     scanner: ScannerEngine = app_state["scanner"]
 

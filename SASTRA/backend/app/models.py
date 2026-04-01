@@ -44,6 +44,12 @@ class User(Base):
         cascade="all, delete-orphan",
         passive_deletes=True,
     )
+    llm_requests = relationship(
+        "LLMRequest",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
 
     def to_dict(self, *, include_scan_count: bool = False) -> dict:
         payload = {
@@ -137,3 +143,14 @@ class Finding(Base):
             "fp_label":         self.fp_label,
             "llm_fix":          self.llm_fix or "",
         }
+
+
+class LLMRequest(Base):
+    __tablename__ = "llm_requests"
+
+    id           = Column(Integer, primary_key=True, autoincrement=True)
+    user_id      = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    endpoint     = Column(String(32), nullable=False, default="")
+    requested_at = Column(String(40), nullable=False)
+
+    user = relationship("User", back_populates="llm_requests")

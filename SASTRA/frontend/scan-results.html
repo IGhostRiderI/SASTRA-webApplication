@@ -699,6 +699,57 @@
       background: transparent; color: #374151; cursor: pointer;
     }
 
+    .app-popup {
+      position: fixed;
+      top: 92px;
+      right: 22px;
+      min-width: 320px;
+      max-width: 460px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.16);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: none;
+      align-items: flex-start;
+      gap: 10px;
+      z-index: 1200;
+    }
+    .app-popup.show { display: flex; }
+    .app-popup.error { border-left: 4px solid #dc2626; }
+    .app-popup-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(220, 38, 38, 0.1);
+      color: #dc2626;
+      font-weight: 800;
+      font-family: 'Sora', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .app-popup-text {
+      font-size: 0.84rem;
+      line-height: 1.45;
+      color: #111827;
+      flex: 1;
+      font-weight: 600;
+    }
+    .app-popup-close {
+      border: none;
+      background: transparent;
+      color: #6b7280;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      padding: 2px 4px;
+      flex-shrink: 0;
+    }
+
     /* Empty */
     .no-findings {
       display: none; flex-direction: column; align-items: center;
@@ -1617,6 +1668,12 @@
   </div>
 </div>
 
+<div class="app-popup" id="app-popup" role="alert" aria-live="assertive">
+  <div class="app-popup-icon">!</div>
+  <div class="app-popup-text" id="app-popup-text"></div>
+  <button class="app-popup-close" id="app-popup-close" aria-label="Close message">x</button>
+</div>
+
 <script>
 (function() {
   const overlay   = document.getElementById('fix-popup-overlay');
@@ -1626,6 +1683,17 @@
   const generating= document.getElementById('fix-generating');
   const fixResult = document.getElementById('fix-result');
   const fixCode   = document.getElementById('fix-popup-code');
+  const appPopup  = document.getElementById('app-popup');
+  const appPopupText = document.getElementById('app-popup-text');
+
+  function showAppPopup(message) {
+    appPopupText.textContent = message;
+    appPopup.classList.add('show', 'error');
+  }
+
+  document.getElementById('app-popup-close').addEventListener('click', () => {
+    appPopup.classList.remove('show');
+  });
 
   let _activeFindingIdx = null;
 
@@ -1678,7 +1746,19 @@
           recommendation: f.fix,
         }),
       });
-      if (!res.ok) throw new Error('API error');
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        if (res.status === 429 && errData?.detail?.code === 'LLM_RATE_LIMIT_REACHED') {
+          const retrySeconds = Number(errData.detail.retry_after_seconds || 0);
+          const retryMinutes = retrySeconds > 0 ? Math.ceil(retrySeconds / 60) : null;
+          const waitHint = retryMinutes ? ` Try again in about ${retryMinutes} minute${retryMinutes === 1 ? '' : 's'}.` : '';
+          showAppPopup(`AI request limit reached. You can send up to 10 requests per minute.${waitHint}`);
+          closePopup();
+          if (btn) { btn.disabled = false; btn.textContent = 'Fix now'; }
+          return;
+        }
+        throw new Error(errData?.detail || 'API error');
+      }
       const data = await res.json();
       let fixText = data.text || '';
 
@@ -1709,6 +1789,7 @@
       renderFixBubble(findingIdx);
     } catch {
       generating.innerHTML = '<span style="color:#dc2626">Failed to generate fix. Check your API key.</span>';
+      showAppPopup('Failed to generate fix. Please try again.');
       if (btn) { btn.disabled = false; btn.textContent = 'Fix now'; }
     }
   };

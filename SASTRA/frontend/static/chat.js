@@ -3,6 +3,44 @@
 
   var chatHistory = [];
 
+  function ensureAppPopup() {
+    var popup = document.getElementById('app-popup') || document.getElementById('chat-app-popup');
+    if (popup) return popup;
+
+    if (!document.getElementById('chat-app-popup-style')) {
+      var style = document.createElement('style');
+      style.id = 'chat-app-popup-style';
+      style.textContent = '' +
+        '.chat-app-popup{position:fixed;top:88px;right:20px;min-width:300px;max-width:460px;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border:1px solid rgba(239,68,68,.25);box-shadow:0 10px 30px rgba(15,23,42,.16);border-radius:14px;padding:14px 16px;display:none;align-items:flex-start;gap:10px;z-index:1200;}' +
+        '.chat-app-popup.show{display:flex;}' +
+        '.chat-app-popup.error{border-left:4px solid #dc2626;}' +
+        '.chat-app-popup-icon{width:22px;height:22px;border-radius:999px;background:rgba(220,38,38,.1);color:#dc2626;font-weight:800;font-family:Sora,sans-serif;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}' +
+        '.chat-app-popup-text{font-size:.84rem;line-height:1.45;color:#111827;flex:1;font-weight:600;}' +
+        '.chat-app-popup-close{border:none;background:transparent;color:#6b7280;cursor:pointer;font-size:1rem;line-height:1;padding:2px 4px;flex-shrink:0;}';
+      document.head.appendChild(style);
+    }
+
+    popup = document.createElement('div');
+    popup.id = 'chat-app-popup';
+    popup.className = 'chat-app-popup';
+    popup.setAttribute('role', 'alert');
+    popup.setAttribute('aria-live', 'assertive');
+    popup.innerHTML = '<div class="chat-app-popup-icon">!</div><div class="chat-app-popup-text" id="chat-app-popup-text"></div><button class="chat-app-popup-close" id="chat-app-popup-close" aria-label="Close message">x</button>';
+    document.body.appendChild(popup);
+    popup.querySelector('#chat-app-popup-close').addEventListener('click', function () {
+      popup.classList.remove('show');
+    });
+    return popup;
+  }
+
+  function showAppPopup(message) {
+    var popup = ensureAppPopup();
+    var textEl = popup.querySelector('#app-popup-text') || popup.querySelector('#chat-app-popup-text');
+    if (!textEl) return;
+    textEl.textContent = message;
+    popup.classList.add('show', 'error');
+  }
+
   function escapeHtml(t) {
     return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
@@ -90,7 +128,16 @@
 
       if (!res.ok) {
         var errData = await res.json().catch(function () { return {}; });
-        throw new Error(errData.detail || 'AI service error.');
+        if (res.status === 429 && errData && errData.detail && errData.detail.code === 'LLM_RATE_LIMIT_REACHED') {
+          var retrySeconds = Number(errData.detail.retry_after_seconds || 0);
+          var retryMinutes = retrySeconds > 0 ? Math.ceil(retrySeconds / 60) : null;
+          var waitHint = retryMinutes ? (' Try again in about ' + retryMinutes + ' minute' + (retryMinutes === 1 ? '' : 's') + '.') : '';
+          showAppPopup('AI request limit reached. You can send up to 10 requests per minute.' + waitHint);
+        }
+        var detailMessage = (typeof errData.detail === 'string')
+          ? errData.detail
+          : (errData.detail && errData.detail.message) || 'AI service error.';
+        throw new Error(detailMessage);
       }
 
       removeTyping();

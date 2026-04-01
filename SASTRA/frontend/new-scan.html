@@ -391,6 +391,73 @@
       color: var(--text-muted); text-align: right;
     }
 
+    /* ── Frontend popup message ── */
+    .app-popup {
+      position: fixed;
+      top: 84px;
+      right: 22px;
+      z-index: 500;
+      min-width: 280px;
+      max-width: min(92vw, 420px);
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.16);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .app-popup.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .app-popup.error {
+      border-color: rgba(220,38,38,0.24);
+      background: rgba(255,248,248,0.97);
+    }
+    .app-popup-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: rgba(220,38,38,0.14);
+      color: #b91c1c;
+    }
+    .app-popup-text {
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: var(--text-primary);
+      padding-top: 2px;
+    }
+    .app-popup-close {
+      margin-left: auto;
+      flex-shrink: 0;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'Sora', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 2px 4px;
+    }
+    .app-popup-close:hover { color: var(--text-primary); }
+
     /* ── Hint text ── */
     .hint {
       font-size: 0.8rem; color: var(--text-light); text-align: center; margin-top: 14px;
@@ -574,7 +641,24 @@
     </div>
   </div>
 
+  <div class="app-popup" id="app-popup" role="alert" aria-live="assertive">
+    <div class="app-popup-icon">!</div>
+    <div class="app-popup-text" id="app-popup-text"></div>
+    <button class="app-popup-close" id="app-popup-close" aria-label="Close message">x</button>
+  </div>
+
   <script>
+    function showAppPopup(message) {
+      const popup = document.getElementById('app-popup');
+      const popupText = document.getElementById('app-popup-text');
+      popupText.textContent = message;
+      popup.classList.add('show', 'error');
+    }
+
+    document.getElementById('app-popup-close').addEventListener('click', () => {
+      document.getElementById('app-popup').classList.remove('show');
+    });
+
     async function requireAuth() {
       const response = await fetch('/api/auth/me', { credentials: 'include' });
       if (!response.ok) {
@@ -694,6 +778,14 @@
         });
         const payload = await response.json();
         if (!response.ok) {
+          if (response.status === 429) {
+            const detail = payload?.detail || {};
+            const retrySeconds = Number(detail.retry_after_seconds || 0);
+            const retryMinutes = retrySeconds > 0 ? Math.ceil(retrySeconds / 60) : 0;
+            const retryText = retryMinutes > 0 ? ` Try again in ${retryMinutes} minute(s).` : '';
+            showAppPopup((detail.message || 'Hourly quota has been reached.') + retryText);
+            return;
+          }
           throw new Error(payload.detail || 'Scan failed');
         }
 
@@ -712,7 +804,7 @@
         }
         window.location.href = `scan-results.html?scan_id=${createdScanId}`;
       } catch (error) {
-        alert(error.message || 'Scan failed');
+        showAppPopup(error.message || 'Scan failed');
       } finally {
         setTimeout(() => overlay.classList.remove('show'), 400);
       }

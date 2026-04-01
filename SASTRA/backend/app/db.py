@@ -25,7 +25,7 @@ from .config import (
     JWT_SECRET,
 )
 from .database import Base, _get_session, engine
-from .models import Finding, Scan, User
+from .models import Finding, LLMRequest, Scan, User
 
 # ── roles ──────────────────────────────────────────────────────────────────────
 ROLE_USER       = "user"
@@ -45,6 +45,10 @@ USERNAME_REGEX = re.compile(r"^[A-Za-z0-9_.-]{3,32}$")
 # NFR-5: scan records older than this are automatically purged on startup
 # and on demand via POST /api/admin/purge.
 SCAN_RETENTION_DAYS = 90
+SCAN_HOURLY_LIMIT = 5
+SCAN_HOURLY_WINDOW_HOURS = 1
+LLM_RPM_LIMIT = 10
+LLM_RPM_WINDOW_MINUTES = 1
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -413,6 +417,107 @@ def purge_old_scans(retention_days: int = SCAN_RETENTION_DAYS) -> int:
         for scan in old_scans:
             session.delete(scan)
         return count
+
+
+def get_hourly_scan_quota(
+    user_id: int,
+    *,
+    limit: int = SCAN_HOURLY_LIMIT,
+    window_hours: int = SCAN_HOURLY_WINDOW_HOURS,
+) -> Dict[str, int]:
+    """
+    Return scan quota usage for a user in the trailing window.
+
+    The time window is sliding: every scan in the last `window_hours` is counted.
+    """
+    now = _utc_now()
+    window_start_iso = (now - timedelta(hours=window_hours)).isoformat()
+
+    with _get_session() as session:
+        rows = (
+            session.query(Scan.scanned_at)
+            .filter(Scan.user_id == user_id, Scan.scanned_at >= window_start_iso)
+            .order_by(Scan.scanned_at.asc())
+            .all()
+        )
+
+    used = len(rows)
+    remaining = max(0, limit - used)
+    retry_after_seconds = 0
+
+    if used >= limit and rows:
+        oldest_raw = rows[0][0]
+        try:
+            oldest = datetime.fromisoformat(oldest_raw)
+            reset_at = oldest + timedelta(hours=window_hours)
+            retry_after_seconds = max(0, int((reset_at - now).total_seconds()))
+        except Exception:
+            retry_after_seconds = window_hours * 3600
+
+    return {
+        "limit": limit,
+        "used": used,
+        "remaining": remaining,
+        "retry_after_seconds": retry_after_seconds,
+    }
+
+
+def get_llm_rpm_quota(
+    user_id: int,
+    *,
+    limit: int = LLM_RPM_LIMIT,
+    window_minutes: int = LLM_RPM_WINDOW_MINUTES,
+) -> Dict[str, int]:
+    """
+    Return combined LLM request usage for a user in a trailing minute window.
+
+    Both chatbot and code-fix requests are counted together via `llm_requests`.
+    """
+    now = _utc_now()
+    window_start_iso = (now - timedelta(minutes=window_minutes)).isoformat()
+
+    with _get_session() as session:
+        rows = (
+            session.query(LLMRequest.requested_at)
+            .filter(
+                LLMRequest.user_id == user_id,
+                LLMRequest.requested_at >= window_start_iso,
+            )
+            .order_by(LLMRequest.requested_at.asc())
+            .all()
+        )
+
+    used = len(rows)
+    remaining = max(0, limit - used)
+    retry_after_seconds = 0
+
+    if used >= limit and rows:
+        oldest_raw = rows[0][0]
+        try:
+            oldest = datetime.fromisoformat(oldest_raw)
+            reset_at = oldest + timedelta(minutes=window_minutes)
+            retry_after_seconds = max(0, int((reset_at - now).total_seconds()))
+        except Exception:
+            retry_after_seconds = window_minutes * 60
+
+    return {
+        "limit": limit,
+        "used": used,
+        "remaining": remaining,
+        "retry_after_seconds": retry_after_seconds,
+    }
+
+
+def record_llm_request(user_id: int, endpoint: str) -> None:
+    """Persist one LLM request for per-user rate limiting."""
+    with _get_session() as session:
+        session.add(
+            LLMRequest(
+                user_id=user_id,
+                endpoint=(endpoint or "")[:32],
+                requested_at=_utc_now_iso(),
+            )
+        )
 
 
 # ══════════════════════════════════════════════════════════════════════════════
