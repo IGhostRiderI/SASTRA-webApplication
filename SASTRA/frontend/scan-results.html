@@ -1322,11 +1322,12 @@
       fix: f.recommendation || '',
       llm_fix: f.llm_fix || '',
       confidence: formatConfidencePercent(f.ml_confidence ?? f.ml_severity_confidence ?? 0),
+      fp_flag: !!f.fp_flag,
     }));
     window.allFindings = allFindings;
     // Load previously saved fixed state
     loadFixedFromStorage();
-    const fpCount = allFindings.filter((f) => isFalsePositive(f.confidence)).length;
+    const fpCount = allFindings.filter((f) => isFalsePositive(f.confidence, f.fp_flag)).length;
     document.getElementById('sum-fp').textContent = fpCount;
     renderOverview(summary);
     renderFindings();
@@ -1379,7 +1380,7 @@
   }
 
   function renderProgressTracker() {
-    const genuine = allFindings.filter((f) => !isFalsePositive(f.confidence));
+    const genuine = allFindings.filter((f) => !isFalsePositive(f.confidence, f.fp_flag));
     const total = genuine.length;
     const fixed = genuine.filter((f) => fixedFindings.has(f._idx)).length;
     const pct = total > 0 ? Math.round((fixed / total) * 100) : 0;
@@ -1477,8 +1478,8 @@
     return String(filePath || '').split('/').pop().split('\\').pop() || filePath;
   }
 
-  function isFalsePositive(confidence) {
-    return confidence > 0 && confidence < 50;
+  function isFalsePositive(confidence, fp_flag) {
+    return !!fp_flag;
   }
 
   // ── Remediation Queue ──────────────────────────────────────────────────────
@@ -1505,7 +1506,7 @@
     if (!list) return;
 
     // Score each finding: severity × exploitability proxy (rule confidence)
-    const genuine = findings.filter((f) => !isFalsePositive(f.confidence) && !fixedFindings.has(f._idx));
+    const genuine = findings.filter((f) => !isFalsePositive(f.confidence, f.fp_flag) && !fixedFindings.has(f._idx));
     if (!genuine.length) {
       list.innerHTML = `<div class="rq-empty">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -1601,7 +1602,7 @@
     filtered.forEach((f) => {
       const i = f._idx;
       const row = document.createElement('div');
-      const fp = isFalsePositive(f.confidence);
+      const fp = isFalsePositive(f.confidence, f.fp_flag);
       const isFixed = fixedFindings.has(i);
       row.className = 'finding-row' + (fp ? ' false-positive-row' : '') + (isFixed ? ' finding-fixed' : '');
       row.setAttribute('data-idx', i);
