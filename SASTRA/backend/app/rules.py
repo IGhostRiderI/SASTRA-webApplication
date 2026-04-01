@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from typing import Dict, List
 
 # ──────────────────────────────────────────────────────────────────────────────
-# PYTHON RULES  (100)
+# PYTHON RULES  (140)
 # ──────────────────────────────────────────────────────────────────────────────
 PYTHON_RULES: List[Dict] = [
     # ── CWE-89: SQL Injection ─────────────────────────────────────────────────
