@@ -2094,3 +2094,19 @@ weighted avg       0.98      0.98      0.98     39084
 2026-03-31 22:59:41 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
 2026-03-31 22:59:41 [INFO] sast: SAST application ready
 2026-03-31 22:59:53 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-04-01 10:06:18 [INFO] sast: SAST application starting up
+2026-04-01 10:06:18 [INFO] sast: Database initialised
+2026-04-01 10:06:18 [INFO] sast.backup: Database backed up → sast_20260401T043618Z.db
+2026-04-01 10:06:18 [INFO] sast.backup: Pruned old backup: sast_20260330T073013Z.db
+2026-04-01 10:06:18 [INFO] sast.backup: Pruned old backup: sast_20260331T073243Z.db
+2026-04-01 10:06:18 [INFO] sast: Startup backup created: sast_20260401T043618Z.db
+2026-04-01 10:06:18 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-04-01 10:06:18 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-04-01 10:06:19 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 10:06:19 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 10:06:19 [INFO] sast: SAST application ready
+2026-04-01 10:06:32 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-04-01 10:07:47 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-89  language: java
+2026-04-01 10:07:49 [INFO] sast: LLM code-fix returned for CWE: CWE-89
+2026-04-01 10:08:08 [INFO] sast: Chat request from 'Nadinak'
+2026-04-01 10:08:09 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
