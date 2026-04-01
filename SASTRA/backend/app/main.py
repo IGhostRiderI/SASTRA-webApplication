@@ -70,6 +70,7 @@ from .db import (
 from .pdf_report import build_pdf_report
 from .ml_engine import load_or_train
 from .scanner import ScannerEngine
+from .ast_scanner import JAVALANG_AVAILABLE, CLANG_AVAILABLE, probe_clang_runtime
 
 # ── Centralised logging (NFR-8) ────────────────────────────────────────────────
 # Logs are written to both the console and a rotating file so that
@@ -303,6 +304,16 @@ async def lifespan(_: FastAPI):
         catalog.get("rule_count", 0),
         len(catalog.get("cwe_catalog", {})),
     )
+
+    logger.info("Java AST availability (javalang): %s", "ready" if JAVALANG_AVAILABLE else "unavailable")
+    if not CLANG_AVAILABLE:
+        logger.warning("C/C++ AST availability (libclang): unavailable (clang.cindex import failed)")
+    else:
+        clang_ready, clang_reason = probe_clang_runtime()
+        if clang_ready:
+            logger.info("C/C++ AST availability (libclang): ready")
+        else:
+            logger.warning("C/C++ AST availability (libclang): unavailable (%s)", clang_reason)
 
     try:
         ml_engine = load_or_train(force_retrain=False)

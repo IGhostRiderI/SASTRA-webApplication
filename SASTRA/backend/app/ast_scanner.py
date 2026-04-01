@@ -40,9 +40,12 @@ vulnerability is never reported twice.
 """
 
 import ast
+import logging
 from typing import Dict, List, Optional, Tuple
 
 from .mappings import map_cwe_to_owasp, severity_for_cwe, severity_score
+
+logger = logging.getLogger("sast.ast")
 
 # ── optional javalang import ───────────────────────────────────────────────────
 try:
@@ -67,6 +70,28 @@ def _get_clang_index():
     if _CLANG_INDEX is None and CLANG_AVAILABLE:
         _CLANG_INDEX = _clang_cindex.Index.create()
     return _CLANG_INDEX
+
+
+def probe_clang_runtime() -> Tuple[bool, str]:
+    """
+    Verify libclang is usable at runtime (not just importable).
+
+    Returns (ready, reason), where reason is a human-readable detail.
+    """
+    if not CLANG_AVAILABLE:
+        return False, "clang.cindex import failed"
+
+    try:
+        _get_clang_index()
+        return True, "libclang runtime ready"
+    except Exception as exc:
+        return False, f"libclang runtime probe failed: {exc}"
+
+
+def is_clang_runtime_ready() -> bool:
+    """Convenience wrapper used by scan dispatch paths."""
+    ready, _ = probe_clang_runtime()
+    return ready
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -554,9 +579,9 @@ def ast_scan_java(
 # C / C++ AST SCANNER  (requires libclang — pip install libclang)
 # ══════════════════════════════════════════════════════════════════════════════
 #
-# libclang ships its own libclang.so/dylib inside the PyPI wheel so no
-# system-level clang installation is required.  The package works identically
-# on macOS (development) and Linux (production).
+# The libclang wheel bundles the shared library on many platforms, but
+# runtime loading can still fail in some Linux/container environments due to
+# missing system-level dependencies. We therefore probe runtime usability.
 #
 # Strategy
 # --------
@@ -655,8 +680,8 @@ def ast_scan_cpp(
     Parse *content* as C/C++ source using libclang and return vulnerability
     findings.
 
-    ``pip install libclang`` ships its own libclang shared library — no system
-    clang is required.  Works identically on macOS and Linux.
+    ``pip install libclang`` may bundle libclang, but runtime loading can still
+    depend on host libraries in some environments.
 
     Returns an empty list if libclang is unavailable or the source cannot
     be parsed (graceful degradation to regex-only scanning).
@@ -679,12 +704,18 @@ def ast_scan_cpp(
             "-w",               # suppress all warnings
             "-ferror-limit=0",  # don't stop on errors (missing headers etc.)
         ]
-        tu = _get_clang_index().parse(
+        idx = _get_clang_index()
+        if idx is None:
+            logger.warning("C/C++ AST scanning skipped: libclang index unavailable")
+            return []
+
+        tu = idx.parse(
             tmp_path,
             args=args,
             options=_clang_cindex.TranslationUnit.PARSE_INCOMPLETE,
         )
     except Exception:
+        logger.exception("C/C++ AST parse failed; falling back to regex-only for this file")
         return []
     finally:
         if tmp_path:

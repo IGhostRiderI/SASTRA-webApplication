@@ -1,15 +1,19 @@
 import re
+import logging
 from collections import Counter
 from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 from .ast_scanner import (
-    JAVALANG_AVAILABLE, CLANG_AVAILABLE,
+    JAVALANG_AVAILABLE, CLANG_AVAILABLE, is_clang_runtime_ready,
     ast_scan_java, ast_scan_python, ast_scan_cpp,
 )
 from .config import MAX_FINDINGS_PER_SCAN
 from .mappings import severity_score
 from .preprocessor import preprocess
+
+
+logger = logging.getLogger("sast.scanner")
 
 
 @dataclass
@@ -253,9 +257,13 @@ class ScannerEngine:
         )
 
         # Pass 2: AST
+        ast_findings: List[Dict[str, object]] = []
+        ast_mode = "disabled"
+
         if language == "python":
             # Built-in ast module — always available
             ast_findings = ast_scan_python(content, original_lines)
+            ast_mode = "enabled"
             all_findings = self._merge_ast_findings(
                 regex_findings, ast_findings, path_value
             )
@@ -263,21 +271,36 @@ class ScannerEngine:
         elif language == "java" and JAVALANG_AVAILABLE:
             # javalang — optional; degrades gracefully if not installed
             ast_findings = ast_scan_java(content, original_lines)
+            ast_mode = "enabled"
             all_findings = self._merge_ast_findings(
                 regex_findings, ast_findings, path_value
             )
 
-        elif language == "cpp" and CLANG_AVAILABLE:
-            # libclang — ships its own library inside the PyPI wheel,
-            # works on macOS and Linux without any system clang install
+        elif language == "cpp" and CLANG_AVAILABLE and is_clang_runtime_ready():
+            # C/C++ AST path runs only when libclang is importable and
+            # runtime-probed as usable in this environment.
             ast_findings = ast_scan_cpp(content, original_lines, filename=path_value)
+            ast_mode = "enabled"
             all_findings = self._merge_ast_findings(
                 regex_findings, ast_findings, path_value
             )
 
         else:
             # Fallback — regex only (Java without javalang, or C/C++ without libclang)
+            ast_mode = "regex-only"
             all_findings = regex_findings
+
+        ast_added = max(0, len(all_findings) - len(regex_findings))
+        logger.info(
+            "Scan composition — language=%s file=%s regex=%d ast_mode=%s ast_raw=%d ast_added=%d total=%d",
+            language,
+            path_value,
+            len(regex_findings),
+            ast_mode,
+            len(ast_findings),
+            ast_added,
+            len(all_findings),
+        )
 
         # Sort: highest severity first, then by line number ascending
         all_findings.sort(
