@@ -1743,6 +1743,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
+<<<<<<< HEAD
     # ── CWE-88: Argument Injection ────────────────────────────────────────────
     {
         "id": "py-cwe88-001",
@@ -1830,10 +1831,22 @@ PYTHON_RULES: List[Dict] = [
         "cwe_id": "CWE-96",
         "cwe_name": "Static Code Injection",
         "severity": "High",
+=======
+    # ── GraphQL injection ─────────────────────────────────────────────────────
+    {
+        "id": "py-gql-001",
+        "language": "python",
+        "title": "GraphQL query built with string concatenation",
+        "pattern": r'gql\s*\(\s*["\'][^"\']*["\'\s]*\+',
+        "cwe_id": "CWE-89",
+        "cwe_name": "Injection",
+        "severity": "Critical",
+>>>>>>> 4b350f28a (Python rules changes +35)
         "owasp_category": "A03:2021 - Injection",
         "source": "hardcoded",
         "confidence": 0.88,
     },
+<<<<<<< HEAD
     {
         "id": "py-cwe96-002",
         "language": "python",
@@ -1963,11 +1976,22 @@ PYTHON_RULES: List[Dict] = [
         "pattern": r'(?:jinja2\.Template|Template)\s*\(.*(?:request\.|args\[|form\[|params\[)',
         "cwe_id": "CWE-917",
         "cwe_name": "Expression Language Injection",
+=======
+    
+    {
+        "id": "py-gql-002",
+        "language": "python",
+        "title": "GraphQL query built with f-string",
+        "pattern": r'gql\s*\(\s*f["\']',
+        "cwe_id": "CWE-89",
+        "cwe_name": "Injection",
+>>>>>>> 4b350f28a (Python rules changes +35)
         "severity": "Critical",
         "owasp_category": "A03:2021 - Injection",
         "source": "hardcoded",
         "confidence": 0.90,
     },
+<<<<<<< HEAD
     {
         "id": "py-cwe917-002",
         "language": "python",
@@ -1989,12 +2013,358 @@ PYTHON_RULES: List[Dict] = [
         "pattern": r'(?:Environment|SandboxedEnvironment)\s*\(.*\).*from_string\s*\(.*(?:request\.|args\[|form\[)',
         "cwe_id": "CWE-1336",
         "cwe_name": "Improper Neutralization of Special Elements in Template Engine",
+=======
+
+    # ── Server-Sent Events / WebSocket with user input ────────────────────────
+    {
+        "id": "py-ws-001",
+        "language": "python",
+        "title": "WebSocket send with unvalidated user data",
+        "pattern": r'websocket\.send\s*\(.*(?:request\.|args\[|form\[|json\[)',
+        "cwe_id": "CWE-20",
+        "cwe_name": "Improper Input Validation",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+    {
+        "id": "py-ws-002",
+        "language": "python",
+        "title": "asyncio WebSocket broadcast without validation",
+        "pattern": r'await\s+websocket\.send\s*\(',
+        "cwe_id": "CWE-20",
+        "cwe_name": "Improper Input Validation",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+
+    # ── Celery task deserialization ───────────────────────────────────────────
+    {
+        "id": "py-celery-001",
+        "language": "python",
+        "title": "Celery task_serializer set to pickle",
+        "pattern": r'task_serializer\s*=\s*["\']pickle["\']',
+        "cwe_id": "CWE-502",
+        "cwe_name": "Deserialization of Untrusted Data",
+        "severity": "Critical",
+        "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+        "source": "hardcoded",
+        "confidence": 0.96,
+    },
+    {
+        "id": "py-celery-002",
+        "language": "python",
+        "title": "Celery accept_content includes pickle",
+        "pattern": r'accept_content\s*=\s*\[.*["\']pickle["\']',
+        "cwe_id": "CWE-502",
+        "cwe_name": "Deserialization of Untrusted Data",
+        "severity": "Critical",
+        "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+        "source": "hardcoded",
+        "confidence": 0.96,
+    },
+
+    # ── Redis pickle deserialization ──────────────────────────────────────────
+    {
+        "id": "py-redis-001",
+        "language": "python",
+        "title": "pickle.loads() on Redis value",
+        "pattern": r'pickle\.loads?\s*\(.*(?:redis|r\.get|cache\.get)',
+        "cwe_id": "CWE-502",
+        "cwe_name": "Deserialization of Untrusted Data",
+        "severity": "Critical",
+        "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+        "source": "hardcoded",
+        "confidence": 0.94,
+    },
+
+    # ── AWS SDK credential misuse ──────────────────────────────────────────────
+    {
+        "id": "py-aws-001",
+        "language": "python",
+        "title": "Hardcoded AWS access key ID",
+        "pattern": r'(?:AKIA|ASIA|AROA|AIDA)[A-Z0-9]{16}',
+        "cwe_id": "CWE-798",
+        "cwe_name": "Use of Hard-coded Credentials",
+        "severity": "Critical",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.97,
+    },
+    {
+        "id": "py-aws-002",
+        "language": "python",
+        "title": "boto3 S3 bucket made public via ACL",
+        "pattern": r'put_bucket_acl\s*\([^)]*(?:public-read|public-read-write)',
+        "cwe_id": "CWE-285",
+        "cwe_name": "Improper Authorization",
+        "severity": "Critical",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.95,
+    },
+    {
+        "id": "py-aws-003",
+        "language": "python",
+        "title": "S3 presigned URL with very long expiry",
+        "pattern": r'generate_presigned_url\s*\([^)]*ExpiresIn\s*=\s*(?:[89]\d{5}|\d{7,})',
+        "cwe_id": "CWE-285",
+        "cwe_name": "Improper Authorization",
+        "severity": "High",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── Flask-Login / Django auth bypass ─────────────────────────────────────
+    {
+        "id": "py-auth-001",
+        "language": "python",
+        "title": "Flask login_required decorator missing on sensitive route",
+        "pattern": r'@app\.route\s*\([^)]*(?:admin|dashboard|settings|profile)[^)]*\)(?!\s*@login_required)',
+        "cwe_id": "CWE-306",
+        "cwe_name": "Missing Authentication for Critical Function",
+        "severity": "High",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+    {
+        "id": "py-auth-002",
+        "language": "python",
+        "title": "Django @login_required bypassed with AUTHENTICATION_BACKENDS wildcard",
+        "pattern": r'AUTHENTICATION_BACKENDS\s*=\s*\[.*["\']django\.contrib\.auth\.backends\.AllowAllUsersModelBackend["\']',
+        "cwe_id": "CWE-287",
+        "cwe_name": "Improper Authentication",
+        "severity": "Critical",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.92,
+    },
+    {
+        "id": "py-auth-003",
+        "language": "python",
+        "title": "JWT HS256 secret is a short/weak literal",
+        "pattern": r'(?:SECRET|secret|key)\s*=\s*["\'][^"\']{1,15}["\'](?=.*jwt|.*encode)',
+        "cwe_id": "CWE-521",
+        "cwe_name": "Weak Password Requirements",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+     # ── SSTI — Mako / Chameleon ────────────────────────────────────────────────
+    {
+        "id": "py-ssti-001",
+        "language": "python",
+        "title": "Mako Template rendered from user input (SSTI)",
+        "pattern": r'Template\s*\(.*(?:request\.|args\[|form\[|json\[)',
+        "cwe_id": "CWE-94",
+        "cwe_name": "Code Injection",
+        "severity": "Critical",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.88,
+    },
+    {
+        "id": "py-ssti-002",
+        "language": "python",
+        "title": "Jinja2 render_template_string with user-controlled template",
+        "pattern": r'render_template_string\s*\(.*(?:request\.|args\[|form\[)',
+        "cwe_id": "CWE-94",
+        "cwe_name": "Code Injection",
+        "severity": "Critical",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.94,
+    },
+
+    # ── XML-RPC ────────────────────────────────────────────────────────────────
+    {
+        "id": "py-xmlrpc-001",
+        "language": "python",
+        "title": "xmlrpc.client.ServerProxy with user-controlled URL",
+        "pattern": r'xmlrpc\.client\.ServerProxy\s*\(.*(?:request\.|args\[|form\[)',
+        "cwe_id": "CWE-918",
+        "cwe_name": "Server-Side Request Forgery",
+        "severity": "High",
+        "owasp_category": "A10:2021 - Server-Side Request Forgery",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+    {
+        "id": "py-xmlrpc-002",
+        "language": "python",
+        "title": "SimpleXMLRPCServer exposed without authentication",
+        "pattern": r'SimpleXMLRPCServer\s*\(\s*\(["\']0\.0\.0\.0["\']',
+        "cwe_id": "CWE-306",
+        "cwe_name": "Missing Authentication for Critical Function",
+        "severity": "High",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── FastAPI / Starlette misconfigs ─────────────────────────────────────────
+    {
+        "id": "py-fastapi-001",
+        "language": "python",
+        "title": "FastAPI CORSMiddleware with allow_origins wildcard",
+        "pattern": r'CORSMiddleware\s*\([^)]*allow_origins\s*=\s*\[\s*["\'][*]["\']',
+        "cwe_id": "CWE-942",
+        "cwe_name": "Permissive Cross-domain Policy",
+        "severity": "High",
+        "owasp_category": "A05:2021 - Security Misconfiguration",
+        "source": "hardcoded",
+        "confidence": 0.92,
+    },
+    {
+        "id": "py-fastapi-002",
+        "language": "python",
+        "title": "FastAPI Depends() skipped for admin endpoint",
+        "pattern": r'@(?:app|router)\.(?:get|post|put|delete)\s*\([^)]*(?:admin|root|superuser)[^)]*\)(?!\s*(?:.*Depends|.*require))',
+        "cwe_id": "CWE-306",
+        "cwe_name": "Missing Authentication for Critical Function",
+        "severity": "High",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+    {
+        "id": "py-fastapi-003",
+        "language": "python",
+        "title": "Starlette debug=True in production",
+        "pattern": r'Starlette\s*\([^)]*debug\s*=\s*True',
+        "cwe_id": "CWE-215",
+        "cwe_name": "Insertion of Sensitive Information Into Debugging Code",
+        "severity": "High",
+        "owasp_category": "A05:2021 - Security Misconfiguration",
+        "source": "hardcoded",
+        "confidence": 0.92,
+    },
+
+    # ── Paramiko host key bypass ───────────────────────────────────────────────
+    {
+        "id": "py-ssh-001",
+        "language": "python",
+        "title": "Paramiko AutoAddPolicy disables host key verification",
+        "pattern": r'set_missing_host_key_policy\s*\(\s*paramiko\.AutoAddPolicy',
+        "cwe_id": "CWE-295",
+        "cwe_name": "Improper Certificate Validation",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.96,
+    },
+    {
+        "id": "py-ssh-002",
+        "language": "python",
+        "title": "Paramiko RejectPolicy — may silently drop connections",
+        "pattern": r'set_missing_host_key_policy\s*\(\s*paramiko\.WarningPolicy',
+        "cwe_id": "CWE-295",
+        "cwe_name": "Improper Certificate Validation",
+        "severity": "Medium",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── base64 masquerading as encryption ─────────────────────────────────────
+    {
+        "id": "py-crypto-009",
+        "language": "python",
+        "title": "base64 encoding used as encryption substitute",
+        "pattern": r'base64\.(?:b64encode|encodebytes)\s*\(.*(?:password|secret|key|token)',
+        "cwe_id": "CWE-311",
+        "cwe_name": "Missing Encryption of Sensitive Data",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+     # ── Django mass assignment / insecure QuerySet ────────────────────────────
+    {
+        "id": "py-django-001",
+        "language": "python",
+        "title": "Django model updated with unfiltered request.POST data",
+        "pattern": r'\.update\s*\(\s*\*\*request\.(?:POST|data|json)\s*\)',
+        "cwe_id": "CWE-915",
+        "cwe_name": "Improperly Controlled Modification of Dynamically-Determined Object Attributes",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.88,
+    },
+    {
+        "id": "py-django-002",
+        "language": "python",
+        "title": "Django ModelForm with fields='__all__'",
+        "pattern": r"fields\s*=\s*['\"]__all__['\"]",
+        "cwe_id": "CWE-915",
+        "cwe_name": "Improperly Controlled Modification of Dynamically-Determined Object Attributes",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+    {
+        "id": "py-django-003",
+        "language": "python",
+        "title": "Django SESSION_COOKIE_HTTPONLY set to False",
+        "pattern": r'SESSION_COOKIE_HTTPONLY\s*=\s*False',
+        "cwe_id": "CWE-1004",
+        "cwe_name": "Sensitive Cookie Without 'HttpOnly' Flag",
+        "severity": "Medium",
+        "owasp_category": "A05:2021 - Security Misconfiguration",
+        "source": "hardcoded",
+        "confidence": 0.95,
+    },
+    {
+        "id": "py-django-004",
+        "language": "python",
+        "title": "Django SECURE_SSL_REDIRECT disabled",
+        "pattern": r'SECURE_SSL_REDIRECT\s*=\s*False',
+        "cwe_id": "CWE-319",
+        "cwe_name": "Cleartext Transmission of Sensitive Information",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.90,
+    },
+    {
+        "id": "py-django-005",
+        "language": "python",
+        "title": "Django SECURE_HSTS_SECONDS set to zero or missing",
+        "pattern": r'SECURE_HSTS_SECONDS\s*=\s*0\b',
+        "cwe_id": "CWE-319",
+        "cwe_name": "Cleartext Transmission of Sensitive Information",
+        "severity": "Medium",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── Subprocess list2cmdline shell expansion ───────────────────────────────
+    {
+        "id": "py-cmdi-012",
+        "language": "python",
+        "title": "subprocess.list2cmdline with user input — expands to shell string",
+        "pattern": r'subprocess\.list2cmdline\s*\(.*(?:request\.|args\[|form\[)',
+        "cwe_id": "CWE-78",
+        "cwe_name": "OS Command Injection",
+>>>>>>> 4b350f28a (Python rules changes +35)
         "severity": "Critical",
         "owasp_category": "A03:2021 - Injection",
         "source": "hardcoded",
         "confidence": 0.88,
     },
 
+<<<<<<< HEAD
     # ── CWE-250: Execution with Unnecessary Privileges ─────────────────────────
     {
         "id": "py-cwe250-001",
@@ -2279,10 +2649,89 @@ PYTHON_RULES: List[Dict] = [
         "cwe_name": "Unprotected Transport of Credentials",
         "severity": "High",
         "owasp_category": "A02:2021 - Cryptographic Failures",
+=======
+     # ── Unsafe multiprocessing / concurrent deserialization ───────────────────
+    {
+        "id": "py-mp-001",
+        "language": "python",
+        "title": "multiprocessing Queue.get() result passed to pickle.loads()",
+        "pattern": r'pickle\.loads?\s*\(.*\.get\s*\(',
+        "cwe_id": "CWE-502",
+        "cwe_name": "Deserialization of Untrusted Data",
+        "severity": "High",
+        "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── ReDoS ─────────────────────────────────────────────────────────────────
+    {
+        "id": "py-redos-001",
+        "language": "python",
+        "title": "Catastrophic backtracking regex pattern (nested quantifiers)",
+        "pattern": r're\.(?:compile|match|search|fullmatch)\s*\(["\'][^"\']*\([^)]*\+[^)]*\)\+',
+        "cwe_id": "CWE-1333",
+        "cwe_name": "Inefficient Regular Expression Complexity",
+        "severity": "Medium",
+        "owasp_category": "A05:2021 - Security Misconfiguration",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+ 
+    # ── Insecure password hashing (no bcrypt/argon2) ──────────────────────────
+    {
+        "id": "py-pw-001",
+        "language": "python",
+        "title": "Password stored with MD5 hash",
+        "pattern": r'hashlib\.md5\s*\(.*(?:password|passwd|pwd)',
+        "cwe_id": "CWE-916",
+        "cwe_name": "Use of Password Hash With Insufficient Computational Effort",
+        "severity": "Critical",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.90,
+    },
+    {
+        "id": "py-pw-002",
+        "language": "python",
+        "title": "Password stored with SHA-256 without key stretching",
+        "pattern": r'hashlib\.sha256\s*\(.*(?:password|passwd|pwd)(?!.*(?:pbkdf2|bcrypt|argon|scrypt))',
+        "cwe_id": "CWE-916",
+        "cwe_name": "Use of Password Hash With Insufficient Computational Effort",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+    {
+        "id": "py-pw-003",
+        "language": "python",
+        "title": "PBKDF2 with dangerously low iteration count",
+        "pattern": r'pbkdf2_hmac\s*\([^)]*iterations\s*=\s*(?:[1-9]\d{0,3})\b',
+        "cwe_id": "CWE-916",
+        "cwe_name": "Use of Password Hash With Insufficient Computational Effort",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.88,
+    },
+
+    # ── Insecure file permissions on sensitive files ───────────────────────────
+    {
+        "id": "py-perm-003",
+        "language": "python",
+        "title": "SSH private key file created with world-readable permission",
+        "pattern": r'os\.(?:chmod|makedirs)\s*\([^)]*(?:\.pem|\.key|id_rsa)[^)]*,\s*0o?[67][0-7][0-7]',
+        "cwe_id": "CWE-732",
+        "cwe_name": "Incorrect Permission Assignment for Critical Resource",
+        "severity": "High",
+        "owasp_category": "A01:2021 - Broken Access Control",
+>>>>>>> 4b350f28a (Python rules changes +35)
         "source": "hardcoded",
         "confidence": 0.85,
     },
 
+<<<<<<< HEAD
     # ── CWE-760: One-Way Hash with Predictable Salt ────────────────────────────
     {
         "id": "py-cwe760-001",
@@ -2293,10 +2742,77 @@ PYTHON_RULES: List[Dict] = [
         "cwe_name": "Use of a One-Way Hash with a Predictable Salt",
         "severity": "High",
         "owasp_category": "A02:2021 - Cryptographic Failures",
+=======
+    # ── Prototype pollution via json.loads + object merge ─────────────────────
+    {
+        "id": "py-proto-001",
+        "language": "python",
+        "title": "Merging user-supplied JSON into config dict without sanitization",
+        "pattern": r'config\.update\s*\(\s*json\.loads\s*\(.*(?:request\.|body|data)',
+        "cwe_id": "CWE-915",
+        "cwe_name": "Improperly Controlled Modification of Dynamically-Determined Object Attributes",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── Command injection via shlex.split bypass ──────────────────────────────
+    {
+        "id": "py-cmdi-013",
+        "language": "python",
+        "title": "shlex.split result passed to subprocess with shell=True",
+        "pattern": r'subprocess\.\w+\s*\(\s*shlex\.split[^)]*shell\s*=\s*True',
+        "cwe_id": "CWE-78",
+        "cwe_name": "OS Command Injection",
+        "severity": "Critical",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.90,
+    },
+
+    # ── Insecure deserialization via numpy ────────────────────────────────────
+    {
+        "id": "py-deser-008",
+        "language": "python",
+        "title": "numpy.load with allow_pickle=True on untrusted data",
+        "pattern": r'numpy\.load\s*\([^)]*allow_pickle\s*=\s*True',
+        "cwe_id": "CWE-502",
+        "cwe_name": "Deserialization of Untrusted Data",
+        "severity": "Critical",
+        "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+        "source": "hardcoded",
+        "confidence": 0.92,
+    },
+
+     # ── Zip slip ──────────────────────────────────────────────────────────────
+    {
+        "id": "py-path-009",
+        "language": "python",
+        "title": "Zip extraction path not validated (Zip Slip)",
+        "pattern": r'zipfile\.ZipFile\s*\([^)]+\)(?!.*namelist.*startswith)',
+        "cwe_id": "CWE-22",
+        "cwe_name": "Path Traversal",
+        "severity": "High",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+    {
+        "id": "py-path-010",
+        "language": "python",
+        "title": "tarfile.extractall without member validation (Tar Slip)",
+        "pattern": r'tarfile\.open\s*\([^)]+\)(?!.*getmembers)',
+        "cwe_id": "CWE-22",
+        "cwe_name": "Path Traversal",
+        "severity": "High",
+        "owasp_category": "A01:2021 - Broken Access Control",
+>>>>>>> 4b350f28a (Python rules changes +35)
         "source": "hardcoded",
         "confidence": 0.78,
     },
 
+<<<<<<< HEAD
     # ── CWE-613: Insufficient Session Expiration ───────────────────────────────
     {
         "id": "py-cwe613-001",
@@ -2457,10 +2973,23 @@ PYTHON_RULES: List[Dict] = [
         "cwe_name": "Insertion of Sensitive Information into Log File",
         "severity": "Medium",
         "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
+=======
+     # ── Cryptography library misuse ───────────────────────────────────────────
+    {
+        "id": "py-crypto-010",
+        "language": "python",
+        "title": "AES-CBC used without MAC (unauthenticated encryption)",
+        "pattern": r'Cipher\s*\(.*algorithms\.AES.*modes\.CBC',
+        "cwe_id": "CWE-353",
+        "cwe_name": "Missing Support for Integrity Check",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+>>>>>>> 4b350f28a (Python rules changes +35)
         "source": "hardcoded",
         "confidence": 0.82,
     },
     {
+<<<<<<< HEAD
         "id": "py-cwe532-002",
         "language": "python",
         "title": "print() of sensitive variable to stdout (potential log sink)",
@@ -2962,6 +3491,46 @@ PYTHON_RULES: List[Dict] = [
         "source": "hardcoded",
         "confidence": 0.72,
     },
+=======
+        "id": "py-crypto-011",
+        "language": "python",
+        "title": "Hardcoded initialization vector (IV) in bytes literal",
+        "pattern": r'iv\s*=\s*b["\'][^"\']{8,}["\']',
+        "cwe_id": "CWE-329",
+        "cwe_name": "Not Using a Random IV with CBC Mode",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.88,
+    },
+
+    # ── Insecure cookie configuration ─────────────────────────────────────────
+    {
+        "id": "py-cookie-004",
+        "language": "python",
+        "title": "Flask response.set_cookie without HttpOnly flag",
+        "pattern": r'set_cookie\s*\([^)]*(?!httponly\s*=\s*True)',
+        "cwe_id": "CWE-1004",
+        "cwe_name": "Sensitive Cookie Without 'HttpOnly' Flag",
+        "severity": "Medium",
+        "owasp_category": "A05:2021 - Security Misconfiguration",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+    {
+        "id": "py-cookie-005",
+        "language": "python",
+        "title": "SameSite cookie attribute not set to Strict or Lax",
+        "pattern": r'set_cookie\s*\([^)]*samesite\s*=\s*["\']None["\']',
+        "cwe_id": "CWE-352",
+        "cwe_name": "Cross-Site Request Forgery",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+>>>>>>> 4b350f28a (Python rules changes +35)
 ]
 
 
