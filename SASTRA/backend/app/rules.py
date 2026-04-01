@@ -1743,7 +1743,6 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-<<<<<<< HEAD
     # ── CWE-88: Argument Injection ────────────────────────────────────────────
     {
         "id": "py-cwe88-001",
@@ -1831,7 +1830,10 @@ PYTHON_RULES: List[Dict] = [
         "cwe_id": "CWE-96",
         "cwe_name": "Static Code Injection",
         "severity": "High",
-=======
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.88,
+    },
     # ── GraphQL injection ─────────────────────────────────────────────────────
     {
         "id": "py-gql-001",
@@ -1841,12 +1843,10 @@ PYTHON_RULES: List[Dict] = [
         "cwe_id": "CWE-89",
         "cwe_name": "Injection",
         "severity": "Critical",
->>>>>>> 4b350f28a (Python rules changes +35)
         "owasp_category": "A03:2021 - Injection",
         "source": "hardcoded",
         "confidence": 0.88,
     },
-<<<<<<< HEAD
     {
         "id": "py-cwe96-002",
         "language": "python",
@@ -1976,7 +1976,11 @@ PYTHON_RULES: List[Dict] = [
         "pattern": r'(?:jinja2\.Template|Template)\s*\(.*(?:request\.|args\[|form\[|params\[)',
         "cwe_id": "CWE-917",
         "cwe_name": "Expression Language Injection",
-=======
+        "severity": "Critical",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.90,
+    },
     
     {
         "id": "py-gql-002",
@@ -1985,13 +1989,11 @@ PYTHON_RULES: List[Dict] = [
         "pattern": r'gql\s*\(\s*f["\']',
         "cwe_id": "CWE-89",
         "cwe_name": "Injection",
->>>>>>> 4b350f28a (Python rules changes +35)
         "severity": "Critical",
         "owasp_category": "A03:2021 - Injection",
         "source": "hardcoded",
         "confidence": 0.90,
     },
-<<<<<<< HEAD
     {
         "id": "py-cwe917-002",
         "language": "python",
@@ -2013,7 +2015,11 @@ PYTHON_RULES: List[Dict] = [
         "pattern": r'(?:Environment|SandboxedEnvironment)\s*\(.*\).*from_string\s*\(.*(?:request\.|args\[|form\[)',
         "cwe_id": "CWE-1336",
         "cwe_name": "Improper Neutralization of Special Elements in Template Engine",
-=======
+        "severity": "Critical",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.88,
+    },
 
     # ── Server-Sent Events / WebSocket with user input ────────────────────────
     {
@@ -2357,14 +2363,12 @@ PYTHON_RULES: List[Dict] = [
         "pattern": r'subprocess\.list2cmdline\s*\(.*(?:request\.|args\[|form\[)',
         "cwe_id": "CWE-78",
         "cwe_name": "OS Command Injection",
->>>>>>> 4b350f28a (Python rules changes +35)
         "severity": "Critical",
         "owasp_category": "A03:2021 - Injection",
         "source": "hardcoded",
         "confidence": 0.88,
     },
 
-<<<<<<< HEAD
     # ── CWE-250: Execution with Unnecessary Privileges ─────────────────────────
     {
         "id": "py-cwe250-001",
@@ -2649,7 +2653,9 @@ PYTHON_RULES: List[Dict] = [
         "cwe_name": "Unprotected Transport of Credentials",
         "severity": "High",
         "owasp_category": "A02:2021 - Cryptographic Failures",
-=======
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
      # ── Unsafe multiprocessing / concurrent deserialization ───────────────────
     {
         "id": "py-mp-001",
@@ -2726,12 +2732,10 @@ PYTHON_RULES: List[Dict] = [
         "cwe_name": "Incorrect Permission Assignment for Critical Resource",
         "severity": "High",
         "owasp_category": "A01:2021 - Broken Access Control",
->>>>>>> 4b350f28a (Python rules changes +35)
         "source": "hardcoded",
         "confidence": 0.85,
     },
 
-<<<<<<< HEAD
     # ── CWE-760: One-Way Hash with Predictable Salt ────────────────────────────
     {
         "id": "py-cwe760-001",
@@ -2742,7 +2746,9 @@ PYTHON_RULES: List[Dict] = [
         "cwe_name": "Use of a One-Way Hash with a Predictable Salt",
         "severity": "High",
         "owasp_category": "A02:2021 - Cryptographic Failures",
-=======
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
     # ── Prototype pollution via json.loads + object merge ─────────────────────
     {
         "id": "py-proto-001",
@@ -2807,12 +2813,10 @@ PYTHON_RULES: List[Dict] = [
         "cwe_name": "Path Traversal",
         "severity": "High",
         "owasp_category": "A01:2021 - Broken Access Control",
->>>>>>> 4b350f28a (Python rules changes +35)
         "source": "hardcoded",
         "confidence": 0.78,
     },
 
-<<<<<<< HEAD
     # ── CWE-613: Insufficient Session Expiration ───────────────────────────────
     {
         "id": "py-cwe613-001",
@@ -2973,7 +2977,9 @@ PYTHON_RULES: List[Dict] = [
         "cwe_name": "Insertion of Sensitive Information into Log File",
         "severity": "Medium",
         "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
-=======
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
      # ── Cryptography library misuse ───────────────────────────────────────────
     {
         "id": "py-crypto-010",
@@ -2984,12 +2990,10 @@ PYTHON_RULES: List[Dict] = [
         "cwe_name": "Missing Support for Integrity Check",
         "severity": "High",
         "owasp_category": "A02:2021 - Cryptographic Failures",
->>>>>>> 4b350f28a (Python rules changes +35)
         "source": "hardcoded",
         "confidence": 0.82,
     },
     {
-<<<<<<< HEAD
         "id": "py-cwe532-002",
         "language": "python",
         "title": "print() of sensitive variable to stdout (potential log sink)",
@@ -3491,7 +3495,27 @@ PYTHON_RULES: List[Dict] = [
         "source": "hardcoded",
         "confidence": 0.72,
     },
-=======
+]
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# JAVA RULES  (100)
+# ──────────────────────────────────────────────────────────────────────────────
+JAVA_RULES: List[Dict] = [
+    # ── CWE-89: SQL Injection ─────────────────────────────────────────────────
+    {
+        "id": "java-sqli-001",
+        "language": "java",
+        "title": "SQL Injection via string concatenation in executeQuery()",
+        "pattern": r'executeQuery\s*\(\s*"[^"]*"\s*\+',
+        "cwe_id": "CWE-89",
+        "cwe_name": "SQL Injection",
+        "severity": "Critical",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.92,
+    },
+    {
         "id": "py-crypto-011",
         "language": "python",
         "title": "Hardcoded initialization vector (IV) in bytes literal",
@@ -3530,7 +3554,6 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
->>>>>>> 4b350f28a (Python rules changes +35)
 ]
 
 

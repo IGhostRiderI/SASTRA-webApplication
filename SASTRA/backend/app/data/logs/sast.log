@@ -2240,3 +2240,24 @@ weighted avg       0.98      0.98      0.98     39084
 2026-04-01 12:37:25 [INFO] sast: LLM code-fix requested by 'nigga_ueyd' — CWE: CWE-196  language: cpp
 2026-04-01 12:37:39 [INFO] sast: LLM code-fix returned for CWE: CWE-196
 2026-04-01 12:37:47 [INFO] sast: SAST application shutting down
+2026-04-01 12:56:05 [INFO] sast: SAST application starting up
+2026-04-01 12:56:05 [INFO] sast: Database initialised
+2026-04-01 12:56:05 [INFO] sast.backup: Database backed up → sast_20260401T072605Z.db
+2026-04-01 12:56:05 [INFO] sast.backup: Pruned old backup: sast_20260331T172940Z.db
+2026-04-01 12:56:05 [INFO] sast: Startup backup created: sast_20260401T072605Z.db
+2026-04-01 12:56:05 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-04-01 12:56:05 [INFO] sast: Rule catalog loaded — 601 rules, 228 CWEs
+2026-04-01 12:56:05 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 12:56:05 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 12:56:05 [INFO] sast: SAST application ready
+2026-04-01 12:56:30 [INFO] sast: SAST application shutting down
+2026-04-01 13:08:37 [INFO] sast: SAST application starting up
+2026-04-01 13:08:37 [INFO] sast: Database initialised
+2026-04-01 13:08:37 [INFO] sast.backup: Database backed up → sast_20260401T073837Z.db
+2026-04-01 13:08:37 [INFO] sast.backup: Pruned old backup: sast_20260331T174943Z.db
+2026-04-01 13:08:37 [INFO] sast: Startup backup created: sast_20260401T073837Z.db
+2026-04-01 13:08:37 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-04-01 13:08:37 [INFO] sast: Rule catalog loaded — 642 rules, 234 CWEs
+2026-04-01 13:08:38 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 13:08:38 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 13:08:38 [INFO] sast: SAST application ready
