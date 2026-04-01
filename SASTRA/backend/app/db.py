@@ -45,7 +45,7 @@ USERNAME_REGEX = re.compile(r"^[A-Za-z0-9_.-]{3,32}$")
 # NFR-5: scan records older than this are automatically purged on startup
 # and on demand via POST /api/admin/purge.
 SCAN_RETENTION_DAYS = 90
-SCAN_HOURLY_LIMIT = 5
+SCAN_HOURLY_LIMIT = 10
 SCAN_HOURLY_WINDOW_HOURS = 1
 LLM_RPM_LIMIT = 10
 LLM_RPM_WINDOW_MINUTES = 1
