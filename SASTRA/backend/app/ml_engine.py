@@ -62,7 +62,7 @@ _N_JOBS = max(1, int((os.cpu_count() or 1) * 0.8))
 # The rule confidence (0.45–0.99) is a reliable signal derived from how
 # frequently the pattern appeared in real vulnerable code; the ML model
 # provides an additional code-semantic signal.
-FP_THRESHOLD  = 0.55
+FP_THRESHOLD  = 0.60
 ML_WEIGHT     = 0.55
 RULE_WEIGHT   = 0.45
 

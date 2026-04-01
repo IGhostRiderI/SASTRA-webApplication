@@ -2110,3 +2110,64 @@ weighted avg       0.98      0.98      0.98     39084
 2026-04-01 10:07:49 [INFO] sast: LLM code-fix returned for CWE: CWE-89
 2026-04-01 10:08:08 [INFO] sast: Chat request from 'Nadinak'
 2026-04-01 10:08:09 [INFO] httpx: HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-01 10:12:37 [INFO] sast: File scan by 'Nadinak' — fp_test_upload.py  lang: python
+2026-04-01 10:12:37 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 0 entries, hierarchy: 0 parent links
+2026-04-01 10:12:37 [INFO] sast: Scan #112 complete — user: 'Nadinak'  findings: 9  risk: 5.0
+2026-04-01 10:12:48 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: python
+2026-04-01 10:13:03 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-04-01 10:14:54 [INFO] sast: File scan by 'Nadinak' — fp_test_upload.py  lang: python
+2026-04-01 10:14:55 [INFO] sast: Scan #113 complete — user: 'Nadinak'  findings: 9  risk: 5.0
+2026-04-01 10:18:56 [INFO] sast: User signed out
+2026-04-01 10:19:18 [WARNING] sast: Failed login attempt — username: This  is a text
+2026-04-01 10:19:34 [INFO] sast: New user registered — username: testLol
+2026-04-01 11:12:34 [INFO] sast: SAST application shutting down
+2026-04-01 11:22:08 [INFO] sast: SAST application starting up
+2026-04-01 11:22:08 [INFO] sast: Database initialised
+2026-04-01 11:22:08 [INFO] sast.backup: Database backed up → sast_20260401T055208Z.db
+2026-04-01 11:22:08 [INFO] sast.backup: Pruned old backup: sast_20260331T112252Z.db
+2026-04-01 11:22:08 [INFO] sast: Startup backup created: sast_20260401T055208Z.db
+2026-04-01 11:22:08 [INFO] sast: Startup purge: no scans older than 90 days found
+2026-04-01 11:22:08 [INFO] sast: Rule catalog loaded — 462 rules, 120 CWEs
+2026-04-01 11:22:08 [INFO] sast.ml: ML engine loaded — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 11:22:08 [INFO] sast: ML engine ready — samples: 195418  vocab: 40000  severity classes: [np.str_('Critical'), np.str_('High'), np.str_('Low'), np.str_('Medium')]
+2026-04-01 11:22:08 [INFO] sast: SAST application ready
+2026-04-01 11:27:36 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-04-01 11:28:04 [INFO] sast: User signed out
+2026-04-01 11:28:15 [WARNING] sast: Failed login attempt — username: test_sastra
+2026-04-01 11:29:51 [INFO] sast: New user registered — username: tresteug
+2026-04-01 11:30:07 [INFO] sast: File scan by 'tresteug' — fp_test_upload.py  lang: python
+2026-04-01 11:30:07 [INFO] app.cwe_dataset_loader: CWE dataset loaded — enrichment: 0 entries, hierarchy: 0 parent links
+2026-04-01 11:30:08 [INFO] sast: Scan #114 complete — user: 'tresteug'  findings: 1  risk: 5.0
+2026-04-01 11:39:04 [INFO] sast: File scan by 'tresteug' — fp_test_upload.py  lang: python
+2026-04-01 11:39:05 [INFO] sast: Scan #115 complete — user: 'tresteug'  findings: 1  risk: 5.0
+2026-04-01 11:39:59 [INFO] sast: File scan by 'tresteug' — fp_test_upload.py  lang: python
+2026-04-01 11:40:00 [INFO] sast: Scan #116 complete — user: 'tresteug'  findings: 1  risk: 5.0
+2026-04-01 11:42:28 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-04-01 11:43:11 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-04-01 11:43:11 [INFO] sast: Scan #117 complete — user: 'Nadinak'  findings: 1  risk: 5.0
+2026-04-01 11:44:09 [INFO] sast: Paste scan by 'Nadinak' — snippet.py  lang: python
+2026-04-01 11:44:12 [INFO] sast: Scan #118 complete — user: 'Nadinak'  findings: 47  risk: 5.0
+2026-04-01 11:44:35 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: python
+2026-04-01 11:44:37 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-04-01 11:44:42 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: python
+2026-04-01 11:44:43 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-04-01 11:44:48 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-04-01 11:44:49 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-04-01 11:44:53 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: python
+2026-04-01 11:44:54 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-04-01 11:44:56 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-78  language: python
+2026-04-01 11:44:57 [INFO] sast: LLM code-fix returned for CWE: CWE-78
+2026-04-01 11:45:01 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-94  language: python
+2026-04-01 11:45:34 [INFO] sast: LLM code-fix returned for CWE: CWE-94
+2026-04-01 11:47:37 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-79  language: python
+2026-04-01 11:47:38 [INFO] sast: LLM code-fix returned for CWE: CWE-79
+2026-04-01 11:47:41 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-502  language: python
+2026-04-01 11:47:42 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-04-01 11:47:45 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-502  language: python
+2026-04-01 11:47:46 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-04-01 11:47:52 [INFO] sast: LLM code-fix requested by 'Nadinak' — CWE: CWE-502  language: python
+2026-04-01 11:47:53 [INFO] sast: LLM code-fix returned for CWE: CWE-502
+2026-04-01 11:51:42 [INFO] sast: User signed in — username: Nadinak  role: superadmin
+2026-04-01 11:54:39 [INFO] sast: PDF report generated for scan #118 by 'Nadinak'
+2026-04-01 11:54:51 [INFO] sast: File scan by 'Nadinak' — intentionally_vulnerable_app.py  lang: python
+2026-04-01 11:54:51 [INFO] sast: Scan #119 complete — user: 'Nadinak'  findings: 5  risk: 5.0

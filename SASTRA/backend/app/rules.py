@@ -1742,6 +1742,1226 @@ PYTHON_RULES: List[Dict] = [
         "source": "hardcoded",
         "confidence": 0.80,
     },
+
+    # ── CWE-88: Argument Injection ────────────────────────────────────────────
+    {
+        "id": "py-cwe88-001",
+        "language": "python",
+        "title": "Argument injection via unsanitized user input in subprocess",
+        "pattern": r'subprocess\.\w+\s*\(\s*(?:args\[|request\.|f["\']|.*\+.*(?:request\.|args\[))',
+        "cwe_id": "CWE-88",
+        "cwe_name": "Argument Injection or Modification",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+    {
+        "id": "py-cwe88-002",
+        "language": "python",
+        "title": "Argument injection via shlex with unsanitized input",
+        "pattern": r'shlex\.split\s*\(.*(?:request\.|args\[|form\[|params\[)',
+        "cwe_id": "CWE-88",
+        "cwe_name": "Argument Injection or Modification",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-91: XML Injection ──────────────────────────────────────────────────
+    {
+        "id": "py-cwe91-001",
+        "language": "python",
+        "title": "XML injection via unsanitized user input in XML construction",
+        "pattern": r'(?:ET\.fromstring|ElementTree\.fromstring|lxml\.etree\.fromstring)\s*\(.*(?:request\.|args\[|form\[)',
+        "cwe_id": "CWE-91",
+        "cwe_name": "XML Injection",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+    {
+        "id": "py-cwe91-002",
+        "language": "python",
+        "title": "XML string built by concatenation with user input",
+        "pattern": r'["\']<\w+[^>]*>\s*["\'\s]*\+.*(?:request\.|args\[|form\[)',
+        "cwe_id": "CWE-91",
+        "cwe_name": "XML Injection",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-93: CRLF Injection ─────────────────────────────────────────────────
+    {
+        "id": "py-cwe93-001",
+        "language": "python",
+        "title": "CRLF injection in HTTP header value from user input",
+        "pattern": r'(?:response\.headers|flask\.Response|HttpResponse)\[.*\]\s*=.*(?:request\.|args\[|form\[|params\[)',
+        "cwe_id": "CWE-93",
+        "cwe_name": "CRLF Injection",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+    {
+        "id": "py-cwe93-002",
+        "language": "python",
+        "title": "Unsanitized redirect target may allow CRLF injection",
+        "pattern": r'(?:redirect|make_response)\s*\(.*(?:request\.|args\[|form\[)',
+        "cwe_id": "CWE-93",
+        "cwe_name": "CRLF Injection",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+
+    # ── CWE-96: Static Code Injection ─────────────────────────────────────────
+    {
+        "id": "py-cwe96-001",
+        "language": "python",
+        "title": "Code injection via exec() with user-controlled input",
+        "pattern": r'\bexec\s*\(.*(?:request\.|args\[|form\[|input\s*\()',
+        "cwe_id": "CWE-96",
+        "cwe_name": "Static Code Injection",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.88,
+    },
+    {
+        "id": "py-cwe96-002",
+        "language": "python",
+        "title": "Writing user-controlled data to a Python source file",
+        "pattern": r'open\s*\([^)]*\.py["\'][^)]*["\']w["\'][^)]*\).*write\s*\(.*(?:request\.|args\[|form\[)',
+        "cwe_id": "CWE-96",
+        "cwe_name": "Static Code Injection",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── CWE-98: PHP Remote File Inclusion (Python analogue: dynamic import) ───
+    {
+        "id": "py-cwe98-001",
+        "language": "python",
+        "title": "Dynamic import of user-supplied module name",
+        "pattern": r'(?:importlib\.import_module|__import__)\s*\(.*(?:request\.|args\[|form\[|params\[)',
+        "cwe_id": "CWE-98",
+        "cwe_name": "PHP Remote File Inclusion",
+        "severity": "Critical",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── CWE-99: Resource Injection ────────────────────────────────────────────
+    {
+        "id": "py-cwe99-001",
+        "language": "python",
+        "title": "Resource injection via user-controlled file path in open()",
+        "pattern": r'\bopen\s*\(.*(?:request\.|args\[|form\[|params\[).*["\'](?:r|w|a|rb|wb)["\']',
+        "cwe_id": "CWE-99",
+        "cwe_name": "Resource Injection",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-117: Log Injection ────────────────────────────────────────────────
+    {
+        "id": "py-cwe117-001",
+        "language": "python",
+        "title": "Log injection via unsanitized user input in logging call",
+        "pattern": r'logging\.\w+\s*\(\s*(?:f["\'].*(?:request\.|args\[)|[^)]*\+.*(?:request\.|args\[|form\[))',
+        "cwe_id": "CWE-117",
+        "cwe_name": "Improper Output Neutralization for Logs",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+    {
+        "id": "py-cwe117-002",
+        "language": "python",
+        "title": "Log injection via logger with f-string containing request data",
+        "pattern": r'(?:logger|log)\.\w+\s*\(\s*f["\'].*(?:\{.*request\.|args\[|form\[)',
+        "cwe_id": "CWE-117",
+        "cwe_name": "Improper Output Neutralization for Logs",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.73,
+    },
+
+    # ── CWE-643: XPath Injection ──────────────────────────────────────────────
+    {
+        "id": "py-cwe643-001",
+        "language": "python",
+        "title": "XPath injection via unsanitized user input in xpath()",
+        "pattern": r'\.xpath\s*\(.*(?:request\.|args\[|form\[|params\[)',
+        "cwe_id": "CWE-643",
+        "cwe_name": "XPath Injection",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+    {
+        "id": "py-cwe643-002",
+        "language": "python",
+        "title": "XPath expression built with string concatenation",
+        "pattern": r'["\'][^"\']*/@\w+["\'\s]*\+.*(?:request\.|args\[|form\[)',
+        "cwe_id": "CWE-643",
+        "cwe_name": "XPath Injection",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-644: Improper Neutralization of HTTP Headers ──────────────────────
+    {
+        "id": "py-cwe644-001",
+        "language": "python",
+        "title": "HTTP response header set from user-controlled value",
+        "pattern": r'(?:response|resp)\.headers\s*\[.*\]\s*=.*(?:request\.|args\[|form\[)',
+        "cwe_id": "CWE-644",
+        "cwe_name": "Improper Neutralization of HTTP Headers for Scripting Syntax",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-829: Inclusion from Untrusted Control Sphere ──────────────────────
+    {
+        "id": "py-cwe829-001",
+        "language": "python",
+        "title": "Loading plugin or module from user-controlled path",
+        "pattern": r'(?:importlib\.import_module|__import__|execfile)\s*\(.*(?:request\.|args\[|form\[|os\.environ)',
+        "cwe_id": "CWE-829",
+        "cwe_name": "Inclusion of Functionality from Untrusted Control Sphere",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── CWE-917: Expression Language Injection ────────────────────────────────
+    {
+        "id": "py-cwe917-001",
+        "language": "python",
+        "title": "Jinja2 template rendered with user-controlled string (SSTI)",
+        "pattern": r'(?:jinja2\.Template|Template)\s*\(.*(?:request\.|args\[|form\[|params\[)',
+        "cwe_id": "CWE-917",
+        "cwe_name": "Expression Language Injection",
+        "severity": "Critical",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.90,
+    },
+    {
+        "id": "py-cwe917-002",
+        "language": "python",
+        "title": "render_template_string with user-controlled template source",
+        "pattern": r'render_template_string\s*\(.*(?:request\.|args\[|form\[)',
+        "cwe_id": "CWE-917",
+        "cwe_name": "Expression Language Injection",
+        "severity": "Critical",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.92,
+    },
+
+    # ── CWE-1336: Template Engine Injection ───────────────────────────────────
+    {
+        "id": "py-cwe1336-001",
+        "language": "python",
+        "title": "Server-side template injection via unsanitized template source",
+        "pattern": r'(?:Environment|SandboxedEnvironment)\s*\(.*\).*from_string\s*\(.*(?:request\.|args\[|form\[)',
+        "cwe_id": "CWE-1336",
+        "cwe_name": "Improper Neutralization of Special Elements in Template Engine",
+        "severity": "Critical",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.88,
+    },
+
+    # ── CWE-250: Execution with Unnecessary Privileges ─────────────────────────
+    {
+        "id": "py-cwe250-001",
+        "language": "python",
+        "title": "Process started as root / setuid(0) call",
+        "pattern": r'os\.setuid\s*\(\s*0\s*\)|os\.seteuid\s*\(\s*0\s*\)',
+        "cwe_id": "CWE-250",
+        "cwe_name": "Execution with Unnecessary Privileges",
+        "severity": "High",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── CWE-266: Incorrect Privilege Assignment ────────────────────────────────
+    {
+        "id": "py-cwe266-001",
+        "language": "python",
+        "title": "Incorrect privilege assignment via chmod with overly permissive mode",
+        "pattern": r'os\.chmod\s*\([^)]+,\s*0o?7[0-7]{2}\s*\)',
+        "cwe_id": "CWE-266",
+        "cwe_name": "Incorrect Privilege Assignment",
+        "severity": "High",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-277: Insecure Inherited Permissions ────────────────────────────────
+    {
+        "id": "py-cwe277-001",
+        "language": "python",
+        "title": "File created without explicitly setting restrictive permissions",
+        "pattern": r'\bopen\s*\([^)]+,\s*["\']w["\'][^)]*\)(?!\s*\n.*os\.chmod)',
+        "cwe_id": "CWE-277",
+        "cwe_name": "Insecure Inherited Permissions",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-288: Authentication Bypass Using Alternate Path ───────────────────
+    {
+        "id": "py-cwe288-001",
+        "language": "python",
+        "title": "Authentication check skipped for specific URL paths",
+        "pattern": r'if\s+.*(?:url|path|endpoint).*(?:startswith|endswith|in)\s*\(.*\)\s*:\s*\n\s*return',
+        "cwe_id": "CWE-288",
+        "cwe_name": "Authentication Bypass Using an Alternate Path or Channel",
+        "severity": "High",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-346: Origin Validation Error ──────────────────────────────────────
+    {
+        "id": "py-cwe346-001",
+        "language": "python",
+        "title": "CORS allow-all origin misconfiguration",
+        "pattern": r'(?:CORS|cors)\s*\([^)]*origins\s*=\s*["\'\*]|Access-Control-Allow-Origin["\'\s]*:\s*["\'\*]',
+        "cwe_id": "CWE-346",
+        "cwe_name": "Origin Validation Error",
+        "severity": "High",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+    {
+        "id": "py-cwe346-002",
+        "language": "python",
+        "title": "Origin header used directly without validation",
+        "pattern": r'request\.headers\.get\s*\(\s*["\']Origin["\']\s*\)(?!.*(?:allowed|whitelist|trusted|validate))',
+        "cwe_id": "CWE-346",
+        "cwe_name": "Origin Validation Error",
+        "severity": "High",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-472: External Control of Assumed-Immutable Web Parameter ──────────
+    {
+        "id": "py-cwe472-001",
+        "language": "python",
+        "title": "Trusting hidden field or cookie value for authorization decision",
+        "pattern": r'(?:request\.cookies\.get|request\.form\.get)\s*\(\s*["\'](?:role|admin|is_admin|privilege|user_id)["\']',
+        "cwe_id": "CWE-472",
+        "cwe_name": "External Control of Assumed-Immutable Web Parameter",
+        "severity": "High",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── CWE-530: Exposure of Backup File ──────────────────────────────────────
+    {
+        "id": "py-cwe530-001",
+        "language": "python",
+        "title": "Backup file path exposed to web directory",
+        "pattern": r'(?:send_file|send_from_directory|FileResponse)\s*\(.*\.(?:bak|backup|old|orig|swp|tmp)["\']',
+        "cwe_id": "CWE-530",
+        "cwe_name": "Exposure of Backup File to an Unauthorized Control Sphere",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-539: Persistent Cookies with Sensitive Information ────────────────
+    {
+        "id": "py-cwe539-001",
+        "language": "python",
+        "title": "Sensitive data stored in persistent cookie without expiry restriction",
+        "pattern": r'(?:response\.set_cookie|set_cookie)\s*\([^)]*(?:password|secret|token|ssn|credit)[^)]*\)',
+        "cwe_id": "CWE-539",
+        "cwe_name": "Use of Persistent Cookies Containing Sensitive Information",
+        "severity": "Medium",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-598: Sensitive Data in GET Query String ────────────────────────────
+    {
+        "id": "py-cwe598-001",
+        "language": "python",
+        "title": "Sensitive parameters transmitted via GET request",
+        "pattern": r'request\.args\.get\s*\(\s*["\'](?:password|passwd|secret|token|api_key|apikey|ssn)["\']',
+        "cwe_id": "CWE-598",
+        "cwe_name": "Use of GET Request Method with Sensitive Query Strings",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── CWE-311: Missing Encryption of Sensitive Data ─────────────────────────
+    {
+        "id": "py-cwe311-001",
+        "language": "python",
+        "title": "Sensitive data written to file without encryption",
+        "pattern": r'open\s*\([^)]+,\s*["\']w["\'][^)]*\).*write\s*\(.*(?:password|secret|token|ssn|credit_card)',
+        "cwe_id": "CWE-311",
+        "cwe_name": "Missing Encryption of Sensitive Data",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-329: Not Using a Random IV with CBC Mode ───────────────────────────
+    {
+        "id": "py-cwe329-001",
+        "language": "python",
+        "title": "CBC mode cipher created without random IV",
+        "pattern": r'(?:AES|DES|Blowfish)\.new\s*\([^)]*MODE_CBC[^)]*\)(?!.*(?:Random|os\.urandom|get_random_bytes))',
+        "cwe_id": "CWE-329",
+        "cwe_name": "Not Using a Random IV with CBC Mode",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+    {
+        "id": "py-cwe329-002",
+        "language": "python",
+        "title": "Static/hardcoded IV used with block cipher",
+        "pattern": r'iv\s*=\s*(?:b["\'][^"\']{8,32}["\']|bytes\([0-9]+\))',
+        "cwe_id": "CWE-329",
+        "cwe_name": "Not Using a Random IV with CBC Mode",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── CWE-331: Insufficient Entropy ─────────────────────────────────────────
+    {
+        "id": "py-cwe331-001",
+        "language": "python",
+        "title": "Weak entropy source used for security-sensitive value",
+        "pattern": r'(?:random\.random|random\.randint|random\.choice)\s*\(.*(?:token|secret|key|password|salt)',
+        "cwe_id": "CWE-331",
+        "cwe_name": "Insufficient Entropy",
+        "severity": "Medium",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-335: Incorrect Usage of Seeds in PRNG ─────────────────────────────
+    {
+        "id": "py-cwe335-001",
+        "language": "python",
+        "title": "PRNG seeded with predictable constant value",
+        "pattern": r'random\.seed\s*\(\s*(?:0|1|42|1234|["\'][^"\']{1,10}["\'])\s*\)',
+        "cwe_id": "CWE-335",
+        "cwe_name": "Incorrect Usage of Seeds in PRNG",
+        "severity": "Medium",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── CWE-336: Same Seed in PRNG ─────────────────────────────────────────────
+    {
+        "id": "py-cwe336-001",
+        "language": "python",
+        "title": "PRNG always seeded with same fixed value",
+        "pattern": r'random\.seed\s*\(\s*\d+\s*\)',
+        "cwe_id": "CWE-336",
+        "cwe_name": "Same Seed in PRNG",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-337: Predictable Seed in PRNG ─────────────────────────────────────
+    {
+        "id": "py-cwe337-001",
+        "language": "python",
+        "title": "PRNG seeded with predictable time-based value",
+        "pattern": r'random\.seed\s*\(.*(?:time\.|datetime\.|timestamp)',
+        "cwe_id": "CWE-337",
+        "cwe_name": "Predictable Seed in PRNG",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── CWE-345: Insufficient Verification of Data Authenticity ───────────────
+    {
+        "id": "py-cwe345-001",
+        "language": "python",
+        "title": "Webhook payload processed without signature verification",
+        "pattern": r'(?:request\.data|request\.json|request\.get_json)\s*\(\s*\)(?![\s\S]{0,200}(?:hmac|signature|verify|secret))',
+        "cwe_id": "CWE-345",
+        "cwe_name": "Insufficient Verification of Data Authenticity",
+        "severity": "High",
+        "owasp_category": "A08:2021 - Software and Data Integrity Failures",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-347: Improper Verification of Cryptographic Signature ─────────────
+    {
+        "id": "py-cwe347-001",
+        "language": "python",
+        "title": "JWT decoded without signature verification (algorithms=none)",
+        "pattern": r'jwt\.decode\s*\([^)]*(?:algorithms\s*=\s*\[\s*["\']none["\']|verify\s*=\s*False)',
+        "cwe_id": "CWE-347",
+        "cwe_name": "Improper Verification of Cryptographic Signature",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.92,
+    },
+    {
+        "id": "py-cwe347-002",
+        "language": "python",
+        "title": "JWT decoded without specifying expected algorithms",
+        "pattern": r'jwt\.decode\s*\([^)]*\)(?![\s\S]{0,50}algorithms)',
+        "cwe_id": "CWE-347",
+        "cwe_name": "Improper Verification of Cryptographic Signature",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-523: Unprotected Transport of Credentials ─────────────────────────
+    {
+        "id": "py-cwe523-001",
+        "language": "python",
+        "title": "HTTP (non-HTTPS) URL used to transmit credentials",
+        "pattern": r'(?:requests\.(?:get|post|put)|urllib\.request\.urlopen)\s*\(\s*["\']http://[^"\']*(?:login|auth|password|token)',
+        "cwe_id": "CWE-523",
+        "cwe_name": "Unprotected Transport of Credentials",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── CWE-760: One-Way Hash with Predictable Salt ────────────────────────────
+    {
+        "id": "py-cwe760-001",
+        "language": "python",
+        "title": "hashlib used with static/hardcoded salt for password hashing",
+        "pattern": r'hashlib\.\w+\s*\([^)]*(?:salt\s*=\s*["\'][^"\']+["\']|b["\'][a-zA-Z0-9]{1,16}["\'])',
+        "cwe_id": "CWE-760",
+        "cwe_name": "Use of a One-Way Hash with a Predictable Salt",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-613: Insufficient Session Expiration ───────────────────────────────
+    {
+        "id": "py-cwe613-001",
+        "language": "python",
+        "title": "Session cookie set without expiration (permanent session risk)",
+        "pattern": r'session\.permanent\s*=\s*True(?![\s\S]{0,200}PERMANENT_SESSION_LIFETIME)',
+        "cwe_id": "CWE-613",
+        "cwe_name": "Insufficient Session Expiration",
+        "severity": "Medium",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+    {
+        "id": "py-cwe613-002",
+        "language": "python",
+        "title": "JWT issued with very long or no expiration",
+        "pattern": r'jwt\.encode\s*\([^)]*(?:exp["\'\s]*:[^)]*\+\s*timedelta\s*\(\s*days\s*=\s*(?:[3-9]\d{2,}|\d{4,}))',
+        "cwe_id": "CWE-613",
+        "cwe_name": "Insufficient Session Expiration",
+        "severity": "Medium",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-640: Weak Password Recovery Mechanism ─────────────────────────────
+    {
+        "id": "py-cwe640-001",
+        "language": "python",
+        "title": "Password reset using predictable token (e.g., MD5 of username/email)",
+        "pattern": r'(?:reset_token|password_reset)\s*=.*(?:md5|hashlib\.md5|hashlib\.sha1)\s*\(',
+        "cwe_id": "CWE-640",
+        "cwe_name": "Weak Password Recovery Mechanism for Forgotten Password",
+        "severity": "High",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-405: Asymmetric Resource Consumption ──────────────────────────────
+    {
+        "id": "py-cwe405-001",
+        "language": "python",
+        "title": "Unbounded resource amplification from user-controlled count",
+        "pattern": r'range\s*\(.*(?:request\.|args\[|form\[|int\s*\(.*request\.)',
+        "cwe_id": "CWE-405",
+        "cwe_name": "Asymmetric Resource Consumption (Amplification)",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+
+    # ── CWE-409: Improper Handling of Highly Compressed Data (Zip Bomb) ───────
+    {
+        "id": "py-cwe409-001",
+        "language": "python",
+        "title": "ZIP archive extracted without size limits (potential zip bomb)",
+        "pattern": r'(?:zipfile\.ZipFile|tarfile\.open)\s*\([^)]+\).*\.extractall\s*\(',
+        "cwe_id": "CWE-409",
+        "cwe_name": "Improper Handling of Highly Compressed Data (Zip Bomb)",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-674: Uncontrolled Recursion ───────────────────────────────────────
+    {
+        "id": "py-cwe674-001",
+        "language": "python",
+        "title": "Recursive function without depth limit or base case guard",
+        "pattern": r'def\s+(\w+)\s*\([^)]*\)[\s\S]{0,500}\1\s*\(',
+        "cwe_id": "CWE-674",
+        "cwe_name": "Uncontrolled Recursion",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-730: REDOS ────────────────────────────────────────────────────────
+    {
+        "id": "py-cwe730-001",
+        "language": "python",
+        "title": "Potentially catastrophic regex with nested quantifiers (ReDoS)",
+        "pattern": r're\.\w+\s*\(\s*["\'].*(?:\.\*|\+){2,}.*["\']',
+        "cwe_id": "CWE-730",
+        "cwe_name": "REDOS (Regex Denial of Service)",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+    {
+        "id": "py-cwe730-002",
+        "language": "python",
+        "title": "Regex with ambiguous alternation applied to user-controlled input",
+        "pattern": r're\.(?:match|search|fullmatch)\s*\(\s*["\'][^"\']*\([^)]+\|\s*[^)]+\)[+*]["\'].*(?:request\.|args\[)',
+        "cwe_id": "CWE-730",
+        "cwe_name": "REDOS (Regex Denial of Service)",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-248: Uncaught Exception ───────────────────────────────────────────
+    {
+        "id": "py-cwe248-001",
+        "language": "python",
+        "title": "Bare except clause suppresses all exceptions silently",
+        "pattern": r'except\s*:\s*\n\s*pass',
+        "cwe_id": "CWE-248",
+        "cwe_name": "Uncaught Exception",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-390: Detection of Error Condition Without Action ──────────────────
+    {
+        "id": "py-cwe390-001",
+        "language": "python",
+        "title": "Exception caught but ignored (no logging or re-raise)",
+        "pattern": r'except\s+\w+(?:\s+as\s+\w+)?\s*:\s*\n\s*pass',
+        "cwe_id": "CWE-390",
+        "cwe_name": "Detection of Error Condition Without Action",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-477: Use of Obsolete Function ─────────────────────────────────────
+    {
+        "id": "py-cwe477-001",
+        "language": "python",
+        "title": "Use of deprecated/obsolete Python 2 function",
+        "pattern": r'\b(?:apply|execfile|has_key|raw_input|reduce|reload|xrange)\s*\(',
+        "cwe_id": "CWE-477",
+        "cwe_name": "Use of Obsolete Function",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-532: Insertion of Sensitive Information into Log File ─────────────
+    {
+        "id": "py-cwe532-001",
+        "language": "python",
+        "title": "Sensitive field value written to log",
+        "pattern": r'(?:logging\.|logger\.|log\.)\w+\s*\(.*(?:password|passwd|secret|token|api_key|credit_card|ssn)',
+        "cwe_id": "CWE-532",
+        "cwe_name": "Insertion of Sensitive Information into Log File",
+        "severity": "Medium",
+        "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+    {
+        "id": "py-cwe532-002",
+        "language": "python",
+        "title": "print() of sensitive variable to stdout (potential log sink)",
+        "pattern": r'\bprint\s*\(.*(?:password|passwd|secret|token|api_key)\b',
+        "cwe_id": "CWE-532",
+        "cwe_name": "Insertion of Sensitive Information into Log File",
+        "severity": "Medium",
+        "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-778: Insufficient Logging ─────────────────────────────────────────
+    {
+        "id": "py-cwe778-001",
+        "language": "python",
+        "title": "Authentication failure not logged",
+        "pattern": r'(?:raise\s+(?:AuthenticationError|PermissionError|Forbidden)|return\s+(?:401|403))(?![\s\S]{0,200}(?:logging\.|logger\.|log\.))',
+        "cwe_id": "CWE-778",
+        "cwe_name": "Insufficient Logging",
+        "severity": "Low",
+        "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-560: Use of umask() with chmod-style Argument ─────────────────────
+    {
+        "id": "py-cwe560-001",
+        "language": "python",
+        "title": "os.umask() called with chmod-style argument (non-inverted mask)",
+        "pattern": r'os\.umask\s*\(\s*0o?[024][0-7]{2}\s*\)',
+        "cwe_id": "CWE-560",
+        "cwe_name": "Use of umask() with chmod-style Argument",
+        "severity": "Medium",
+        "owasp_category": "A05:2021 - Security Misconfiguration",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-332: Insufficient Entropy in PRNG ─────────────────────────────────
+    {
+        "id": "py-cwe332-001",
+        "language": "python",
+        "title": "Insufficient entropy: random module used for security token",
+        "pattern": r'random\.(?:randint|random|choice|choices|sample)\s*\(.*(?:token|key|nonce|otp|password|secret)',
+        "cwe_id": "CWE-332",
+        "cwe_name": "Insufficient Entropy in PRNG",
+        "severity": "Medium",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-334: Small Space of Random Values ─────────────────────────────────
+    {
+        "id": "py-cwe334-001",
+        "language": "python",
+        "title": "Security token generated with small range of values",
+        "pattern": r'(?:random\.randint|randrange)\s*\(\s*\d+\s*,\s*(?:[1-9]\d{0,3})\s*\)',
+        "cwe_id": "CWE-334",
+        "cwe_name": "Small Space of Random Values",
+        "severity": "Medium",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-322: Key Exchange without Entity Authentication ────────────────────
+    {
+        "id": "py-cwe322-001",
+        "language": "python",
+        "title": "Diffie-Hellman key exchange without peer authentication",
+        "pattern": r'(?:dh\.generate_parameters|DHParameterNumbers|generate_dh)(?![\s\S]{0,500}(?:verify|certificate|authenticate))',
+        "cwe_id": "CWE-322",
+        "cwe_name": "Key Exchange without Entity Authentication",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+
+    # ── CWE-354: Improper Validation of Integrity Check Value ─────────────────
+    {
+        "id": "py-cwe354-001",
+        "language": "python",
+        "title": "HMAC or checksum computed but not compared securely",
+        "pattern": r'hmac\.new\s*\([^)]+\)(?![\s\S]{0,200}(?:compare_digest|constant_time_compare))',
+        "cwe_id": "CWE-354",
+        "cwe_name": "Improper Validation of Integrity Check Value",
+        "severity": "Medium",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-525: Browser Cache with Sensitive Information ─────────────────────
+    {
+        "id": "py-cwe525-001",
+        "language": "python",
+        "title": "Response missing Cache-Control no-store for sensitive page",
+        "pattern": r'(?:jsonify|make_response|render_template)\s*\([^)]*(?:password|token|secret|account)[^)]*\)(?![\s\S]{0,300}Cache-Control)',
+        "cwe_id": "CWE-525",
+        "cwe_name": "Use of Web Browser Cache Containing Sensitive Information",
+        "severity": "Low",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-255: Credentials Management Errors ────────────────────────────────
+    {
+        "id": "py-cwe255-001",
+        "language": "python",
+        "title": "Default or empty credentials used in configuration",
+        "pattern": r'(?:password|passwd|secret)\s*=\s*["\'](?:password|passwd|admin|default|changeme|)["\']',
+        "cwe_id": "CWE-255",
+        "cwe_name": "Credentials Management Errors",
+        "severity": "Medium",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-263: Password Aging with Long Expiration ───────────────────────────
+    {
+        "id": "py-cwe263-001",
+        "language": "python",
+        "title": "Password expiration set to excessively long period",
+        "pattern": r'PASSWORD_EXPIRY\s*=\s*(?:[3-9]\d{3}|\d{5,})',
+        "cwe_id": "CWE-263",
+        "cwe_name": "Password Aging with Long Expiration",
+        "severity": "Low",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-549: Missing Password Field Masking ────────────────────────────────
+    {
+        "id": "py-cwe549-001",
+        "language": "python",
+        "title": "Password field rendered without masking in template",
+        "pattern": r'(?:input|field)\s*.*(?:type\s*=\s*["\']text["\'])[^>]*(?:password|passwd|pass)',
+        "cwe_id": "CWE-549",
+        "cwe_name": "Missing Password Field Masking",
+        "severity": "Low",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-290: Authentication Bypass by Spoofing ────────────────────────────
+    {
+        "id": "py-cwe290-001",
+        "language": "python",
+        "title": "Authentication decision based on spoofable X-Forwarded-For or similar header",
+        "pattern": r'request\.headers\.get\s*\(\s*["\'](?:X-Forwarded-For|X-Real-IP|Client-IP)["\']',
+        "cwe_id": "CWE-290",
+        "cwe_name": "Authentication Bypass by Spoofing",
+        "severity": "High",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-283: Unverified Ownership ─────────────────────────────────────────
+    {
+        "id": "py-cwe283-001",
+        "language": "python",
+        "title": "Resource accessed without verifying it belongs to requesting user",
+        "pattern": r'(?:get_object_or_404|\.get\s*\(id\s*=).*(?:request\.(?:args|data|json|GET|POST))',
+        "cwe_id": "CWE-283",
+        "cwe_name": "Unverified Ownership",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-403: File Descriptor Exposed to Unintended Control Sphere ─────────
+    {
+        "id": "py-cwe403-001",
+        "language": "python",
+        "title": "File descriptor or socket passed to child process via inherit",
+        "pattern": r'subprocess\.\w+\s*\([^)]*(?:close_fds\s*=\s*False|pass_fds\s*=)',
+        "cwe_id": "CWE-403",
+        "cwe_name": "Exposure of File Descriptor to Unintended Control Sphere",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-420: Unprotected Alternate Channel ─────────────────────────────────
+    {
+        "id": "py-cwe420-001",
+        "language": "python",
+        "title": "Debug or management endpoint exposed without authentication",
+        "pattern": r'@(?:app|router)\.(?:route|get|post)\s*\(\s*["\']\/(?:debug|admin|manage|internal|health)["\'][^)]*\)(?![\s\S]{0,300}(?:login_required|authenticate|require_auth|verify_token))',
+        "cwe_id": "CWE-420",
+        "cwe_name": "Unprotected Alternate Channel",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+
+    # ── CWE-425: Direct Request (Forced Browsing) ─────────────────────────────
+    {
+        "id": "py-cwe425-001",
+        "language": "python",
+        "title": "Static file route serves sensitive resources without access control",
+        "pattern": r'(?:send_from_directory|StaticFiles|mount)\s*\([^)]*(?:private|secret|internal|admin|config)',
+        "cwe_id": "CWE-425",
+        "cwe_name": "Direct Request (Forced Browsing)",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+
+    # ── CWE-441: Unintended Proxy or Intermediary ──────────────────────────────
+    {
+        "id": "py-cwe441-001",
+        "language": "python",
+        "title": "Application forwards user-controlled URL as proxy (SSRF/proxy risk)",
+        "pattern": r'requests\.(?:get|post)\s*\(.*(?:request\.|args\[|form\[|params\[)',
+        "cwe_id": "CWE-441",
+        "cwe_name": "Unintended Proxy or Intermediary",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-552: Files or Directories Accessible to External Parties ──────────
+    {
+        "id": "py-cwe552-001",
+        "language": "python",
+        "title": "Sensitive directory served as static files",
+        "pattern": r'(?:StaticFiles|send_from_directory)\s*\([^)]*(?:directory|path)\s*=\s*["\'](?:\/etc|\/var|\/home|\.env|config)',
+        "cwe_id": "CWE-552",
+        "cwe_name": "Files or Directories Accessible to External Parties",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-650: Trusting HTTP Permission Methods ──────────────────────────────
+    {
+        "id": "py-cwe650-001",
+        "language": "python",
+        "title": "Authorization decision based on HTTP method alone (trusting OPTIONS/HEAD)",
+        "pattern": r'if\s+request\.method\s*(?:==|in)\s*["\'\[]*(?:OPTIONS|HEAD|GET)["\'\]]*\s*:[\s\S]{0,200}return',
+        "cwe_id": "CWE-650",
+        "cwe_name": "Trusting HTTP Permission Methods on the Server Side",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-668: Exposure of Resource to Wrong Sphere ─────────────────────────
+    {
+        "id": "py-cwe668-001",
+        "language": "python",
+        "title": "Sensitive configuration value exposed in API response",
+        "pattern": r'(?:jsonify|json\.dumps)\s*\(.*(?:SECRET_KEY|DATABASE_URL|API_KEY|PRIVATE_KEY|password)',
+        "cwe_id": "CWE-668",
+        "cwe_name": "Exposure of Resource to Wrong Sphere",
+        "severity": "Medium",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-407: Inefficient Algorithmic Complexity ────────────────────────────
+    {
+        "id": "py-cwe407-001",
+        "language": "python",
+        "title": "Nested loop over user-controlled collection (O(n^2) complexity risk)",
+        "pattern": r'for\s+\w+\s+in\s+.*(?:request\.|args\[|form\[)[\s\S]{0,200}for\s+\w+\s+in',
+        "cwe_id": "CWE-407",
+        "cwe_name": "Inefficient Algorithmic Complexity",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-410: Insufficient Resource Pool ────────────────────────────────────
+    {
+        "id": "py-cwe410-001",
+        "language": "python",
+        "title": "Thread pool or connection pool created without maximum size limit",
+        "pattern": r'(?:ThreadPoolExecutor|ProcessPoolExecutor)\s*\(\s*\)',
+        "cwe_id": "CWE-410",
+        "cwe_name": "Insufficient Resource Pool",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+
+    # ── CWE-664: Improper Control of Resource Through Lifetime ────────────────
+    {
+        "id": "py-cwe664-001",
+        "language": "python",
+        "title": "Resource opened but not closed via context manager",
+        "pattern": r'(?:open|socket\.socket)\s*\([^)]*\)(?![\s\S]{0,5}(?:as\s+\w+|\s*with))',
+        "cwe_id": "CWE-664",
+        "cwe_name": "Improper Control of a Resource Through its Lifetime",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-695: Use of Low-Level Functionality ────────────────────────────────
+    {
+        "id": "py-cwe695-001",
+        "language": "python",
+        "title": "Use of ctypes for direct memory/OS access",
+        "pattern": r'\bctypes\.\w+|cffi\.FFI\s*\(',
+        "cwe_id": "CWE-695",
+        "cwe_name": "Use of Low-Level Functionality",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-755: Improper Handling of Exceptional Conditions ──────────────────
+    {
+        "id": "py-cwe755-001",
+        "language": "python",
+        "title": "Exception handler catches all exceptions and continues silently",
+        "pattern": r'except\s+Exception\s*(?:as\s+\w+)?\s*:\s*\n\s*(?:pass|continue)',
+        "cwe_id": "CWE-755",
+        "cwe_name": "Improper Handling of Exceptional Conditions",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-398: Indicator of Poor Code Quality ───────────────────────────────
+    {
+        "id": "py-cwe398-001",
+        "language": "python",
+        "title": "TODO/FIXME/HACK comment indicating unfinished security logic",
+        "pattern": r'#\s*(?:TODO|FIXME|HACK|XXX).*(?:auth|secur|password|token|validate|sanitize)',
+        "cwe_id": "CWE-398",
+        "cwe_name": "Indicator of Poor Code Quality",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.60,
+    },
+
+    # ── CWE-563: Assignment to Variable Without Use ────────────────────────────
+    {
+        "id": "py-cwe563-001",
+        "language": "python",
+        "title": "Security-relevant variable assigned but never used",
+        "pattern": r'(?:result|status|error|ret|rc)\s*=\s*(?:check|validate|verify|authenticate)\s*\([^)]+\)\s*\n(?!\s*if\s+\w*(?:result|status|error|ret|rc))',
+        "cwe_id": "CWE-563",
+        "cwe_name": "Assignment to Variable without Use",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-570: Expression is Always False ───────────────────────────────────
+    {
+        "id": "py-cwe570-001",
+        "language": "python",
+        "title": "Condition that is always False (dead code — potential logic flaw)",
+        "pattern": r'if\s+False\s*:',
+        "cwe_id": "CWE-570",
+        "cwe_name": "Expression is Always False",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-571: Expression is Always True ────────────────────────────────────
+    {
+        "id": "py-cwe571-001",
+        "language": "python",
+        "title": "Condition that is always True (bypasses check — potential logic flaw)",
+        "pattern": r'if\s+True\s*:',
+        "cwe_id": "CWE-571",
+        "cwe_name": "Expression is Always True",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-624: Executable Regular Expression Error ───────────────────────────
+    {
+        "id": "py-cwe624-001",
+        "language": "python",
+        "title": "Regex compiled from user-controlled input (ReDoS / code exec risk)",
+        "pattern": r're\.compile\s*\(.*(?:request\.|args\[|form\[|params\[)',
+        "cwe_id": "CWE-624",
+        "cwe_name": "Executable Regular Expression Error",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-625: Permissive Regular Expression ─────────────────────────────────
+    {
+        "id": "py-cwe625-001",
+        "language": "python",
+        "title": "Overly permissive regex used for input validation",
+        "pattern": r're\.(?:match|fullmatch)\s*\(\s*["\'](?:\.\*|[^"\']{0,5})["\']',
+        "cwe_id": "CWE-625",
+        "cwe_name": "Permissive Regular Expression",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-645: Overly Restrictive Account Lockout ────────────────────────────
+    {
+        "id": "py-cwe645-001",
+        "language": "python",
+        "title": "Account lockout threshold set too low (1 attempt) enabling DoS",
+        "pattern": r'(?:MAX_LOGIN_ATTEMPTS|lockout_threshold|max_attempts)\s*=\s*[1](?!\d)',
+        "cwe_id": "CWE-645",
+        "cwe_name": "Overly Restrictive Account Lockout Mechanism",
+        "severity": "Low",
+        "owasp_category": "A05:2021 - Security Misconfiguration",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-651: WSDL Exposure ─────────────────────────────────────────────────
+    {
+        "id": "py-cwe651-001",
+        "language": "python",
+        "title": "WSDL file served without access control",
+        "pattern": r'(?:route|path)\s*.*["\'](?:/|.*)?(?:service\.wsdl|\?wsdl)["\']',
+        "cwe_id": "CWE-651",
+        "cwe_name": "Exposure of WSDL File Containing Sensitive Information",
+        "severity": "Low",
+        "owasp_category": "A05:2021 - Security Misconfiguration",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+
+    # ── CWE-544: Missing Standardized Error Handling ───────────────────────────
+    {
+        "id": "py-cwe544-001",
+        "language": "python",
+        "title": "No application-wide error handler registered",
+        "pattern": r'(?:Flask|FastAPI)\s*\(\s*__name__\s*\)(?![\s\S]{0,3000}(?:@app\.errorhandler|exception_handler|add_exception_handler))',
+        "cwe_id": "CWE-544",
+        "cwe_name": "Missing Standardized Error Handling Mechanism",
+        "severity": "Low",
+        "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
+        "source": "hardcoded",
+        "confidence": 0.60,
+    },
+
+    # ── CWE-392: Missing Report of Error Condition ─────────────────────────────
+    {
+        "id": "py-cwe392-001",
+        "language": "python",
+        "title": "Function returns None on error without signaling failure",
+        "pattern": r'except\s+\w+(?:\s+as\s+\w+)?\s*:\s*\n\s*return\s+None',
+        "cwe_id": "CWE-392",
+        "cwe_name": "Missing Report of Error Condition",
+        "severity": "Low",
+        "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-393: Return of Wrong Status Code ──────────────────────────────────
+    {
+        "id": "py-cwe393-001",
+        "language": "python",
+        "title": "200 OK returned on authentication or authorization failure",
+        "pattern": r'return\s+(?:jsonify|make_response)\s*\(.*(?:error|fail|denied|unauthorized)[^)]*\),\s*200',
+        "cwe_id": "CWE-393",
+        "cwe_name": "Return of Wrong Status Code",
+        "severity": "Low",
+        "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
 ]
 
 
@@ -3194,6 +4414,314 @@ JAVA_RULES: List[Dict] = [
         "source": "hardcoded",
         "confidence": 0.65,
     },
+
+    # ── CWE-91: XML Injection (Java) ──────────────────────────────────────────
+    {
+        "id": "java-cwe91-001",
+        "language": "java",
+        "title": "XML constructed by string concatenation with user input",
+        "pattern": r'(?:DocumentBuilder|SAXParser|XMLStreamReader).*\+\s*\w+(?:Param|Input|Request|User)',
+        "cwe_id": "CWE-91",
+        "cwe_name": "XML Injection",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-93: CRLF Injection (Java) ─────────────────────────────────────────
+    {
+        "id": "java-cwe93-001",
+        "language": "java",
+        "title": "HTTP response header set from unsanitized input (CRLF risk)",
+        "pattern": r'response\.(?:addHeader|setHeader)\s*\([^)]*(?:request\.getParameter|getHeader)',
+        "cwe_id": "CWE-93",
+        "cwe_name": "CRLF Injection",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-117: Log Injection (Java) ─────────────────────────────────────────
+    {
+        "id": "java-cwe117-001",
+        "language": "java",
+        "title": "Unsanitized user input written to log (log injection)",
+        "pattern": r'(?:log(?:ger)?|LOG)\.\w+\s*\(.*request\.getParameter\s*\(',
+        "cwe_id": "CWE-117",
+        "cwe_name": "Improper Output Neutralization for Logs",
+        "severity": "Medium",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-643: XPath Injection (Java) ──────────────────────────────────────
+    {
+        "id": "java-cwe643-001",
+        "language": "java",
+        "title": "XPath expression built with user input (XPath injection)",
+        "pattern": r'xpath\.evaluate\s*\(.*\+.*(?:request\.getParameter|getInput)',
+        "cwe_id": "CWE-643",
+        "cwe_name": "XPath Injection",
+        "severity": "High",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── CWE-917: Expression Language Injection (Java) ─────────────────────────
+    {
+        "id": "java-cwe917-001",
+        "language": "java",
+        "title": "EL expression evaluated with user-controlled input (EL injection)",
+        "pattern": r'(?:ELProcessor|ExpressionFactory).*eval\s*\(.*(?:request\.getParameter|getInput)',
+        "cwe_id": "CWE-917",
+        "cwe_name": "Expression Language Injection",
+        "severity": "Critical",
+        "owasp_category": "A03:2021 - Injection",
+        "source": "hardcoded",
+        "confidence": 0.88,
+    },
+
+    # ── CWE-346: Origin Validation Error (Java) ───────────────────────────────
+    {
+        "id": "java-cwe346-001",
+        "language": "java",
+        "title": "CORS wildcard origin configured in Java servlet",
+        "pattern": r'response\.(?:addHeader|setHeader)\s*\(\s*"Access-Control-Allow-Origin"\s*,\s*"\*"',
+        "cwe_id": "CWE-346",
+        "cwe_name": "Origin Validation Error",
+        "severity": "High",
+        "owasp_category": "A01:2021 - Broken Access Control",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── CWE-347: Improper Verification of Cryptographic Signature (Java) ──────
+    {
+        "id": "java-cwe347-001",
+        "language": "java",
+        "title": "JWT verification disabled or algorithm set to none",
+        "pattern": r'(?:Jwts\.parser|JwtParser).*\.parse(?:Claims)?Jws\s*\([^)]*\)(?!.*(?:setSigningKey|verifyWith))',
+        "cwe_id": "CWE-347",
+        "cwe_name": "Improper Verification of Cryptographic Signature",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-613: Insufficient Session Expiration (Java) ───────────────────────
+    {
+        "id": "java-cwe613-001",
+        "language": "java",
+        "title": "Session timeout set to zero or very large value",
+        "pattern": r'(?:setMaxInactiveInterval|session-timeout)\s*\(\s*(?:0|-1|\d{4,})\s*\)',
+        "cwe_id": "CWE-613",
+        "cwe_name": "Insufficient Session Expiration",
+        "severity": "Medium",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-532: Sensitive Information in Log (Java) ───────────────────────────
+    {
+        "id": "java-cwe532-001",
+        "language": "java",
+        "title": "Sensitive field logged in Java application",
+        "pattern": r'(?:log(?:ger)?|LOG)\.\w+\s*\(.*(?:password|passwd|secret|token|apiKey|creditCard|ssn)',
+        "cwe_id": "CWE-532",
+        "cwe_name": "Insertion of Sensitive Information into Log File",
+        "severity": "Medium",
+        "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── CWE-580: clone() Without super.clone() ────────────────────────────────
+    {
+        "id": "java-cwe580-001",
+        "language": "java",
+        "title": "clone() method does not call super.clone()",
+        "pattern": r'public\s+\w+\s+clone\s*\(\s*\)\s*\{(?![\s\S]{0,500}super\.clone\s*\(\s*\))',
+        "cwe_id": "CWE-580",
+        "cwe_name": "clone() Method Without super.clone()",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-583: finalize() Declared Public ───────────────────────────────────
+    {
+        "id": "java-cwe583-001",
+        "language": "java",
+        "title": "finalize() method declared public",
+        "pattern": r'public\s+(?:void\s+)?finalize\s*\(\s*\)',
+        "cwe_id": "CWE-583",
+        "cwe_name": "finalize() Method Declared Public",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── CWE-584: Return Inside Finally Block ──────────────────────────────────
+    {
+        "id": "java-cwe584-001",
+        "language": "java",
+        "title": "return statement inside finally block may suppress exceptions",
+        "pattern": r'finally\s*\{[^}]*\breturn\b',
+        "cwe_id": "CWE-584",
+        "cwe_name": "Return Inside Finally Block",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── CWE-585: Empty Synchronized Block ─────────────────────────────────────
+    {
+        "id": "java-cwe585-001",
+        "language": "java",
+        "title": "Empty synchronized block provides no thread safety",
+        "pattern": r'synchronized\s*\([^)]+\)\s*\{\s*\}',
+        "cwe_id": "CWE-585",
+        "cwe_name": "Empty Synchronized Block",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.88,
+    },
+
+    # ── CWE-586: Explicit Call to Finalize() ──────────────────────────────────
+    {
+        "id": "java-cwe586-001",
+        "language": "java",
+        "title": "Explicit call to finalize() method",
+        "pattern": r'\.\s*finalize\s*\(\s*\)',
+        "cwe_id": "CWE-586",
+        "cwe_name": "Explicit Call to Finalize()",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── CWE-595: Comparison of Object References ──────────────────────────────
+    {
+        "id": "java-cwe595-001",
+        "language": "java",
+        "title": "String compared with == instead of .equals()",
+        "pattern": r'(?:String\s+\w+|"\w+")\s*==\s*(?:"\w+"|request\.getParameter)',
+        "cwe_id": "CWE-595",
+        "cwe_name": "Comparison of Object References Instead of Object Contents",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-597: Use of Wrong Operator in String Comparison ──────────────────
+    {
+        "id": "java-cwe597-001",
+        "language": "java",
+        "title": "String equality check using == operator (wrong operator)",
+        "pattern": r'if\s*\(\s*\w+\s*==\s*"[^"]*"\s*\)',
+        "cwe_id": "CWE-597",
+        "cwe_name": "Use of Wrong Operator in String Comparison",
+        "severity": "Low",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── CWE-567: Unsynchronized Access to Shared Data ─────────────────────────
+    {
+        "id": "java-cwe567-001",
+        "language": "java",
+        "title": "Static mutable field accessed without synchronization",
+        "pattern": r'private\s+static\s+(?!final)(?!synchronized)\w+\s+\w+\s*=',
+        "cwe_id": "CWE-567",
+        "cwe_name": "Unsynchronized Access to Shared Data in a Multithreaded Context",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-600: Uncaught Exception in Servlet ────────────────────────────────
+    {
+        "id": "java-cwe600-001",
+        "language": "java",
+        "title": "Servlet method without try/catch may leak exception details",
+        "pattern": r'(?:doGet|doPost|doPut|doDelete)\s*\([^)]+\)\s*(?:throws\s+\w+)?\s*\{(?![\s\S]{0,1000}try\s*\{)',
+        "cwe_id": "CWE-600",
+        "cwe_name": "Uncaught Exception in Servlet",
+        "severity": "Low",
+        "owasp_category": "A05:2021 - Security Misconfiguration",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-579: J2EE Non-serializable Object in Session ─────────────────────
+    {
+        "id": "java-cwe579-001",
+        "language": "java",
+        "title": "Non-serializable object stored in HttpSession",
+        "pattern": r'session\.setAttribute\s*\([^)]+,\s*new\s+(?!.*Serializable)\w+\s*\(',
+        "cwe_id": "CWE-579",
+        "cwe_name": "J2EE Bad Practices: Non-serializable Object Stored in Session",
+        "severity": "Low",
+        "owasp_category": "A05:2021 - Security Misconfiguration",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-329: No Random IV with CBC (Java) ─────────────────────────────────
+    {
+        "id": "java-cwe329-001",
+        "language": "java",
+        "title": "Cipher in CBC mode initialized with static/zero IV",
+        "pattern": r'(?:IvParameterSpec|new\s+byte\[16\])(?!.*(?:SecureRandom|random\.nextBytes))',
+        "cwe_id": "CWE-329",
+        "cwe_name": "Not Using a Random IV with CBC Mode",
+        "severity": "High",
+        "owasp_category": "A02:2021 - Cryptographic Failures",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-640: Weak Password Recovery (Java) ────────────────────────────────
+    {
+        "id": "java-cwe640-001",
+        "language": "java",
+        "title": "Predictable password reset token generation",
+        "pattern": r'(?:resetToken|passwordReset)\s*=.*(?:MD5|SHA1|System\.currentTimeMillis)',
+        "cwe_id": "CWE-640",
+        "cwe_name": "Weak Password Recovery Mechanism for Forgotten Password",
+        "severity": "High",
+        "owasp_category": "A07:2021 - Identification and Authentication Failures",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-778: Insufficient Logging (Java) ──────────────────────────────────
+    {
+        "id": "java-cwe778-001",
+        "language": "java",
+        "title": "Security-sensitive operation without audit logging",
+        "pattern": r'(?:deleteUser|grantRole|revokeRole|resetPassword)\s*\([^)]*\)(?![\s\S]{0,200}(?:log(?:ger)?|LOG)\.\w+)',
+        "cwe_id": "CWE-778",
+        "cwe_name": "Insufficient Logging",
+        "severity": "Low",
+        "owasp_category": "A09:2021 - Security Logging and Monitoring Failures",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
 ]
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -4561,6 +6089,390 @@ CPP_RULES: List[Dict] = [
         "cwe_name": "Race Condition",
         "severity": "Medium",
         "owasp_category": "A05:2021 - Security Misconfiguration",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-123: Write-what-where Condition ───────────────────────────────────
+    {
+        "id": "c-cwe123-001",
+        "language": "cpp",
+        "title": "Arbitrary write via user-controlled pointer dereference",
+        "pattern": r'\*\s*\(\s*(?:int|char|void)\s*\*\s*\)\s*(?:\w+\s*\+|\w+\[)',
+        "cwe_id": "CWE-123",
+        "cwe_name": "Write-what-where Condition",
+        "severity": "Critical",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-128: Wrap-around Error ────────────────────────────────────────────
+    {
+        "id": "c-cwe128-001",
+        "language": "cpp",
+        "title": "Integer wrap-around in size calculation before allocation",
+        "pattern": r'(?:malloc|calloc|realloc)\s*\(\s*\w+\s*\*\s*\w+\s*\)',
+        "cwe_id": "CWE-128",
+        "cwe_name": "Wrap-around Error",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-129: Improper Validation of Array Index ───────────────────────────
+    {
+        "id": "c-cwe129-001",
+        "language": "cpp",
+        "title": "Array indexed by user-controlled value without bounds check",
+        "pattern": r'\w+\s*\[\s*(?:atoi|atol|strtol|strtoul)\s*\(',
+        "cwe_id": "CWE-129",
+        "cwe_name": "Improper Validation of Array Index",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+    {
+        "id": "c-cwe129-002",
+        "language": "cpp",
+        "title": "Array index from argv without range validation",
+        "pattern": r'\w+\s*\[\s*argv\s*\[',
+        "cwe_id": "CWE-129",
+        "cwe_name": "Improper Validation of Array Index",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-131: Incorrect Calculation of Buffer Size ─────────────────────────
+    {
+        "id": "c-cwe131-001",
+        "language": "cpp",
+        "title": "Buffer size calculated with sizeof(pointer) instead of sizeof(type)",
+        "pattern": r'malloc\s*\(\s*sizeof\s*\(\s*\w+\s*\*\s*\)\s*\)',
+        "cwe_id": "CWE-131",
+        "cwe_name": "Incorrect Calculation of Buffer Size",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+    {
+        "id": "c-cwe131-002",
+        "language": "cpp",
+        "title": "strlen used in malloc without +1 for null terminator",
+        "pattern": r'malloc\s*\(\s*strlen\s*\([^)]+\)\s*\)',
+        "cwe_id": "CWE-131",
+        "cwe_name": "Incorrect Calculation of Buffer Size",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── CWE-170: Improper Null Termination ────────────────────────────────────
+    {
+        "id": "c-cwe170-001",
+        "language": "cpp",
+        "title": "strncpy may not null-terminate destination buffer",
+        "pattern": r'\bstrncpy\s*\([^)]+\)',
+        "cwe_id": "CWE-170",
+        "cwe_name": "Improper Null Termination",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-193: Off-by-one Error ──────────────────────────────────────────────
+    {
+        "id": "c-cwe193-001",
+        "language": "cpp",
+        "title": "Loop bound uses <= with array size (off-by-one)",
+        "pattern": r'for\s*\([^;]+;\s*\w+\s*<=\s*(?:sizeof|strlen|size)\s*\(',
+        "cwe_id": "CWE-193",
+        "cwe_name": "Off-by-one Error",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-196: Unsigned to Signed Conversion Error ───────────────────────────
+    {
+        "id": "c-cwe196-001",
+        "language": "cpp",
+        "title": "Unsigned value assigned to signed integer (implicit conversion)",
+        "pattern": r'(?:int|short|long)\s+\w+\s*=\s*(?:strlen|sizeof|strtoul|atou)\s*\(',
+        "cwe_id": "CWE-196",
+        "cwe_name": "Unsigned to Signed Conversion Error",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-363: Race Condition Enabling Link Following ────────────────────────
+    {
+        "id": "c-cwe363-001",
+        "language": "cpp",
+        "title": "access() followed by open() — TOCTOU race enabling symlink attack",
+        "pattern": r'\baccess\s*\([^)]+\)[\s\S]{0,300}\bopen\s*\(',
+        "cwe_id": "CWE-363",
+        "cwe_name": "Race Condition Enabling Link Following",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.78,
+    },
+
+    # ── CWE-366: Race Condition within a Thread ────────────────────────────────
+    {
+        "id": "c-cwe366-001",
+        "language": "cpp",
+        "title": "Shared variable accessed from multiple threads without mutex",
+        "pattern": r'(?:pthread_create|std::thread)\s*\([^;]+\)[\s\S]{0,500}(?:global|static)\s+\w+\s*[+\-]?=',
+        "cwe_id": "CWE-366",
+        "cwe_name": "Race Condition within a Thread",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-379: Temp File with Incorrect Permissions ─────────────────────────
+    {
+        "id": "c-cwe379-001",
+        "language": "cpp",
+        "title": "Temporary file created with predictable name (insecure tmpnam/tempnam)",
+        "pattern": r'\b(?:tmpnam|tempnam)\s*\(',
+        "cwe_id": "CWE-379",
+        "cwe_name": "Creation of Temporary File in Directory with Insecure Permissions",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.85,
+    },
+
+    # ── CWE-412: Unrestricted Externally Accessible Lock ─────────────────────
+    {
+        "id": "c-cwe412-001",
+        "language": "cpp",
+        "title": "Named mutex/semaphore accessible without ACL restrictions",
+        "pattern": r'(?:CreateMutex|CreateSemaphore|sem_open)\s*\([^)]*NULL[^)]*\)',
+        "cwe_id": "CWE-412",
+        "cwe_name": "Unrestricted Externally Accessible Lock",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.72,
+    },
+
+    # ── CWE-413: Improper Resource Locking ────────────────────────────────────
+    {
+        "id": "c-cwe413-001",
+        "language": "cpp",
+        "title": "Mutex locked but unlock may be skipped on error path",
+        "pattern": r'pthread_mutex_lock\s*\([^)]+\)[\s\S]{0,500}return(?![\s\S]{0,200}pthread_mutex_unlock)',
+        "cwe_id": "CWE-413",
+        "cwe_name": "Improper Resource Locking",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+
+    # ── CWE-587: Assignment of Fixed Address to Pointer ───────────────────────
+    {
+        "id": "c-cwe587-001",
+        "language": "cpp",
+        "title": "Hard-coded memory address assigned to pointer",
+        "pattern": r'\(\s*(?:void|char|int|unsigned)\s*\*\s*\)\s*0x[0-9a-fA-F]{4,}',
+        "cwe_id": "CWE-587",
+        "cwe_name": "Assignment of a Fixed Address to a Pointer",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.82,
+    },
+
+    # ── CWE-680: Integer Overflow to Buffer Overflow ──────────────────────────
+    {
+        "id": "c-cwe680-001",
+        "language": "cpp",
+        "title": "Integer overflow in size before allocation leads to buffer overflow",
+        "pattern": r'(?:malloc|calloc)\s*\(\s*(?:\w+\s*\+\s*\w+|\w+\s*\*\s*\w+)\s*\)',
+        "cwe_id": "CWE-680",
+        "cwe_name": "Integer Overflow to Buffer Overflow",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+    {
+        "id": "c-cwe680-002",
+        "language": "cpp",
+        "title": "Size parameter from user input used in allocation without overflow check",
+        "pattern": r'(?:malloc|new\s+\w+\[)\s*(?:atoi|atol|strtol)\s*\(',
+        "cwe_id": "CWE-680",
+        "cwe_name": "Integer Overflow to Buffer Overflow",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.80,
+    },
+
+    # ── CWE-786: Access of Memory Before Start of Buffer ─────────────────────
+    {
+        "id": "c-cwe786-001",
+        "language": "cpp",
+        "title": "Pointer arithmetic may access memory before buffer start",
+        "pattern": r'\w+\s*-=\s*\d+\s*;[\s\S]{0,100}\*\w+',
+        "cwe_id": "CWE-786",
+        "cwe_name": "Access of Memory Location Before Start of Buffer",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-788: Access of Memory After End of Buffer ─────────────────────────
+    {
+        "id": "c-cwe788-001",
+        "language": "cpp",
+        "title": "Buffer accessed at index that may exceed allocated size",
+        "pattern": r'\w+\s*\[\s*\w+\s*\]\s*=[\s\S]{0,50}(?:sizeof|strlen)\s*\(',
+        "cwe_id": "CWE-788",
+        "cwe_name": "Access of Memory Location After End of Buffer",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-824: Access of Uninitialized Pointer ──────────────────────────────
+    {
+        "id": "c-cwe824-001",
+        "language": "cpp",
+        "title": "Pointer declared but not initialized before use",
+        "pattern": r'(?:int|char|void)\s*\*\s*\w+\s*;[\s\S]{0,200}\*\w+\s*=(?!\s*(?:malloc|calloc|new|NULL|nullptr))',
+        "cwe_id": "CWE-824",
+        "cwe_name": "Access of Uninitialized Pointer",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+
+    # ── CWE-843: Type Confusion ────────────────────────────────────────────────
+    {
+        "id": "c-cwe843-001",
+        "language": "cpp",
+        "title": "Unsafe reinterpret_cast between unrelated pointer types",
+        "pattern": r'reinterpret_cast\s*<\s*\w+\s*\*\s*>',
+        "cwe_id": "CWE-843",
+        "cwe_name": "Access of Resource Using Incompatible Type (Type Confusion)",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+    {
+        "id": "c-cwe843-002",
+        "language": "cpp",
+        "title": "C-style cast between unrelated pointer types (type confusion risk)",
+        "pattern": r'\(\s*(?:int|short|long|double|float)\s*\*\s*\)\s*\w+\s*(?:;|\s*[\+\-\*\/])',
+        "cwe_id": "CWE-843",
+        "cwe_name": "Access of Resource Using Incompatible Type (Type Confusion)",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-409: Zip Bomb (C) ─────────────────────────────────────────────────
+    {
+        "id": "c-cwe409-001",
+        "language": "cpp",
+        "title": "Decompression without size limits (potential zip bomb)",
+        "pattern": r'(?:inflate|uncompress|BZ2_bzDecompress|LZ4_decompress)\s*\(',
+        "cwe_id": "CWE-409",
+        "cwe_name": "Improper Handling of Highly Compressed Data (Zip Bomb)",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.68,
+    },
+
+    # ── CWE-665: Improper Initialization ──────────────────────────────────────
+    {
+        "id": "c-cwe665-001",
+        "language": "cpp",
+        "title": "Variable declared without initialization used in condition",
+        "pattern": r'(?:int|char|float|double)\s+\w+\s*;[\s\S]{0,100}if\s*\(\s*\w+\s*[><=!]',
+        "cwe_id": "CWE-665",
+        "cwe_name": "Improper Initialization",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-667: Improper Locking ──────────────────────────────────────────────
+    {
+        "id": "c-cwe667-001",
+        "language": "cpp",
+        "title": "Mutex not unlocked on all code paths",
+        "pattern": r'pthread_mutex_lock\s*\(&\w+\)[\s\S]{0,1000}(?:return|exit)\s*\([^)]*\)(?![\s\S]{0,100}pthread_mutex_unlock)',
+        "cwe_id": "CWE-667",
+        "cwe_name": "Improper Locking",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.70,
+    },
+
+    # ── CWE-672: Operation After Expiration or Release ────────────────────────
+    {
+        "id": "c-cwe672-001",
+        "language": "cpp",
+        "title": "File descriptor used after fclose() call",
+        "pattern": r'fclose\s*\(\s*(\w+)\s*\)[\s\S]{0,300}(?:fread|fwrite|fprintf|fscanf)\s*\(\s*\1',
+        "cwe_id": "CWE-672",
+        "cwe_name": "Operation on a Resource after Expiration or Release",
+        "severity": "High",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.75,
+    },
+
+    # ── CWE-674: Uncontrolled Recursion (C) ───────────────────────────────────
+    {
+        "id": "c-cwe674-001",
+        "language": "cpp",
+        "title": "Recursive function without visible base-case depth guard",
+        "pattern": r'(\w+)\s*\([^)]*\)\s*\{[\s\S]{0,200}\1\s*\([^)]*\)',
+        "cwe_id": "CWE-674",
+        "cwe_name": "Uncontrolled Recursion",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
+        "source": "hardcoded",
+        "confidence": 0.65,
+    },
+
+    # ── CWE-754: Improper Check for Unusual Conditions ────────────────────────
+    {
+        "id": "c-cwe754-001",
+        "language": "cpp",
+        "title": "Return value of malloc/realloc not checked for NULL",
+        "pattern": r'(?:malloc|realloc|calloc)\s*\([^)]+\)\s*;(?![\s\S]{0,100}(?:if|assert|NULL|nullptr))',
+        "cwe_id": "CWE-754",
+        "cwe_name": "Improper Check for Unusual or Exceptional Conditions",
+        "severity": "Medium",
+        "owasp_category": "A04:2021 - Insecure Design",
         "source": "hardcoded",
         "confidence": 0.72,
     },

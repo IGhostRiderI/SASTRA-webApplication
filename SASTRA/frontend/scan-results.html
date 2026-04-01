@@ -1241,10 +1241,10 @@
     if (!wrap) return;
     wrap.innerHTML = '';
 
-    const buildGroup = (title, rows, color) => {
+    const buildGroup = (title, rows, color, limit = 5) => {
       const group = document.createElement('div');
       group.className = 'ranking-group';
-      const safeRows = Array.isArray(rows) ? rows.slice(0, 4) : [];
+      const safeRows = Array.isArray(rows) ? rows.slice(0, limit) : [];
       const maxCount = Math.max(1, ...safeRows.map((r) => Number(r?.[1] || 0)));
 
       const rowsHtml = safeRows.length
@@ -1260,8 +1260,8 @@
       wrap.appendChild(group);
     };
 
-    buildGroup('Top CWE', topCwe, '#1d4ed8');
-    buildGroup('Top OWASP', topOwasp, '#0ea5e9');
+    buildGroup('Top CWE', topCwe, '#1d4ed8', 5);
+    buildGroup('Top OWASP', topOwasp, '#0ea5e9', 10);
   }
 
   function renderOverview(summary = {}) {

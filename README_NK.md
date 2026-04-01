@@ -14,7 +14,7 @@ Local web app for static vulnerability detection on uploaded/pasted Python, Java
 - User accounts with per-user scan history and role-based admin controls
 
 ## Auth and roles
-- Superadmin (hardcoded):
+- ADMIN
   - Username: `Nadinak`
   - Password: `Nadina`
 - Regular users can sign up/sign in and view only their own scan history.
