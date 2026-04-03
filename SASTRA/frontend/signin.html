@@ -174,6 +174,24 @@
 
     .btn-submit:active { transform: translateY(0); }
 
+    .login-error {
+      display: none;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #991b1b;
+      background: rgba(254, 226, 226, 0.9);
+      border: 1px solid rgba(248, 113, 113, 0.45);
+      text-align: left;
+    }
+
+    .login-error.show {
+      display: block;
+    }
+
     .card-footer {
       margin-top: 28px;
       font-size: 0.88rem;
@@ -228,6 +246,8 @@
         <input type="password" id="password" placeholder="" autocomplete="current-password"/>
       </div>
 
+      <p id="login-error" class="login-error" role="alert" aria-live="polite"></p>
+
       <button class="btn-submit" onclick="handleLogin()">Login</button>
 
       <div style="display:flex;align-items:center;gap:12px;margin-top:20px;margin-bottom:4px;">
@@ -246,14 +266,49 @@
   </div>
 
   <script>
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const loginError = document.getElementById('login-error');
+
+    function showLoginError(message) {
+      loginError.textContent = message;
+      loginError.classList.add('show');
+    }
+
+    function clearLoginError() {
+      loginError.textContent = '';
+      loginError.classList.remove('show');
+    }
+
+    function clearFieldHighlight(input) {
+      input.style.boxShadow = '';
+    }
+
+    usernameInput.addEventListener('input', function () {
+      clearFieldHighlight(usernameInput);
+      clearLoginError();
+    });
+
+    passwordInput.addEventListener('input', function () {
+      clearFieldHighlight(passwordInput);
+      clearLoginError();
+    });
+
     async function handleLogin() {
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value.trim();
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      clearLoginError();
+
       if (!username || !password) {
-        document.getElementById('username').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
-        document.getElementById('password').style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
+        usernameInput.style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
+        passwordInput.style.boxShadow = '0 0 0 2px rgba(239,68,68,0.4)';
+        showLoginError('Please enter both username and password.');
         return;
       }
+
+      clearFieldHighlight(usernameInput);
+      clearFieldHighlight(passwordInput);
 
       try {
         const response = await fetch('/api/auth/login', {
@@ -262,14 +317,23 @@
           credentials: 'include',
           body: JSON.stringify({ username, password }),
         });
+
         if (!response.ok) {
-          throw new Error('Invalid username or password');
+          let message = 'Invalid username or password';
+          try {
+            const errorPayload = await response.json();
+            message = errorPayload?.detail || errorPayload?.message || message;
+          } catch (_error) {
+            // Keep default message if response body is not JSON.
+          }
+          throw new Error(message);
         }
+
         const payload = await response.json();
         sessionStorage.setItem('sastra_user', payload.user?.username || username);
         window.location.href = 'dashboard.html';
       } catch (error) {
-        alert(error.message || 'Login failed');
+        showLoginError(error.message || 'Login failed');
       }
     }
   </script>
