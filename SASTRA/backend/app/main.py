@@ -2,10 +2,12 @@ import io
 import logging
 import logging.handlers
 import posixpath
+import secrets
 import sys
 import threading
 import time
 import zipfile
+from urllib.parse import urlencode
 from collections import Counter
 from collections import deque
 from contextlib import asynccontextmanager
@@ -36,6 +38,9 @@ from .config import (
     ERROR_RATE_THRESHOLD,
     ERROR_RATE_WINDOW_SECONDS,
     SUPPORTED_LANGUAGES,
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
+    GOOGLE_REDIRECT_URI,
 )
 from .backup import backup_database
 from .rules import build_rules_catalog
@@ -54,6 +59,7 @@ from .db import (
     delete_user_and_data,
     get_finding,
     get_llm_rpm_quota,
+    get_or_create_google_user,
     save_finding_fix,
     get_scan,
     get_hourly_scan_quota,
@@ -689,6 +695,62 @@ async def logout() -> JSONResponse:
 @app.post("/api/logout")
 async def logout_compat() -> JSONResponse:
     return await logout()
+
+
+@app.get("/auth/google")
+async def google_login() -> RedirectResponse:
+    state = secrets.token_urlsafe(16)
+    params = urlencode({
+        "client_id":     GOOGLE_CLIENT_ID,
+        "redirect_uri":  GOOGLE_REDIRECT_URI,
+        "response_type": "code",
+        "scope":         "openid email profile",
+        "state":         state,
+    })
+    response = RedirectResponse(f"https://accounts.google.com/o/oauth2/v2/auth?{params}")
+    response.set_cookie("oauth_state", state, httponly=True, max_age=300, samesite="lax", secure=COOKIE_SECURE)
+    return response
+
+
+@app.get("/auth/google/callback")
+async def google_callback(request: Request, code: str = "", state: str = "", error: str = "") -> RedirectResponse:
+    if error or not code:
+        return RedirectResponse("/signin.html?error=google_denied")
+
+    token_resp = requests.post("https://oauth2.googleapis.com/token", data={
+        "code":          code,
+        "client_id":     GOOGLE_CLIENT_ID,
+        "client_secret": GOOGLE_CLIENT_SECRET,
+        "redirect_uri":  GOOGLE_REDIRECT_URI,
+        "grant_type":    "authorization_code",
+    })
+    if not token_resp.ok:
+        logger.warning("Google token exchange failed: %s", token_resp.text)
+        return RedirectResponse("/signin.html?error=google_failed")
+
+    access_token = token_resp.json().get("access_token")
+    userinfo_resp = requests.get(
+        "https://www.googleapis.com/oauth2/v2/userinfo",
+        headers={"Authorization": f"Bearer {access_token}"},
+    )
+    if not userinfo_resp.ok:
+        return RedirectResponse("/signin.html?error=google_failed")
+
+    userinfo  = userinfo_resp.json()
+    google_id = userinfo.get("id", "")
+    email     = userinfo.get("email", "")
+
+    if not google_id or not email:
+        return RedirectResponse("/signin.html?error=google_failed")
+
+    user  = get_or_create_google_user(google_id, email)
+    token = create_access_token(int(user["id"]))
+    logger.info("Google sign-in — username: %s", user["username"])
+
+    response = RedirectResponse("/dashboard.html")
+    _set_session_cookie(response, token)
+    response.delete_cookie("oauth_state")
+    return response
 
 
 @app.get("/api/auth/me")

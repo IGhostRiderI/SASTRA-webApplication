@@ -34,6 +34,7 @@ class User(Base):
     password_hash = Column(Text, nullable=False)
     role          = Column(String(16), nullable=False, default="user")
     created_at    = Column(String(40), nullable=False)
+    google_id     = Column(String(128), nullable=True, unique=True)
 
     # One user → many scans.
     # cascade="all, delete-orphan" means deleting a User automatically

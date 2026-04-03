@@ -206,6 +206,7 @@ def init_db() -> None:
     # if the column already exists (SQLite raises OperationalError on
     # duplicate column addition).
     migration_statements = [
+        "ALTER TABLE users    ADD COLUMN google_id               TEXT",
         "ALTER TABLE scans    ADD COLUMN files_scanned           INTEGER NOT NULL DEFAULT 1",
         "ALTER TABLE findings ADD COLUMN source_path             TEXT    NOT NULL DEFAULT ''",
         "ALTER TABLE findings ADD COLUMN language                TEXT    NOT NULL DEFAULT ''",
@@ -365,6 +366,37 @@ def update_user_credentials(
         if clean_password is not None:
             user.password_hash = _hash_password(clean_password)
 
+        session.flush()
+        return user.to_dict()
+
+
+def get_or_create_google_user(google_id: str, email: str) -> Dict[str, object]:
+    """Find an existing user by google_id, or create a new one."""
+    with _get_session() as session:
+        user = session.query(User).filter(User.google_id == google_id).first()
+        if user:
+            return user.to_dict()
+
+        # Derive a clean username from the email prefix
+        base = re.sub(r"[^A-Za-z0-9_.-]", "_", (email.split("@")[0] or "user"))[:28]
+        if len(base) < 3:
+            base = f"g_{base}"
+        username = base
+        counter = 1
+        while session.query(User).filter(
+            func.lower(User.username) == func.lower(username)
+        ).first():
+            username = f"{base}{counter}"
+            counter += 1
+
+        user = User(
+            username=username,
+            password_hash="",   # Google users have no password
+            role=ROLE_USER,
+            created_at=_utc_now_iso(),
+            google_id=google_id,
+        )
+        session.add(user)
         session.flush()
         return user.to_dict()
 
