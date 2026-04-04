@@ -359,7 +359,7 @@
         }
         const payload = await response.json();
         sessionStorage.setItem('sastra_user', payload.user?.username || username);
-        window.location.href = 'dashboard.html';
+        window.location.href = 'new-scan.html';
       } catch (error) {
         setError(error.message || 'Signup failed. Please try again.');
       }

@@ -827,26 +827,21 @@
     /* ── FLOATING CHATBOT BUBBLE ── */
     .chat-bubble-btn {
       position: fixed; bottom: 28px; right: 28px; z-index: 9999;
-      height: 50px; padding: 0 22px 0 16px; border-radius: 999px;
+      width: 44px; height: 44px; padding: 0; border-radius: 50%;
       background: linear-gradient(135deg, #2563eb, #1d4ed8);
       border: none; cursor: pointer;
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; justify-content: center;
       box-shadow: 0 8px 28px rgba(37,99,235,0.38);
       transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease;
-      white-space: nowrap;
     }
     .chat-bubble-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 36px rgba(37,99,235,0.48); }
     .chat-bubble-btn svg { width: 20px; height: 20px; color: #fff; flex-shrink: 0; transition: opacity 0.18s; }
-    .chat-bubble-label {
-      font-family: 'Sora', sans-serif; font-size: 0.84rem; font-weight: 700;
-      color: #fff; letter-spacing: 0.01em;
-    }
+    .chat-bubble-label { display: none; }
     .chat-bubble-btn .icon-close { display: none; }
     .chat-bubble-btn.open .icon-chat  { display: none; }
     .chat-bubble-btn.open .icon-close { display: block; }
-    .chat-bubble-btn.open .chat-bubble-label { display: none; }
     .chat-bubble-notif {
-      position: absolute; top: 4px; right: 4px;
+      position: absolute; top: 1px; right: 1px;
       width: 10px; height: 10px; border-radius: 50%;
       background: #10b981; border: 2px solid #fff;
       pointer-events: none;
