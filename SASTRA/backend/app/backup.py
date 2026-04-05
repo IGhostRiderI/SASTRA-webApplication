@@ -5,7 +5,7 @@ Creates atomic SQLite backups using the sqlite3.backup() API, which
 produces a consistent snapshot even while the database is in use.
 
 Backup policy:
-  - Backups are stored in BACKUP_DIR (app/data/backups/).
+  - Backups are stored in BACKUP_DIR (app/data/backups/)..
   - File names follow the pattern: sast_<YYYYMMDDTHHMMSSZ>.db
   - A maximum of MAX_BACKUPS recent backups are retained; older ones
     are automatically pruned after each successful backup.
