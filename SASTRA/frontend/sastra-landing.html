@@ -213,12 +213,6 @@
       display: flex; flex-direction: column;
       animation: floatPreview 8s ease-in-out infinite;
     }
-    /* Scan line */
-    .dash-preview::before {
-      content: ''; position: absolute; left:0; right:0; height:2px; z-index:5; pointer-events:none;
-      background: linear-gradient(90deg, transparent 0%, rgba(37,99,235,0.6) 40%, rgba(5,150,105,0.4) 70%, transparent 100%);
-      animation: scanLine 4s ease-in-out infinite;
-    }
 
     .dash-bar { display:flex; align-items:center; gap:6px; padding:10px 14px 8px; background:rgba(255,255,255,0.3); border-bottom:1px solid rgba(0,0,0,0.06); flex-shrink:0; }
     .dash-dot { width:9px; height:9px; border-radius:50%; }
@@ -708,33 +702,6 @@
     </div><!-- /right-area -->
   </div><!-- /page-shell -->
 
-  <section class="chips-ticker">
-    <div class="chips-track">
-      <div class="chips-inner">
-        <span class="chip"><span class="chip-dot" style="background:#e0e0e0;"></span>OWASP Top 10 Rule Coverage</span>
-        <span class="chip"><span class="chip-dot" style="background:#a0a0a0;"></span>Client-Ready PDF Reports</span>
-        <span class="chip"><span class="chip-dot" style="background:#c8c8c8;"></span>Built-in False Positive Filtering</span>
-        <span class="chip"><span class="chip-dot" style="background:#e8e8e8;"></span>3 Languages</span>
-        <span class="chip"><span class="chip-dot" style="background:#b0b0b0;"></span>Python · Java · C++</span>
-        <span class="chip"><span class="chip-dot" style="background:#d8d8d8;"></span>Top 3 Focus</span>
-        <span class="chip"><span class="chip-dot" style="background:#909090;"></span>Remediation Queue</span>
-        <span class="chip"><span class="chip-dot" style="background:#e0e0e0;"></span>1-Click Fixes</span>
-        <span class="chip"><span class="chip-dot" style="background:#c0c0c0;"></span>AI Code Suggestions</span>
-        <span class="chip"><span class="chip-dot" style="background:#a8a8a8;"></span>OWASP Top 10 Coverage</span>
-        <!-- duplicate for seamless loop -->
-        <span class="chip"><span class="chip-dot" style="background:#e0e0e0;"></span>OWASP Top 10 Rule Coverage</span>
-        <span class="chip"><span class="chip-dot" style="background:#a0a0a0;"></span>Client-Ready PDF Reports</span>
-        <span class="chip"><span class="chip-dot" style="background:#c8c8c8;"></span>Built-in False Positive Filtering</span>
-        <span class="chip"><span class="chip-dot" style="background:#e8e8e8;"></span>3 Languages</span>
-        <span class="chip"><span class="chip-dot" style="background:#b0b0b0;"></span>Python · Java · C++</span>
-        <span class="chip"><span class="chip-dot" style="background:#d8d8d8;"></span>Top 3 Focus</span>
-        <span class="chip"><span class="chip-dot" style="background:#909090;"></span>Remediation Queue</span>
-        <span class="chip"><span class="chip-dot" style="background:#e0e0e0;"></span>1-Click Fixes</span>
-        <span class="chip"><span class="chip-dot" style="background:#c0c0c0;"></span>AI Code Suggestions</span>
-        <span class="chip"><span class="chip-dot" style="background:#a8a8a8;"></span>OWASP Top 10 Coverage</span>
-      </div>
-    </div>
-  </section>
 
   <!-- LEARN MORE POPUP -->
   <div class="lm-overlay" id="lm-overlay" onclick="if(event.target===this)closeLearnMore()">
@@ -766,7 +733,7 @@
           <div class="lm-feat"><div class="lm-feat-icon fi-blue2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="lm-feat-title">PDF Security Reports</div><div class="lm-feat-desc">Export a client-ready PDF with all findings, severity breakdown, CWE/OWASP references, and remediation guidance.</div></div></div>
           <div class="lm-feat"><div class="lm-feat-icon fi-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div><div class="lm-feat-title">Remediation Tracking</div><div class="lm-feat-desc">Mark vulnerabilities as fixed, track progress by severity, and hide resolved issues to focus on what remains.</div></div></div>
         </div>
-        <div class="lm-section-title">Vulnerabilities Detected (CWE Coverage)</div>
+        <div class="lm-section-title">Top CWEs Covered</div>
         <div class="lm-cwe-grid">
           <div class="lm-cwe"><div class="lm-cwe-badge">CWE-89</div><div class="lm-cwe-name">SQL Injection</div></div>
           <div class="lm-cwe"><div class="lm-cwe-badge">CWE-78</div><div class="lm-cwe-name">Command Injection</div></div>
