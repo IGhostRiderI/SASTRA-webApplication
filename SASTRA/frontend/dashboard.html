@@ -298,15 +298,16 @@
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav { padding: 0 20px; }
       .nav-links { display: none; }
       .main { padding: 28px 20px 48px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
       .scan-right { gap: 10px; }
       .severity-tags { display: none; }
-      .nav { padding: 0 20px; }
+      .nav-welcome { display: none; }
       .dash-header { flex-direction: column; gap: 16px; }
     }
   

@@ -478,14 +478,16 @@
     .drawer-btn-outline:hover { background: rgba(255,255,255,0.9); }
 
     @media (max-width: 900px) {
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .main { padding: 28px 20px 48px; }
       .summary-strip { grid-template-columns: repeat(2, 1fr); }
       .table-header, .scan-row { grid-template-columns: 2.2fr 0.8fr 1fr 48px; }
       .col-lang, .col-issues { display: none; }
     }
     @media (max-width: 640px) {
-      .nav { padding: 0 20px; }
-      .nav-links { display: none; }
       .main { padding: 28px 16px 48px; }
+      .nav-welcome { display: none; }
       .table-header, .scan-row { grid-template-columns: 1fr auto 48px; }
       .col-status, .col-lang, .col-issues { display: none; }
       .drawer { width: 100%; max-width: 100%; }

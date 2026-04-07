@@ -199,9 +199,13 @@
     .chat-panel-send { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: none; cursor: not-allowed; opacity: 0.55; display: flex; align-items: center; justify-content: center; }
     .chat-panel-send svg { width: 14px; height: 14px; color: #fff; }
 
+    @media (max-width: 900px) {
+      nav { padding: 20px 28px; }
+      .main { padding: 36px 28px 80px; }
+    }
     @media (max-width: 640px) {
-      nav { padding: 20px 24px; }
-      .main { padding: 32px 24px 80px; }
+      nav { padding: 16px 20px; }
+      .main { padding: 28px 20px 64px; }
       .cwe-grid { grid-template-columns: 1fr; }
     }
   </style>

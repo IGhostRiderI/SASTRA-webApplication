@@ -940,10 +940,14 @@
       .remediation-card { grid-column: span 2; }
       .snippet-col { display: none; }
     }
-    @media (max-width: 680px) {
+    @media (max-width: 900px) {
       .nav { padding: 0 20px; }
       .nav-links { display: none; }
+      .main { padding: 28px 20px 48px; }
+    }
+    @media (max-width: 680px) {
       .main { padding: 28px 16px 48px; }
+      .nav-welcome { display: none; }
       .top-row { grid-template-columns: 1fr; }
       .top-row .glass-card:last-child { grid-column: span 1; }
       .col-cwe, .col-owasp, .col-issue { display: none; }
