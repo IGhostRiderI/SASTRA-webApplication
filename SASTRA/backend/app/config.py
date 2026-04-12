@@ -59,10 +59,15 @@ ALERT_COOLDOWN_SECONDS = int(os.environ.get("ALERT_COOLDOWN_SECONDS", "300"))
 
 # ── JWT configuration ──────────────────────────────────────────────────────────
 # JWT_SECRET MUST be set as an environment variable in any real deployment.
-# The default value below is for local development convenience only.
 # Changing this secret invalidates all existing tokens — all users will
 # need to sign in again.
 JWT_SECRET = os.environ.get("JWT_SECRET", "")
+if not JWT_SECRET:
+    raise RuntimeError(
+        "JWT_SECRET environment variable is not set. "
+        "Generate one with: python -c \"import secrets; print(secrets.token_hex(32))\" "
+        "and set it before starting the server."
+    )
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRY_DAYS = 7
 

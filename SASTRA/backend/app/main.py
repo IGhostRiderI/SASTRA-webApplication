@@ -19,6 +19,9 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Redirect
 import requests
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 
 from .config import (
     BACKUP_DIR,
@@ -232,6 +235,8 @@ def _log_unhandled_exception(exc_type, exc_value, exc_tb):
 
 sys.excepthook = _log_unhandled_exception
 
+_limiter = Limiter(key_func=get_remote_address)
+
 SESSION_COOKIE = "sast_session"
 SESSION_COOKIE_MAX_AGE = 60 * 60 * 24 * JWT_EXPIRY_DAYS  # matches JWT expiry
 
@@ -270,6 +275,17 @@ class LLMFixRequest(BaseModel):
     cwe_id: str
     language: str
     recommendation: Optional[str] = None
+
+    def validate_fields(self) -> None:
+        import re as _re
+        if not _re.fullmatch(r"CWE-\d{1,5}", self.cwe_id.strip()):
+            raise ValueError(f"Invalid cwe_id format: {self.cwe_id!r}")
+        if self.language.strip().lower() not in {"python", "java", "cpp"}:
+            raise ValueError(f"Unsupported language: {self.language!r}")
+        if len(self.snippet) > 8000:
+            raise ValueError("snippet too large")
+        if self.recommendation and len(self.recommendation) > 2000:
+            raise ValueError("recommendation too large")
 
 
 @asynccontextmanager
@@ -342,6 +358,8 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(title="Lightweight SAST Dashboard", lifespan=lifespan)
+app.state.limiter = _limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 BASE_DIR     = Path(__file__).resolve().parent
 FRONTEND_DIR = BASE_DIR.parent.parent / "frontend"
@@ -392,7 +410,7 @@ def _set_session_cookie(response: JSONResponse, token: str) -> None:
         value=token,
         httponly=True,
         secure=COOKIE_SECURE,
-        samesite="lax",
+        samesite="strict",
         max_age=SESSION_COOKIE_MAX_AGE,
         path="/",
     )
@@ -453,31 +471,38 @@ def infer_language(filename: str, language: Optional[str]) -> str:
 
 
 def _zip_sources(data: bytes) -> list[dict[str, str]]:
+    import tempfile, os as _os
     sources: list[dict[str, str]] = []
     try:
         archive = zipfile.ZipFile(io.BytesIO(data))
     except zipfile.BadZipFile as exc:
         raise HTTPException(status_code=400, detail="Invalid ZIP archive.") from exc
 
-    for info in archive.infolist():
-        if info.is_dir():
-            continue
-        if len(sources) >= MAX_ZIP_FILES:
-            break
-        if info.file_size > MAX_ZIP_MEMBER_SIZE_BYTES:
-            continue
-        normalized = posixpath.normpath(info.filename).lstrip("/")
-        if normalized.startswith(".."):
-            continue
-        ext = Path(normalized).suffix.lower()
-        if ext not in EXTENSION_TO_LANGUAGE:
-            continue
-        language = EXTENSION_TO_LANGUAGE[ext]
-        with archive.open(info) as fh:
-            content = fh.read().decode("utf-8", errors="ignore")
-        if not content.strip():
-            continue
-        sources.append({"source_path": normalized, "language": language, "content": content})
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp_root = Path(tmpdir).resolve()
+        for info in archive.infolist():
+            if info.is_dir():
+                continue
+            if len(sources) >= MAX_ZIP_FILES:
+                break
+            if info.file_size > MAX_ZIP_MEMBER_SIZE_BYTES:
+                continue
+            # Resolve the target path and verify it stays inside the temp dir
+            # This prevents path traversal via "..", absolute paths, or symlinks.
+            normalized = posixpath.normpath(info.filename).lstrip("/")
+            target = (tmp_root / normalized).resolve()
+            if not str(target).startswith(str(tmp_root) + _os.sep):
+                logger.warning("ZIP path traversal blocked: %s", info.filename)
+                continue
+            ext = Path(normalized).suffix.lower()
+            if ext not in EXTENSION_TO_LANGUAGE:
+                continue
+            language = EXTENSION_TO_LANGUAGE[ext]
+            with archive.open(info) as fh:
+                content = fh.read().decode("utf-8", errors="ignore")
+            if not content.strip():
+                continue
+            sources.append({"source_path": normalized, "language": language, "content": content})
 
     return sources
 
@@ -663,22 +688,26 @@ def _login_response(payload: AuthPayload) -> JSONResponse:
 
 
 @app.post("/api/auth/signup")
-async def signup(payload: AuthPayload) -> JSONResponse:
+@_limiter.limit("10/minute")
+async def signup(request: Request, payload: AuthPayload) -> JSONResponse:
     return _signup_response(payload)
 
 
 @app.post("/api/signup")
-async def signup_compat(payload: AuthPayload) -> JSONResponse:
+@_limiter.limit("10/minute")
+async def signup_compat(request: Request, payload: AuthPayload) -> JSONResponse:
     return _signup_response(payload)
 
 
 @app.post("/api/auth/login")
-async def login(payload: AuthPayload) -> JSONResponse:
+@_limiter.limit("10/minute")
+async def login(request: Request, payload: AuthPayload) -> JSONResponse:
     return _login_response(payload)
 
 
 @app.post("/api/login")
-async def login_compat(payload: AuthPayload) -> JSONResponse:
+@_limiter.limit("10/minute")
+async def login_compat(request: Request, payload: AuthPayload) -> JSONResponse:
     return _login_response(payload)
 
 
@@ -699,7 +728,7 @@ async def logout_compat() -> JSONResponse:
 
 @app.get("/auth/google")
 async def google_login() -> RedirectResponse:
-    state = secrets.token_urlsafe(16)
+    state = secrets.token_urlsafe(32)
     params = urlencode({
         "client_id":     GOOGLE_CLIENT_ID,
         "redirect_uri":  GOOGLE_REDIRECT_URI,
@@ -715,6 +744,13 @@ async def google_login() -> RedirectResponse:
 @app.get("/auth/google/callback")
 async def google_callback(request: Request, code: str = "", state: str = "", error: str = "") -> RedirectResponse:
     if error or not code:
+        return RedirectResponse("/signin.html?error=google_denied")
+
+    # Validate the state parameter against the cookie set in /auth/google
+    # to prevent OAuth CSRF attacks.
+    stored_state = request.cookies.get("oauth_state", "")
+    if not stored_state or not secrets.compare_digest(stored_state, state):
+        logger.warning("OAuth state mismatch — possible CSRF attempt")
         return RedirectResponse("/signin.html?error=google_denied")
 
     token_resp = requests.post("https://oauth2.googleapis.com/token", data={
@@ -982,6 +1018,10 @@ async def llm_codefix(
     payload: LLMFixRequest,
     current_user: dict = Depends(_require_user),
 ) -> JSONResponse:
+    try:
+        payload.validate_fields()
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     quota = get_llm_rpm_quota(int(current_user["id"]))
     if quota["remaining"] <= 0:
         retry_after = max(1, quota["retry_after_seconds"])

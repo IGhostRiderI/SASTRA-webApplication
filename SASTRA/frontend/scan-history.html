@@ -696,6 +696,15 @@
   let currentPage = 1;
   const perPage = 10;
 
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function formatRelativeSince(value) {
     if (!value) return '-';
     const t = new Date(value).getTime();
@@ -807,12 +816,12 @@
       const row = document.createElement('div');
       row.className = 'scan-row';
       row.innerHTML = `
-        <div class="file-cell"><div class="file-info"><div class="file-name">${s.name}</div><div class="file-meta">${s.date}</div></div></div>
+        <div class="file-cell"><div class="file-info"><div class="file-name">${escapeHtml(s.name)}</div><div class="file-meta">${escapeHtml(s.date)}</div></div></div>
         <div class="col-status"><span class="badge badge-completed"><span class="badge-dot"></span>completed</span></div>
-        <div class="col-lang"><span class="lang-pill">${s.lang || '-'}</span></div>
-        <div class="col-issues sev-group">${s.critical ? `<span class="sev sev-critical">${s.critical} Critical</span>` : ''}${s.high ? `<span class="sev sev-high">${s.high} High</span>` : ''}</div>
-        <div class="issues-cell">${s.issues}</div>
-        <div><button class="action-btn" onclick="window.location.href='scan-results.html?scan_id=${s.id}'">></button></div>`;
+        <div class="col-lang"><span class="lang-pill">${escapeHtml(s.lang || '-')}</span></div>
+        <div class="col-issues sev-group">${s.critical ? `<span class="sev sev-critical">${Number(s.critical)} Critical</span>` : ''}${s.high ? `<span class="sev sev-high">${Number(s.high)} High</span>` : ''}</div>
+        <div class="issues-cell">${Number(s.issues)}</div>
+        <div><button class="action-btn" onclick="window.location.href='scan-results.html?scan_id=${encodeURIComponent(String(s.id))}'">></button></div>`;
       container.appendChild(row);
     });
 

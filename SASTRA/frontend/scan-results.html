@@ -1575,12 +1575,12 @@
         <div class="rq-item" data-idx="${f._idx}" onclick="scrollToFinding(${f._idx})" style="cursor:pointer">
           <div class="rq-item-top">
             <div class="rq-rank">${i + 1}</div>
-            <div class="rq-item-title">${f.title || f.cwe || 'Unknown Issue'}</div>
+            <div class="rq-item-title">${escapeHtml(f.title || f.cwe || 'Unknown Issue')}</div>
             <div class="rq-sev-pill ${sevCls}">${sevCls}</div>
           </div>
           <div class="rq-item-file">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
-            ${f.file || 'Unknown file'} · Line ${f.line || '?'}
+            ${escapeHtml(f.file || 'Unknown file')} · Line ${Number(f.line) || '?'}
           </div>
           <div class="rq-item-why">${effort.why}</div>
           <div class="rq-item-footer">

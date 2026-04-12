@@ -106,8 +106,8 @@ def _clean_username(username: str) -> str:
 
 def _validate_password(password: str) -> str:
     cleaned = (password or "").strip()
-    if len(cleaned) < 4:
-        raise ValueError("Password must be at least 4 characters.")
+    if len(cleaned) < 10:
+        raise ValueError("Password must be at least 10 characters.")
     return cleaned
 
 
@@ -617,6 +617,7 @@ def list_scans(
     include_all: bool = False,
     target_user_id: Optional[int] = None,
 ) -> List[Dict[str, object]]:
+    limit = max(1, min(limit, 200))  # hard cap: never return more than 200 rows
     with _get_session() as session:
         query = (
             session.query(Scan, User.username.label("owner_username"))
