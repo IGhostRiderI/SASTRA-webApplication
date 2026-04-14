@@ -28,6 +28,18 @@ html[data-theme="dark"] {
   --popup-confirm-color: #0a0a0a;
 }
 
+/* Privacy checkbox — dark mode fixes */
+html[data-theme="dark"] .privacy-row input[type="checkbox"] {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+html[data-theme="dark"] .privacy-row input[type="checkbox"]:checked {
+  background: #f5f5f5;
+  border-color: #f5f5f5;
+}
+html[data-theme="dark"] .privacy-row input[type="checkbox"]:checked::after {
+  border-color: #0a0a0a;
+}
+
 .theme-toggle-btn {
   position: relative;
   width: 58px;

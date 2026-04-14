@@ -642,6 +642,16 @@ async def settings_page() -> FileResponse:
     return _serve_frontend_page("settings.html")
 
 
+@app.get("/privacy-policy.html", response_class=HTMLResponse)
+async def privacy_policy_page() -> FileResponse:
+    return _serve_frontend_page("privacy-policy.html")
+
+
+@app.get("/learn-more.html", response_class=HTMLResponse)
+async def learn_more_page() -> FileResponse:
+    return _serve_frontend_page("learn-more.html")
+
+
 # ── system endpoints ───────────────────────────────────────────────────────────
 
 @app.get("/api/health")

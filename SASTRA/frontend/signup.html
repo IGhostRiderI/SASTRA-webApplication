@@ -214,6 +214,76 @@
 
     .card-footer a:hover { opacity: 0.6; }
 
+    .privacy-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .privacy-row input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border: 2px solid rgba(128,128,128,0.45);
+      border-radius: 5px;
+      background: var(--input-bg);
+      cursor: pointer;
+      margin-top: 2px;
+      transition: background 0.15s, border-color 0.15s;
+      position: relative;
+    }
+
+    .privacy-row input[type="checkbox"]:checked {
+      background: #0a0a0a;
+      border-color: #0a0a0a;
+    }
+
+    .privacy-row input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 1px;
+      width: 5px;
+      height: 9px;
+      border: 2px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+
+    .privacy-row input[type="checkbox"].error {
+      border-color: rgba(239,68,68,0.65);
+    }
+
+    .privacy-label {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .privacy-label a {
+      color: var(--text-primary);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: opacity 0.15s;
+    }
+
+    .privacy-label a:hover { opacity: 0.6; }
+
+    .privacy-error {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #b91c1c;
+      margin-top: 6px;
+      min-height: 1em;
+      text-align: left;
+    }
+
     @media (max-width: 560px) {
       nav { padding: 20px 24px; }
       .card { padding: 36px 24px 32px; }
@@ -258,6 +328,14 @@
         <input type="password" id="confirm-password" placeholder="" autocomplete="new-password"/>
         <p class="field-error" id="confirm-password-error" role="alert" aria-live="polite"></p>
       </div>
+
+      <div class="privacy-row">
+        <input type="checkbox" id="privacy-agree"/>
+        <label class="privacy-label" for="privacy-agree">
+          I have read and agree to SASTRA's <a href="privacy-policy.html" target="_blank">Privacy Policy</a>. I understand that uploaded code is discarded after scanning and only results are stored.
+        </label>
+      </div>
+      <p class="privacy-error" id="privacy-error" role="alert" aria-live="polite"></p>
 
       <button class="btn-submit" onclick="handleSignup()">Create Account</button>
 
@@ -306,6 +384,7 @@
 
     function clearErrors() {
       document.getElementById('confirm-password-error').textContent = '';
+      document.getElementById('privacy-error').textContent = '';
       document.querySelectorAll('input').forEach(i => i.classList.remove('error'));
     }
 
@@ -342,6 +421,13 @@
 
       if (password !== confirm) {
         setError('Passwords do not match.', ['password', 'confirm-password']);
+        return;
+      }
+
+      const privacyChecked = document.getElementById('privacy-agree').checked;
+      if (!privacyChecked) {
+        document.getElementById('privacy-agree').classList.add('error');
+        document.getElementById('privacy-error').textContent = 'You must agree to the Privacy Policy to create an account.';
         return;
       }
 

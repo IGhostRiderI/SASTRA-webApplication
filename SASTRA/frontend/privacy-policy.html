@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy – SASTRA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("sastra-theme");
+        var d = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (t === "dark" || (!t && d)) document.documentElement.setAttribute("data-theme", "dark");
+      } catch (_) {}
+    })();
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --page-bg: #f7f7f5;
+      --surface: #ffffff;
+      --border: #e5e5e3;
+      --text: #1a1a1a;
+      --text-secondary: #525252;
+      --text-muted: #8a8a8a;
+      --accent: #0a0a0a;
+      --nav-bg: #ffffff;
+    }
+
+    [data-theme="dark"] {
+      --page-bg: #111111;
+      --surface: #1c1c1c;
+      --border: #2a2a2a;
+      --text: #ededed;
+      --text-secondary: #a8a8a8;
+      --text-muted: #666666;
+      --accent: #ededed;
+      --nav-bg: #141414;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--page-bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── top nav ── */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .logo svg { width: 20px; height: 20px; }
+
+    .nav-back {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.15s;
+    }
+
+    .nav-back:hover { color: var(--text); }
+
+    /* ── layout ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* ── sidebar ── */
+    .sidebar {
+      position: sticky;
+      top: 80px;
+    }
+
+    .sidebar-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 5px 0;
+      border-left: 2px solid transparent;
+      padding-left: 12px;
+      transition: color 0.15s, border-color 0.15s;
+      line-height: 1.4;
+    }
+
+    .sidebar nav a:hover {
+      color: var(--text);
+      border-left-color: var(--border);
+    }
+
+    .sidebar nav a.active {
+      color: var(--text);
+      border-left-color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── content ── */
+    .content header {
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .content header h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .content header p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* ── sections ── */
+    .policy-section {
+      margin-bottom: 52px;
+      scroll-margin-top: 80px;
+    }
+
+    .policy-section h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .policy-section p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.93rem;
+    }
+
+    .policy-section p:last-child { margin-bottom: 0; }
+
+    .policy-section ul {
+      list-style: none;
+      margin: 14px 0;
+    }
+
+    .policy-section ul li {
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+      padding: 9px 0;
+      padding-left: 16px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .policy-section ul li:first-child { border-top: 1px solid var(--border); }
+
+    .policy-section ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+      background: var(--text-muted);
+      border-radius: 50%;
+    }
+
+    .policy-section strong { color: var(--text); font-weight: 600; }
+
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .callout strong { color: var(--text); }
+
+    /* ── data grid ── */
+    .data-grid {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 20px 0;
+      font-size: 0.875rem;
+    }
+
+    .data-grid-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-grid-row:last-child { border-bottom: none; }
+
+    .data-grid-row.header {
+      background: var(--surface);
+    }
+
+    .data-grid-cell {
+      padding: 11px 16px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .data-grid-cell:first-child {
+      font-weight: 600;
+      color: var(--text);
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    /* ── footer ── */
+    .content-footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .content-footer a {
+      color: var(--text-secondary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .content-footer a:hover { color: var(--text); }
+
+    @media (max-width: 720px) {
+      .top-nav { padding: 0 20px; }
+      .layout { grid-template-columns: 1fr; gap: 32px; padding: 32px 20px 64px; }
+      .sidebar { display: none; }
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg"/>
+  <link rel="stylesheet" href="/static/theme.css"/>
+  <script src="/static/theme.js" defer></script>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="sastra-landing.html" class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+      </svg>
+      SASTRA
+    </a>
+    <a href="javascript:history.back()" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back
+    </a>
+  </div>
+
+  <div class="layout">
+
+    <!-- Sidebar navigation -->
+    <aside class="sidebar">
+      <p class="sidebar-label">On this page</p>
+      <nav id="toc">
+        <a href="#overview">Overview</a>
+        <a href="#what-we-collect">What we collect</a>
+        <a href="#your-code">Your code</a>
+        <a href="#how-we-use-it">How we use it</a>
+        <a href="#retention">Retention</a>
+        <a href="#sharing">Sharing</a>
+        <a href="#security">Security</a>
+        <a href="#your-rights">Your rights</a>
+        <a href="#cookies">Cookies</a>
+        <a href="#changes">Changes</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+
+      <header>
+        <h1>Privacy Policy</h1>
+        <p>Last updated: April 14, 2026 &nbsp;&middot;&nbsp; Effective: April 14, 2026</p>
+      </header>
+
+      <section class="policy-section" id="overview">
+        <h2>Overview</h2>
+        <p>SASTRA is a static application security testing tool. This policy explains what data we handle when you use it, how we handle it, and what rights you have over it.</p>
+        <p>The short version: you submit code to be scanned for vulnerabilities. We run the analysis and immediately discard the source code — it is never written to our database. Only the scan results (vulnerability findings and metadata) are saved, so you can refer back to them later. Scan records are deleted automatically after 90 days.</p>
+        <p>This policy applies to all users of SASTRA regardless of how you access it.</p>
+      </section>
+
+      <section class="policy-section" id="what-we-collect">
+        <h2>What we collect</h2>
+        <p>We collect only what is necessary to run the service.</p>
+        <div class="data-grid">
+          <div class="data-grid-row">
+            <div class="data-grid-cell">Account credentials</div>
+            <div class="data-grid-cell">Your username and a bcrypt hash of your password. We never store your password in plaintext.</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="data-grid-cell">Submitted code</div>
+            <div class="data-grid-cell">Source files or code snippets you upload or paste. Used only to run the scan — discarded immediately after results are generated. Never written to the database.</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="data-grid-cell">Scan metadata</div>
+            <div class="data-grid-cell">Filename, language, timestamp, and severity counts associated with each scan.</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="data-grid-cell">Findings</div>
+            <div class="data-grid-cell">Matched vulnerability rules, CWE identifiers, severity ratings, and the relevant code snippets flagged during analysis.</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="data-grid-cell">Session token</div>
+            <div class="data-grid-cell">A JWT stored in an HttpOnly cookie. Used to keep you authenticated. Cleared on logout.</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="data-grid-cell">Application logs</div>
+            <div class="data-grid-cell">Request timestamps and error messages for operational monitoring. Source code is never written to logs.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="policy-section" id="your-code">
+        <h2>Your code</h2>
+        <p>We understand that source code is often proprietary. It may contain business logic, unreleased features, or confidential implementation details belonging to you or your organization.</p>
+        <p><strong>Your source code is never stored.</strong> The moment the scan completes, the uploaded file or pasted code is discarded from memory. What persists in the database are only the results — vulnerability findings, severity ratings, CWE identifiers, and scan metadata — not the original source.</p>
+        <ul>
+          <li>Your code is used <strong>only</strong> to perform the scan, then immediately discarded.</li>
+          <li>It is never written to our database, logged, or retained in any form after the scan completes.</li>
+          <li>It is never sold, licensed, or disclosed to any third party.</li>
+          <li>It is never used to train or fine-tune any machine learning model. SASTRA's ML model is trained exclusively on publicly available open-source datasets.</li>
+          <li>It is not sent to any external service unless you explicitly click <strong>Get AI Fix</strong> on a specific finding. In that case, only the minimal code snippet for that finding is transmitted — not your full file.</li>
+        </ul>
+        <div class="callout">
+          <strong>Note for teams and organizations:</strong> Before uploading code, ensure you have the authority to submit it to a third-party service. If the code belongs to a client or is covered by an NDA or open-source license with redistribution restrictions, verify that using SASTRA complies with those obligations.
+        </div>
+      </section>
+
+      <section class="policy-section" id="how-we-use-it">
+        <h2>How we use your data</h2>
+        <p>We use data collected through SASTRA solely for the following purposes:</p>
+        <ul>
+          <li>Running vulnerability scans on the code you submit</li>
+          <li>Authenticating your identity and protecting your account</li>
+          <li>Generating in-app results and downloadable PDF reports</li>
+          <li>Maintaining your scan history so you can review past results</li>
+          <li>Monitoring application health, diagnosing errors, and fixing bugs</li>
+          <li>Detecting and preventing abuse or unauthorized access</li>
+        </ul>
+        <p>We do not use your data for advertising, profiling, analytics sold to third parties, or any purpose not listed here.</p>
+      </section>
+
+      <section class="policy-section" id="retention">
+        <h2>Retention</h2>
+        <p>Different data is kept for different lengths of time:</p>
+        <ul>
+          <li><strong>Source code</strong> — never stored. Discarded immediately after the scan completes.</li>
+          <li><strong>Scan findings and metadata</strong> (vulnerability results, severity ratings, CWEs, filename, timestamps) — retained so you can review past scans. Deleted automatically 90 days after the scan date.</li>
+          <li><strong>Account credentials</strong> — kept for as long as your account exists. You can request deletion at any time.</li>
+          <li><strong>Application logs</strong> — rotated automatically at 10 MB per file, five files maximum. Logs contain no source code.</li>
+          <li><strong>Database backups</strong> — created daily and rotated on a short cycle.</li>
+        </ul>
+        <p>If you delete your account, all scans, findings, and credentials associated with it are removed from the database.</p>
+      </section>
+
+      <section class="policy-section" id="sharing">
+        <h2>Sharing</h2>
+        <p>We do not sell or share your personal data or source code. The only circumstances in which data leaves our system are:</p>
+        <ul>
+          <li><strong>AI code fix (opt-in only):</strong> If you click <em>Get AI Fix</em>, a small code snippet for that specific finding is sent to the configured LLM endpoint (NVIDIA NIM by default). This is always a deliberate, per-finding action. The snippet is not retained beyond the API response.</li>
+          <li><strong>Legal process:</strong> If we are required by law, regulation, or a valid court order to disclose data, we will do so only to the extent required and will notify you where legally permitted.</li>
+        </ul>
+        <p>There are no third-party analytics scripts, advertising networks, or tracking pixels embedded in SASTRA.</p>
+      </section>
+
+      <section class="policy-section" id="security">
+        <h2>Security</h2>
+        <p>We take reasonable steps to protect the data you entrust to us:</p>
+        <ul>
+          <li>Passwords are hashed with bcrypt. Plaintext passwords are never stored or logged.</li>
+          <li>Session tokens are issued as HttpOnly, SameSite cookies, reducing exposure to XSS attacks.</li>
+          <li>Scans are tied to individual accounts. No scan is accessible to another user.</li>
+          <li>Application logs are scrubbed of source code content.</li>
+          <li>The database is backed up daily to reduce the risk of data loss.</li>
+        </ul>
+        <p>No system can guarantee complete security. We recommend not uploading code that contains live credentials, API keys, or secrets — those should be rotated regardless of where the code is shared.</p>
+      </section>
+
+      <section class="policy-section" id="your-rights">
+        <h2>Your rights</h2>
+        <p>You have the following rights with respect to your data:</p>
+        <ul>
+          <li><strong>Access:</strong> View all your scans and findings from the dashboard at any time.</li>
+          <li><strong>Download:</strong> Export any scan result as a PDF report from the scan results page.</li>
+          <li><strong>Deletion:</strong> Delete individual scans from your scan history, or request full account deletion by contacting us.</li>
+          <li><strong>Correction:</strong> Update your username or password from the Settings page.</li>
+          <li><strong>Opt-out of AI features:</strong> The AI code-fix feature is entirely opt-in. You can use every other part of SASTRA without your code ever leaving our servers.</li>
+        </ul>
+        <p>To exercise any right not available directly in the application, contact the administrator of your SASTRA deployment.</p>
+      </section>
+
+      <section class="policy-section" id="cookies">
+        <h2>Cookies and local storage</h2>
+        <p>SASTRA uses browser storage only where necessary:</p>
+        <ul>
+          <li><strong>Authentication cookie</strong> — an HttpOnly, SameSite=Lax JWT set on login. Required for the application to function. Cleared on logout.</li>
+          <li><strong>Theme preference (localStorage)</strong> — stores your light or dark mode selection. Contains no personal data.</li>
+          <li><strong>Session username (sessionStorage)</strong> — your display name, used in the UI. Cleared when the browser tab closes.</li>
+        </ul>
+        <p>We do not use advertising cookies, cross-site trackers, or browser fingerprinting.</p>
+      </section>
+
+      <section class="policy-section" id="changes">
+        <h2>Changes to this policy</h2>
+        <p>If we make material changes to how we handle your data, we will update the date at the top of this page and display a notice within the application. For significant changes — particularly anything affecting how submitted code is handled — we will ask you to review and re-accept the updated policy before continuing.</p>
+        <p>Continuing to use SASTRA after a policy update constitutes acceptance of the revised terms.</p>
+      </section>
+
+      <section class="policy-section" id="contact">
+        <h2>Contact</h2>
+        <p>For questions about this policy, data access requests, or account deletion, contact the administrator of your SASTRA deployment.</p>
+        <p>If you believe a privacy violation has occurred, you have the right to raise a complaint with the relevant data protection authority in your jurisdiction.</p>
+      </section>
+
+      <div class="content-footer">
+        <span>SASTRA &middot; Privacy Policy &middot; April 14, 2026</span>
+        <span>
+          <a href="signup.html">Sign up</a> &nbsp;&middot;&nbsp;
+          <a href="signin.html">Sign in</a>
+        </span>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // Highlight active section in sidebar on scroll
+    const sections = document.querySelectorAll('.policy-section');
+    const links = document.querySelectorAll('#toc a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`#toc a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
