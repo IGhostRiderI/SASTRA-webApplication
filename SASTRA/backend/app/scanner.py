@@ -115,7 +115,7 @@ class ScannerEngine:
             "language":  language,
         }
 
-    # ── regex scan ─────────────────────────────────────────────────────────────
+    #  regex scan 
 
     def _regex_scan(
         self,
@@ -184,7 +184,7 @@ class ScannerEngine:
 
         return findings
 
-    # ── AST merge ──────────────────────────────────────────────────────────────
+    #  AST merge 
 
     @staticmethod
     def _merge_ast_findings(
@@ -222,7 +222,7 @@ class ScannerEngine:
 
         return merged
 
-    # ── public scan API ────────────────────────────────────────────────────────
+    #  public scan API 
 
     def scan(
         self,
@@ -236,14 +236,14 @@ class ScannerEngine:
 
         Detection passes per language:
 
-            Python — regex on preprocessed source
+            Python - regex on preprocessed source
                    + AST walk on original source (built-in ast module)
 
-            Java   — regex on preprocessed source
+            Java - regex on preprocessed source
                    + AST walk on original source (javalang, if installed)
                      Falls back to regex-only if javalang is unavailable.
 
-            C/C++  — regex on preprocessed source only.
+            C/C++ - regex on preprocessed source only.
         """
         # FR-7: preprocess before regex scanning
         clean_content  = preprocess(content, language)
@@ -261,7 +261,7 @@ class ScannerEngine:
         ast_mode = "disabled"
 
         if language == "python":
-            # Built-in ast module — always available
+            # Built-in ast module - always available
             ast_findings = ast_scan_python(content, original_lines)
             ast_mode = "enabled"
             all_findings = self._merge_ast_findings(
@@ -269,7 +269,7 @@ class ScannerEngine:
             )
 
         elif language == "java" and JAVALANG_AVAILABLE:
-            # javalang — optional; degrades gracefully if not installed
+            # javalang - optional; degrades gracefully if not installed
             ast_findings = ast_scan_java(content, original_lines)
             ast_mode = "enabled"
             all_findings = self._merge_ast_findings(
@@ -286,13 +286,13 @@ class ScannerEngine:
             )
 
         else:
-            # Fallback — regex only (Java without javalang, or C/C++ without libclang)
+            # Fallback - regex only (Java without javalang, or C/C++ without libclang)
             ast_mode = "regex-only"
             all_findings = regex_findings
 
         ast_added = max(0, len(all_findings) - len(regex_findings))
         logger.info(
-            "Scan composition — language=%s file=%s regex=%d ast_mode=%s ast_raw=%d ast_added=%d total=%d",
+            "Scan composition - language=%s file=%s regex=%d ast_mode=%s ast_raw=%d ast_added=%d total=%d",
             language,
             path_value,
             len(regex_findings),

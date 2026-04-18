@@ -177,7 +177,7 @@ def build_pdf_report(scan_payload: Dict[str, object]) -> bytes:
         rule_fix = finding.get("recommendation", "")
         fp_flag  = bool(finding.get("fp_flag", False))
         fp_label = finding.get("fp_label", "")
-        suffix   = f"  ⚠ {fp_label}" if fp_flag and fp_label else ("  ⚠ Potential false positive" if fp_flag else "")
+        suffix   = f"  [{fp_label}]" if fp_flag and fp_label else ("  [Potential false positive]" if fp_flag else "")
         c.drawString(text_x, text_y - 20 * mm, _text(f"Fix: {rule_fix}{suffix}", 128))
 
         # LLM-generated fix

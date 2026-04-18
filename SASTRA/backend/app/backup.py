@@ -1,20 +1,5 @@
-"""
-Database backup utility — NFR-4.
-
-Creates atomic SQLite backups using the sqlite3.backup() API, which
-produces a consistent snapshot even while the database is in use.
-
-Backup policy:
-  - Backups are stored in BACKUP_DIR (app/data/backups/)..
-  - File names follow the pattern: sast_<YYYYMMDDTHHMMSSZ>.db
-  - A maximum of MAX_BACKUPS recent backups are retained; older ones
-    are automatically pruned after each successful backup.
-
-Recovery targets (NFR-4):
-  - RPO 24 h — a daily backup (triggered on application startup) means
-    at most one day of data can be lost.
-  - RTO 4 h  — restoring is a single file copy: cp backup.db sast.db
-"""
+"""SQLite backup utility. Uses sqlite3.backup() for a consistent snapshot while
+the DB is in use. Keeps the most recent MAX_BACKUPS files in BACKUP_DIR."""
 
 import logging
 import sqlite3

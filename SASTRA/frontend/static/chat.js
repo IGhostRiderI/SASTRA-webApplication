@@ -177,7 +177,7 @@
 
     } catch (err) {
       removeTyping();
-      addMessage('ai', '⚠ ' + (err.message || 'Something went wrong. Please try again.'));
+      addMessage('ai', (err.message || 'Something went wrong. Please try again.'));
     } finally {
       input.disabled = false;
       sendBtn.disabled = false;

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Privacy Policy – SASTRA</title>
+  <title>Privacy Policy - SASTRA</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
   <script>
     (function () {
@@ -50,7 +50,7 @@
       min-height: 100vh;
     }
 
-    /* ── top nav ── */
+    /*  top nav  */
     .top-nav {
       position: sticky;
       top: 0;
@@ -91,7 +91,7 @@
 
     .nav-back:hover { color: var(--text); }
 
-    /* ── layout ── */
+    /*  layout  */
     .layout {
       display: grid;
       grid-template-columns: 220px 1fr;
@@ -102,7 +102,7 @@
       align-items: start;
     }
 
-    /* ── sidebar ── */
+    /*  sidebar  */
     .sidebar {
       position: sticky;
       top: 80px;
@@ -141,7 +141,7 @@
       font-weight: 500;
     }
 
-    /* ── content ── */
+    /*  content  */
     .content header {
       padding-bottom: 32px;
       border-bottom: 1px solid var(--border);
@@ -162,7 +162,7 @@
       color: var(--text-muted);
     }
 
-    /* ── sections ── */
+    /*  sections  */
     .policy-section {
       margin-bottom: 52px;
       scroll-margin-top: 80px;
@@ -229,7 +229,7 @@
 
     .callout strong { color: var(--text); }
 
-    /* ── data grid ── */
+    /*  data grid  */
     .data-grid {
       width: 100%;
       border: 1px solid var(--border);
@@ -264,7 +264,7 @@
       background: var(--surface);
     }
 
-    /* ── footer ── */
+    /*  footer  */
     .content-footer {
       margin-top: 64px;
       padding-top: 24px;
@@ -342,7 +342,7 @@
       <section class="policy-section" id="overview">
         <h2>Overview</h2>
         <p>SASTRA is a static application security testing tool. This policy explains what data we handle when you use it, how we handle it, and what rights you have over it.</p>
-        <p>The short version: you submit code to be scanned for vulnerabilities. We run the analysis and immediately discard the source code — it is never written to our database. Only the scan results (vulnerability findings and metadata) are saved, so you can refer back to them later. Scan records are deleted automatically after 90 days.</p>
+        <p>The short version: you submit code to be scanned for vulnerabilities. We run the analysis and immediately discard the source code - it is never written to our database. Only the scan results (vulnerability findings and metadata) are saved, so you can refer back to them later. Scan records are deleted automatically after 90 days.</p>
         <p>This policy applies to all users of SASTRA regardless of how you access it.</p>
       </section>
 
@@ -356,7 +356,7 @@
           </div>
           <div class="data-grid-row">
             <div class="data-grid-cell">Submitted code</div>
-            <div class="data-grid-cell">Source files or code snippets you upload or paste. Used only to run the scan — discarded immediately after results are generated. Never written to the database.</div>
+            <div class="data-grid-cell">Source files or code snippets you upload or paste. Used only to run the scan - discarded immediately after results are generated. Never written to the database.</div>
           </div>
           <div class="data-grid-row">
             <div class="data-grid-cell">Scan metadata</div>
@@ -380,13 +380,13 @@
       <section class="policy-section" id="your-code">
         <h2>Your code</h2>
         <p>We understand that source code is often proprietary. It may contain business logic, unreleased features, or confidential implementation details belonging to you or your organization.</p>
-        <p><strong>Your source code is never stored.</strong> The moment the scan completes, the uploaded file or pasted code is discarded from memory. What persists in the database are only the results — vulnerability findings, severity ratings, CWE identifiers, and scan metadata — not the original source.</p>
+        <p><strong>Your source code is never stored.</strong> The moment the scan completes, the uploaded file or pasted code is discarded from memory. What persists in the database are only the results - vulnerability findings, severity ratings, CWE identifiers, and scan metadata - not the original source.</p>
         <ul>
           <li>Your code is used <strong>only</strong> to perform the scan, then immediately discarded.</li>
           <li>It is never written to our database, logged, or retained in any form after the scan completes.</li>
           <li>It is never sold, licensed, or disclosed to any third party.</li>
           <li>It is never used to train or fine-tune any machine learning model. SASTRA's ML model is trained exclusively on publicly available open-source datasets.</li>
-          <li>It is not sent to any external service unless you explicitly click <strong>Get AI Fix</strong> on a specific finding. In that case, only the minimal code snippet for that finding is transmitted — not your full file.</li>
+          <li>It is not sent to any external service unless you explicitly click <strong>Get AI Fix</strong> on a specific finding. In that case, only the minimal code snippet for that finding is transmitted - not your full file.</li>
         </ul>
         <div class="callout">
           <strong>Note for teams and organizations:</strong> Before uploading code, ensure you have the authority to submit it to a third-party service. If the code belongs to a client or is covered by an NDA or open-source license with redistribution restrictions, verify that using SASTRA complies with those obligations.
@@ -411,11 +411,11 @@
         <h2>Retention</h2>
         <p>Different data is kept for different lengths of time:</p>
         <ul>
-          <li><strong>Source code</strong> — never stored. Discarded immediately after the scan completes.</li>
-          <li><strong>Scan findings and metadata</strong> (vulnerability results, severity ratings, CWEs, filename, timestamps) — retained so you can review past scans. Deleted automatically 90 days after the scan date.</li>
-          <li><strong>Account credentials</strong> — kept for as long as your account exists. You can request deletion at any time.</li>
-          <li><strong>Application logs</strong> — rotated automatically at 10 MB per file, five files maximum. Logs contain no source code.</li>
-          <li><strong>Database backups</strong> — created daily and rotated on a short cycle.</li>
+          <li><strong>Source code</strong> - never stored. Discarded immediately after the scan completes.</li>
+          <li><strong>Scan findings and metadata</strong> (vulnerability results, severity ratings, CWEs, filename, timestamps) - retained so you can review past scans. Deleted automatically 90 days after the scan date.</li>
+          <li><strong>Account credentials</strong> - kept for as long as your account exists. You can request deletion at any time.</li>
+          <li><strong>Application logs</strong> - rotated automatically at 10 MB per file, five files maximum. Logs contain no source code.</li>
+          <li><strong>Database backups</strong> - created daily and rotated on a short cycle.</li>
         </ul>
         <p>If you delete your account, all scans, findings, and credentials associated with it are removed from the database.</p>
       </section>
@@ -440,7 +440,7 @@
           <li>Application logs are scrubbed of source code content.</li>
           <li>The database is backed up daily to reduce the risk of data loss.</li>
         </ul>
-        <p>No system can guarantee complete security. We recommend not uploading code that contains live credentials, API keys, or secrets — those should be rotated regardless of where the code is shared.</p>
+        <p>No system can guarantee complete security. We recommend not uploading code that contains live credentials, API keys, or secrets - those should be rotated regardless of where the code is shared.</p>
       </section>
 
       <section class="policy-section" id="your-rights">
@@ -460,16 +460,16 @@
         <h2>Cookies and local storage</h2>
         <p>SASTRA uses browser storage only where necessary:</p>
         <ul>
-          <li><strong>Authentication cookie</strong> — an HttpOnly, SameSite=Lax JWT set on login. Required for the application to function. Cleared on logout.</li>
-          <li><strong>Theme preference (localStorage)</strong> — stores your light or dark mode selection. Contains no personal data.</li>
-          <li><strong>Session username (sessionStorage)</strong> — your display name, used in the UI. Cleared when the browser tab closes.</li>
+          <li><strong>Authentication cookie</strong> - an HttpOnly, SameSite=Lax JWT set on login. Required for the application to function. Cleared on logout.</li>
+          <li><strong>Theme preference (localStorage)</strong> - stores your light or dark mode selection. Contains no personal data.</li>
+          <li><strong>Session username (sessionStorage)</strong> - your display name, used in the UI. Cleared when the browser tab closes.</li>
         </ul>
         <p>We do not use advertising cookies, cross-site trackers, or browser fingerprinting.</p>
       </section>
 
       <section class="policy-section" id="changes">
         <h2>Changes to this policy</h2>
-        <p>If we make material changes to how we handle your data, we will update the date at the top of this page and display a notice within the application. For significant changes — particularly anything affecting how submitted code is handled — we will ask you to review and re-accept the updated policy before continuing.</p>
+        <p>If we make material changes to how we handle your data, we will update the date at the top of this page and display a notice within the application. For significant changes - particularly anything affecting how submitted code is handled - we will ask you to review and re-accept the updated policy before continuing.</p>
         <p>Continuing to use SASTRA after a policy update constitutes acceptance of the revised terms.</p>
       </section>
 

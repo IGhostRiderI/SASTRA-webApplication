@@ -1,4 +1,4 @@
-:root {
+now :root {
   color-scheme: light;
 }
 
@@ -28,7 +28,7 @@ html[data-theme="dark"] {
   --popup-confirm-color: #0a0a0a;
 }
 
-/* Privacy checkbox — dark mode fixes */
+/* Privacy checkbox - dark mode fixes */
 html[data-theme="dark"] .privacy-row input[type="checkbox"] {
   border-color: rgba(255, 255, 255, 0.3);
 }
@@ -434,7 +434,7 @@ html[data-theme="dark"] .btn-dismiss-fix {
   color: #e0e0e0 !important;
 }
 
-/* ── Logout popup: global fixes ── */
+/*  Logout popup: global fixes  */
 .logout-popup-btn { white-space: nowrap; }
 
 html[data-theme="dark"] .logout-popup {
@@ -469,7 +469,7 @@ html[data-theme="dark"] .logout-popup-confirm:hover {
   }
 }
 
-/* ── Dark mode: logout button → white bg, black text ── */
+/*  Dark mode: logout button → white bg, black text  */
 html[data-theme="dark"] .btn-logout {
   background: #ffffff !important;
   color: #000000 !important;
@@ -480,14 +480,14 @@ html[data-theme="dark"] .btn-logout:hover {
   color: #000000 !important;
 }
 
-/* ── Dark mode: new-scan method toggle active button ── */
+/*  Dark mode: new-scan method toggle active button  */
 html[data-theme="dark"] .toggle-btn.active {
   background: #ffffff !important;
   color: #000000 !important;
   border-color: #ffffff !important;
 }
 
-/* ── Dark mode: language selector active button ── */
+/*  Dark mode: language selector active button  */
 html[data-theme="dark"] .lang-btn.active {
   background: rgba(240, 240, 240, 0.22) !important;
   border-color: rgba(255, 255, 255, 0.4) !important;
@@ -497,7 +497,7 @@ html[data-theme="dark"] .lang-btn.active:hover {
   background: rgba(240, 240, 240, 0.3) !important;
 }
 
-/* ── Dark mode: run scan button ── */
+/*  Dark mode: run scan button  */
 html[data-theme="dark"] .btn-run-scan {
   background: #ffffff !important;
   color: #000000 !important;
@@ -507,7 +507,7 @@ html[data-theme="dark"] .btn-run-scan:hover {
   color: #000000 !important;
 }
 
-/* ── Dark mode: settings save changes button ── */
+/*  Dark mode: settings save changes button  */
 html[data-theme="dark"] .btn-save {
   background: #ffffff !important;
   color: #000000 !important;
@@ -518,14 +518,14 @@ html[data-theme="dark"] .btn-save:hover {
   color: #000000 !important;
 }
 
-/* ── Dark mode: scan history active filter button ── */
+/*  Dark mode: scan history active filter button  */
 html[data-theme="dark"] .filter-btn.active {
   background: #ffffff !important;
   color: #000000 !important;
   border-color: #ffffff !important;
 }
 
-/* ── Dark mode: sign-in / sign-up submit button ── */
+/*  Dark mode: sign-in / sign-up submit button  */
 html[data-theme="dark"] .btn-submit {
   background: #ffffff !important;
   color: #000000 !important;
@@ -536,7 +536,7 @@ html[data-theme="dark"] .btn-submit:hover {
   color: #000000 !important;
 }
 
-/* ── Dark mode: new scan button (dashboard + scan history) ── */
+/*  Dark mode: new scan button (dashboard + scan history)  */
 html[data-theme="dark"] .btn-new-scan {
   background: #ffffff !important;
   color: #000000 !important;
@@ -549,7 +549,7 @@ html[data-theme="dark"] .btn-new-scan svg {
   color: #000000 !important;
 }
 
-/* ── Dark mode: paste code textarea ── */
+/*  Dark mode: paste code textarea  */
 html[data-theme="dark"] textarea#code-input {
   background: rgba(255, 255, 255, 0.1) !important;
   border-color: rgba(255, 255, 255, 0.18) !important;
@@ -563,7 +563,7 @@ html[data-theme="dark"] textarea#code-input::placeholder {
   color: #888888 !important;
 }
 
-/* ── Dark mode: landing page overrides ── */
+/*  Dark mode: landing page overrides  */
 html[data-theme="dark"] body.landing-page .btn-dark {
   background: #ffffff !important;
   border-color: #ffffff !important;

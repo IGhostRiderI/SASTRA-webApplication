@@ -1,43 +1,6 @@
-"""
-AST-based vulnerability scanner for Python, Java, and C/C++ source code.
-(FR-7, Tools section)
-
-Python scanner
---------------
-Uses Python's built-in ``ast`` module — no extra dependencies required.
-
-Java scanner
-------------
-Uses the ``javalang`` third-party library.  The import is wrapped in a
-try/except so the application starts and runs normally even when
-javalang is not installed — Java files simply fall back to regex-only
-scanning in that case.
-
-Install javalang to enable Java AST scanning:
-    pip install javalang
-
-Why AST alongside regex
------------------------
-Regex rules match text patterns and can miss or misfire depending on
-whitespace, string quoting, or comment placement.  The AST scanner
-operates on the parsed syntax tree, so it is immune to those issues:
-
-  * It never fires on commented-out code (comments are stripped by the
-    parser before the tree is built).
-  * It correctly resolves method chains and qualified names.
-  * It detects hardcoded password / secret assignments that regex
-    patterns struggle with.
-
-Findings produced here use ``source="ast"`` so analysts and reports
-can distinguish them from regex-derived findings.
-
-Deduplication
--------------
-The scanner returns findings keyed by ``(line_number, cwe_id)``.
-``ScannerEngine`` uses the same key to skip any AST finding whose
-(line, CWE) pair is already covered by a regex finding, so the same
-vulnerability is never reported twice.
-"""
+"""AST-based vulnerability scanner for Python, Java, and C/C++. Python uses the
+built-in ast module; Java uses javalang; C/C++ uses libclang. Findings are tagged
+source="ast" and deduped against regex findings by (line_number, cwe_id)."""
 
 import ast
 import logging
@@ -47,14 +10,14 @@ from .mappings import map_cwe_to_owasp, severity_for_cwe, severity_score
 
 logger = logging.getLogger("sast.ast")
 
-# ── optional javalang import ───────────────────────────────────────────────────
+#  optional javalang import 
 try:
     import javalang
     JAVALANG_AVAILABLE = True
 except ImportError:
     JAVALANG_AVAILABLE = False
 
-# ── optional libclang import ───────────────────────────────────────────────────
+#  optional libclang import 
 try:
     import clang.cindex as _clang_cindex
     CLANG_AVAILABLE = True
@@ -94,9 +57,7 @@ def is_clang_runtime_ready() -> bool:
     return ready
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # SHARED HELPERS
-# ══════════════════════════════════════════════════════════════════════════════
 
 def _make_finding(
     line_number: int,
@@ -166,9 +127,7 @@ def _ml_context(source_lines: List[str], lineno: int) -> str:
     return "\n".join(source_lines[start:end])[:600]
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # PYTHON AST SCANNER
-# ══════════════════════════════════════════════════════════════════════════════
 
 # Maps (module_or_None, function_name) → (cwe_id, cwe_name, title)
 _PY_CALL_RULES: Dict[Tuple[Optional[str], str], Tuple[str, str, str]] = {
@@ -177,11 +136,11 @@ _PY_CALL_RULES: Dict[Tuple[Optional[str], str], Tuple[str, str, str]] = {
     (None, "exec"):    ("CWE-94",  "Code Injection",                        "Unsafe exec() usage"),
     (None, "compile"): ("CWE-94",  "Code Injection",                        "Dynamic code compilation via compile()"),
     (None, "input"):   ("CWE-20",  "Improper Input Validation",             "Unvalidated user input via input()"),
-    # open() — only flagged when argument is not a string literal (handled below via _ast_check_open)
-    # os module — os.system always dangerous (no safe usage pattern)
+    # open() - only flagged when argument is not a string literal (handled below via _ast_check_open)
+    # os module - os.system always dangerous (no safe usage pattern)
     ("os", "system"):  ("CWE-78",  "OS Command Injection",                  "OS command execution via os.system()"),
     ("os", "popen"):   ("CWE-78",  "OS Command Injection",                  "OS command execution via os.popen()"),
-    # subprocess — only flagged when shell=True (handled below via _ast_check_subprocess)
+    # subprocess - only flagged when shell=True (handled below via _ast_check_subprocess)
 
     # pickle / marshal / shelve
     ("pickle",     "loads"):   ("CWE-502", "Deserialization of Untrusted Data", "Unsafe deserialization via pickle.loads()"),
@@ -191,7 +150,7 @@ _PY_CALL_RULES: Dict[Tuple[Optional[str], str], Tuple[str, str, str]] = {
     ("shelve",     "open"):    ("CWE-502", "Deserialization of Untrusted Data", "Potential unsafe deserialization via shelve.open()"),
     ("jsonpickle", "decode"):  ("CWE-502", "Deserialization of Untrusted Data", "Unsafe deserialization via jsonpickle.decode()"),
     # yaml
-    ("yaml", "load"):          ("CWE-20",  "Improper Input Validation",        "Unsafe YAML load() — use safe_load()"),
+    ("yaml", "load"):          ("CWE-20",  "Improper Input Validation",        "Unsafe YAML load() - use safe_load()"),
     # hashlib weak algorithms
     ("hashlib", "md5"):        ("CWE-327", "Use of a Broken Cryptographic Algorithm", "Weak hash algorithm MD5"),
     ("hashlib", "sha1"):       ("CWE-327", "Use of a Broken Cryptographic Algorithm", "Weak hash algorithm SHA-1"),
@@ -202,7 +161,7 @@ _PY_CALL_RULES: Dict[Tuple[Optional[str], str], Tuple[str, str, str]] = {
     ("random", "seed"):        ("CWE-330", "Use of Insufficiently Random Values", "Predictable RNG seed via random.seed()"),
     # tempfile
     ("tempfile", "mktemp"):    ("CWE-377", "Insecure Temporary File",  "Insecure temp file creation via tempfile.mktemp()"),
-    # SQL — execute() only flagged when query is NOT parameterized (handled below via _ast_check_execute)
+    # SQL - execute() only flagged when query is NOT parameterized (handled below via _ast_check_execute)
 }
 
 _PY_SECRET_KWARG_NAMES = frozenset({
@@ -265,7 +224,7 @@ def ast_scan_python(
                 cwe_id, cwe_name, title = rule
                 findings.append(_make_finding(lineno, col, cwe_id, cwe_name, title, _snip(lineno), "python", _ctx(lineno)))
 
-            # execute() — only flag when first arg is NOT a parameterized call
+            # execute() - only flag when first arg is NOT a parameterized call
             # (parameterized = has a second positional argument, e.g. cursor.execute(sql, params))
             if func_name in ("execute", "executemany") and node.args:
                 first_arg = node.args[0]
@@ -277,7 +236,7 @@ def ast_scan_python(
                         "Potential SQL injection via execute() with dynamic query (no parameterization)",
                         _snip(lineno), "python", _ctx(lineno)))
 
-            # open() — only flag when first arg is NOT a string literal
+            # open() - only flag when first arg is NOT a string literal
             if func_name == "open" and module is None and node.args:
                 first_arg = node.args[0]
                 if not isinstance(first_arg, ast.Constant):
@@ -286,7 +245,7 @@ def ast_scan_python(
                         "Unvalidated file path passed to open()",
                         _snip(lineno), "python", _ctx(lineno)))
 
-            # subprocess — only flag when shell=True is explicitly set
+            # subprocess - only flag when shell=True is explicitly set
             if module == "subprocess" and func_name in ("run", "call", "Popen", "check_output", "check_call"):
                 shell_true = any(
                     isinstance(kw.value, ast.Constant) and kw.value.value is True
@@ -370,16 +329,14 @@ def ast_scan_python(
                 findings.append(_make_finding(
                     lineno, 0,
                     "CWE-617", "Reachable Assertion",
-                    "Security check implemented via assert — removed in optimised builds",
+                    "Security check implemented via assert - removed in optimised builds",
                     _snip(lineno), "python", _ctx(lineno),
                 ))
 
     return findings
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # JAVA AST SCANNER  (requires javalang)
-# ══════════════════════════════════════════════════════════════════════════════
 
 # Method invocations to flag: method_name → (cwe_id, cwe_name, title)
 # These are matched on the method name alone because javalang does not
@@ -387,7 +344,7 @@ def ast_scan_python(
 _JAVA_METHOD_RULES: Dict[str, Tuple[str, str, str]] = {
     # Command execution
     "exec":              ("CWE-78",  "OS Command Injection",                  "Command execution via Runtime.exec()"),
-    # Reflection — dynamic class / method loading
+    # Reflection - dynamic class / method loading
     "forName":           ("CWE-470", "Use of Externally-Controlled Input to Select Classes",
                                                                               "Dynamic class loading via Class.forName()"),
     "loadClass":         ("CWE-470", "Use of Externally-Controlled Input to Select Classes",
@@ -404,13 +361,13 @@ _JAVA_METHOD_RULES: Dict[str, Tuple[str, str, str]] = {
     "readUnshared":      ("CWE-502", "Deserialization of Untrusted Data",    "Unsafe deserialization via readUnshared()"),
     # Cryptography
     "getInstance":       ("CWE-327", "Use of a Broken Cryptographic Algorithm",
-                                                                              "Potential weak algorithm via getInstance() — verify algorithm argument"),
+                                                                              "Potential weak algorithm via getInstance() - verify algorithm argument"),
     # XML external entity
-    "parse":             ("CWE-611", "XML External Entity",                  "Potential XXE via XML parse() — ensure external entities disabled"),
-    "newDocumentBuilder":("CWE-611", "XML External Entity",                  "Potential XXE via DocumentBuilder — ensure external entities disabled"),
+    "parse":             ("CWE-611", "XML External Entity",                  "Potential XXE via XML parse() - ensure external entities disabled"),
+    "newDocumentBuilder":("CWE-611", "XML External Entity",                  "Potential XXE via DocumentBuilder - ensure external entities disabled"),
     # SSRF
-    "openConnection":    ("CWE-918", "Server-Side Request Forgery",          "Potential SSRF via openConnection() — validate target URL"),
-    "openStream":        ("CWE-918", "Server-Side Request Forgery",          "Potential SSRF via openStream() — validate target URL"),
+    "openConnection":    ("CWE-918", "Server-Side Request Forgery",          "Potential SSRF via openConnection() - validate target URL"),
+    "openStream":        ("CWE-918", "Server-Side Request Forgery",          "Potential SSRF via openStream() - validate target URL"),
 }
 
 # Field / variable names that suggest a hardcoded credential
@@ -467,7 +424,7 @@ def ast_scan_java(
     def _ctx(lineno: int) -> str:
         return _ml_context(source_lines, lineno)
 
-    # ── 1. Method invocations ──────────────────────────────────────────────────
+    #  1. Method invocations 
     for _, node in tree.filter(javalang.tree.MethodInvocation):
         method_name = node.member
         lineno = _java_position(node)
@@ -476,34 +433,34 @@ def ast_scan_java(
         if rule:
             cwe_id, cwe_name, title = rule
 
-            # Refine getInstance() — only flag if a known-weak algorithm
+            # Refine getInstance() - only flag if a known-weak algorithm
             # literal is passed as the first argument.
             if method_name == "getInstance":
                 args = node.arguments or []
                 if args and isinstance(args[0], javalang.tree.Literal):
                     algo = str(args[0].value).strip('"\'')
                     if algo.upper() not in _JAVA_WEAK_ALGORITHMS:
-                        continue   # not a known-weak algorithm — skip
+                        continue   # not a known-weak algorithm - skip
                     title = f"Weak cryptographic algorithm '{algo}' passed to getInstance()"
                 else:
-                    continue       # no literal argument — skip to avoid noise
+                    continue       # no literal argument - skip to avoid noise
 
             findings.append(_make_finding(lineno, 0, cwe_id, cwe_name, title, _snip(lineno), "java", _ctx(lineno)))
 
         # 1a. java.util.Random non-secure RNG usage
         if method_name in _JAVA_RANDOM_METHODS:
             # Check whether the invocation is on a Random object by looking
-            # at the qualifier — this is a best-effort heuristic.
+            # at the qualifier - this is a best-effort heuristic.
             qualifier = str(node.qualifier or "").lower()
             if "random" in qualifier or not qualifier:
                 findings.append(_make_finding(
                     lineno, 0,
                     "CWE-330", "Use of Insufficiently Random Values",
-                    f"Non-cryptographic RNG via Random.{method_name}() — use SecureRandom",
+                    f"Non-cryptographic RNG via Random.{method_name}() - use SecureRandom",
                     _snip(lineno), "java", _ctx(lineno),
                 ))
 
-    # ── 2. Object creation — detect new Random() and new ObjectInputStream() ──
+    #  2. Object creation - detect new Random() and new ObjectInputStream() 
     for _, node in tree.filter(javalang.tree.ClassCreator):
         type_name = node.type.name if node.type else ""
         lineno = _java_position(node)
@@ -512,7 +469,7 @@ def ast_scan_java(
             findings.append(_make_finding(
                 lineno, 0,
                 "CWE-330", "Use of Insufficiently Random Values",
-                "Non-cryptographic RNG: new Random() — use SecureRandom for security-sensitive values",
+                "Non-cryptographic RNG: new Random() - use SecureRandom for security-sensitive values",
                 _snip(lineno), "java", _ctx(lineno),
             ))
 
@@ -524,7 +481,7 @@ def ast_scan_java(
                 _snip(lineno), "java", _ctx(lineno),
             ))
 
-    # ── 3. Hardcoded credential field declarations ─────────────────────────────
+    #  3. Hardcoded credential field declarations 
     # Catches:  private String password = "secret";
     for _, node in tree.filter(javalang.tree.VariableDeclarator):
         var_name = (node.name or "").lower()
@@ -547,7 +504,7 @@ def ast_scan_java(
                 _snip(lineno), "java", _ctx(lineno),
             ))
 
-    # ── 4. Empty / permissive TrustManager (certificate validation disabled) ──
+    #  4. Empty / permissive TrustManager (certificate validation disabled) 
     # Heuristic: look for a class that implements X509TrustManager and
     # contains a method named checkServerTrusted or checkClientTrusted
     # that has an empty body (no statements).
@@ -561,7 +518,7 @@ def ast_scan_java(
                 continue
             if method.name not in ("checkServerTrusted", "checkClientTrusted", "checkValidity"):
                 continue
-            # An empty body means the method does nothing — certificate
+            # An empty body means the method does nothing - certificate
             # validation is effectively disabled.
             if not method.body:
                 lineno = _java_position(method)
@@ -575,24 +532,10 @@ def ast_scan_java(
     return findings
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# C / C++ AST SCANNER  (requires libclang — pip install libclang)
-# ══════════════════════════════════════════════════════════════════════════════
-#
-# The libclang wheel bundles the shared library on many platforms, but
-# runtime loading can still fail in some Linux/container environments due to
-# missing system-level dependencies. We therefore probe runtime usability.
-#
-# Strategy
-# --------
-# We write the source to a temporary file and ask libclang to parse it with
-# minimal compiler flags so it never needs real system headers.  We walk the
-# cursor tree looking for:
-#   - Dangerous function calls (system, popen, gets, strcpy, printf family …)
-#   - Hardcoded credential variable declarations
-#   - Weak / broken cryptographic API usage (MD5_Init, DES_*, RC4 …)
-#   - Insecure random (rand, srand)
-# ══════════════════════════════════════════════════════════════════════════════
+# C / C++ AST scanner (requires libclang).
+# Parses source with minimal compiler flags so no system headers are needed.
+# Looks for dangerous calls (system, popen, gets, strcpy, printf family),
+# hardcoded credentials, weak crypto APIs, and insecure random.
 
 import tempfile
 import os
@@ -616,46 +559,46 @@ _CPP_CALL_RULES: Dict[str, Tuple[str, str, str]] = {
                         "Ensure exec arguments are not user-controlled."),
     "execve":          ("CWE-78",  "OS Command Injection",
                         "Ensure exec arguments are not user-controlled."),
-    # Buffer overflow — banned functions
+    # Buffer overflow - banned functions
     "gets":            ("CWE-121", "Stack-based Buffer Overflow",
-                        "gets() has no bounds checking — replace with fgets()."),
+                        "gets() has no bounds checking - replace with fgets()."),
     "strcpy":          ("CWE-120", "Buffer Copy Without Checking Size",
-                        "strcpy() is unsafe — use strncpy() or strlcpy()."),
+                        "strcpy() is unsafe - use strncpy() or strlcpy()."),
     "strcat":          ("CWE-120", "Buffer Copy Without Checking Size",
-                        "strcat() is unsafe — use strncat() or strlcat()."),
+                        "strcat() is unsafe - use strncat() or strlcat()."),
     "sprintf":         ("CWE-134", "Use of Externally-Controlled Format String",
-                        "sprintf() has no bounds checking — use snprintf()."),
+                        "sprintf() has no bounds checking - use snprintf()."),
     "vsprintf":        ("CWE-134", "Use of Externally-Controlled Format String",
-                        "vsprintf() has no bounds checking — use vsnprintf()."),
+                        "vsprintf() has no bounds checking - use vsnprintf()."),
     "scanf":           ("CWE-120", "Buffer Copy Without Checking Size",
-                        "scanf() with %%s has no bounds — specify a field width or use fgets()."),
+                        "scanf() with %%s has no bounds - specify a field width or use fgets()."),
     "printf":          ("CWE-134", "Use of Externally-Controlled Format String",
                         "Ensure the printf format string is a literal, not user-controlled."),
     "fprintf":         ("CWE-134", "Use of Externally-Controlled Format String",
                         "Ensure the fprintf format string is a literal, not user-controlled."),
     # Weak crypto
     "MD5_Init":        ("CWE-327", "Use of a Broken Cryptographic Algorithm",
-                        "MD5 is cryptographically broken — use SHA-256 or stronger."),
+                        "MD5 is cryptographically broken - use SHA-256 or stronger."),
     "MD5_Update":      ("CWE-327", "Use of a Broken Cryptographic Algorithm",
-                        "MD5 is cryptographically broken — use SHA-256 or stronger."),
+                        "MD5 is cryptographically broken - use SHA-256 or stronger."),
     "MD5_Final":       ("CWE-327", "Use of a Broken Cryptographic Algorithm",
-                        "MD5 is cryptographically broken — use SHA-256 or stronger."),
+                        "MD5 is cryptographically broken - use SHA-256 or stronger."),
     "SHA1_Init":       ("CWE-327", "Use of a Broken Cryptographic Algorithm",
-                        "SHA-1 is cryptographically broken — use SHA-256 or stronger."),
+                        "SHA-1 is cryptographically broken - use SHA-256 or stronger."),
     "SHA1_Update":     ("CWE-327", "Use of a Broken Cryptographic Algorithm",
-                        "SHA-1 is cryptographically broken — use SHA-256 or stronger."),
+                        "SHA-1 is cryptographically broken - use SHA-256 or stronger."),
     "SHA1_Final":      ("CWE-327", "Use of a Broken Cryptographic Algorithm",
-                        "SHA-1 is cryptographically broken — use SHA-256 or stronger."),
+                        "SHA-1 is cryptographically broken - use SHA-256 or stronger."),
     "DES_ecb_encrypt": ("CWE-327", "Use of a Broken Cryptographic Algorithm",
-                        "DES is cryptographically broken — use AES-256-GCM."),
+                        "DES is cryptographically broken - use AES-256-GCM."),
     # Insecure random
     "rand":            ("CWE-330", "Use of Insufficiently Random Values",
-                        "rand() is not cryptographically secure — use getrandom() or /dev/urandom."),
+                        "rand() is not cryptographically secure - use getrandom() or /dev/urandom."),
     "srand":           ("CWE-330", "Use of Insufficiently Random Values",
-                        "srand() seeds a non-cryptographic RNG — avoid for security-sensitive code."),
+                        "srand() seeds a non-cryptographic RNG - avoid for security-sensitive code."),
     # Unsafe memory
     "alloca":          ("CWE-770", "Allocation of Resources Without Limits or Throttling",
-                        "alloca() allocates on the stack with no bounds — use malloc() with size checks."),
+                        "alloca() allocates on the stack with no bounds - use malloc() with size checks."),
 }
 
 # Variable name fragments that suggest a hardcoded credential
@@ -734,7 +677,7 @@ def ast_scan_cpp(
 
     def _walk(cursor) -> None:
         loc = cursor.location
-        # Skip nodes from system headers — only analyse our file
+        # Skip nodes from system headers - only analyse our file
         if loc.file and loc.file.name != tmp_path:
             for child in cursor.get_children():
                 _walk(child)
@@ -744,7 +687,7 @@ def ast_scan_cpp(
         col    = max((loc.column or 1) - 1, 0)
         kind   = cursor.kind
 
-        # ── 1. Dangerous function calls ────────────────────────────────────
+        #  1. Dangerous function calls 
         if kind == _clang_cindex.CursorKind.CALL_EXPR:
             func_name = cursor.spelling or ""
             rule = _CPP_CALL_RULES.get(func_name)
@@ -758,7 +701,7 @@ def ast_scan_cpp(
                 f["recommendation"] = rec
                 findings.append(f)
 
-        # ── 2. Hardcoded credential variable declarations ──────────────────
+        #  2. Hardcoded credential variable declarations 
         elif kind in (
             _clang_cindex.CursorKind.VAR_DECL,
             _clang_cindex.CursorKind.FIELD_DECL,
@@ -780,7 +723,7 @@ def ast_scan_cpp(
                         _snip(lineno), "cpp", _ctx(lineno),
                     )
                     f["recommendation"] = (
-                        "Do not hardcode credentials — load secrets from "
+                        "Do not hardcode credentials - load secrets from "
                         "environment variables or a secrets manager."
                     )
                     findings.append(f)

@@ -27,21 +27,21 @@ from .config import (
 from .database import Base, _get_session, engine
 from .models import Finding, LLMRequest, Scan, User
 
-# ── roles ──────────────────────────────────────────────────────────────────────
+#  roles 
 ROLE_USER       = "user"
 ROLE_ADMIN      = "admin"
 ROLE_SUPERADMIN = "superadmin"
 VALID_ROLES     = {ROLE_USER, ROLE_ADMIN, ROLE_SUPERADMIN}
 
-# ── superadmin credentials ─────────────────────────────────────────────────────
+#  superadmin credentials 
 # Must be set via SUPERADMIN_USERNAME and SUPERADMIN_PASSWORD environment variables.
 SUPERADMIN_USERNAME = os.environ.get("SUPERADMIN_USERNAME", "")
 SUPERADMIN_PASSWORD = os.environ.get("SUPERADMIN_PASSWORD", "")
 
-# ── password hashing (passlib PBKDF2-SHA256) ───────────────────────────────────
+#  password hashing (passlib PBKDF2-SHA256) 
 USERNAME_REGEX = re.compile(r"^[A-Za-z0-9_.-]{3,32}$")
 
-# ── scan retention ─────────────────────────────────────────────────────────────
+#  scan retention 
 # NFR-5: scan records older than this are automatically purged on startup
 # and on demand via POST /api/admin/purge.
 SCAN_RETENTION_DAYS = 90
@@ -51,9 +51,7 @@ LLM_RPM_LIMIT = 10
 LLM_RPM_WINDOW_MINUTES = 1
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # HELPERS
-# ══════════════════════════════════════════════════════════════════════════════
 
 def _utc_now() -> datetime:
     return datetime.now(timezone.utc)
@@ -83,7 +81,7 @@ def _verify_password(password: str, hashed_value: str) -> bool:
         except Exception:
             return False
 
-    # Legacy hashlib format — backward compatibility for existing accounts
+    # Legacy hashlib format - backward compatibility for existing accounts
     try:
         algo, iterations_raw, salt_hex, digest_hex = hashed_value.split("$", 3)
         if algo != "pbkdf2_sha256":
@@ -118,16 +116,14 @@ def _normalize_role(role: str) -> str:
     return normalized
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # JWT AUTHENTICATION
-# ══════════════════════════════════════════════════════════════════════════════
 
 def create_access_token(user_id: int) -> str:
     """
     Issue a signed JWT containing the user ID.
 
     The token is valid for JWT_EXPIRY_DAYS days (default 7).
-    It is stored in an HttpOnly cookie by the caller (main.py) — the
+    It is stored in an HttpOnly cookie by the caller (main.py) - the
     client never sees it in JavaScript.
     """
     now = _utc_now()
@@ -157,9 +153,7 @@ def decode_access_token(token: str) -> Optional[int]:
         return None
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # DATABASE INITIALISATION
-# ══════════════════════════════════════════════════════════════════════════════
 
 def _ensure_superadmin() -> int:
     """
@@ -194,13 +188,13 @@ def init_db() -> None:
     Create all tables that do not yet exist and apply column migrations
     needed for databases created by earlier versions of the application.
 
-    ``Base.metadata.create_all`` is idempotent — it skips tables that
+    ``Base.metadata.create_all`` is idempotent - it skips tables that
     already exist, so this is safe to call on every startup.
     """
     # Create tables defined in models.py that do not exist yet
     Base.metadata.create_all(bind=engine)
 
-    # ── column migrations for existing databases ────────────────────────────
+    #  column migrations for existing databases 
     # These ALTER TABLE statements add columns introduced after the initial
     # release.  Each is wrapped in a try/except so it is silently skipped
     # if the column already exists (SQLite raises OperationalError on
@@ -224,7 +218,7 @@ def init_db() -> None:
                 conn.execute(text(stmt))
                 conn.commit()
             except Exception:
-                # Column already exists — skip silently
+                # Column already exists - skip silently
                 conn.rollback()
 
     superadmin_id = _ensure_superadmin()
@@ -244,9 +238,7 @@ def init_db() -> None:
             )
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # USER MANAGEMENT
-# ══════════════════════════════════════════════════════════════════════════════
 
 def create_user(
     username: str, password: str, role: str = ROLE_USER
@@ -424,9 +416,7 @@ def delete_user_and_data(user_id: int) -> None:
         session.query(User).filter(User.id == user_id).delete(synchronize_session=False)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# SCAN HISTORY — NFR-5: 90-DAY RETENTION
-# ══════════════════════════════════════════════════════════════════════════════
+# SCAN HISTORY - NFR-5: 90-DAY RETENTION
 
 def purge_old_scans(retention_days: int = SCAN_RETENTION_DAYS) -> int:
     """
@@ -552,9 +542,7 @@ def record_llm_request(user_id: int, endpoint: str) -> None:
         )
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # SCAN STORAGE AND RETRIEVAL
-# ══════════════════════════════════════════════════════════════════════════════
 
 def save_scan(
     user_id: int, filename: str, language: str, scan_output: Dict[str, object]

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SASTRA – Scan History</title>
+  <title>SASTRA - Scan History</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
     <script>
     (function () {
@@ -59,7 +59,7 @@
     @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes shimmer { from { background-position: -600px 0; } to { background-position: 600px 0; } }
 
-    /* ══ NAV ══ */
+    /* NAV */
     .nav {
       position: sticky; top: 0; z-index: 100;
       height: var(--nav-height);
@@ -106,7 +106,7 @@
     }
     .btn-logout:hover { background: #222; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
 
-    /* ── Logout popup ── */
+    /*  Logout popup  */
     .logout-popup-wrap { position: relative; }
     .logout-popup {
       display: none; position: absolute;
@@ -129,14 +129,14 @@
     .logout-popup-confirm { background: var(--popup-confirm-bg, var(--btn-dark)); color: var(--popup-confirm-color, var(--btn-dark-text)); border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
     .logout-popup-confirm:hover { filter: brightness(1.1); }
 
-    /* ══ MAIN ══ */
+    /* MAIN */
     .main {
       position: relative; z-index: 5;
       padding: 44px 40px 60px;
       max-width: 1100px; margin: 0 auto;
     }
 
-    /* ── Page Header ── */
+    /*  Page Header  */
     .page-header {
       display: flex; align-items: flex-end; justify-content: space-between;
       margin-bottom: 32px;
@@ -161,7 +161,7 @@
     .btn-new-scan:hover { background: #1a1a1a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.22); }
     .btn-new-scan svg { width: 16px; height: 16px; }
 
-    /* ── Summary Strip ── */
+    /*  Summary Strip  */
     .summary-strip {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
       margin-bottom: 28px;
@@ -194,7 +194,7 @@
     .pill-val { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; line-height: 1; }
     .pill-label { font-size: 0.76rem; color: var(--text-muted); margin-top: 3px; }
 
-    /* ── Filter / Search Bar ── */
+    /*  Filter / Search Bar  */
     .toolbar {
       display: flex; align-items: center; gap: 12px;
       margin-bottom: 20px; flex-wrap: wrap;
@@ -242,7 +242,7 @@
     }
     .sort-select:focus { background: rgba(255,255,255,0.8); border-color: rgba(0,0,0,0.18); }
 
-    /* ── History Table ── */
+    /*  History Table  */
     .history-card {
       background: var(--card-bg);
       backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
@@ -493,7 +493,7 @@
       .drawer { width: 100%; max-width: 100%; }
     }
   
-    /* ── FLOATING CHATBOT BUBBLE ── */
+    /*  FLOATING CHATBOT BUBBLE  */
     .chat-bubble-btn { position: fixed; bottom: 28px; right: 28px; z-index: 9999; width: 44px; height: 44px; padding: 0; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 28px rgba(37,99,235,0.38); transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease; }
     .chat-bubble-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 36px rgba(37,99,235,0.48); }
     .chat-bubble-btn svg { width: 20px; height: 20px; color: #fff; flex-shrink: 0; }
@@ -531,7 +531,7 @@
 <div class="blob blob-1"></div>
 <div class="blob blob-2"></div>
 
-<!-- ══ NAV ══ -->
+<!-- = NAV = -->
 <nav class="nav">
   <div class="nav-left">
     <a href="sastra-landing.html" class="logo">
@@ -562,7 +562,7 @@
   </div>
 </nav>
 
-<!-- ══ MAIN ══ -->
+<!-- = MAIN = -->
 <main class="main">
 
   <!-- Page Header -->
@@ -661,7 +661,7 @@
 
   <!-- Pagination -->
   <div class="pagination" id="pagination">
-    <div class="page-info" id="page-info">Showing 1–8 of 8 scans</div>
+    <div class="page-info" id="page-info">Showing 1 - 8 of 8 scans</div>
     <div class="page-controls" id="page-controls"></div>
   </div>
 
@@ -755,7 +755,7 @@
       id: s.id,
       name: s.filename,
       lang: (s.language || '').toUpperCase(),
-      size: '—',
+      size: ' - ',
       status: 'completed',
       date: new Date(s.scanned_at || s.created_at).toLocaleString(),
       dateSort: new Date(s.scanned_at || s.created_at).getTime(),
@@ -847,7 +847,7 @@
   initHistory();
 </script>
 
-<!-- ── FLOATING CHATBOT BUBBLE ── -->
+<!--  FLOATING CHATBOT BUBBLE  -->
 <button class="chat-bubble-btn" id="chatBubbleBtn" onclick="toggleChatPanel()" aria-label="Open AI assistant">
   <svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   <span class="chat-bubble-label">SASTRA AI</span>
@@ -862,7 +862,7 @@
   </div>
   <div class="chat-panel-body" id="chatMessages">
     <div class="chat-msg chat-msg-ai">
-      <div class="chat-msg-bubble">Hi! I'm SASTRA AI — your security assistant. Ask me about vulnerabilities, secure coding practices, or your scan results.</div>
+      <div class="chat-msg-bubble">Hi! I'm SASTRA AI - your security assistant. Ask me about vulnerabilities, secure coding practices, or your scan results.</div>
     </div>
   </div>
   <div class="chat-panel-input-row">

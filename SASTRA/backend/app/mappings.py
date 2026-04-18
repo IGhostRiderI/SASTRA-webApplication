@@ -55,7 +55,7 @@ OWASP_BY_CWE: Dict[str, str] = {
     "CWE-476": "A04:2021 - Insecure Design",
     "CWE-787": "A03:2021 - Injection",
     "CWE-20":  "A03:2021 - Injection",
-    # ── Injection (A03) ──────────────────────────────────────────────────────
+    #  Injection (A03) 
     "CWE-88":   "A03:2021 - Injection",
     "CWE-91":   "A03:2021 - Injection",
     "CWE-93":   "A03:2021 - Injection",
@@ -68,7 +68,7 @@ OWASP_BY_CWE: Dict[str, str] = {
     "CWE-829":  "A03:2021 - Injection",
     "CWE-917":  "A03:2021 - Injection",
     "CWE-1336": "A03:2021 - Injection",
-    # ── Broken Access Control (A01) ──────────────────────────────────────────
+    #  Broken Access Control (A01) 
     "CWE-250":  "A01:2021 - Broken Access Control",
     "CWE-266":  "A01:2021 - Broken Access Control",
     "CWE-277":  "A01:2021 - Broken Access Control",
@@ -87,7 +87,7 @@ OWASP_BY_CWE: Dict[str, str] = {
     "CWE-598":  "A01:2021 - Broken Access Control",
     "CWE-650":  "A01:2021 - Broken Access Control",
     "CWE-668":  "A01:2021 - Broken Access Control",
-    # ── Cryptographic Failures (A02) ─────────────────────────────────────────
+    #  Cryptographic Failures (A02) 
     "CWE-311":  "A02:2021 - Cryptographic Failures",
     "CWE-322":  "A02:2021 - Cryptographic Failures",
     "CWE-329":  "A02:2021 - Cryptographic Failures",
@@ -103,13 +103,13 @@ OWASP_BY_CWE: Dict[str, str] = {
     "CWE-523":  "A02:2021 - Cryptographic Failures",
     "CWE-525":  "A02:2021 - Cryptographic Failures",
     "CWE-760":  "A02:2021 - Cryptographic Failures",
-    # ── Identification and Authentication Failures (A07) ─────────────────────
+    #  Identification and Authentication Failures (A07) 
     "CWE-255":  "A07:2021 - Identification and Authentication Failures",
     "CWE-263":  "A07:2021 - Identification and Authentication Failures",
     "CWE-549":  "A07:2021 - Identification and Authentication Failures",
     "CWE-613":  "A07:2021 - Identification and Authentication Failures",
     "CWE-640":  "A07:2021 - Identification and Authentication Failures",
-    # ── Insecure Design — Memory/Buffer (A04) ────────────────────────────────
+    #  Insecure Design - Memory/Buffer (A04) 
     "CWE-123":  "A04:2021 - Insecure Design",
     "CWE-128":  "A04:2021 - Insecure Design",
     "CWE-129":  "A04:2021 - Insecure Design",
@@ -122,14 +122,14 @@ OWASP_BY_CWE: Dict[str, str] = {
     "CWE-788":  "A04:2021 - Insecure Design",
     "CWE-824":  "A04:2021 - Insecure Design",
     "CWE-843":  "A04:2021 - Insecure Design",
-    # ── Insecure Design — Concurrency/Race (A04) ─────────────────────────────
+    #  Insecure Design - Concurrency/Race (A04) 
     "CWE-363":  "A04:2021 - Insecure Design",
     "CWE-366":  "A04:2021 - Insecure Design",
     "CWE-379":  "A04:2021 - Insecure Design",
     "CWE-412":  "A04:2021 - Insecure Design",
     "CWE-413":  "A04:2021 - Insecure Design",
     "CWE-567":  "A04:2021 - Insecure Design",
-    # ── Insecure Design — Resource/DoS (A04) ────────────────────────────────
+    #  Insecure Design - Resource/DoS (A04) 
     "CWE-405":  "A04:2021 - Insecure Design",
     "CWE-407":  "A04:2021 - Insecure Design",
     "CWE-409":  "A04:2021 - Insecure Design",
@@ -143,7 +143,7 @@ OWASP_BY_CWE: Dict[str, str] = {
     "CWE-730":  "A04:2021 - Insecure Design",
     "CWE-754":  "A04:2021 - Insecure Design",
     "CWE-755":  "A04:2021 - Insecure Design",
-    # ── Insecure Design — Code Quality/Logic (A04) ───────────────────────────
+    #  Insecure Design - Code Quality/Logic (A04) 
     "CWE-248":  "A04:2021 - Insecure Design",
     "CWE-390":  "A04:2021 - Insecure Design",
     "CWE-398":  "A04:2021 - Insecure Design",
@@ -161,13 +161,13 @@ OWASP_BY_CWE: Dict[str, str] = {
     "CWE-597":  "A04:2021 - Insecure Design",
     "CWE-624":  "A04:2021 - Insecure Design",
     "CWE-625":  "A04:2021 - Insecure Design",
-    # ── Security Misconfiguration (A05) ──────────────────────────────────────
+    #  Security Misconfiguration (A05) 
     "CWE-645":  "A05:2021 - Security Misconfiguration",
     "CWE-651":  "A05:2021 - Security Misconfiguration",
     "CWE-560":  "A05:2021 - Security Misconfiguration",
     "CWE-600":  "A05:2021 - Security Misconfiguration",
     "CWE-579":  "A05:2021 - Security Misconfiguration",
-    # ── Security Logging and Monitoring Failures (A09) ───────────────────────
+    #  Security Logging and Monitoring Failures (A09) 
     "CWE-392":  "A09:2021 - Security Logging and Monitoring Failures",
     "CWE-393":  "A09:2021 - Security Logging and Monitoring Failures",
     "CWE-532":  "A09:2021 - Security Logging and Monitoring Failures",
@@ -208,7 +208,7 @@ SEVERITY_BY_CWE: Dict[str, str] = {
     "CWE-209": "Low",
     "CWE-476": "Medium",
     "CWE-20":  "Medium",
-    # ── Injection (A03) ──────────────────────────────────────────────────────
+    #  Injection (A03) 
     "CWE-88":   "High",
     "CWE-91":   "Medium",
     "CWE-93":   "Medium",
@@ -221,7 +221,7 @@ SEVERITY_BY_CWE: Dict[str, str] = {
     "CWE-829":  "High",
     "CWE-917":  "Critical",
     "CWE-1336": "Critical",
-    # ── Broken Access Control (A01) ──────────────────────────────────────────
+    #  Broken Access Control (A01) 
     "CWE-250":  "High",
     "CWE-266":  "High",
     "CWE-277":  "Medium",
@@ -240,7 +240,7 @@ SEVERITY_BY_CWE: Dict[str, str] = {
     "CWE-598":  "Medium",
     "CWE-650":  "Medium",
     "CWE-668":  "Medium",
-    # ── Cryptographic Failures (A02) ─────────────────────────────────────────
+    #  Cryptographic Failures (A02) 
     "CWE-311":  "High",
     "CWE-322":  "High",
     "CWE-329":  "High",
@@ -256,13 +256,13 @@ SEVERITY_BY_CWE: Dict[str, str] = {
     "CWE-523":  "High",
     "CWE-525":  "Low",
     "CWE-760":  "High",
-    # ── Identification and Authentication Failures (A07) ─────────────────────
+    #  Identification and Authentication Failures (A07) 
     "CWE-255":  "Medium",
     "CWE-263":  "Low",
     "CWE-549":  "Low",
     "CWE-613":  "Medium",
     "CWE-640":  "High",
-    # ── Insecure Design — Memory/Buffer (A04) ────────────────────────────────
+    #  Insecure Design - Memory/Buffer (A04) 
     "CWE-123":  "Critical",
     "CWE-128":  "High",
     "CWE-129":  "High",
@@ -275,14 +275,14 @@ SEVERITY_BY_CWE: Dict[str, str] = {
     "CWE-788":  "High",
     "CWE-824":  "High",
     "CWE-843":  "High",
-    # ── Insecure Design — Concurrency/Race (A04) ─────────────────────────────
+    #  Insecure Design - Concurrency/Race (A04) 
     "CWE-363":  "Medium",
     "CWE-366":  "Medium",
     "CWE-379":  "Medium",
     "CWE-412":  "Medium",
     "CWE-413":  "Medium",
     "CWE-567":  "Medium",
-    # ── Insecure Design — Resource/DoS (A04) ────────────────────────────────
+    #  Insecure Design - Resource/DoS (A04) 
     "CWE-405":  "Medium",
     "CWE-407":  "Low",
     "CWE-409":  "Medium",
@@ -296,7 +296,7 @@ SEVERITY_BY_CWE: Dict[str, str] = {
     "CWE-730":  "Medium",
     "CWE-754":  "Medium",
     "CWE-755":  "Medium",
-    # ── Insecure Design — Code Quality/Logic (A04) ───────────────────────────
+    #  Insecure Design - Code Quality/Logic (A04) 
     "CWE-248":  "Low",
     "CWE-390":  "Low",
     "CWE-398":  "Low",
@@ -314,13 +314,13 @@ SEVERITY_BY_CWE: Dict[str, str] = {
     "CWE-597":  "Low",
     "CWE-624":  "Medium",
     "CWE-625":  "Low",
-    # ── Security Misconfiguration (A05) ──────────────────────────────────────
+    #  Security Misconfiguration (A05) 
     "CWE-645":  "Low",
     "CWE-651":  "Low",
     "CWE-560":  "Medium",
     "CWE-600":  "Low",
     "CWE-579":  "Low",
-    # ── Security Logging and Monitoring Failures (A09) ───────────────────────
+    #  Security Logging and Monitoring Failures (A09) 
     "CWE-392":  "Low",
     "CWE-393":  "Low",
     "CWE-532":  "Medium",

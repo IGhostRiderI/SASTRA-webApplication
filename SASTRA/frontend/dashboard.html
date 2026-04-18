@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SASTRA – Security Dashboard</title>
+  <title>SASTRA - Security Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
     <script>
     (function () {
@@ -57,7 +57,7 @@
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ══ NAV ══ */
+    /* NAV */
     .nav {
       position: sticky; top: 0; z-index: 100;
       height: var(--nav-height);
@@ -113,7 +113,7 @@
     }
     .btn-logout:hover { background: #222; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
 
-    /* ── Logout popup ── */
+    /*  Logout popup  */
     .logout-popup-wrap { position: relative; }
     .logout-popup {
       display: none; position: absolute;
@@ -136,10 +136,10 @@
     .logout-popup-confirm { background: var(--popup-confirm-bg, var(--btn-dark)); color: var(--popup-confirm-color, var(--btn-dark-text)); border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
     .logout-popup-confirm:hover { filter: brightness(1.1); }
 
-    /* ══ MAIN CONTENT ══ */
+    /* MAIN CONTENT */
     .main { position: relative; z-index: 5; padding: 44px 40px 60px; max-width: 1280px; margin: 0 auto; }
 
-    /* ── Dashboard Header ── */
+    /*  Dashboard Header  */
     .dash-header {
       display: flex; align-items: flex-start; justify-content: space-between;
       margin-bottom: 36px;
@@ -164,7 +164,7 @@
     .btn-new-scan:hover { background: #1a1a1a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.24); }
     .btn-new-scan svg { width: 17px; height: 17px; }
 
-    /* ── Stat Cards ── */
+    /*  Stat Cards  */
     .stats-grid {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
       margin-bottom: 32px;
@@ -206,7 +206,7 @@
 
     .stat-file { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-top: 10px; }
 
-    /* ── Recent Scans ── */
+    /*  Recent Scans  */
     .section-card {
       background: var(--card-bg);
       backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
@@ -296,7 +296,7 @@
       margin-bottom: 12px;
     }
 
-    /* ── Responsive ── */
+    /*  Responsive  */
     @media (max-width: 900px) {
       .nav { padding: 0 20px; }
       .nav-links { display: none; }
@@ -311,7 +311,7 @@
       .dash-header { flex-direction: column; gap: 16px; }
     }
   
-    /* ── FLOATING CHATBOT BUBBLE ── */
+    /*  FLOATING CHATBOT BUBBLE  */
     .chat-bubble-btn { position: fixed; bottom: 28px; right: 28px; z-index: 9999; width: 44px; height: 44px; padding: 0; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 28px rgba(37,99,235,0.38); transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease; }
     .chat-bubble-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 36px rgba(37,99,235,0.48); }
     .chat-bubble-btn svg { width: 20px; height: 20px; color: #fff; flex-shrink: 0; }
@@ -350,7 +350,7 @@
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
 
-  <!-- ══ NAV ══ -->
+  <!-- = NAV = -->
   <nav class="nav">
     <div class="nav-left">
       <a href="sastra-landing.html" class="logo">
@@ -382,7 +382,7 @@
     </div>
   </nav>
 
-  <!-- ══ MAIN ══ -->
+  <!-- = MAIN = -->
   <main class="main">
 
     <!-- Dashboard Header -->
@@ -598,7 +598,7 @@
     loadDashboard();
   </script>
 
-<!-- ── FLOATING CHATBOT BUBBLE ── -->
+<!--  FLOATING CHATBOT BUBBLE  -->
 <button class="chat-bubble-btn" id="chatBubbleBtn" onclick="toggleChatPanel()" aria-label="Open AI assistant">
   <svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   <span class="chat-bubble-label">SASTRA AI</span>
@@ -613,7 +613,7 @@
   </div>
   <div class="chat-panel-body" id="chatMessages">
     <div class="chat-msg chat-msg-ai">
-      <div class="chat-msg-bubble">Hi! I'm SASTRA AI — your security assistant. Ask me about vulnerabilities, secure coding practices, or your scan results.</div>
+      <div class="chat-msg-bubble">Hi! I'm SASTRA AI - your security assistant. Ask me about vulnerabilities, secure coding practices, or your scan results.</div>
     </div>
   </div>
   <div class="chat-panel-input-row">

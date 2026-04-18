@@ -1,4 +1,4 @@
-/* ── Chat panel: messages body ─────────────────────────────────────────────── */
+/*  Chat panel: messages body  */
 .chat-panel-body {
   justify-content: flex-start !important;
   align-items: stretch !important;
@@ -9,7 +9,7 @@
   scroll-behavior: smooth;
 }
 
-/* ── Message rows ── */
+/*  Message rows  */
 .chat-msg {
   display: flex;
   align-items: flex-end;
@@ -46,7 +46,7 @@
   border-radius: 14px 4px 14px 14px;
 }
 
-/* ── Typing indicator ── */
+/*  Typing indicator  */
 .chat-typing-wrap {
   display: flex;
   align-items: center;
@@ -74,7 +74,7 @@
   30%           { transform: translateY(-5px); }
 }
 
-/* ── Enable send button ── */
+/*  Enable send button  */
 .chat-panel-send {
   cursor: pointer !important;
   opacity: 1 !important;
@@ -90,7 +90,7 @@
   transform: none !important;
 }
 
-/* ── Markdown rendering ── */
+/*  Markdown rendering  */
 .chat-msg-bubble code {
   font-family: 'Courier New', monospace;
   font-size: 0.78rem;
@@ -110,7 +110,7 @@
   padding: 0;
 }
 
-/* ── Dark mode ── */
+/*  Dark mode  */
 html[data-theme="dark"] .chat-msg-ai .chat-msg-bubble {
   background: rgba(255, 255, 255, 0.05) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;

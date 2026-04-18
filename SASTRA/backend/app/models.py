@@ -1,16 +1,4 @@
-"""
-SQLAlchemy ORM models.
-
-Three tables:
-  - users    — registered accounts with hashed passwords and roles
-  - scans    — one row per scan run; aggregated severity counts stored
-               so the history list can be rendered without loading findings
-  - findings — individual vulnerability findings linked to a scan
-
-The sessions table from the original sqlite3 design is intentionally
-absent.  Authentication now uses stateless JWT tokens (see db.py) so
-no server-side session storage is needed.
-"""
+"""ORM models: users, scans, findings. Auth uses JWTs, so no sessions table."""
 
 from sqlalchemy import (
     Boolean,

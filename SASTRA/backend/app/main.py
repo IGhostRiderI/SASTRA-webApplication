@@ -81,7 +81,7 @@ from .ml_engine import load_or_train
 from .scanner import ScannerEngine
 from .ast_scanner import JAVALANG_AVAILABLE, CLANG_AVAILABLE, probe_clang_runtime
 
-# ── Centralised logging (NFR-8) ────────────────────────────────────────────────
+#  Centralised logging (NFR-8) 
 # Logs are written to both the console and a rotating file so that
 # crashes and high error rates can be monitored after the fact.
 #
@@ -95,13 +95,13 @@ _LOG_DATEFMT = "%Y-%m-%d %H:%M:%S"
 _root_logger = logging.getLogger()
 _root_logger.setLevel(logging.INFO)
 
-# Console handler — always present
+# Console handler - always present
 if not any(isinstance(handler, logging.StreamHandler) for handler in _root_logger.handlers):
     _console_handler = logging.StreamHandler(sys.stdout)
     _console_handler.setFormatter(logging.Formatter(_LOG_FORMAT, datefmt=_LOG_DATEFMT))
     _root_logger.addHandler(_console_handler)
 
-# Rotating file handler — persists logs for post-incident review
+# Rotating file handler - persists logs for post-incident review
 _log_file_path = str(LOG_DIR / "sast.log")
 _has_rotating_log = any(
     isinstance(handler, logging.handlers.RotatingFileHandler)
@@ -120,7 +120,7 @@ if not _has_rotating_log:
 
 logger = logging.getLogger("sast")
 
-# ── Error rate tracker (NFR-8) ─────────────────────────────────────────────────
+#  Error rate tracker (NFR-8) 
 # Counts 5xx errors and logs a warning when the rate looks elevated.
 _error_counter: dict = {"count": 0}
 _ERROR_ALERT_THRESHOLD = 10  # warn after this many 5xx errors per session
@@ -216,7 +216,7 @@ def _record_error(endpoint: str = "") -> None:
     count = _error_counter["count"]
     if count == _ERROR_ALERT_THRESHOLD:
         logger.warning(
-            "ALERT: %d server errors recorded this session — check logs for root cause. "
+            "ALERT: %d server errors recorded this session - check logs for root cause. "
             "Last endpoint: %s",
             count, endpoint,
         )
@@ -224,7 +224,7 @@ def _record_error(endpoint: str = "") -> None:
         logger.warning("ALERT: server error count now %d", count)
 
 
-# ── Unhandled exception hook ───────────────────────────────────────────────────
+#  Unhandled exception hook 
 def _log_unhandled_exception(exc_type, exc_value, exc_tb):
     if issubclass(exc_type, KeyboardInterrupt):
         sys.__excepthook__(exc_type, exc_value, exc_tb)
@@ -300,7 +300,7 @@ async def lifespan(_: FastAPI):
         backup_path = backup_database(DB_PATH, BACKUP_DIR)
         logger.info("Startup backup created: %s", backup_path.name)
     except Exception:
-        logger.exception("Startup database backup failed — continuing without backup")
+        logger.exception("Startup database backup failed - continuing without backup")
 
     # NFR-5: purge scans older than retention period on every startup
     try:
@@ -316,13 +316,13 @@ async def lifespan(_: FastAPI):
                 SCAN_RETENTION_DAYS,
             )
     except Exception:
-        logger.exception("Startup purge failed — continuing without purging")
+        logger.exception("Startup purge failed - continuing without purging")
 
     catalog = build_rules_catalog()
     app_state["catalog"] = catalog
     app_state["scanner"] = ScannerEngine(catalog)
     logger.info(
-        "Rule catalog loaded — %d rules, %d CWEs",
+        "Rule catalog loaded - %d rules, %d CWEs",
         catalog.get("rule_count", 0),
         len(catalog.get("cwe_catalog", {})),
     )
@@ -342,7 +342,7 @@ async def lifespan(_: FastAPI):
         app_state["ml_engine"] = ml_engine
         app_state["ml_meta"]   = ml_engine.metadata
         logger.info(
-            "ML engine ready — samples: %d  vocab: %d  severity classes: %s",
+            "ML engine ready - samples: %d  vocab: %d  severity classes: %s",
             ml_engine.metadata.get("sample_count", 0),
             ml_engine.metadata.get("vocab_size", 0),
             ml_engine.metadata.get("severity_classes", []),
@@ -350,7 +350,7 @@ async def lifespan(_: FastAPI):
     except Exception:
         app_state["ml_engine"] = None
         app_state["ml_meta"]   = {"status": "unavailable"}
-        logger.exception("Failed to load ML engine — continuing without ML enrichment")
+        logger.exception("Failed to load ML engine - continuing without ML enrichment")
 
     logger.info("SAST application ready")
     yield
@@ -378,7 +378,7 @@ async def observability_middleware(request: Request, call_next):
     except Exception:
         duration_ms = round((time.perf_counter() - start) * 1000, 2)
         _record_request(500, endpoint)
-        logger.exception("Unhandled request failure — %s %s (%sms)", method, endpoint, duration_ms)
+        logger.exception("Unhandled request failure - %s %s (%sms)", method, endpoint, duration_ms)
         raise
 
     status_code = response.status_code
@@ -386,13 +386,13 @@ async def observability_middleware(request: Request, call_next):
     _record_request(status_code, endpoint)
 
     if status_code >= 500:
-        logger.error("Request failed — %s %s status=%d duration_ms=%s", method, endpoint, status_code, duration_ms)
+        logger.error("Request failed - %s %s status=%d duration_ms=%s", method, endpoint, status_code, duration_ms)
     else:
-        logger.info("Request served — %s %s status=%d duration_ms=%s", method, endpoint, status_code, duration_ms)
+        logger.info("Request served - %s %s status=%d duration_ms=%s", method, endpoint, status_code, duration_ms)
     return response
 
 
-# ── helpers ────────────────────────────────────────────────────────────────────
+#  helpers 
 
 def _user_public(user: dict) -> dict:
     return {
@@ -422,7 +422,7 @@ def _clear_session_cookie(response: JSONResponse) -> None:
 
 def _require_user(request: Request) -> dict:
     """
-    FastAPI dependency — reads the JWT from the HttpOnly cookie, verifies
+    FastAPI dependency - reads the JWT from the HttpOnly cookie, verifies
     it, and returns the user dict.  Raises 401 on any failure.
 
     Because JWT is stateless, no database lookup is needed for token
@@ -581,7 +581,7 @@ def _filter_false_positives(scan_output: dict) -> dict:
     return _rebuild_summary_from_findings(scan_output)
 
 
-# ── page routes ────────────────────────────────────────────────────────────────
+#  page routes 
 
 @app.get("/", response_class=HTMLResponse)
 async def index() -> HTMLResponse:
@@ -652,7 +652,7 @@ async def learn_more_page() -> FileResponse:
     return _serve_frontend_page("learn-more.html")
 
 
-# ── system endpoints ───────────────────────────────────────────────────────────
+#  system endpoints 
 
 @app.get("/api/health")
 async def health() -> JSONResponse:
@@ -669,7 +669,7 @@ async def catalog_summary() -> JSONResponse:
     })
 
 
-# ── auth endpoints ─────────────────────────────────────────────────────────────
+#  auth endpoints 
 
 def _signup_response(payload: AuthPayload) -> JSONResponse:
     try:
@@ -678,7 +678,7 @@ def _signup_response(payload: AuthPayload) -> JSONResponse:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     token = create_access_token(int(user["id"]))
-    logger.info("New user registered — username: %s", user["username"])
+    logger.info("New user registered - username: %s", user["username"])
     response = JSONResponse({"ok": True, "user": _user_public(user)})
     _set_session_cookie(response, token)
     return response
@@ -687,11 +687,11 @@ def _signup_response(payload: AuthPayload) -> JSONResponse:
 def _login_response(payload: AuthPayload) -> JSONResponse:
     user = authenticate_user(payload.username, payload.password)
     if user is None:
-        logger.warning("Failed login attempt — username: %s", payload.username)
+        logger.warning("Failed login attempt - username: %s", payload.username)
         raise HTTPException(status_code=401, detail="Invalid username or password.")
 
     token = create_access_token(int(user["id"]))
-    logger.info("User signed in — username: %s  role: %s", user["username"], user["role"])
+    logger.info("User signed in - username: %s  role: %s", user["username"], user["role"])
     response = JSONResponse({"ok": True, "user": _user_public(user)})
     _set_session_cookie(response, token)
     return response
@@ -723,7 +723,7 @@ async def login_compat(request: Request, payload: AuthPayload) -> JSONResponse:
 
 @app.post("/api/auth/logout")
 async def logout() -> JSONResponse:
-    # JWT is stateless — no server-side record to delete.
+    # JWT is stateless - no server-side record to delete.
     # Simply clear the HttpOnly cookie on the client.
     logger.info("User signed out")
     response = JSONResponse({"ok": True})
@@ -760,7 +760,7 @@ async def google_callback(request: Request, code: str = "", state: str = "", err
     # to prevent OAuth CSRF attacks.
     stored_state = request.cookies.get("oauth_state", "")
     if not stored_state or not secrets.compare_digest(stored_state, state):
-        logger.warning("OAuth state mismatch — possible CSRF attempt")
+        logger.warning("OAuth state mismatch - possible CSRF attempt")
         return RedirectResponse("/signin.html?error=google_denied")
 
     token_resp = requests.post("https://oauth2.googleapis.com/token", data={
@@ -791,7 +791,7 @@ async def google_callback(request: Request, code: str = "", state: str = "", err
 
     user  = get_or_create_google_user(google_id, email)
     token = create_access_token(int(user["id"]))
-    logger.info("Google sign-in — username: %s", user["username"])
+    logger.info("Google sign-in - username: %s", user["username"])
 
     response = RedirectResponse("/dashboard.html")
     _set_session_cookie(response, token)
@@ -826,7 +826,7 @@ async def auth_me_update(
     if updated is None:
         raise HTTPException(status_code=404, detail="User not found.")
 
-    logger.info("User updated account settings — username: %s", updated["username"])
+    logger.info("User updated account settings - username: %s", updated["username"])
     return JSONResponse({"ok": True, "user": _user_public(updated)})
 
 
@@ -848,7 +848,7 @@ async def auth_me_delete(current_user: dict = Depends(_require_user)) -> JSONRes
     except Exception:
         logger.exception("Account deletion failed for user id=%s", current_user["id"])
         raise HTTPException(status_code=500, detail="Unable to delete account data.")
-    logger.info("User deleted their account — id: %s", current_user["id"])
+    logger.info("User deleted their account - id: %s", current_user["id"])
     response = JSONResponse({"ok": True})
     _clear_session_cookie(response)
     return response
@@ -870,7 +870,7 @@ async def auth_me_delete_compat_post(current_user: dict = Depends(_require_user)
     return await auth_me_delete(current_user)
 
 
-# ── admin — user management ────────────────────────────────────────────────────
+#  admin - user management 
 
 @app.get("/api/admin/users")
 async def admin_users(current_user: dict = Depends(_require_admin)) -> JSONResponse:
@@ -951,23 +951,23 @@ async def admin_delete_user(
     return JSONResponse({"ok": True})
 
 
-# ── NFR-5: manual purge endpoint ───────────────────────────────────────────────
+#  NFR-5: manual purge endpoint 
 
 @app.post("/api/admin/purge")
 async def admin_purge(current_user: dict = Depends(_require_admin)) -> JSONResponse:
     try:
         removed = purge_old_scans()
     except Exception:
-        logger.exception("Manual purge failed — triggered by '%s'", current_user["username"])
+        logger.exception("Manual purge failed - triggered by '%s'", current_user["username"])
         raise HTTPException(status_code=500, detail="Purge operation failed.")
     logger.info(
-        "Manual purge by '%s' — removed %d scan(s) older than %d days",
+        "Manual purge by '%s' - removed %d scan(s) older than %d days",
         current_user["username"], removed, SCAN_RETENTION_DAYS,
     )
     return JSONResponse({"ok": True, "removed": removed, "retention_days": SCAN_RETENTION_DAYS})
 
 
-# ── ML remediation model ───────────────────────────────────────────────────────
+#  ML remediation model 
 
 @app.get("/api/ml/status")
 async def ml_status() -> JSONResponse:
@@ -989,14 +989,14 @@ async def ml_retrain(current_user: dict = Depends(_require_admin)) -> JSONRespon
     app_state["ml_engine"] = ml_engine
     app_state["ml_meta"]   = ml_engine.metadata
     logger.info(
-        "ML retrain complete — samples: %d  severity classes: %s",
+        "ML retrain complete - samples: %d  severity classes: %s",
         ml_engine.metadata.get("sample_count", 0),
         ml_engine.metadata.get("severity_classes", []),
     )
     return JSONResponse({"ok": True, "metadata": ml_engine.metadata})
 
 
-# ── LLM code-fix helper ────────────────────────────────────────────────────────
+#  LLM code-fix helper 
 
 import re as _re
 
@@ -1018,7 +1018,7 @@ def _extract_code_only(text: str) -> str:
             last_marker = i
     if last_marker >= 0:
         lines = lines[last_marker + 1:]
-    # Strip stray import lines — we only want the fixed code, not added imports
+    # Strip stray import lines - we only want the fixed code, not added imports
     lines = [l for l in lines if not _IMPORT_LINE.match(l)]
     return '\n'.join(lines).strip()
 
@@ -1057,12 +1057,12 @@ async def llm_codefix(
     prompt = (
         f"Security vulnerability: {payload.cwe_id} in {payload.language}.{rec_hint}\n\n"
         f"VULNERABLE ({line_count} line{'s' if line_count != 1 else ''}):\n{payload.snippet}\n\n"
-        f"FIXED (output EXACTLY {line_count} line{'s' if line_count != 1 else ''} — "
+        f"FIXED (output EXACTLY {line_count} line{'s' if line_count != 1 else ''} - "
         f"the same code with only the vulnerability fixed, nothing added or removed):"
     )
 
     logger.info(
-        "LLM code-fix requested by '%s' — CWE: %s  language: %s",
+        "LLM code-fix requested by '%s' - CWE: %s  language: %s",
         current_user["username"], payload.cwe_id, payload.language,
     )
 
@@ -1099,14 +1099,14 @@ async def llm_codefix(
         text = _extract_code_only(raw)
         logger.info("LLM code-fix returned for CWE: %s", payload.cwe_id)
     except Exception:
-        logger.exception("NVIDIA API call failed — CWE: %s", payload.cwe_id)
+        logger.exception("NVIDIA API call failed - CWE: %s", payload.cwe_id)
         _record_error("/api/llm/codefix")
         raise HTTPException(status_code=502, detail="NVIDIA API error.")
 
     return JSONResponse({"ok": True, "text": text})
 
 
-# ── SASTRA AI Chatbot ──────────────────────────────────────────────────────────
+#  SASTRA AI Chatbot 
 
 class ChatRequest(BaseModel):
     message: str
@@ -1145,7 +1145,7 @@ async def chat_with_ai(
 
     user_role = current_user.get("role", "user")
     system_prompt = (
-        "You are SASTRA AI, the built-in assistant for the SASTRA web application — "
+        "You are SASTRA AI, the built-in assistant for the SASTRA web application - "
         "a Static Application Security Testing (SAST) tool.\n\n"
 
         "## About SASTRA\n"
@@ -1213,7 +1213,7 @@ async def chat_with_ai(
                     yield f"data: {_json.dumps({'token': chunk.choices[0].delta.content})}\n\n"
         except Exception:
             logger.exception("Chat API failed for user: %s", current_user["username"])
-            yield f"data: {_json.dumps({'token': ' ⚠ AI service unavailable. Please try again.'})}\n\n"
+            yield f"data: {_json.dumps({'token': 'AI service unavailable. Please try again.'})}\n\n"
         yield "data: [DONE]\n\n"
 
     return StreamingResponse(_stream(), media_type="text/event-stream")
@@ -1239,7 +1239,7 @@ async def save_llm_fix(
     return JSONResponse({"ok": True})
 
 
-# ── scan endpoints ─────────────────────────────────────────────────────────────
+#  scan endpoints 
 
 @app.post("/api/scan")
 async def scan_file(
@@ -1276,7 +1276,7 @@ async def scan_file(
             sources = _zip_sources(data)
             if not sources:
                 raise HTTPException(status_code=400, detail="ZIP has no supported source files.")
-            logger.info("ZIP scan by '%s' — %s  files: %d", current_user["username"], filename, len(sources))
+            logger.info("ZIP scan by '%s' - %s  files: %d", current_user["username"], filename, len(sources))
             scan_output   = scanner.scan_many(sources=sources, archive_name=filename)
             scan_language = scan_output["summary"]["language"]
         else:
@@ -1286,7 +1286,7 @@ async def scan_file(
             if not content.strip():
                 raise HTTPException(status_code=400, detail="Uploaded file is empty.")
             detected_language = infer_language(filename, language)
-            logger.info("File scan by '%s' — %s  lang: %s", current_user["username"], filename, detected_language)
+            logger.info("File scan by '%s' - %s  lang: %s", current_user["username"], filename, detected_language)
             scan_output   = scanner.scan(content=content, language=detected_language, filename=filename, source_path=filename)
             scan_language = detected_language
     else:
@@ -1300,7 +1300,7 @@ async def scan_file(
             if not language:
                 raise HTTPException(status_code=400, detail="Select language for pasted code.")
             raise
-        logger.info("Paste scan by '%s' — %s  lang: %s", current_user["username"], synthetic_name, scan_language)
+        logger.info("Paste scan by '%s' - %s  lang: %s", current_user["username"], synthetic_name, scan_language)
         scan_output = scanner.scan(content=snippet, language=scan_language, filename=synthetic_name, source_path=synthetic_name)
         filename    = synthetic_name
 
@@ -1314,7 +1314,7 @@ async def scan_file(
     scan_id = save_scan(int(current_user["id"]), filename, scan_language, scan_output)
 
     logger.info(
-        "Scan #%d complete — user: '%s'  findings: %d  risk: %s",
+        "Scan #%d complete - user: '%s'  findings: %d  risk: %s",
         scan_id, current_user["username"],
         scan_output["summary"]["total_findings"],
         scan_output["summary"]["risk_score"],

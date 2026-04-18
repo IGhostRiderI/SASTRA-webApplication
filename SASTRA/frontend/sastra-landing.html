@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SASTRA – Advanced Code Security & Vulnerability Scanner</title>
+  <title>SASTRA - Advanced Code Security & Vulnerability Scanner</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
     <script>
     (function () {
@@ -38,7 +38,7 @@
       color: var(--text-primary);
     }
 
-    /* ── ANIMATED GRID ── */
+    /*  ANIMATED GRID  */
     .grid-bg {
       position: fixed; inset: 0; z-index: 2; pointer-events: none;
       background-image: linear-gradient(rgba(37,99,235,0.045) 1px, transparent 1px),
@@ -59,7 +59,7 @@
     .blob-3 { width: 260px; height: 260px; background: radial-gradient(circle, #93c5fd, transparent 70%); top: 35%; left: 38%; animation: drift 11s 1s ease-in-out infinite alternate; }
     @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,22px) scale(1.06); } }
 
-    /* ── KEYFRAMES ── */
+    /*  KEYFRAMES  */
     @keyframes fadeUp    { from { opacity:0; transform:translateY(26px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeIn    { from { opacity:0; } to { opacity:1; } }
     @keyframes gradShift { from { background-position: 0% 50%; } to { background-position: 200% 50%; } }
@@ -85,7 +85,7 @@
       100% { transform: translateY(0px); }
     }
 
-    /* ── NAV ── */
+    /*  NAV  */
     nav {
       position: sticky; top: 0; z-index: 40;
       display: flex; align-items: center; justify-content: space-between;
@@ -110,7 +110,7 @@
     }
     .hero-actions a { text-decoration: none; }
 
-    /* ── PAGE SHELL ── */
+    /*  PAGE SHELL  */
     .page-shell {
       position: relative; z-index: 5;
       display: flex; min-height: 76vh;
@@ -118,7 +118,7 @@
       align-items: stretch; gap: 0;
     }
 
-    /* ── HERO COLUMN ── */
+    /*  HERO COLUMN  */
     .hero-col {
       flex: 0 0 60%; width: 60%;
       position: relative;
@@ -192,7 +192,7 @@
     }
     .btn-secondary-cta:hover { background: rgba(0,0,0,0.12); }
 
-    /* ── RIGHT AREA ── */
+    /*  RIGHT AREA  */
     .right-area {
       flex: 0 0 40%; width: 40%; position: relative;
       display: flex; align-items: center; justify-content: flex-end;
@@ -201,7 +201,7 @@
       animation: fadeIn 0.8s 0.35s ease both;
     }
 
-    /* ── DASHBOARD PREVIEW ── */
+    /*  DASHBOARD PREVIEW  */
     .dash-preview {
       position: absolute; inset: 0;
       background: rgba(255,255,255,0.75);
@@ -291,7 +291,7 @@
     .drq-pill.h { background:rgba(234,88,12,0.22); }
     .drq-pill.m { background:rgba(217,119,6,0.2); }
 
-    /* ── CHATBOT FLOATING CARD ── */
+    /*  CHATBOT FLOATING CARD  */
     .chat-preview {
       position: absolute;
       bottom: 18px; right: 55px;
@@ -332,7 +332,7 @@
     .cp-send { width:28px; height:28px; border-radius:8px; flex-shrink:0; background:#0a0a0a; border:none; cursor:not-allowed; opacity:0.65; display:flex; align-items:center; justify-content:center; }
     .cp-send svg { width:11px; height:11px; color:#fff; }
 
-    /* ── CHIPS TICKER ── */
+    /*  CHIPS TICKER  */
     .chips-ticker {
       position: relative;
       z-index: 8;
@@ -404,7 +404,7 @@
       flex-shrink: 0;
     }
 
-    /* ── LEARN MORE POPUP ── */
+    /*  LEARN MORE POPUP  */
     .lm-overlay { position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.35); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.28s ease; }
     .lm-overlay.open { opacity:1; pointer-events:all; }
     .lm-box { background:rgba(245,248,252,0.98); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.85); border-radius:24px; box-shadow:0 32px 80px rgba(0,0,0,0.18); width:min(780px,92vw); max-height:82vh; display:flex; flex-direction:column; overflow:hidden; transform:scale(0.94) translateY(14px); transition:transform 0.28s cubic-bezier(0.34,1.56,0.64,1); }
@@ -452,7 +452,7 @@
     .lm-cta-sub   { font-size:0.78rem; color:#6b7280; }
     .lm-cta .btn  { font-size:0.82rem; padding:10px 20px; white-space:nowrap; }
 
-    /* ── LEARN MORE POPUP — DARK MODE ── */
+    /*  LEARN MORE POPUP - DARK MODE  */
     [data-theme="dark"] .lm-box { background:rgba(16,20,28,0.98); border-color:rgba(255,255,255,0.08); box-shadow:0 32px 80px rgba(0,0,0,0.55); }
     [data-theme="dark"] .lm-header { border-bottom-color:rgba(255,255,255,0.08); }
     [data-theme="dark"] .lm-title { color:#e8edf8; }
@@ -716,11 +716,11 @@
         </button>
       </div>
       <div class="lm-body">
-        <div class="lm-section-title">Scan Pipeline — Step by Step</div>
+        <div class="lm-section-title">Scan Pipeline - Step by Step</div>
         <div class="lm-steps">
-          <div class="lm-step"><div class="lm-step-num">1</div><div><div class="lm-step-title">Upload your code</div><div class="lm-step-desc">Submit a single source file (.py, .java, .cpp) or a ZIP archive. SASTRA supports Python, Java, and C/C++ — up to 25 MB and 250 files per scan.</div></div></div>
-          <div class="lm-step"><div class="lm-step-num">2</div><div><div class="lm-step-title">AST &amp; regex scanning</div><div class="lm-step-desc">For Python, SASTRA parses code into an Abstract Syntax Tree for context-aware checks. For Java and C++, pattern rules map directly to CWE IDs — catching injection, overflow, weak crypto, and more.</div></div></div>
-          <div class="lm-step"><div class="lm-step-num">3</div><div><div class="lm-step-title">ML enrichment &amp; false positive filtering</div><div class="lm-step-desc">A machine learning classifier predicts severity and flags likely false positives — dramatically reducing noise so you can focus on real issues.</div></div></div>
+          <div class="lm-step"><div class="lm-step-num">1</div><div><div class="lm-step-title">Upload your code</div><div class="lm-step-desc">Submit a single source file (.py, .java, .cpp) or a ZIP archive. SASTRA supports Python, Java, and C/C++ - up to 25 MB and 250 files per scan.</div></div></div>
+          <div class="lm-step"><div class="lm-step-num">2</div><div><div class="lm-step-title">AST &amp; regex scanning</div><div class="lm-step-desc">For Python, SASTRA parses code into an Abstract Syntax Tree for context-aware checks. For Java and C++, pattern rules map directly to CWE IDs - catching injection, overflow, weak crypto, and more.</div></div></div>
+          <div class="lm-step"><div class="lm-step-num">3</div><div><div class="lm-step-title">ML enrichment &amp; false positive filtering</div><div class="lm-step-desc">A machine learning classifier predicts severity and flags likely false positives - dramatically reducing noise so you can focus on real issues.</div></div></div>
           <div class="lm-step"><div class="lm-step-num">4</div><div><div class="lm-step-title">Remediation Queue</div><div class="lm-step-desc">The top 3 most impactful issues are surfaced in a prioritized queue, ranked by severity, ML confidence, and estimated fix effort.</div></div></div>
           <div class="lm-step"><div class="lm-step-num">5</div><div><div class="lm-step-title">Fix generation &amp; PDF export</div><div class="lm-step-desc">Click "Fix now" on any finding to generate a secured code replacement. Export a full PDF security report ready to share with your team or clients.</div></div></div>
         </div>
@@ -729,7 +729,7 @@
           <div class="lm-feat"><div class="lm-feat-icon fi-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div><div class="lm-feat-title">Static Code Analysis</div><div class="lm-feat-desc">Deep AST-based and pattern scanning across Python, Java, and C++. Vulnerability patterns mapped to CWE and OWASP standards.</div></div></div>
           <div class="lm-feat"><div class="lm-feat-icon fi-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div><div class="lm-feat-title">ML Severity Classification</div><div class="lm-feat-desc">Classifies findings as Critical, High, Medium, or Low so you can prioritize the issues that matter most.</div></div></div>
           <div class="lm-feat"><div class="lm-feat-icon fi-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div><div class="lm-feat-title">False Positive Filtering</div><div class="lm-feat-desc">The ML classifier automatically flags likely false positives, cutting noise and focusing attention on real threats.</div></div></div>
-          <div class="lm-feat"><div class="lm-feat-icon fi-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><div class="lm-feat-title">Instant AI Code Fixes</div><div class="lm-feat-desc">One-click fix generation produces a secured replacement — auto-marked as fixed so you can track remediation progress.</div></div></div>
+          <div class="lm-feat"><div class="lm-feat-icon fi-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div><div class="lm-feat-title">Instant AI Code Fixes</div><div class="lm-feat-desc">One-click fix generation produces a secured replacement - auto-marked as fixed so you can track remediation progress.</div></div></div>
           <div class="lm-feat"><div class="lm-feat-icon fi-blue2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><div class="lm-feat-title">PDF Security Reports</div><div class="lm-feat-desc">Export a client-ready PDF with all findings, severity breakdown, CWE/OWASP references, and remediation guidance.</div></div></div>
           <div class="lm-feat"><div class="lm-feat-icon fi-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div><div class="lm-feat-title">Remediation Tracking</div><div class="lm-feat-desc">Mark vulnerabilities as fixed, track progress by severity, and hide resolved issues to focus on what remains.</div></div></div>
         </div>
@@ -751,9 +751,9 @@
         <div class="lm-cta">
           <div class="lm-cta-text">
             <div class="lm-cta-title">Ready to secure your code?</div>
-            <div class="lm-cta-sub">Create a free account — no credit card required.</div>
+            <div class="lm-cta-sub">Create a free account - no credit card required.</div>
           </div>
-          <a href="signup.html"><button class="btn btn-dark">Start Scanning ⚡</button></a>
+          <a href="signup.html"><button class="btn btn-dark">Start Scanning</button></a>
         </div>
       </div>
     </div>

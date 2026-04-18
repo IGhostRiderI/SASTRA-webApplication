@@ -5,11 +5,11 @@ Hardcoded regex-based vulnerability detection rules.
 from datetime import datetime, timezone
 from typing import Dict, List
 
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 # PYTHON RULES  (140)
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 PYTHON_RULES: List[Dict] = [
-    # ── CWE-89: SQL Injection ─────────────────────────────────────────────────
+    #  CWE-89: SQL Injection 
     {
         "id": "py-sqli-001",
         "language": "python",
@@ -131,7 +131,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-78: OS Command Injection ──────────────────────────────────────────
+    #  CWE-78: OS Command Injection 
     {
         "id": "py-cmdi-001",
         "language": "python",
@@ -253,7 +253,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-79: Cross-Site Scripting ──────────────────────────────────────────
+    #  CWE-79: Cross-Site Scripting 
     {
         "id": "py-xss-001",
         "language": "python",
@@ -339,7 +339,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-22: Path Traversal ────────────────────────────────────────────────
+    #  CWE-22: Path Traversal 
     {
         "id": "py-path-001",
         "language": "python",
@@ -425,7 +425,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-798/259: Hardcoded Credentials ───────────────────────────────────
+    #  CWE-798/259: Hardcoded Credentials 
     {
         "id": "py-cred-001",
         "language": "python",
@@ -523,7 +523,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.90,
     },
 
-    # ── CWE-502: Insecure Deserialization ─────────────────────────────────────
+    #  CWE-502: Insecure Deserialization 
     {
         "id": "py-deser-001",
         "language": "python",
@@ -597,7 +597,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.96,
     },
 
-    # ── CWE-918: Server-Side Request Forgery ──────────────────────────────────
+    #  CWE-918: Server-Side Request Forgery 
     {
         "id": "py-ssrf-001",
         "language": "python",
@@ -659,7 +659,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-327: Weak Cryptography ────────────────────────────────────────────
+    #  CWE-327: Weak Cryptography 
     {
         "id": "py-crypto-001",
         "language": "python",
@@ -745,7 +745,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.95,
     },
 
-    # ── CWE-338: Insecure Randomness ──────────────────────────────────────────
+    #  CWE-338: Insecure Randomness 
     {
         "id": "py-rand-001",
         "language": "python",
@@ -807,7 +807,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-611: XML External Entity ──────────────────────────────────────────
+    #  CWE-611: XML External Entity 
     {
         "id": "py-xxe-001",
         "language": "python",
@@ -869,7 +869,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-94: Code Injection ────────────────────────────────────────────────
+    #  CWE-94: Code Injection 
     {
         "id": "py-codeinj-001",
         "language": "python",
@@ -931,7 +931,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.92,
     },
 
-    # ── CWE-601: Open Redirect ────────────────────────────────────────────────
+    #  CWE-601: Open Redirect 
     {
         "id": "py-redirect-001",
         "language": "python",
@@ -981,7 +981,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-90: LDAP Injection ────────────────────────────────────────────────
+    #  CWE-90: LDAP Injection 
     {
         "id": "py-ldap-001",
         "language": "python",
@@ -1019,7 +1019,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-295: Improper Certificate Validation ──────────────────────────────
+    #  CWE-295: Improper Certificate Validation 
     {
         "id": "py-tls-001",
         "language": "python",
@@ -1081,7 +1081,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-285: Improper Authorization ──────────────────────────────────────
+    #  CWE-285: Improper Authorization 
     {
         "id": "py-authz-001",
         "language": "python",
@@ -1131,7 +1131,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.90,
     },
 
-    # ── CWE-312: Cleartext Storage of Sensitive Data ──────────────────────────
+    #  CWE-312: Cleartext Storage of Sensitive Data 
     {
         "id": "py-clear-001",
         "language": "python",
@@ -1181,7 +1181,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-215 / CWE-16: Debug / Misconfiguration ───────────────────────────
+    #  CWE-215 / CWE-16: Debug / Misconfiguration 
     {
         "id": "py-debug-001",
         "language": "python",
@@ -1243,7 +1243,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.95,
     },
 
-    # ── CWE-377: Insecure Temporary File ──────────────────────────────────────
+    #  CWE-377: Insecure Temporary File 
     {
         "id": "py-tmpfile-001",
         "language": "python",
@@ -1269,7 +1269,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-732: Incorrect Permission Assignment ──────────────────────────────
+    #  CWE-732: Incorrect Permission Assignment 
     {
         "id": "py-perm-001",
         "language": "python",
@@ -1295,7 +1295,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-943: NoSQL Injection ───────────────────────────────────────────────
+    #  CWE-943: NoSQL Injection 
     {
         "id": "py-nosqli-001",
         "language": "python",
@@ -1321,7 +1321,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-209: Information Exposure Through Error Messages ──────────────────
+    #  CWE-209: Information Exposure Through Error Messages 
     {
         "id": "py-errinfo-001",
         "language": "python",
@@ -1359,7 +1359,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-319: Cleartext Transmission ──────────────────────────────────────
+    #  CWE-319: Cleartext Transmission 
     {
         "id": "py-cleartext-001",
         "language": "python",
@@ -1373,7 +1373,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-400: Uncontrolled Resource Consumption ────────────────────────────
+    #  CWE-400: Uncontrolled Resource Consumption 
     {
         "id": "py-dos-001",
         "language": "python",
@@ -1399,7 +1399,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-614: Cookie without Secure flag ───────────────────────────────────
+    #  CWE-614: Cookie without Secure flag 
     {
         "id": "py-cookie-001",
         "language": "python",
@@ -1437,7 +1437,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.92,
     },
 
-    # ── CWE-113: HTTP Response Splitting ──────────────────────────────────────
+    #  CWE-113: HTTP Response Splitting 
     {
         "id": "py-httprsplit-001",
         "language": "python",
@@ -1451,7 +1451,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-190: Integer Overflow ──────────────────────────────────────────────
+    #  CWE-190: Integer Overflow 
     {
         "id": "py-intovf-001",
         "language": "python",
@@ -1465,7 +1465,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-330: Insufficient Randomness ──────────────────────────────────────
+    #  CWE-330: Insufficient Randomness 
     {
         "id": "py-rand-006",
         "language": "python",
@@ -1479,7 +1479,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-116: Improper Output Encoding ────────────────────────────────────
+    #  CWE-116: Improper Output Encoding 
     {
         "id": "py-encode-001",
         "language": "python",
@@ -1493,7 +1493,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-476: Null Dereference ─────────────────────────────────────────────
+    #  CWE-476: Null Dereference 
     {
         "id": "py-nullref-001",
         "language": "python",
@@ -1507,7 +1507,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-703: Improper Exception Handling ─────────────────────────────────
+    #  CWE-703: Improper Exception Handling 
     {
         "id": "py-except-001",
         "language": "python",
@@ -1521,7 +1521,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-776: XML Bomb ─────────────────────────────────────────────────────
+    #  CWE-776: XML Bomb 
     {
         "id": "py-xmlbomb-001",
         "language": "python",
@@ -1535,7 +1535,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-521: Weak Password Requirements ───────────────────────────────────
+    #  CWE-521: Weak Password Requirements 
     {
         "id": "py-weakpw-001",
         "language": "python",
@@ -1549,7 +1549,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-326: Inadequate Encryption Strength ────────────────────────────────
+    #  CWE-326: Inadequate Encryption Strength 
     {
         "id": "py-keysize-001",
         "language": "python",
@@ -1563,7 +1563,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.92,
     },
 
-    # ── CWE-601 additional ────────────────────────────────────────────────────
+    #  CWE-601 additional 
     {
         "id": "py-redirect-005",
         "language": "python",
@@ -1577,7 +1577,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-918 additional ────────────────────────────────────────────────────
+    #  CWE-918 additional 
     {
         "id": "py-ssrf-006",
         "language": "python",
@@ -1591,7 +1591,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-89 additional ─────────────────────────────────────────────────────
+    #  CWE-89 additional 
     {
         "id": "py-sqli-011",
         "language": "python",
@@ -1605,7 +1605,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-787: Out-of-Bounds Write ──────────────────────────────────────────
+    #  CWE-787: Out-of-Bounds Write 
     {
         "id": "py-oob-001",
         "language": "python",
@@ -1619,7 +1619,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-78 additional ─────────────────────────────────────────────────────
+    #  CWE-78 additional 
     {
         "id": "py-cmdi-011",
         "language": "python",
@@ -1633,7 +1633,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-502 additional ────────────────────────────────────────────────────
+    #  CWE-502 additional 
     {
         "id": "py-deser-007",
         "language": "python",
@@ -1647,7 +1647,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.90,
     },
 
-    # ── CWE-22 additional ─────────────────────────────────────────────────────
+    #  CWE-22 additional 
     {
         "id": "py-path-008",
         "language": "python",
@@ -1661,7 +1661,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-327 additional ────────────────────────────────────────────────────
+    #  CWE-327 additional 
     {
         "id": "py-crypto-008",
         "language": "python",
@@ -1675,7 +1675,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-863: Incorrect Authorization ─────────────────────────────────────
+    #  CWE-863: Incorrect Authorization 
     {
         "id": "py-authz-005",
         "language": "python",
@@ -1689,7 +1689,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-200: Sensitive Data Exposure ──────────────────────────────────────
+    #  CWE-200: Sensitive Data Exposure 
     {
         "id": "py-exposure-001",
         "language": "python",
@@ -1715,7 +1715,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-434: Unrestricted File Upload ────────────────────────────────────
+    #  CWE-434: Unrestricted File Upload 
     {
         "id": "py-upload-001",
         "language": "python",
@@ -1729,7 +1729,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-548: Exposure via Directory Listing ────────────────────────────────
+    #  CWE-548: Exposure via Directory Listing 
     {
         "id": "py-dirlist-001",
         "language": "python",
@@ -1743,7 +1743,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-88: Argument Injection ────────────────────────────────────────────
+    #  CWE-88: Argument Injection 
     {
         "id": "py-cwe88-001",
         "language": "python",
@@ -1769,7 +1769,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-91: XML Injection ──────────────────────────────────────────────────
+    #  CWE-91: XML Injection 
     {
         "id": "py-cwe91-001",
         "language": "python",
@@ -1795,7 +1795,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-93: CRLF Injection ─────────────────────────────────────────────────
+    #  CWE-93: CRLF Injection 
     {
         "id": "py-cwe93-001",
         "language": "python",
@@ -1821,7 +1821,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-96: Static Code Injection ─────────────────────────────────────────
+    #  CWE-96: Static Code Injection 
     {
         "id": "py-cwe96-001",
         "language": "python",
@@ -1834,7 +1834,7 @@ PYTHON_RULES: List[Dict] = [
         "source": "hardcoded",
         "confidence": 0.88,
     },
-    # ── GraphQL injection ─────────────────────────────────────────────────────
+    #  GraphQL injection 
     {
         "id": "py-gql-001",
         "language": "python",
@@ -1860,7 +1860,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-98: PHP Remote File Inclusion (Python analogue: dynamic import) ───
+    #  CWE-98: PHP Remote File Inclusion (Python analogue: dynamic import) 
     {
         "id": "py-cwe98-001",
         "language": "python",
@@ -1874,7 +1874,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-99: Resource Injection ────────────────────────────────────────────
+    #  CWE-99: Resource Injection 
     {
         "id": "py-cwe99-001",
         "language": "python",
@@ -1888,7 +1888,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-117: Log Injection ────────────────────────────────────────────────
+    #  CWE-117: Log Injection 
     {
         "id": "py-cwe117-001",
         "language": "python",
@@ -1914,7 +1914,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.73,
     },
 
-    # ── CWE-643: XPath Injection ──────────────────────────────────────────────
+    #  CWE-643: XPath Injection 
     {
         "id": "py-cwe643-001",
         "language": "python",
@@ -1940,7 +1940,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-644: Improper Neutralization of HTTP Headers ──────────────────────
+    #  CWE-644: Improper Neutralization of HTTP Headers 
     {
         "id": "py-cwe644-001",
         "language": "python",
@@ -1954,7 +1954,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-829: Inclusion from Untrusted Control Sphere ──────────────────────
+    #  CWE-829: Inclusion from Untrusted Control Sphere 
     {
         "id": "py-cwe829-001",
         "language": "python",
@@ -1968,7 +1968,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-917: Expression Language Injection ────────────────────────────────
+    #  CWE-917: Expression Language Injection 
     {
         "id": "py-cwe917-001",
         "language": "python",
@@ -2007,7 +2007,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.92,
     },
 
-    # ── CWE-1336: Template Engine Injection ───────────────────────────────────
+    #  CWE-1336: Template Engine Injection 
     {
         "id": "py-cwe1336-001",
         "language": "python",
@@ -2021,7 +2021,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── Server-Sent Events / WebSocket with user input ────────────────────────
+    #  Server-Sent Events / WebSocket with user input 
     {
         "id": "py-ws-001",
         "language": "python",
@@ -2047,7 +2047,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── Celery task deserialization ───────────────────────────────────────────
+    #  Celery task deserialization 
     {
         "id": "py-celery-001",
         "language": "python",
@@ -2073,7 +2073,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.96,
     },
 
-    # ── Redis pickle deserialization ──────────────────────────────────────────
+    #  Redis pickle deserialization 
     {
         "id": "py-redis-001",
         "language": "python",
@@ -2087,7 +2087,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.94,
     },
 
-    # ── AWS SDK credential misuse ──────────────────────────────────────────────
+    #  AWS SDK credential misuse 
     {
         "id": "py-aws-001",
         "language": "python",
@@ -2125,7 +2125,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── Flask-Login / Django auth bypass ─────────────────────────────────────
+    #  Flask-Login / Django auth bypass 
     {
         "id": "py-auth-001",
         "language": "python",
@@ -2163,7 +2163,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-     # ── SSTI — Mako / Chameleon ────────────────────────────────────────────────
+     #  SSTI - Mako / Chameleon 
     {
         "id": "py-ssti-001",
         "language": "python",
@@ -2189,7 +2189,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.94,
     },
 
-    # ── XML-RPC ────────────────────────────────────────────────────────────────
+    #  XML-RPC 
     {
         "id": "py-xmlrpc-001",
         "language": "python",
@@ -2215,7 +2215,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── FastAPI / Starlette misconfigs ─────────────────────────────────────────
+    #  FastAPI / Starlette misconfigs 
     {
         "id": "py-fastapi-001",
         "language": "python",
@@ -2253,7 +2253,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.92,
     },
 
-    # ── Paramiko host key bypass ───────────────────────────────────────────────
+    #  Paramiko host key bypass 
     {
         "id": "py-ssh-001",
         "language": "python",
@@ -2269,7 +2269,7 @@ PYTHON_RULES: List[Dict] = [
     {
         "id": "py-ssh-002",
         "language": "python",
-        "title": "Paramiko RejectPolicy — may silently drop connections",
+        "title": "Paramiko RejectPolicy - may silently drop connections",
         "pattern": r'set_missing_host_key_policy\s*\(\s*paramiko\.WarningPolicy',
         "cwe_id": "CWE-295",
         "cwe_name": "Improper Certificate Validation",
@@ -2279,7 +2279,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── base64 masquerading as encryption ─────────────────────────────────────
+    #  base64 masquerading as encryption 
     {
         "id": "py-crypto-009",
         "language": "python",
@@ -2293,7 +2293,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-     # ── Django mass assignment / insecure QuerySet ────────────────────────────
+     #  Django mass assignment / insecure QuerySet 
     {
         "id": "py-django-001",
         "language": "python",
@@ -2355,11 +2355,11 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── Subprocess list2cmdline shell expansion ───────────────────────────────
+    #  Subprocess list2cmdline shell expansion 
     {
         "id": "py-cmdi-012",
         "language": "python",
-        "title": "subprocess.list2cmdline with user input — expands to shell string",
+        "title": "subprocess.list2cmdline with user input - expands to shell string",
         "pattern": r'subprocess\.list2cmdline\s*\(.*(?:request\.|args\[|form\[)',
         "cwe_id": "CWE-78",
         "cwe_name": "OS Command Injection",
@@ -2369,7 +2369,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-250: Execution with Unnecessary Privileges ─────────────────────────
+    #  CWE-250: Execution with Unnecessary Privileges 
     {
         "id": "py-cwe250-001",
         "language": "python",
@@ -2383,7 +2383,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-266: Incorrect Privilege Assignment ────────────────────────────────
+    #  CWE-266: Incorrect Privilege Assignment 
     {
         "id": "py-cwe266-001",
         "language": "python",
@@ -2397,7 +2397,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-277: Insecure Inherited Permissions ────────────────────────────────
+    #  CWE-277: Insecure Inherited Permissions 
     {
         "id": "py-cwe277-001",
         "language": "python",
@@ -2411,7 +2411,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-288: Authentication Bypass Using Alternate Path ───────────────────
+    #  CWE-288: Authentication Bypass Using Alternate Path 
     {
         "id": "py-cwe288-001",
         "language": "python",
@@ -2425,7 +2425,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-346: Origin Validation Error ──────────────────────────────────────
+    #  CWE-346: Origin Validation Error 
     {
         "id": "py-cwe346-001",
         "language": "python",
@@ -2451,7 +2451,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-472: External Control of Assumed-Immutable Web Parameter ──────────
+    #  CWE-472: External Control of Assumed-Immutable Web Parameter 
     {
         "id": "py-cwe472-001",
         "language": "python",
@@ -2465,7 +2465,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-530: Exposure of Backup File ──────────────────────────────────────
+    #  CWE-530: Exposure of Backup File 
     {
         "id": "py-cwe530-001",
         "language": "python",
@@ -2479,7 +2479,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-539: Persistent Cookies with Sensitive Information ────────────────
+    #  CWE-539: Persistent Cookies with Sensitive Information 
     {
         "id": "py-cwe539-001",
         "language": "python",
@@ -2493,7 +2493,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-598: Sensitive Data in GET Query String ────────────────────────────
+    #  CWE-598: Sensitive Data in GET Query String 
     {
         "id": "py-cwe598-001",
         "language": "python",
@@ -2507,7 +2507,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-311: Missing Encryption of Sensitive Data ─────────────────────────
+    #  CWE-311: Missing Encryption of Sensitive Data 
     {
         "id": "py-cwe311-001",
         "language": "python",
@@ -2521,7 +2521,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-329: Not Using a Random IV with CBC Mode ───────────────────────────
+    #  CWE-329: Not Using a Random IV with CBC Mode 
     {
         "id": "py-cwe329-001",
         "language": "python",
@@ -2547,7 +2547,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-331: Insufficient Entropy ─────────────────────────────────────────
+    #  CWE-331: Insufficient Entropy 
     {
         "id": "py-cwe331-001",
         "language": "python",
@@ -2561,7 +2561,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-335: Incorrect Usage of Seeds in PRNG ─────────────────────────────
+    #  CWE-335: Incorrect Usage of Seeds in PRNG 
     {
         "id": "py-cwe335-001",
         "language": "python",
@@ -2575,7 +2575,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-336: Same Seed in PRNG ─────────────────────────────────────────────
+    #  CWE-336: Same Seed in PRNG 
     {
         "id": "py-cwe336-001",
         "language": "python",
@@ -2589,7 +2589,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-337: Predictable Seed in PRNG ─────────────────────────────────────
+    #  CWE-337: Predictable Seed in PRNG 
     {
         "id": "py-cwe337-001",
         "language": "python",
@@ -2603,7 +2603,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-345: Insufficient Verification of Data Authenticity ───────────────
+    #  CWE-345: Insufficient Verification of Data Authenticity 
     {
         "id": "py-cwe345-001",
         "language": "python",
@@ -2617,7 +2617,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-347: Improper Verification of Cryptographic Signature ─────────────
+    #  CWE-347: Improper Verification of Cryptographic Signature 
     {
         "id": "py-cwe347-001",
         "language": "python",
@@ -2643,7 +2643,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-523: Unprotected Transport of Credentials ─────────────────────────
+    #  CWE-523: Unprotected Transport of Credentials 
     {
         "id": "py-cwe523-001",
         "language": "python",
@@ -2656,7 +2656,7 @@ PYTHON_RULES: List[Dict] = [
         "source": "hardcoded",
         "confidence": 0.85,
     },
-     # ── Unsafe multiprocessing / concurrent deserialization ───────────────────
+     #  Unsafe multiprocessing / concurrent deserialization 
     {
         "id": "py-mp-001",
         "language": "python",
@@ -2670,7 +2670,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── ReDoS ─────────────────────────────────────────────────────────────────
+    #  ReDoS 
     {
         "id": "py-redos-001",
         "language": "python",
@@ -2684,7 +2684,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.75,
     },
  
-    # ── Insecure password hashing (no bcrypt/argon2) ──────────────────────────
+    #  Insecure password hashing (no bcrypt/argon2) 
     {
         "id": "py-pw-001",
         "language": "python",
@@ -2722,7 +2722,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── Insecure file permissions on sensitive files ───────────────────────────
+    #  Insecure file permissions on sensitive files 
     {
         "id": "py-perm-003",
         "language": "python",
@@ -2736,7 +2736,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-760: One-Way Hash with Predictable Salt ────────────────────────────
+    #  CWE-760: One-Way Hash with Predictable Salt 
     {
         "id": "py-cwe760-001",
         "language": "python",
@@ -2749,7 +2749,7 @@ PYTHON_RULES: List[Dict] = [
         "source": "hardcoded",
         "confidence": 0.78,
     },
-    # ── Prototype pollution via json.loads + object merge ─────────────────────
+    #  Prototype pollution via json.loads + object merge 
     {
         "id": "py-proto-001",
         "language": "python",
@@ -2763,7 +2763,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── Command injection via shlex.split bypass ──────────────────────────────
+    #  Command injection via shlex.split bypass 
     {
         "id": "py-cmdi-013",
         "language": "python",
@@ -2777,7 +2777,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.90,
     },
 
-    # ── Insecure deserialization via numpy ────────────────────────────────────
+    #  Insecure deserialization via numpy 
     {
         "id": "py-deser-008",
         "language": "python",
@@ -2791,7 +2791,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.92,
     },
 
-     # ── Zip slip ──────────────────────────────────────────────────────────────
+     #  Zip slip 
     {
         "id": "py-path-009",
         "language": "python",
@@ -2817,7 +2817,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-613: Insufficient Session Expiration ───────────────────────────────
+    #  CWE-613: Insufficient Session Expiration 
     {
         "id": "py-cwe613-001",
         "language": "python",
@@ -2843,7 +2843,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-640: Weak Password Recovery Mechanism ─────────────────────────────
+    #  CWE-640: Weak Password Recovery Mechanism 
     {
         "id": "py-cwe640-001",
         "language": "python",
@@ -2857,7 +2857,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-405: Asymmetric Resource Consumption ──────────────────────────────
+    #  CWE-405: Asymmetric Resource Consumption 
     {
         "id": "py-cwe405-001",
         "language": "python",
@@ -2871,7 +2871,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-409: Improper Handling of Highly Compressed Data (Zip Bomb) ───────
+    #  CWE-409: Improper Handling of Highly Compressed Data (Zip Bomb) 
     {
         "id": "py-cwe409-001",
         "language": "python",
@@ -2885,7 +2885,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-674: Uncontrolled Recursion ───────────────────────────────────────
+    #  CWE-674: Uncontrolled Recursion 
     {
         "id": "py-cwe674-001",
         "language": "python",
@@ -2899,7 +2899,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-730: REDOS ────────────────────────────────────────────────────────
+    #  CWE-730: REDOS 
     {
         "id": "py-cwe730-001",
         "language": "python",
@@ -2925,7 +2925,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-248: Uncaught Exception ───────────────────────────────────────────
+    #  CWE-248: Uncaught Exception 
     {
         "id": "py-cwe248-001",
         "language": "python",
@@ -2939,7 +2939,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-390: Detection of Error Condition Without Action ──────────────────
+    #  CWE-390: Detection of Error Condition Without Action 
     {
         "id": "py-cwe390-001",
         "language": "python",
@@ -2953,7 +2953,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-477: Use of Obsolete Function ─────────────────────────────────────
+    #  CWE-477: Use of Obsolete Function 
     {
         "id": "py-cwe477-001",
         "language": "python",
@@ -2967,7 +2967,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-532: Insertion of Sensitive Information into Log File ─────────────
+    #  CWE-532: Insertion of Sensitive Information into Log File 
     {
         "id": "py-cwe532-001",
         "language": "python",
@@ -2980,7 +2980,7 @@ PYTHON_RULES: List[Dict] = [
         "source": "hardcoded",
         "confidence": 0.82,
     },
-     # ── Cryptography library misuse ───────────────────────────────────────────
+     #  Cryptography library misuse 
     {
         "id": "py-crypto-010",
         "language": "python",
@@ -3006,7 +3006,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-778: Insufficient Logging ─────────────────────────────────────────
+    #  CWE-778: Insufficient Logging 
     {
         "id": "py-cwe778-001",
         "language": "python",
@@ -3020,7 +3020,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-560: Use of umask() with chmod-style Argument ─────────────────────
+    #  CWE-560: Use of umask() with chmod-style Argument 
     {
         "id": "py-cwe560-001",
         "language": "python",
@@ -3034,7 +3034,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-332: Insufficient Entropy in PRNG ─────────────────────────────────
+    #  CWE-332: Insufficient Entropy in PRNG 
     {
         "id": "py-cwe332-001",
         "language": "python",
@@ -3048,7 +3048,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-334: Small Space of Random Values ─────────────────────────────────
+    #  CWE-334: Small Space of Random Values 
     {
         "id": "py-cwe334-001",
         "language": "python",
@@ -3062,7 +3062,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-322: Key Exchange without Entity Authentication ────────────────────
+    #  CWE-322: Key Exchange without Entity Authentication 
     {
         "id": "py-cwe322-001",
         "language": "python",
@@ -3076,7 +3076,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-354: Improper Validation of Integrity Check Value ─────────────────
+    #  CWE-354: Improper Validation of Integrity Check Value 
     {
         "id": "py-cwe354-001",
         "language": "python",
@@ -3090,7 +3090,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-525: Browser Cache with Sensitive Information ─────────────────────
+    #  CWE-525: Browser Cache with Sensitive Information 
     {
         "id": "py-cwe525-001",
         "language": "python",
@@ -3104,7 +3104,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-255: Credentials Management Errors ────────────────────────────────
+    #  CWE-255: Credentials Management Errors 
     {
         "id": "py-cwe255-001",
         "language": "python",
@@ -3118,7 +3118,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-263: Password Aging with Long Expiration ───────────────────────────
+    #  CWE-263: Password Aging with Long Expiration 
     {
         "id": "py-cwe263-001",
         "language": "python",
@@ -3132,7 +3132,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-549: Missing Password Field Masking ────────────────────────────────
+    #  CWE-549: Missing Password Field Masking 
     {
         "id": "py-cwe549-001",
         "language": "python",
@@ -3146,7 +3146,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-290: Authentication Bypass by Spoofing ────────────────────────────
+    #  CWE-290: Authentication Bypass by Spoofing 
     {
         "id": "py-cwe290-001",
         "language": "python",
@@ -3160,7 +3160,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-283: Unverified Ownership ─────────────────────────────────────────
+    #  CWE-283: Unverified Ownership 
     {
         "id": "py-cwe283-001",
         "language": "python",
@@ -3174,7 +3174,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-403: File Descriptor Exposed to Unintended Control Sphere ─────────
+    #  CWE-403: File Descriptor Exposed to Unintended Control Sphere 
     {
         "id": "py-cwe403-001",
         "language": "python",
@@ -3188,7 +3188,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-420: Unprotected Alternate Channel ─────────────────────────────────
+    #  CWE-420: Unprotected Alternate Channel 
     {
         "id": "py-cwe420-001",
         "language": "python",
@@ -3202,7 +3202,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-425: Direct Request (Forced Browsing) ─────────────────────────────
+    #  CWE-425: Direct Request (Forced Browsing) 
     {
         "id": "py-cwe425-001",
         "language": "python",
@@ -3216,7 +3216,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-441: Unintended Proxy or Intermediary ──────────────────────────────
+    #  CWE-441: Unintended Proxy or Intermediary 
     {
         "id": "py-cwe441-001",
         "language": "python",
@@ -3230,7 +3230,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-552: Files or Directories Accessible to External Parties ──────────
+    #  CWE-552: Files or Directories Accessible to External Parties 
     {
         "id": "py-cwe552-001",
         "language": "python",
@@ -3244,7 +3244,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-650: Trusting HTTP Permission Methods ──────────────────────────────
+    #  CWE-650: Trusting HTTP Permission Methods 
     {
         "id": "py-cwe650-001",
         "language": "python",
@@ -3258,7 +3258,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-668: Exposure of Resource to Wrong Sphere ─────────────────────────
+    #  CWE-668: Exposure of Resource to Wrong Sphere 
     {
         "id": "py-cwe668-001",
         "language": "python",
@@ -3272,7 +3272,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-407: Inefficient Algorithmic Complexity ────────────────────────────
+    #  CWE-407: Inefficient Algorithmic Complexity 
     {
         "id": "py-cwe407-001",
         "language": "python",
@@ -3286,7 +3286,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-410: Insufficient Resource Pool ────────────────────────────────────
+    #  CWE-410: Insufficient Resource Pool 
     {
         "id": "py-cwe410-001",
         "language": "python",
@@ -3300,7 +3300,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-664: Improper Control of Resource Through Lifetime ────────────────
+    #  CWE-664: Improper Control of Resource Through Lifetime 
     {
         "id": "py-cwe664-001",
         "language": "python",
@@ -3314,7 +3314,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-695: Use of Low-Level Functionality ────────────────────────────────
+    #  CWE-695: Use of Low-Level Functionality 
     {
         "id": "py-cwe695-001",
         "language": "python",
@@ -3328,7 +3328,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-755: Improper Handling of Exceptional Conditions ──────────────────
+    #  CWE-755: Improper Handling of Exceptional Conditions 
     {
         "id": "py-cwe755-001",
         "language": "python",
@@ -3342,7 +3342,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-398: Indicator of Poor Code Quality ───────────────────────────────
+    #  CWE-398: Indicator of Poor Code Quality 
     {
         "id": "py-cwe398-001",
         "language": "python",
@@ -3356,7 +3356,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.60,
     },
 
-    # ── CWE-563: Assignment to Variable Without Use ────────────────────────────
+    #  CWE-563: Assignment to Variable Without Use 
     {
         "id": "py-cwe563-001",
         "language": "python",
@@ -3370,11 +3370,11 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-570: Expression is Always False ───────────────────────────────────
+    #  CWE-570: Expression is Always False 
     {
         "id": "py-cwe570-001",
         "language": "python",
-        "title": "Condition that is always False (dead code — potential logic flaw)",
+        "title": "Condition that is always False (dead code - potential logic flaw)",
         "pattern": r'if\s+False\s*:',
         "cwe_id": "CWE-570",
         "cwe_name": "Expression is Always False",
@@ -3384,11 +3384,11 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-571: Expression is Always True ────────────────────────────────────
+    #  CWE-571: Expression is Always True 
     {
         "id": "py-cwe571-001",
         "language": "python",
-        "title": "Condition that is always True (bypasses check — potential logic flaw)",
+        "title": "Condition that is always True (bypasses check - potential logic flaw)",
         "pattern": r'if\s+True\s*:',
         "cwe_id": "CWE-571",
         "cwe_name": "Expression is Always True",
@@ -3398,7 +3398,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-624: Executable Regular Expression Error ───────────────────────────
+    #  CWE-624: Executable Regular Expression Error 
     {
         "id": "py-cwe624-001",
         "language": "python",
@@ -3412,7 +3412,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-625: Permissive Regular Expression ─────────────────────────────────
+    #  CWE-625: Permissive Regular Expression 
     {
         "id": "py-cwe625-001",
         "language": "python",
@@ -3426,7 +3426,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-645: Overly Restrictive Account Lockout ────────────────────────────
+    #  CWE-645: Overly Restrictive Account Lockout 
     {
         "id": "py-cwe645-001",
         "language": "python",
@@ -3440,7 +3440,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-651: WSDL Exposure ─────────────────────────────────────────────────
+    #  CWE-651: WSDL Exposure 
     {
         "id": "py-cwe651-001",
         "language": "python",
@@ -3454,7 +3454,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-544: Missing Standardized Error Handling ───────────────────────────
+    #  CWE-544: Missing Standardized Error Handling 
     {
         "id": "py-cwe544-001",
         "language": "python",
@@ -3468,7 +3468,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.60,
     },
 
-    # ── CWE-392: Missing Report of Error Condition ─────────────────────────────
+    #  CWE-392: Missing Report of Error Condition 
     {
         "id": "py-cwe392-001",
         "language": "python",
@@ -3482,7 +3482,7 @@ PYTHON_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-393: Return of Wrong Status Code ──────────────────────────────────
+    #  CWE-393: Return of Wrong Status Code 
     {
         "id": "py-cwe393-001",
         "language": "python",
@@ -3498,11 +3498,11 @@ PYTHON_RULES: List[Dict] = [
 ]
 
 
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 # JAVA RULES  (100)
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 JAVA_RULES: List[Dict] = [
-    # ── CWE-89: SQL Injection ─────────────────────────────────────────────────
+    #  CWE-89: SQL Injection 
     {
         "id": "java-sqli-001",
         "language": "java",
@@ -3528,7 +3528,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── Insecure cookie configuration ─────────────────────────────────────────
+    #  Insecure cookie configuration 
     {
         "id": "py-cookie-004",
         "language": "python",
@@ -3557,11 +3557,11 @@ JAVA_RULES: List[Dict] = [
 ]
 
 
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 # JAVA RULES  (140)
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 JAVA_RULES: List[Dict] = [
-    # ── CWE-89: SQL Injection ─────────────────────────────────────────────────
+    #  CWE-89: SQL Injection 
     {
         "id": "java-sqli-001",
         "language": "java",
@@ -3683,7 +3683,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.90,
     },
 
-    # ── CWE-78: OS Command Injection ──────────────────────────────────────────
+    #  CWE-78: OS Command Injection 
     {
         "id": "java-cmdi-001",
         "language": "java",
@@ -3781,7 +3781,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-79: Cross-Site Scripting ──────────────────────────────────────────
+    #  CWE-79: Cross-Site Scripting 
     {
         "id": "java-xss-001",
         "language": "java",
@@ -3867,7 +3867,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-22: Path Traversal ────────────────────────────────────────────────
+    #  CWE-22: Path Traversal 
     {
         "id": "java-path-001",
         "language": "java",
@@ -3941,7 +3941,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-798/259: Hardcoded Credentials ───────────────────────────────────
+    #  CWE-798/259: Hardcoded Credentials 
     {
         "id": "java-cred-001",
         "language": "java",
@@ -4039,7 +4039,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-502: Insecure Deserialization ─────────────────────────────────────
+    #  CWE-502: Insecure Deserialization 
     {
         "id": "java-deser-001",
         "language": "java",
@@ -4125,7 +4125,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-611: XML External Entity ──────────────────────────────────────────
+    #  CWE-611: XML External Entity 
     {
         "id": "java-xxe-001",
         "language": "java",
@@ -4211,7 +4211,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-918: SSRF ─────────────────────────────────────────────────────────
+    #  CWE-918: SSRF 
     {
         "id": "java-ssrf-001",
         "language": "java",
@@ -4273,7 +4273,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-327: Weak Cryptography ────────────────────────────────────────────
+    #  CWE-327: Weak Cryptography 
     {
         "id": "java-crypto-001",
         "language": "java",
@@ -4359,7 +4359,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.92,
     },
 
-    # ── CWE-338: Insecure Randomness ──────────────────────────────────────────
+    #  CWE-338: Insecure Randomness 
     {
         "id": "java-rand-001",
         "language": "java",
@@ -4409,7 +4409,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-90: LDAP Injection ────────────────────────────────────────────────
+    #  CWE-90: LDAP Injection 
     {
         "id": "java-ldap-001",
         "language": "java",
@@ -4447,7 +4447,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-295: Improper Certificate Validation ──────────────────────────────
+    #  CWE-295: Improper Certificate Validation 
     {
         "id": "java-tls-001",
         "language": "java",
@@ -4509,7 +4509,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.95,
     },
 
-    # ── CWE-601: Open Redirect ────────────────────────────────────────────────
+    #  CWE-601: Open Redirect 
     {
         "id": "java-redirect-001",
         "language": "java",
@@ -4559,7 +4559,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-312: Cleartext Storage ────────────────────────────────────────────
+    #  CWE-312: Cleartext Storage 
     {
         "id": "java-clear-001",
         "language": "java",
@@ -4621,7 +4621,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.92,
     },
 
-    # ── CWE-352: CSRF ─────────────────────────────────────────────────────────
+    #  CWE-352: CSRF 
     {
         "id": "java-csrf-001",
         "language": "java",
@@ -4659,7 +4659,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-209: Information Exposure ─────────────────────────────────────────
+    #  CWE-209: Information Exposure 
     {
         "id": "java-errinfo-001",
         "language": "java",
@@ -4697,7 +4697,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-470: Unsafe Reflection ────────────────────────────────────────────
+    #  CWE-470: Unsafe Reflection 
     {
         "id": "java-reflect-001",
         "language": "java",
@@ -4735,7 +4735,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.90,
     },
 
-    # ── CWE-94: Code Injection (Script Engine) ────────────────────────────────
+    #  CWE-94: Code Injection (Script Engine) 
     {
         "id": "java-codeinj-001",
         "language": "java",
@@ -4773,7 +4773,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-285: Improper Authorization ──────────────────────────────────────
+    #  CWE-285: Improper Authorization 
     {
         "id": "java-authz-001",
         "language": "java",
@@ -4811,7 +4811,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-319: Cleartext Transmission ──────────────────────────────────────
+    #  CWE-319: Cleartext Transmission 
     {
         "id": "java-cleartext-001",
         "language": "java",
@@ -4837,7 +4837,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-400: Uncontrolled Resource Consumption ────────────────────────────
+    #  CWE-400: Uncontrolled Resource Consumption 
     {
         "id": "java-dos-001",
         "language": "java",
@@ -4863,7 +4863,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-434: Unrestricted File Upload ─────────────────────────────────────
+    #  CWE-434: Unrestricted File Upload 
     {
         "id": "java-upload-001",
         "language": "java",
@@ -4889,7 +4889,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-611 additional: JNDI Injection ───────────────────────────────────
+    #  CWE-611 additional: JNDI Injection 
     {
         "id": "java-jndi-001",
         "language": "java",
@@ -4915,7 +4915,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.90,
     },
 
-    # ── CWE-502: Spring/EL Injection ──────────────────────────────────────────
+    #  CWE-502: Spring/EL Injection 
     {
         "id": "java-el-001",
         "language": "java",
@@ -4929,7 +4929,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.92,
     },
 
-    # ── CWE-200: Sensitive Data Exposure ──────────────────────────────────────
+    #  CWE-200: Sensitive Data Exposure 
     {
         "id": "java-exposure-001",
         "language": "java",
@@ -4955,7 +4955,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-327: Weak MAC ─────────────────────────────────────────────────────
+    #  CWE-327: Weak MAC 
     {
         "id": "java-crypto-008",
         "language": "java",
@@ -4969,7 +4969,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.90,
     },
 
-    # ── CWE-732: Misconfiguration ─────────────────────────────────────────────
+    #  CWE-732: Misconfiguration 
     {
         "id": "java-misc-001",
         "language": "java",
@@ -5007,7 +5007,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-91: XML Injection (Java) ──────────────────────────────────────────
+    #  CWE-91: XML Injection (Java) 
     {
         "id": "java-cwe91-001",
         "language": "java",
@@ -5021,7 +5021,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-93: CRLF Injection (Java) ─────────────────────────────────────────
+    #  CWE-93: CRLF Injection (Java) 
     {
         "id": "java-cwe93-001",
         "language": "java",
@@ -5035,7 +5035,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-117: Log Injection (Java) ─────────────────────────────────────────
+    #  CWE-117: Log Injection (Java) 
     {
         "id": "java-cwe117-001",
         "language": "java",
@@ -5049,7 +5049,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-643: XPath Injection (Java) ──────────────────────────────────────
+    #  CWE-643: XPath Injection (Java) 
     {
         "id": "java-cwe643-001",
         "language": "java",
@@ -5063,7 +5063,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-917: Expression Language Injection (Java) ─────────────────────────
+    #  CWE-917: Expression Language Injection (Java) 
     {
         "id": "java-cwe917-001",
         "language": "java",
@@ -5077,7 +5077,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-346: Origin Validation Error (Java) ───────────────────────────────
+    #  CWE-346: Origin Validation Error (Java) 
     {
         "id": "java-cwe346-001",
         "language": "java",
@@ -5091,7 +5091,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-347: Improper Verification of Cryptographic Signature (Java) ──────
+    #  CWE-347: Improper Verification of Cryptographic Signature (Java) 
     {
         "id": "java-cwe347-001",
         "language": "java",
@@ -5105,7 +5105,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-613: Insufficient Session Expiration (Java) ───────────────────────
+    #  CWE-613: Insufficient Session Expiration (Java) 
     {
         "id": "java-cwe613-001",
         "language": "java",
@@ -5119,7 +5119,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-532: Sensitive Information in Log (Java) ───────────────────────────
+    #  CWE-532: Sensitive Information in Log (Java) 
     {
         "id": "java-cwe532-001",
         "language": "java",
@@ -5133,7 +5133,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-580: clone() Without super.clone() ────────────────────────────────
+    #  CWE-580: clone() Without super.clone() 
     {
         "id": "java-cwe580-001",
         "language": "java",
@@ -5147,7 +5147,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-583: finalize() Declared Public ───────────────────────────────────
+    #  CWE-583: finalize() Declared Public 
     {
         "id": "java-cwe583-001",
         "language": "java",
@@ -5161,7 +5161,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-584: Return Inside Finally Block ──────────────────────────────────
+    #  CWE-584: Return Inside Finally Block 
     {
         "id": "java-cwe584-001",
         "language": "java",
@@ -5175,7 +5175,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-585: Empty Synchronized Block ─────────────────────────────────────
+    #  CWE-585: Empty Synchronized Block 
     {
         "id": "java-cwe585-001",
         "language": "java",
@@ -5189,7 +5189,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-586: Explicit Call to Finalize() ──────────────────────────────────
+    #  CWE-586: Explicit Call to Finalize() 
     {
         "id": "java-cwe586-001",
         "language": "java",
@@ -5203,7 +5203,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-595: Comparison of Object References ──────────────────────────────
+    #  CWE-595: Comparison of Object References 
     {
         "id": "java-cwe595-001",
         "language": "java",
@@ -5217,7 +5217,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-597: Use of Wrong Operator in String Comparison ──────────────────
+    #  CWE-597: Use of Wrong Operator in String Comparison 
     {
         "id": "java-cwe597-001",
         "language": "java",
@@ -5231,7 +5231,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-567: Unsynchronized Access to Shared Data ─────────────────────────
+    #  CWE-567: Unsynchronized Access to Shared Data 
     {
         "id": "java-cwe567-001",
         "language": "java",
@@ -5245,7 +5245,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-600: Uncaught Exception in Servlet ────────────────────────────────
+    #  CWE-600: Uncaught Exception in Servlet 
     {
         "id": "java-cwe600-001",
         "language": "java",
@@ -5259,7 +5259,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-579: J2EE Non-serializable Object in Session ─────────────────────
+    #  CWE-579: J2EE Non-serializable Object in Session 
     {
         "id": "java-cwe579-001",
         "language": "java",
@@ -5273,7 +5273,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-329: No Random IV with CBC (Java) ─────────────────────────────────
+    #  CWE-329: No Random IV with CBC (Java) 
     {
         "id": "java-cwe329-001",
         "language": "java",
@@ -5287,7 +5287,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-640: Weak Password Recovery (Java) ────────────────────────────────
+    #  CWE-640: Weak Password Recovery (Java) 
     {
         "id": "java-cwe640-001",
         "language": "java",
@@ -5301,7 +5301,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-778: Insufficient Logging (Java) ──────────────────────────────────
+    #  CWE-778: Insufficient Logging (Java) 
     {
         "id": "java-cwe778-001",
         "language": "java",
@@ -5315,11 +5315,11 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-     # ── Log4Shell (CVE-2021-44228) detection ──────────────────────────────────
+     #  Log4Shell (CVE-2021-44228) detection 
     {
         "id": "java-log4shell-001",
         "language": "java",
-        "title": "Log4j log statement with user input — Log4Shell vector",
+        "title": "Log4j log statement with user input - Log4Shell vector",
         "pattern": r'(?:log|logger|LOG)\.(?:info|warn|error|debug|trace|fatal)\s*\(.*(?:getParameter|getHeader|getAttribute)',
         "cwe_id": "CWE-74",
         "cwe_name": "Injection",
@@ -5341,7 +5341,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.99,
     },
 
-    # ── Template injection — Velocity / FreeMarker / Thymeleaf ───────────────
+    #  Template injection - Velocity / FreeMarker / Thymeleaf 
     {
         "id": "java-ssti-001",
         "language": "java",
@@ -5379,7 +5379,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.90,
     },
 
-     # ── Spring misconfiguration ────────────────────────────────────────────────
+     #  Spring misconfiguration 
     {
         "id": "java-spring-001",
         "language": "java",
@@ -5441,7 +5441,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-     # ── Jackson polymorphic deserialization ───────────────────────────────────
+     #  Jackson polymorphic deserialization 
     {
         "id": "java-jackson-001",
         "language": "java",
@@ -5479,7 +5479,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── Weak key derivation ────────────────────────────────────────────────────
+    #  Weak key derivation 
     {
         "id": "java-kdf-001",
         "language": "java",
@@ -5505,7 +5505,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── SMTP cleartext ────────────────────────────────────────────────────────
+    #  SMTP cleartext 
     {
         "id": "java-smtp-001",
         "language": "java",
@@ -5531,7 +5531,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-     # ── WebClient / Feign SSRF ────────────────────────────────────────────────
+     #  WebClient / Feign SSRF 
     {
         "id": "java-ssrf-006",
         "language": "java",
@@ -5557,7 +5557,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-     # ── GraphQL injection ─────────────────────────────────────────────────────
+     #  GraphQL injection 
     {
         "id": "java-gql-001",
         "language": "java",
@@ -5571,7 +5571,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── XXE additional parsers ─────────────────────────────────────────────────
+    #  XXE additional parsers 
     {
         "id": "java-xxe-008",
         "language": "java",
@@ -5609,7 +5609,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-     # ── OAuth2 / JWT misconfiguration ─────────────────────────────────────────
+     #  OAuth2 / JWT misconfiguration 
     {
         "id": "java-oauth-001",
         "language": "java",
@@ -5647,7 +5647,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-     # ── Hardcoded AWS keys / GCP / GitHub tokens ──────────────────────────────
+     #  Hardcoded AWS keys / GCP / GitHub tokens 
     {
         "id": "java-cred-009",
         "language": "java",
@@ -5673,7 +5673,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.97,
     },
 
-     # ── Path traversal additional ─────────────────────────────────────────────
+     #  Path traversal additional 
     {
         "id": "java-path-007",
         "language": "java",
@@ -5699,7 +5699,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── Insecure random for session tokens ────────────────────────────────────
+    #  Insecure random for session tokens 
     {
         "id": "java-rand-005",
         "language": "java",
@@ -5713,7 +5713,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── Missing input validation on REST endpoint ─────────────────────────────
+    #  Missing input validation on REST endpoint 
     {
         "id": "java-valid-001",
         "language": "java",
@@ -5727,7 +5727,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-     # ── Response caching sensitive data ───────────────────────────────────────
+     #  Response caching sensitive data 
     {
         "id": "java-cache-001",
         "language": "java",
@@ -5741,7 +5741,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.78,
     },
  
-    # ── Actuator exposure ──────────────────────────────────────────────────────
+    #  Actuator exposure 
     {
         "id": "java-actuator-001",
         "language": "java",
@@ -5767,7 +5767,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.95,
     },
 
-    # ── CWE-79: DOM-based XSS ─────────────────────────────────────────────────
+    #  CWE-79: DOM-based XSS 
     {
         "id": "js-xss-001",
         "language": "javascript",
@@ -5889,7 +5889,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-     # ── CWE-94: Code Injection (eval / Function) ──────────────────────────────
+     #  CWE-94: Code Injection (eval / Function) 
     {
         "id": "js-codeinj-001",
         "language": "javascript",
@@ -5939,7 +5939,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
  
-    # ── CWE-601: Open Redirect ────────────────────────────────────────────────
+    #  CWE-601: Open Redirect 
     {
         "id": "js-redirect-001",
         "language": "javascript",
@@ -5977,7 +5977,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.82,
     },
  
-    # ── CWE-614/1004: Insecure Cookie Handling ────────────────────────────────
+    #  CWE-614/1004: Insecure Cookie Handling 
     {
         "id": "js-cookie-001",
         "language": "javascript",
@@ -6027,7 +6027,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
  
-    # ── CWE-312/922: Insecure Storage (localStorage / sessionStorage) ─────────
+    #  CWE-312/922: Insecure Storage (localStorage / sessionStorage) 
     {
         "id": "js-storage-001",
         "language": "javascript",
@@ -6077,7 +6077,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
  
-    # ── CWE-798: Hardcoded Credentials / Secrets ──────────────────────────────
+    #  CWE-798: Hardcoded Credentials / Secrets 
     {
         "id": "js-cred-001",
         "language": "javascript",
@@ -6151,7 +6151,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.98,
     },
  
-    # ── CWE-346/942: CORS / Origin Validation ─────────────────────────────────
+    #  CWE-346/942: CORS / Origin Validation 
     {
         "id": "js-cors-001",
         "language": "javascript",
@@ -6201,7 +6201,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
  
-    # ── CWE-319: Cleartext Transmission ──────────────────────────────────────
+    #  CWE-319: Cleartext Transmission 
     {
         "id": "js-cleartext-001",
         "language": "javascript",
@@ -6239,7 +6239,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
  
-    # ── CWE-20: Improper Input Validation ─────────────────────────────────────
+    #  CWE-20: Improper Input Validation 
     {
         "id": "js-input-001",
         "language": "javascript",
@@ -6277,7 +6277,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-     # ── CWE-352: CSRF ─────────────────────────────────────────────────────────
+     #  CWE-352: CSRF 
     {
         "id": "js-csrf-001",
         "language": "javascript",
@@ -6291,7 +6291,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
  
-    # ── CWE-327: Weak Cryptography ────────────────────────────────────────────
+    #  CWE-327: Weak Cryptography 
     {
         "id": "js-crypto-001",
         "language": "javascript",
@@ -6353,7 +6353,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.92,
     },
  
-    # ── CWE-285/287: Authentication & Auth bypass ─────────────────────────────
+    #  CWE-285/287: Authentication & Auth bypass 
     {
         "id": "js-auth-001",
         "language": "javascript",
@@ -6403,7 +6403,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
  
-    # ── CWE-209: Information Exposure ─────────────────────────────────────────
+    #  CWE-209: Information Exposure 
     {
         "id": "js-info-001",
         "language": "javascript",
@@ -6441,7 +6441,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
  
-    # ── CWE-918: Client-Side SSRF (proxy/fetch to attacker URL) ──────────────
+    #  CWE-918: Client-Side SSRF (proxy/fetch to attacker URL) 
     {
         "id": "js-ssrf-001",
         "language": "javascript",
@@ -6455,11 +6455,11 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
  
-    # ── CWE-693: Clickjacking / Missing Security Headers ──────────────────────
+    #  CWE-693: Clickjacking / Missing Security Headers 
     {
         "id": "js-clickjack-001",
         "language": "javascript",
-        "title": "Frame-busting check absent — clickjacking risk",
+        "title": "Frame-busting check absent - clickjacking risk",
         "pattern": r'(?:top|parent)\s*[!=]==?\s*(?:self|window)(?![\s\S]{0,100}(?:location|navigate|hidden|display))',
         "cwe_id": "CWE-693",
         "cwe_name": "Protection Mechanism Failure",
@@ -6469,7 +6469,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.75,
     },
  
-    # ── CWE-116: Improper Output Encoding ─────────────────────────────────────
+    #  CWE-116: Improper Output Encoding 
     {
         "id": "js-encode-001",
         "language": "javascript",
@@ -6507,7 +6507,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
  
-    # ── CWE-400: Prototype Pollution ──────────────────────────────────────────
+    #  CWE-400: Prototype Pollution 
     {
         "id": "js-proto-001",
         "language": "javascript",
@@ -6545,7 +6545,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.92,
     },
  
-    # ── CWE-400: ReDoS ────────────────────────────────────────────────────────
+    #  CWE-400: ReDoS 
     {
         "id": "js-redos-001",
         "language": "javascript",
@@ -6559,7 +6559,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.82,
     },
  
-    # ── CWE-116: SQL-like injection via client-side query builder ─────────────
+    #  CWE-116: SQL-like injection via client-side query builder 
     {
         "id": "js-sqli-001",
         "language": "javascript",
@@ -6573,7 +6573,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
  
-    # ── CWE-285: Insecure Direct Object Reference (IDOR) hint ─────────────────
+    #  CWE-285: Insecure Direct Object Reference (IDOR) hint 
     {
         "id": "js-idor-001",
         "language": "javascript",
@@ -6587,7 +6587,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.80,
     },
  
-    # ── CWE-539: Sensitive data in persistent cookie ───────────────────────────
+    #  CWE-539: Sensitive data in persistent cookie 
     {
         "id": "js-cookie-005",
         "language": "javascript",
@@ -6601,7 +6601,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.85,
     },
  
-    # ── CWE-598: Sensitive data in GET query ──────────────────────────────────
+    #  CWE-598: Sensitive data in GET query 
     {
         "id": "js-get-001",
         "language": "javascript",
@@ -6615,7 +6615,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.88,
     },
  
-    # ── CWE-613: Insufficient Session Expiration ──────────────────────────────
+    #  CWE-613: Insufficient Session Expiration 
     {
         "id": "js-session-001",
         "language": "javascript",
@@ -6629,7 +6629,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.75,
     },
  
-    # ── CWE-311: Cleartext password in form without TLS ──────────────────────
+    #  CWE-311: Cleartext password in form without TLS 
     {
         "id": "js-tls-001",
         "language": "javascript",
@@ -6643,7 +6643,7 @@ JAVA_RULES: List[Dict] = [
         "confidence": 0.90,
     },
  
-    # ── Supply-chain / CDN integrity ───────────────────────────────────────────
+    #  Supply-chain / CDN integrity 
     {
         "id": "js-sri-001",
         "language": "javascript",
@@ -6671,15 +6671,15 @@ JAVA_RULES: List[Dict] = [
 
 ]
 
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 # C++ RULES  (130)
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 CPP_RULES: List[Dict] = [
-    # ── CWE-120/121/122: Buffer Overflow — dangerous copy functions ───────────
+    #  CWE-120/121/122: Buffer Overflow - dangerous copy functions 
     {
         "id": "cpp-buf-001",
         "language": "cpp",
-        "title": "strcpy() — unbounded string copy",
+        "title": "strcpy() - unbounded string copy",
         "pattern": r'\bstrcpy\s*\(',
         "cwe_id": "CWE-120",
         "cwe_name": "Buffer Copy without Checking Size of Input",
@@ -6691,7 +6691,7 @@ CPP_RULES: List[Dict] = [
     {
         "id": "cpp-buf-002",
         "language": "cpp",
-        "title": "strcat() — unbounded string concatenation",
+        "title": "strcat() - unbounded string concatenation",
         "pattern": r'\bstrcat\s*\(',
         "cwe_id": "CWE-120",
         "cwe_name": "Buffer Copy without Checking Size of Input",
@@ -6703,7 +6703,7 @@ CPP_RULES: List[Dict] = [
     {
         "id": "cpp-buf-003",
         "language": "cpp",
-        "title": "gets() — reads unbounded input",
+        "title": "gets() - reads unbounded input",
         "pattern": r'\bgets\s*\(',
         "cwe_id": "CWE-120",
         "cwe_name": "Buffer Copy without Checking Size of Input",
@@ -6787,7 +6787,7 @@ CPP_RULES: List[Dict] = [
     {
         "id": "cpp-buf-010",
         "language": "cpp",
-        "title": "strncat() — off-by-one risk",
+        "title": "strncat() - off-by-one risk",
         "pattern": r'\bstrncat\s*\(',
         "cwe_id": "CWE-120",
         "cwe_name": "Buffer Copy without Checking Size of Input",
@@ -6797,7 +6797,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-134: Uncontrolled Format String ───────────────────────────────────
+    #  CWE-134: Uncontrolled Format String 
     {
         "id": "cpp-fmt-001",
         "language": "cpp",
@@ -6859,7 +6859,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-78: OS Command Injection ──────────────────────────────────────────
+    #  CWE-78: OS Command Injection 
     {
         "id": "cpp-cmdi-001",
         "language": "cpp",
@@ -6933,7 +6933,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-416: Use After Free ───────────────────────────────────────────────
+    #  CWE-416: Use After Free 
     {
         "id": "cpp-uaf-001",
         "language": "cpp",
@@ -6995,7 +6995,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-415: Double Free ──────────────────────────────────────────────────
+    #  CWE-415: Double Free 
     {
         "id": "cpp-dblfree-001",
         "language": "cpp",
@@ -7021,7 +7021,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-401: Memory Leak ──────────────────────────────────────────────────
+    #  CWE-401: Memory Leak 
     {
         "id": "cpp-memleak-001",
         "language": "cpp",
@@ -7095,7 +7095,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-476: NULL Pointer Dereference ─────────────────────────────────────
+    #  CWE-476: NULL Pointer Dereference 
     {
         "id": "cpp-null-001",
         "language": "cpp",
@@ -7157,7 +7157,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-190: Integer Overflow ─────────────────────────────────────────────
+    #  CWE-190: Integer Overflow 
     {
         "id": "cpp-intovf-001",
         "language": "cpp",
@@ -7231,7 +7231,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-787: Out-of-Bounds Write ──────────────────────────────────────────
+    #  CWE-787: Out-of-Bounds Write 
     {
         "id": "cpp-oob-001",
         "language": "cpp",
@@ -7283,7 +7283,7 @@ CPP_RULES: List[Dict] = [
     {
         "id": "cpp-oob-005",
         "language": "cpp",
-        "title": "Stack buffer with alloca() — size not validated",
+        "title": "Stack buffer with alloca() - size not validated",
         "pattern": r'\balloca\s*\(',
         "cwe_id": "CWE-121",
         "cwe_name": "Stack-based Buffer Overflow",
@@ -7293,7 +7293,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-125: Out-of-Bounds Read ───────────────────────────────────────────
+    #  CWE-125: Out-of-Bounds Read 
     {
         "id": "cpp-oobread-001",
         "language": "cpp",
@@ -7331,7 +7331,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-362: Race Condition ───────────────────────────────────────────────
+    #  CWE-362: Race Condition 
     {
         "id": "cpp-race-001",
         "language": "cpp",
@@ -7381,7 +7381,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-369: Divide by Zero ───────────────────────────────────────────────
+    #  CWE-369: Divide by Zero 
     {
         "id": "cpp-divzero-001",
         "language": "cpp",
@@ -7419,7 +7419,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-457: Use of Uninitialized Variable ────────────────────────────────
+    #  CWE-457: Use of Uninitialized Variable 
     {
         "id": "cpp-uninit-001",
         "language": "cpp",
@@ -7445,7 +7445,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-377: Insecure Temporary File ─────────────────────────────────────
+    #  CWE-377: Insecure Temporary File 
     {
         "id": "cpp-tmpfile-001",
         "language": "cpp",
@@ -7483,7 +7483,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.90,
     },
 
-    # ── CWE-676: Use of Potentially Dangerous Function ────────────────────────
+    #  CWE-676: Use of Potentially Dangerous Function 
     {
         "id": "cpp-danger-001",
         "language": "cpp",
@@ -7581,7 +7581,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-327: Weak Cryptography ────────────────────────────────────────────
+    #  CWE-327: Weak Cryptography 
     {
         "id": "cpp-crypto-001",
         "language": "cpp",
@@ -7667,7 +7667,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-89: SQL Injection ─────────────────────────────────────────────────
+    #  CWE-89: SQL Injection 
     {
         "id": "cpp-sqli-001",
         "language": "cpp",
@@ -7717,7 +7717,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-798: Hardcoded Credentials ───────────────────────────────────────
+    #  CWE-798: Hardcoded Credentials 
     {
         "id": "cpp-cred-001",
         "language": "cpp",
@@ -7755,7 +7755,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.98,
     },
 
-    # ── CWE-22: Path Traversal ────────────────────────────────────────────────
+    #  CWE-22: Path Traversal 
     {
         "id": "cpp-path-001",
         "language": "cpp",
@@ -7793,11 +7793,11 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-134 additional: Dangerous string operations ───────────────────────
+    #  CWE-134 additional: Dangerous string operations 
     {
         "id": "cpp-strop-001",
         "language": "cpp",
-        "title": "wcscpy() — unbounded wide-string copy",
+        "title": "wcscpy() - unbounded wide-string copy",
         "pattern": r'\bwcscpy\s*\(',
         "cwe_id": "CWE-120",
         "cwe_name": "Buffer Copy without Checking Size of Input",
@@ -7809,7 +7809,7 @@ CPP_RULES: List[Dict] = [
     {
         "id": "cpp-strop-002",
         "language": "cpp",
-        "title": "wcscat() — unbounded wide-string concat",
+        "title": "wcscat() - unbounded wide-string concat",
         "pattern": r'\bwcscat\s*\(',
         "cwe_id": "CWE-120",
         "cwe_name": "Buffer Copy without Checking Size of Input",
@@ -7831,7 +7831,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-295: TLS / Certificate Issues ────────────────────────────────────
+    #  CWE-295: TLS / Certificate Issues 
     {
         "id": "cpp-tls-001",
         "language": "cpp",
@@ -7869,7 +7869,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.96,
     },
 
-    # ── CWE-209: Information Exposure ─────────────────────────────────────────
+    #  CWE-209: Information Exposure 
     {
         "id": "cpp-errinfo-001",
         "language": "cpp",
@@ -7895,7 +7895,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-758: Reliance on Undefined Behavior ───────────────────────────────
+    #  CWE-758: Reliance on Undefined Behavior 
     {
         "id": "cpp-undef-001",
         "language": "cpp",
@@ -7933,7 +7933,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-416 additional: Dangling pointer ─────────────────────────────────
+    #  CWE-416 additional: Dangling pointer 
     {
         "id": "cpp-dangle-001",
         "language": "cpp",
@@ -7947,7 +7947,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-400: Resource Exhaustion ──────────────────────────────────────────
+    #  CWE-400: Resource Exhaustion 
     {
         "id": "cpp-dos-001",
         "language": "cpp",
@@ -7973,11 +7973,11 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-732: File Permission ──────────────────────────────────────────────
+    #  CWE-732: File Permission 
     {
         "id": "cpp-perm-001",
         "language": "cpp",
-        "title": "umask(0) — disables all permission restrictions",
+        "title": "umask(0) - disables all permission restrictions",
         "pattern": r'\bumask\s*\(\s*0\s*\)',
         "cwe_id": "CWE-732",
         "cwe_name": "Incorrect Permission Assignment for Critical Resource",
@@ -7987,7 +7987,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.88,
     },
 
-    # ── CWE-20: Input Validation ──────────────────────────────────────────────
+    #  CWE-20: Input Validation 
     {
         "id": "cpp-input-001",
         "language": "cpp",
@@ -8015,7 +8015,7 @@ CPP_RULES: List[Dict] = [
     {
         "id": "cpp-input-003",
         "language": "cpp",
-        # Only flag cin reading into a raw char buffer — NOT the safe error-check idiom if (!(cin >> x))
+        # Only flag cin reading into a raw char buffer - NOT the safe error-check idiom if (!(cin >> x))
         "title": "cin >> into fixed-size char buffer without width limit",
         "pattern": r'(?<!!\()(?<!\(\s*!\s*\()\bchar\b[^;{}\n]{0,60}cin\s*>>\s*\w+(?!\s*\.setw|\s*\)\s*\))',
         "cwe_id": "CWE-120",
@@ -8026,7 +8026,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-362 additional: TOCTOU ────────────────────────────────────────────
+    #  CWE-362 additional: TOCTOU 
     {
         "id": "cpp-toctou-001",
         "language": "cpp",
@@ -8040,7 +8040,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-123: Write-what-where Condition ───────────────────────────────────
+    #  CWE-123: Write-what-where Condition 
     {
         "id": "c-cwe123-001",
         "language": "cpp",
@@ -8054,7 +8054,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-128: Wrap-around Error ────────────────────────────────────────────
+    #  CWE-128: Wrap-around Error 
     {
         "id": "c-cwe128-001",
         "language": "cpp",
@@ -8068,7 +8068,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-129: Improper Validation of Array Index ───────────────────────────
+    #  CWE-129: Improper Validation of Array Index 
     {
         "id": "c-cwe129-001",
         "language": "cpp",
@@ -8094,7 +8094,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-131: Incorrect Calculation of Buffer Size ─────────────────────────
+    #  CWE-131: Incorrect Calculation of Buffer Size 
     {
         "id": "c-cwe131-001",
         "language": "cpp",
@@ -8120,7 +8120,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-170: Improper Null Termination ────────────────────────────────────
+    #  CWE-170: Improper Null Termination 
     {
         "id": "c-cwe170-001",
         "language": "cpp",
@@ -8134,7 +8134,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-193: Off-by-one Error ──────────────────────────────────────────────
+    #  CWE-193: Off-by-one Error 
     {
         "id": "c-cwe193-001",
         "language": "cpp",
@@ -8148,7 +8148,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-196: Unsigned to Signed Conversion Error ───────────────────────────
+    #  CWE-196: Unsigned to Signed Conversion Error 
     {
         "id": "c-cwe196-001",
         "language": "cpp",
@@ -8162,11 +8162,11 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-363: Race Condition Enabling Link Following ────────────────────────
+    #  CWE-363: Race Condition Enabling Link Following 
     {
         "id": "c-cwe363-001",
         "language": "cpp",
-        "title": "access() followed by open() — TOCTOU race enabling symlink attack",
+        "title": "access() followed by open() - TOCTOU race enabling symlink attack",
         "pattern": r'\baccess\s*\([^)]+\)[\s\S]{0,300}\bopen\s*\(',
         "cwe_id": "CWE-363",
         "cwe_name": "Race Condition Enabling Link Following",
@@ -8176,7 +8176,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.78,
     },
 
-    # ── CWE-366: Race Condition within a Thread ────────────────────────────────
+    #  CWE-366: Race Condition within a Thread 
     {
         "id": "c-cwe366-001",
         "language": "cpp",
@@ -8190,7 +8190,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-379: Temp File with Incorrect Permissions ─────────────────────────
+    #  CWE-379: Temp File with Incorrect Permissions 
     {
         "id": "c-cwe379-001",
         "language": "cpp",
@@ -8204,7 +8204,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.85,
     },
 
-    # ── CWE-412: Unrestricted Externally Accessible Lock ─────────────────────
+    #  CWE-412: Unrestricted Externally Accessible Lock 
     {
         "id": "c-cwe412-001",
         "language": "cpp",
@@ -8218,7 +8218,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── CWE-413: Improper Resource Locking ────────────────────────────────────
+    #  CWE-413: Improper Resource Locking 
     {
         "id": "c-cwe413-001",
         "language": "cpp",
@@ -8232,7 +8232,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-587: Assignment of Fixed Address to Pointer ───────────────────────
+    #  CWE-587: Assignment of Fixed Address to Pointer 
     {
         "id": "c-cwe587-001",
         "language": "cpp",
@@ -8246,7 +8246,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.82,
     },
 
-    # ── CWE-680: Integer Overflow to Buffer Overflow ──────────────────────────
+    #  CWE-680: Integer Overflow to Buffer Overflow 
     {
         "id": "c-cwe680-001",
         "language": "cpp",
@@ -8272,7 +8272,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.80,
     },
 
-    # ── CWE-786: Access of Memory Before Start of Buffer ─────────────────────
+    #  CWE-786: Access of Memory Before Start of Buffer 
     {
         "id": "c-cwe786-001",
         "language": "cpp",
@@ -8286,7 +8286,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-788: Access of Memory After End of Buffer ─────────────────────────
+    #  CWE-788: Access of Memory After End of Buffer 
     {
         "id": "c-cwe788-001",
         "language": "cpp",
@@ -8300,7 +8300,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-824: Access of Uninitialized Pointer ──────────────────────────────
+    #  CWE-824: Access of Uninitialized Pointer 
     {
         "id": "c-cwe824-001",
         "language": "cpp",
@@ -8314,7 +8314,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-843: Type Confusion ────────────────────────────────────────────────
+    #  CWE-843: Type Confusion 
     {
         "id": "c-cwe843-001",
         "language": "cpp",
@@ -8340,7 +8340,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-409: Zip Bomb (C) ─────────────────────────────────────────────────
+    #  CWE-409: Zip Bomb (C) 
     {
         "id": "c-cwe409-001",
         "language": "cpp",
@@ -8354,7 +8354,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.68,
     },
 
-    # ── CWE-665: Improper Initialization ──────────────────────────────────────
+    #  CWE-665: Improper Initialization 
     {
         "id": "c-cwe665-001",
         "language": "cpp",
@@ -8368,7 +8368,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-667: Improper Locking ──────────────────────────────────────────────
+    #  CWE-667: Improper Locking 
     {
         "id": "c-cwe667-001",
         "language": "cpp",
@@ -8382,7 +8382,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.70,
     },
 
-    # ── CWE-672: Operation After Expiration or Release ────────────────────────
+    #  CWE-672: Operation After Expiration or Release 
     {
         "id": "c-cwe672-001",
         "language": "cpp",
@@ -8396,7 +8396,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.75,
     },
 
-    # ── CWE-674: Uncontrolled Recursion (C) ───────────────────────────────────
+    #  CWE-674: Uncontrolled Recursion (C) 
     {
         "id": "c-cwe674-001",
         "language": "cpp",
@@ -8410,7 +8410,7 @@ CPP_RULES: List[Dict] = [
         "confidence": 0.65,
     },
 
-    # ── CWE-754: Improper Check for Unusual Conditions ────────────────────────
+    #  CWE-754: Improper Check for Unusual Conditions 
     {
         "id": "c-cwe754-001",
         "language": "cpp",
@@ -8425,9 +8425,9 @@ CPP_RULES: List[Dict] = [
     },
 ]
 
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 # C DATASET RULES  (Juliet C/C++ derived)
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 C_DATASET_RULES: List[Dict] = [
     {
         "id": "cpp-cds-001",
@@ -9630,7 +9630,7 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.72,
     },
 
-    # ── OpenSSL misuse ────────────────────────────────────────────────────────
+    #  OpenSSL misuse 
     {
         "id": "cpp-ssl-001",
         "language": "cpp",
@@ -9670,7 +9670,7 @@ C_DATASET_RULES: List[Dict] = [
     {
         "id": "cpp-ssl-004",
         "language": "cpp",
-        "title": "SSLv2_method() — SSL version 2 is broken",
+        "title": "SSLv2_method() - SSL version 2 is broken",
         "pattern": r'\bSSLv2_method\s*\(',
         "cwe_id": "CWE-327",
         "cwe_name": "Use of Broken Cryptographic Algorithm",
@@ -9682,7 +9682,7 @@ C_DATASET_RULES: List[Dict] = [
     {
         "id": "cpp-ssl-005",
         "language": "cpp",
-        "title": "MD4_Init — MD4 is cryptographically broken",
+        "title": "MD4_Init - MD4 is cryptographically broken",
         "pattern": r'\bMD4_Init\s*\(',
         "cwe_id": "CWE-327",
         "cwe_name": "Use of Broken Cryptographic Algorithm",
@@ -9716,11 +9716,11 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.88,
     },
  
-    # ── Networking misuse ─────────────────────────────────────────────────────
+    #  Networking misuse 
     {
         "id": "cpp-net-001",
         "language": "cpp",
-        "title": "gethostbyname() deprecated — vulnerable to DNS rebinding",
+        "title": "gethostbyname() deprecated - vulnerable to DNS rebinding",
         "pattern": r'\bgethostbyname\s*\(',
         "cwe_id": "CWE-350",
         "cwe_name": "Reliance on Reverse DNS Resolution for a Security-Critical Action",
@@ -9732,7 +9732,7 @@ C_DATASET_RULES: List[Dict] = [
     {
         "id": "cpp-net-002",
         "language": "cpp",
-        "title": "inet_addr() deprecated — does not detect errors properly",
+        "title": "inet_addr() deprecated - does not detect errors properly",
         "pattern": r'\binet_addr\s*\(',
         "cwe_id": "CWE-20",
         "cwe_name": "Improper Input Validation",
@@ -9790,11 +9790,11 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.70,
     },
  
-    # ── Memory safety — VLA / placement new ──────────────────────────────────
+    #  Memory safety - VLA / placement new 
     {
         "id": "cpp-mem-001",
         "language": "cpp",
-        "title": "Variable-length array (VLA) — stack exhaustion risk",
+        "title": "Variable-length array (VLA) - stack exhaustion risk",
         "pattern": r'(?:char|int|long|uint8_t)\s+\w+\s*\[\s*\w+\s*\]\s*;(?!\s*(?://|/\*))',
         "cwe_id": "CWE-121",
         "cwe_name": "Stack-based Buffer Overflow",
@@ -9806,7 +9806,7 @@ C_DATASET_RULES: List[Dict] = [
     {
         "id": "cpp-mem-002",
         "language": "cpp",
-        "title": "operator new[] without std::nothrow — throws on OOM",
+        "title": "operator new[] without std::nothrow - throws on OOM",
         "pattern": r'\bnew\s+\w+\s*\[\s*\w+\s*\](?!\s*\(\s*std::nothrow\s*\))',
         "cwe_id": "CWE-390",
         "cwe_name": "Detection of Error Condition Without Action",
@@ -9818,7 +9818,7 @@ C_DATASET_RULES: List[Dict] = [
     {
         "id": "cpp-mem-003",
         "language": "cpp",
-        "title": "memset() on struct containing pointers — potential object slicing",
+        "title": "memset() on struct containing pointers - potential object slicing",
         "pattern": r'memset\s*\(\s*&\w+\s*,\s*0\s*,\s*sizeof\s*\(',
         "cwe_id": "CWE-454",
         "cwe_name": "Use of Uninitialized Variable",
@@ -9840,11 +9840,11 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.72,
     },
  
-    # ── setenv injection ──────────────────────────────────────────────────────
+    #  setenv injection 
     {
         "id": "cpp-env-001",
         "language": "cpp",
-        "title": "setenv() with user-controlled value — environment injection",
+        "title": "setenv() with user-controlled value - environment injection",
         "pattern": r'\bsetenv\s*\([^,]+,\s*(?:argv|buf|input)',
         "cwe_id": "CWE-78",
         "cwe_name": "OS Command Injection",
@@ -9866,11 +9866,11 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.72,
     },
  
-    # ── longjmp across C++ destructors ────────────────────────────────────────
+    #  longjmp across C++ destructors 
     {
         "id": "cpp-undef-004",
         "language": "cpp",
-        "title": "longjmp() called from C++ code — skips destructors (UB)",
+        "title": "longjmp() called from C++ code - skips destructors (UB)",
         "pattern": r'\blongjmp\s*\(',
         "cwe_id": "CWE-703",
         "cwe_name": "Improper Check or Handling of Exceptional Conditions",
@@ -9880,7 +9880,7 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.80,
     },
  
-    # ── atexit sensitive callback ──────────────────────────────────────────────
+    #  atexit sensitive callback 
     {
         "id": "cpp-misc-001",
         "language": "cpp",
@@ -9894,11 +9894,11 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.65,
     },
  
-    # ── execve argv[0] spoofing ────────────────────────────────────────────────
+    #  execve argv[0] spoofing 
     {
         "id": "cpp-cmdi-007",
         "language": "cpp",
-        "title": "execve() with argv[0] differing from path — process spoofing",
+        "title": "execve() with argv[0] differing from path - process spoofing",
         "pattern": r'\bexecve\s*\(\s*["\'][^"\']+["\'],',
         "cwe_id": "CWE-78",
         "cwe_name": "OS Command Injection",
@@ -9908,7 +9908,7 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.75,
     },
  
-    # ── Hardcoded credentials additional patterns ─────────────────────────────
+    #  Hardcoded credentials additional patterns 
     {
         "id": "cpp-cred-004",
         "language": "cpp",
@@ -9934,11 +9934,11 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.97,
     },
  
-    # ── POSIX privilege escalation ────────────────────────────────────────────
+    #  POSIX privilege escalation 
     {
         "id": "cpp-priv-001",
         "language": "cpp",
-        "title": "setuid(0) — escalating to root",
+        "title": "setuid(0) - escalating to root",
         "pattern": r'\bsetuid\s*\(\s*0\s*\)',
         "cwe_id": "CWE-250",
         "cwe_name": "Execution with Unnecessary Privileges",
@@ -9960,7 +9960,7 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.80,
     },
  
-    # ── Integer sign confusion ────────────────────────────────────────────────
+    #  Integer sign confusion 
     {
         "id": "cpp-intovf-007",
         "language": "cpp",
@@ -9974,7 +9974,7 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.72,
     },
  
-    # ── Format string in wide-char functions ──────────────────────────────────
+    #  Format string in wide-char functions 
     {
         "id": "cpp-fmt-006",
         "language": "cpp",
@@ -10000,7 +10000,7 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.80,
     },
  
-    # ── Windows-specific ──────────────────────────────────────────────────────
+    #  Windows-specific 
     {
         "id": "cpp-win-001",
         "language": "cpp",
@@ -10040,7 +10040,7 @@ C_DATASET_RULES: List[Dict] = [
     {
         "id": "cpp-win-004",
         "language": "cpp",
-        "title": "CryptAcquireContext with CRYPT_VERIFYCONTEXT — no key protection",
+        "title": "CryptAcquireContext with CRYPT_VERIFYCONTEXT - no key protection",
         "pattern": r'\bCryptAcquireContext\s*\([^)]*CRYPT_VERIFYCONTEXT',
         "cwe_id": "CWE-321",
         "cwe_name": "Use of Hard-coded Cryptographic Key",
@@ -10050,7 +10050,7 @@ C_DATASET_RULES: List[Dict] = [
         "confidence": 0.72,
     },
  
-    # ── Race condition additional ──────────────────────────────────────────────
+    #  Race condition additional 
     {
         "id": "cpp-race-005",
         "language": "cpp",
@@ -10065,9 +10065,9 @@ C_DATASET_RULES: List[Dict] = [
     },
 ]
 
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 # Public API
-# ──────────────────────────────────────────────────────────────────────────────
+# 
 ALL_RULES: List[Dict] = PYTHON_RULES + JAVA_RULES + CPP_RULES + C_DATASET_RULES
 
 

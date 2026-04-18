@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SASTRA – How It Works</title>
+  <title>SASTRA - How It Works</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
     <script>
     (function () {
@@ -239,7 +239,7 @@
 
     <div class="page-eyebrow">Documentation</div>
     <h1 class="page-title">How SASTRA Works</h1>
-    <p class="page-intro">SASTRA is a static application security testing (SAST) platform that combines rule-based scanning, abstract syntax tree analysis, and machine learning to identify vulnerabilities in your source code — before they reach production.</p>
+    <p class="page-intro">SASTRA is a static application security testing (SAST) platform that combines rule-based scanning, abstract syntax tree analysis, and machine learning to identify vulnerabilities in your source code - before they reach production.</p>
 
     <!-- HOW IT WORKS -->
     <div class="section">
@@ -247,7 +247,7 @@
         <div class="section-icon si-teal">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-        <div class="section-title">Scan Pipeline — Step by Step</div>
+        <div class="section-title">Scan Pipeline - Step by Step</div>
       </div>
       <div class="section-body">
         <div class="steps">
@@ -262,7 +262,7 @@
             <div class="step-num">2</div>
             <div class="step-content">
               <div class="step-title">AST & regex scanning</div>
-              <div class="step-desc">For Python, SASTRA parses the code into an Abstract Syntax Tree and applies context-aware checks — flagging dangerous patterns only when they are genuinely unsafe (e.g. SQL built by string concatenation, subprocess with shell=True). For Java and C++, 462+ regex rules map directly to CWE IDs.</div>
+              <div class="step-desc">For Python, SASTRA parses the code into an Abstract Syntax Tree and applies context-aware checks - flagging dangerous patterns only when they are genuinely unsafe (e.g. SQL built by string concatenation, subprocess with shell=True). For Java and C++, 462+ regex rules map directly to CWE IDs.</div>
             </div>
           </div>
           <div class="step">
@@ -283,7 +283,7 @@
             <div class="step-num">5</div>
             <div class="step-content">
               <div class="step-title">Fix generation & export</div>
-              <div class="step-desc">Click "Fix now" on any finding to generate a secured replacement using an LLM. Export a full PDF security report with all findings, code snippets, CWE references, severity breakdown, and remediation guidance — ready to share with clients or your security team.</div>
+              <div class="step-desc">Click "Fix now" on any finding to generate a secured replacement using an LLM. Export a full PDF security report with all findings, code snippets, CWE references, severity breakdown, and remediation guidance - ready to share with clients or your security team.</div>
             </div>
           </div>
         </div>
@@ -328,11 +328,11 @@
         <div class="section-title">ML Engine & False Positive Reduction</div>
       </div>
       <div class="section-body">
-        <p>Static analysis tools are notorious for generating false positives — flagging secure code as vulnerable. SASTRA addresses this with a two-model ML pipeline:</p>
+        <p>Static analysis tools are notorious for generating false positives - flagging secure code as vulnerable. SASTRA addresses this with a two-model ML pipeline:</p>
         <ul>
-          <li><div class="li-dot"></div><strong>Severity Predictor</strong> — A Random Forest classifier trained on real vulnerability data assigns a severity level based on the CWE type and code context.</li>
-          <li><div class="li-dot"></div><strong>FP Classifier</strong> — A separate binary classifier, trained on 14,442 samples (7,300 vulnerable + 7,142 safe/patched code pairs), estimates whether each finding is a genuine vulnerability or a false positive. Findings with a combined ML + rule confidence score below the threshold are flagged automatically.</li>
-          <li><div class="li-dot"></div><strong>CWE Enrichment</strong> — The feature text fed to the ML model is enriched with CWE descriptions, consequence keywords, and detection method tokens from the official CWE dataset — giving the TF-IDF vectorizer semantic signal beyond just the raw code.</li>
+          <li><div class="li-dot"></div><strong>Severity Predictor</strong> - A Random Forest classifier trained on real vulnerability data assigns a severity level based on the CWE type and code context.</li>
+          <li><div class="li-dot"></div><strong>FP Classifier</strong> - A separate binary classifier, trained on 14,442 samples (7,300 vulnerable + 7,142 safe/patched code pairs), estimates whether each finding is a genuine vulnerability or a false positive. Findings with a combined ML + rule confidence score below the threshold are flagged automatically.</li>
+          <li><div class="li-dot"></div><strong>CWE Enrichment</strong> - The feature text fed to the ML model is enriched with CWE descriptions, consequence keywords, and detection method tokens from the official CWE dataset - giving the TF-IDF vectorizer semantic signal beyond just the raw code.</li>
         </ul>
       </div>
     </div>
@@ -347,10 +347,10 @@
       </div>
       <div class="section-body">
         <ul>
-          <li><div class="li-dot"></div><strong>Python</strong> — .py files. Full AST-based analysis with context-aware checks for injection, path traversal, code execution, insecure deserialization, and more.</li>
-          <li><div class="li-dot"></div><strong>Java</strong> — .java files. Regex + AST scanning covering SQL injection, command injection, insecure deserialization, weak crypto, and hardcoded credentials.</li>
-          <li><div class="li-dot"></div><strong>C / C++</strong> — .c, .cpp, .cc, .cxx, .h, .hpp files. Comprehensive buffer overflow, use-after-free, integer overflow, command injection, and unsafe function detection.</li>
-          <li><div class="li-dot"></div><strong>ZIP archives</strong> — Upload a multi-file project as a ZIP (up to 25 MB, 250 files). SASTRA scans every supported file and aggregates findings into a single unified report.</li>
+          <li><div class="li-dot"></div><strong>Python</strong> - .py files. Full AST-based analysis with context-aware checks for injection, path traversal, code execution, insecure deserialization, and more.</li>
+          <li><div class="li-dot"></div><strong>Java</strong> - .java files. Regex + AST scanning covering SQL injection, command injection, insecure deserialization, weak crypto, and hardcoded credentials.</li>
+          <li><div class="li-dot"></div><strong>C / C++</strong> - .c, .cpp, .cc, .cxx, .h, .hpp files. Comprehensive buffer overflow, use-after-free, integer overflow, command injection, and unsafe function detection.</li>
+          <li><div class="li-dot"></div><strong>ZIP archives</strong> - Upload a multi-file project as a ZIP (up to 25 MB, 250 files). SASTRA scans every supported file and aggregates findings into a single unified report.</li>
         </ul>
       </div>
     </div>
@@ -379,14 +379,14 @@
       </div>
       <div class="section-body">
         <ul>
-          <li><div class="li-dot"></div>Create a free account — no credit card required.</li>
+          <li><div class="li-dot"></div>Create a free account - no credit card required.</li>
           <li><div class="li-dot"></div>Go to <strong>New Scan</strong>, upload a source file or ZIP archive, and click <strong>Start Scan</strong>.</li>
           <li><div class="li-dot"></div>Review findings in the scan results dashboard. Use the <strong>Remediation Queue</strong> to focus on the highest-priority issues first.</li>
           <li><div class="li-dot"></div>Click <strong>Fix now</strong> on any finding to generate a secured code fix instantly.</li>
           <li><div class="li-dot"></div>Export a PDF report and share it with your team or client.</li>
         </ul>
         <div style="margin-top:22px;">
-          <a href="signup.html"><button class="btn btn-dark" style="font-size:0.95rem;padding:13px 30px;">Create Free Account ⚡</button></a>
+          <a href="signup.html"><button class="btn btn-dark" style="font-size:0.95rem;padding:13px 30px;">Create Free Account</button></a>
         </div>
       </div>
     </div>
@@ -407,7 +407,7 @@
     </div>
     <div class="chat-panel-body" id="chatMessages">
       <div class="chat-msg chat-msg-ai">
-        <div class="chat-msg-bubble">Hi! I'm SASTRA AI — your security assistant. Ask me about vulnerabilities, secure coding practices, or your scan results.</div>
+        <div class="chat-msg-bubble">Hi! I'm SASTRA AI - your security assistant. Ask me about vulnerabilities, secure coding practices, or your scan results.</div>
       </div>
     </div>
     <div class="chat-panel-input-row">

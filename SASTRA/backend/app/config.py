@@ -39,7 +39,7 @@ MAX_ZIP_UPLOAD_SIZE_BYTES = 25 * 1024 * 1024
 MAX_ZIP_FILES = 250
 MAX_ZIP_MEMBER_SIZE_BYTES = 1 * 1024 * 1024
 
-ML_MAX_SAMPLES_PER_LANGUAGE = 999_999  # no effective cap — use all available data
+ML_MAX_SAMPLES_PER_LANGUAGE = 999_999  # no effective cap - use all available data
 ML_MAX_VOCAB = 40000   # increased from 20k to match expanded dataset (~72k rows)
 ML_MIN_DF = 2
 
@@ -49,7 +49,7 @@ NVIDIA_API_KEY = os.environ.get("NVIDIA_API_KEY", "")
 NVIDIA_CHAT_API_KEY = os.environ.get("NVIDIA_CHAT_API_KEY", "")
 COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "false").strip().lower() in {"1", "true", "yes", "on"}
 
-# ── Observability / alerting configuration ───────────────────────────────────
+#  Observability / alerting configuration 
 ALERT_WEBHOOK_URL = os.environ.get("ALERT_WEBHOOK_URL", "").strip()
 ERROR_RATE_WINDOW_SECONDS = int(os.environ.get("ERROR_RATE_WINDOW_SECONDS", "300"))
 ERROR_RATE_MIN_REQUESTS = int(os.environ.get("ERROR_RATE_MIN_REQUESTS", "50"))
@@ -57,9 +57,9 @@ ERROR_RATE_MIN_ERRORS = int(os.environ.get("ERROR_RATE_MIN_ERRORS", "10"))
 ERROR_RATE_THRESHOLD = float(os.environ.get("ERROR_RATE_THRESHOLD", "0.2"))
 ALERT_COOLDOWN_SECONDS = int(os.environ.get("ALERT_COOLDOWN_SECONDS", "300"))
 
-# ── JWT configuration ──────────────────────────────────────────────────────────
+#  JWT configuration 
 # JWT_SECRET MUST be set as an environment variable in any real deployment.
-# Changing this secret invalidates all existing tokens — all users will
+# Changing this secret invalidates all existing tokens - all users will
 # need to sign in again.
 JWT_SECRET = os.environ.get("JWT_SECRET", "")
 if not JWT_SECRET:
@@ -71,7 +71,7 @@ if not JWT_SECRET:
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRY_DAYS = 7
 
-# ── Google OAuth ───────────────────────────────────────────────────────────────
+#  Google OAuth 
 GOOGLE_CLIENT_ID     = os.environ.get("GOOGLE_CLIENT_ID", "")
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "")
 GOOGLE_REDIRECT_URI  = os.environ.get("GOOGLE_REDIRECT_URI", "https://www.sastra.website/auth/google/callback")

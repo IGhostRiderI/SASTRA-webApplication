@@ -1,17 +1,5 @@
-"""
-Loads CWE data from the CWE mapping dataset CSVs and tree_structure.json files.
-
-Provides two things to the ML pipeline:
-  1. get_enrichment_text(cwe_key) — semantic CWE text to append to the ML
-     feature string at both training and inference time, giving the models
-     real signal about what a CWE means rather than seeing an opaque ID.
-  2. get_parent(cwe_key) — hierarchy lookup used by mappings.py for OWASP
-     fallback on CWEs not in the static dict.
-
-No ML retraining is needed for the hierarchy/OWASP change.
-Retraining IS needed when enrichment text is added (handled by deleting the
-cached pkl.gz so load_or_train() retrains automatically on next startup).
-"""
+"""Load CWE data from the mapping dataset CSVs and tree_structure.json. Exposes
+get_enrichment_text() for ML feature strings and get_parent() for OWASP fallback."""
 
 import csv
 import json
@@ -22,7 +10,7 @@ from typing import Dict, Optional
 
 logger = logging.getLogger(__name__)
 
-# ── Internal stores ────────────────────────────────────────────────────────────
+#  Internal stores 
 
 # cwe_key → enrichment text string for ML features
 _CWE_ENRICHMENT: Dict[str, str] = {}
@@ -33,7 +21,7 @@ _PARENT_OF: Dict[str, str] = {}
 _loaded = False
 
 
-# ── Parsing helpers ────────────────────────────────────────────────────────────
+#  Parsing helpers 
 
 def _clean(text: str, max_chars: int = 200) -> str:
     """Strip CWE structured-text delimiters and truncate."""
@@ -87,7 +75,7 @@ def _detection_token(detection_methods: str) -> str:
     return ""
 
 
-# ── CSV loader ─────────────────────────────────────────────────────────────────
+#  CSV loader 
 
 def _load_csv(csv_path: Path) -> None:
     if not csv_path.exists():
@@ -125,7 +113,7 @@ def _load_csv(csv_path: Path) -> None:
         logger.exception("Failed to load CWE CSV: %s", csv_path)
 
 
-# ── Tree loader ────────────────────────────────────────────────────────────────
+#  Tree loader 
 
 def _walk_tree(node: dict, parent_id: Optional[str]) -> None:
     for child_id, subtree in node.items():
@@ -146,7 +134,7 @@ def _load_tree(tree_path: Path) -> None:
         logger.exception("Failed to load CWE tree: %s", tree_path)
 
 
-# ── Public init ────────────────────────────────────────────────────────────────
+#  Public init 
 
 def load(datasets_root: Path) -> None:
     global _loaded
@@ -167,7 +155,7 @@ def load(datasets_root: Path) -> None:
 
     _loaded = True
     logger.info(
-        "CWE dataset loaded — enrichment: %d entries, hierarchy: %d parent links",
+        "CWE dataset loaded - enrichment: %d entries, hierarchy: %d parent links",
         len(_CWE_ENRICHMENT),
         len(_PARENT_OF),
     )
@@ -179,7 +167,7 @@ def _ensure_loaded() -> None:
         load(DATASETS_ROOT)
 
 
-# ── Public API ─────────────────────────────────────────────────────────────────
+#  Public API 
 
 def get_enrichment_text(cwe_key: str) -> str:
     """
@@ -192,7 +180,7 @@ def get_enrichment_text(cwe_key: str) -> str:
       - CVE count token (real-world evidence → FP signal)
       - detection method token (static-analysis reliability → FP signal)
 
-    Returns empty string if the CWE is unknown (safe — models degrade
+    Returns empty string if the CWE is unknown (safe - models degrade
     gracefully to code-only features).
     """
     _ensure_loaded()

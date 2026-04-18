@@ -1,20 +1,20 @@
 # SASTRA — Static Application Security Testing and Remediation Assistant
 
-Lightweight SAST web application with a FastAPI backend and static frontend pages. Supports Python, Java, and C/C++ code scanning with ML-based severity prediction and optional LLM-powered remediation.
+Lightweight SAST web application. FastAPI backend serves static HTML pages. Scans Python, Java, and C/C++ source for vulnerabilities with ML-based severity prediction and optional LLM-powered remediation.
 
 ## Repository Structure
 
-- `backend/` FastAPI app, auth, scanning APIs, DB, reports
-- `frontend/` HTML pages (served by backend routes)
-- `datasets/` training/test datasets and helper scripts
+- `SASTRA/backend/` - FastAPI app, auth, scanning APIs, DB, reports
+- `SASTRA/frontend/` - HTML pages served by backend routes
+- `datasets/` - Training and test datasets
 
 ## Prerequisites
 
-- Python `3.10+` (recommended `3.12`)
-- `pip`
+- Python 3.10+ (3.12 recommended)
+- pip
 - Git
 
-## 1) Install dependencies
+## 1. Install
 
 ```bash
 cd SASTRA/backend
@@ -23,50 +23,48 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## 2) Run app (local)
+## 2. Configure environment
+
+Create a `.env` or export the following. Never commit real values.
 
 ```bash
-cd backend
+export NVIDIA_API_KEY="nvidia-api-key"            # optional, for LLM code fix
+export NVIDIA_CHAT_API_KEY="nvidia-chat-api-key"  # optional, for chatbot
+export SUPERADMIN_USERNAME="admin"
+export SUPERADMIN_PASSWORD="change-me"
+export JWT_SECRET="secret"
+```
+
+## 3. Run
+
+```bash
+cd SASTRA/backend
 source .venv/bin/activate
-export NVIDIA_API_KEY="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"
-export NVIDIA_CHAT_API_KEY="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"
-export SUPERADMIN_USERNAME="Nadinak"
-export SUPERADMIN_PASSWORD="Nadina"
-export JWT_SECRET="SASTRA_Applied_Project"
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Open: `http://127.0.0.1:8000`
+Open `http://127.0.0.1:8000`.
 
-> **Note:** On first run (or if `ml_engine.pkl.gz` is deleted), the ML model will train automatically on startup. This may take a few minutes. The app is ready once `Application startup complete` appears in the terminal.
+On the first run (or if `ml_engine.pkl.gz` is deleted), the ML model trains on startup. The app is ready once `Application startup complete` appears in the terminal.
 
-## 3) Run on GitHub Codespaces
+## Run on GitHub Codespaces
 
 ```bash
-
-cd /workspaces/SASTRA-WEBAPPLICATION/backend
+cd /workspaces/SASTRA-webApplication/SASTRA/backend
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-export NVIDIA_API_KEY="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"
-export NVIDIA_CHAT_API_KEY="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"
-export SUPERADMIN_USERNAME="Nadinak"
-export SUPERADMIN_PASSWORD="Nadina"
-export JWT_SECRET="SASTRA_Applied_Project"
+# export environment variables as above
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Then open the Codespaces `Ports` tab, forward port `8000`, and open the forwarded URL.
+Open the Codespaces `Ports` tab, forward port `8000`, and open the forwarded URL.
 
 ## Common Issues
 
 ### Virtualenv symlink error
 
-If you see an error like:
-
-`Unable to symlink ... python3`
-
-Use:
+If `Unable to symlink ... python3` appears:
 
 ```bash
 python3 -m venv --copies .venv
@@ -74,11 +72,9 @@ python3 -m venv --copies .venv
 
 ### Stale UI after frontend changes
 
-Hard refresh the browser:
-
-- `Ctrl + Shift + R`
+Hard refresh: `Ctrl + Shift + R`.
 
 ## Notes
 
-- SQLite DB file is created at `backend/app/data/sast.db`
-- Frontend pages are served by backend routes like `/dashboard.html`, `/new-scan.html`, `/scan-history.html`, `/settings.html`
+- SQLite DB file is created at `SASTRA/backend/app/data/sast.db`.
+- Frontend pages are served by backend routes such as `/dashboard.html`, `/new-scan.html`, `/scan-history.html`, `/settings.html`.

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SASTRA – Scan Results</title>
+  <title>SASTRA - Scan Results</title>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
     <script>
     (function () {
@@ -58,7 +58,7 @@
     @keyframes fillBar { from { width: 0; } to { width: var(--target-width); } }
     @keyframes drawPie { from { stroke-dashoffset: 440; } to { stroke-dashoffset: var(--target-offset); } }
 
-    /* ══ NAV ══ */
+    /* NAV */
     .nav {
       position: sticky; top: 0; z-index: 100;
       height: var(--nav-height);
@@ -105,7 +105,7 @@
     }
     .btn-logout:hover { background: #222; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
 
-    /* ── Logout popup ── */
+    /*  Logout popup  */
     .logout-popup-wrap { position: relative; }
     .logout-popup {
       display: none; position: absolute;
@@ -128,7 +128,7 @@
     .logout-popup-confirm { background: var(--popup-confirm-bg, var(--btn-dark)); color: var(--popup-confirm-color, var(--btn-dark-text)); border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
     .logout-popup-confirm:hover { filter: brightness(1.1); }
 
-    /* ══ MAIN ══ */
+    /* MAIN */
     .main { position: relative; z-index: 5; padding: 44px 40px 70px; max-width: 100%; margin: 0 auto; }
 
     /* Page Header */
@@ -155,7 +155,7 @@
     .btn-outline-action { background: rgba(255,255,255,0.6); color: var(--text-primary); border: 1.5px solid rgba(0,0,0,0.13); backdrop-filter: blur(8px); }
     .btn-outline-action:hover { background: rgba(255,255,255,0.85); box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
 
-    /* ── TOP 4 CARDS ROW ── */
+    /*  TOP 4 CARDS ROW  */
     .top-row {
       display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: 18px; margin-bottom: 24px;
@@ -219,7 +219,7 @@
     .legend-label { font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
     .legend-count { font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 800; }
 
-    /* ── REMEDIATION QUEUE CARD ── */
+    /*  REMEDIATION QUEUE CARD  */
     .remediation-card {
       display: flex; flex-direction: column;
       background: var(--card-bg);
@@ -342,7 +342,7 @@
     .rank-bar { height: 100%; border-radius: 999px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
     .rank-count { font-family: 'Sora', sans-serif; font-size: 0.76rem; font-weight: 800; line-height: 1; width: 32px; min-width: 32px; text-align: right; flex-shrink: 0; font-variant-numeric: tabular-nums; }
 
-    /* ── FINDINGS TABLE ── */
+    /*  FINDINGS TABLE  */
     .findings-section {
       animation: fadeUp 0.6s 0.35s ease both;
     }
@@ -824,7 +824,7 @@
     .fix-tag { display: inline-flex; align-items: center; gap: 5px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: #059669; font-size: 0.78rem; font-weight: 600; padding: 4px 12px; border-radius: 999px; margin-top: 6px; }
     .fix-tag svg { width: 12px; height: 12px; }
 
-    /* ── FLOATING CHATBOT BUBBLE ── */
+    /*  FLOATING CHATBOT BUBBLE  */
     .chat-bubble-btn {
       position: fixed; bottom: 28px; right: 28px; z-index: 9999;
       width: 44px; height: 44px; padding: 0; border-radius: 50%;
@@ -963,7 +963,7 @@
 <div class="blob blob-1"></div>
 <div class="blob blob-2"></div>
 
-<!-- ══ NAV ══ -->
+<!-- = NAV = -->
 <nav class="nav">
   <div class="nav-left">
     <a href="sastra-landing.html" class="logo">
@@ -994,7 +994,7 @@
   </div>
 </nav>
 
-<!-- ══ MAIN ══ -->
+<!-- = MAIN = -->
 <main class="main">
 
   <!-- Page Header -->
@@ -1015,7 +1015,7 @@
     </div>
   </div>
 
-  <!-- ── TOP ROW ── -->
+  <!--  TOP ROW  -->
   <div class="top-row" style="animation: fadeUp 0.6s 0.12s ease both;">
 
     <!-- Summary -->
@@ -1114,7 +1114,7 @@
 
   </div>
 
-  <!-- ── FINDINGS ── -->
+  <!--  FINDINGS  -->
   <div class="findings-section">
     <div class="findings-header">
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
@@ -1152,7 +1152,7 @@
         <div class="no-findings" id="no-findings">
           <div class="no-findings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="no-findings-title">No issues found</div>
-          <div class="no-findings-sub">Great — no findings match this filter.</div>
+          <div class="no-findings-sub">Great - no findings match this filter.</div>
         </div>
       </div>
     </div>
@@ -1516,15 +1516,15 @@
     return !!fp_flag;
   }
 
-  // ── Remediation Queue ──────────────────────────────────────────────────────
+  //  Remediation Queue 
   const SEV_SCORE  = { critical: 4, high: 3, medium: 2, low: 1 };
   const EFFORT_MAP = {
-    'CWE-798': { label: 'Low effort',    cls: 'low-effort',  why: 'Replace hardcoded secret with an environment variable — a one-line change.' },
+    'CWE-798': { label: 'Low effort',    cls: 'low-effort',  why: 'Replace hardcoded secret with an environment variable - a one-line change.' },
     'CWE-89':  { label: 'Low effort',    cls: 'low-effort',  why: 'Switch to parameterized queries to eliminate direct SQL injection risk.' },
     'CWE-78':  { label: 'Low effort',    cls: 'low-effort',  why: 'Use argument lists instead of shell strings to prevent command injection.' },
-    'CWE-327': { label: 'Low effort',    cls: 'low-effort',  why: 'Replace weak hash with SHA-256 or bcrypt — minimal code change, high impact.' },
+    'CWE-327': { label: 'Low effort',    cls: 'low-effort',  why: 'Replace weak hash with SHA-256 or bcrypt - minimal code change, high impact.' },
     'CWE-330': { label: 'Low effort',    cls: 'low-effort',  why: 'Replace random module with the secrets module for cryptographically secure tokens.' },
-    'CWE-295': { label: 'Low effort',    cls: 'low-effort',  why: 'Enable SSL certificate verification — removing a single flag closes the attack vector.' },
+    'CWE-295': { label: 'Low effort',    cls: 'low-effort',  why: 'Enable SSL certificate verification - removing a single flag closes the attack vector.' },
     'CWE-601': { label: 'Low effort',    cls: 'low-effort',  why: 'Add a simple URL allowlist check before redirecting to block open redirect attacks.' },
     'CWE-502': { label: 'Medium effort', cls: 'med-effort',  why: 'Replace pickle/unsafe deserializer with JSON or a schema-validated parser.' },
     'CWE-22':  { label: 'Medium effort', cls: 'med-effort',  why: 'Validate and canonicalize the path against a known safe base directory.' },
@@ -1643,7 +1643,7 @@
       row.style.gridTemplateColumns = getColTemplate();
       const confClass = confidenceClass(f.confidence);
       const fixAreaHtml = f.llm_fix
-        ? `<div class="fix-bubble" id="fix-bubble-${i}" onclick="toggleFixBubble(${i})"><span class="fix-bubble-label">✓ LLM Fix</span><span class="fix-bubble-code">${escapeHtml(f.llm_fix)}</span></div>`
+        ? `<div class="fix-bubble" id="fix-bubble-${i}" onclick="toggleFixBubble(${i})"><span class="fix-bubble-label">LLM Fix</span><span class="fix-bubble-code">${escapeHtml(f.llm_fix)}</span></div>`
         : `<button class="btn-fix-now" id="fix-btn-${i}" onclick="openFixPopup(${i})">Fix now</button>`;
 
       const sevBadge = fp
@@ -1799,7 +1799,7 @@
 
       // If the LLM returned the same code, it means there's nothing to fix
       if (fixText.trim() === f.snippet.trim()) {
-        fixText = '⚠️ No fix needed — this finding may be a false positive. The code already appears secure.';
+        fixText = 'No fix needed - this finding may be a false positive. The code already appears secure.';
       }
 
       // Update in-memory
@@ -1835,7 +1835,7 @@
     if (!container) return;
     if (f.llm_fix) {
       container.innerHTML = `<div class="fix-bubble" id="fix-bubble-${idx}" onclick="toggleFixBubble(${idx})">
-        <span class="fix-bubble-label">✓ LLM Fix</span>
+        <span class="fix-bubble-label">LLM Fix</span>
         <span class="fix-bubble-code">${escapeHtml(f.llm_fix)}</span>
       </div>`;
     } else {
@@ -1852,7 +1852,7 @@
 })();
 </script>
 
-<!-- ── FLOATING CHATBOT BUBBLE ── -->
+<!--  FLOATING CHATBOT BUBBLE  -->
 <button class="chat-bubble-btn" id="chatBubbleBtn" onclick="toggleChatPanel()" aria-label="Open AI assistant">
   <svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   <span class="chat-bubble-label">SASTRA AI</span>
@@ -1872,7 +1872,7 @@
   </div>
   <div class="chat-panel-body" id="chatMessages">
     <div class="chat-msg chat-msg-ai">
-      <div class="chat-msg-bubble">Hi! I'm SASTRA AI — your security assistant. Ask me about the vulnerabilities in this scan, what they mean, or how to fix them.</div>
+      <div class="chat-msg-bubble">Hi! I'm SASTRA AI - your security assistant. Ask me about the vulnerabilities in this scan, what they mean, or how to fix them.</div>
     </div>
   </div>
   <div class="chat-panel-input-row">

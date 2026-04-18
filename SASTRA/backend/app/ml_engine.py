@@ -1,30 +1,6 @@
-"""
-ML Engine — severity prediction and false positive filtering.
-
-Proposal alignment (Section 3.2 #7, #11 / Section 5 Tools):
-
-  Severity Predictor
-    Given a code snippet + CWE ID + language, predict the severity
-    level (Low / Medium / High / Critical).
-    Algorithm : Random Forest multi-class classifier (scikit-learn).
-    Training  : Vulnerable-only samples from the Khan & Zanis Ali
-                dataset (Zenodo #13870382).  Labels are derived from
-                the CWE-to-severity mapping in mappings.py.
-    Storage   : joblib-serialised, gzip-compressed (ml_engine.pkl.gz).
-
-  False Positive Classifier
-    Given a code snippet + CWE ID + language, estimate the probability
-    that a scanner finding is a genuine vulnerability rather than a
-    false positive.
-    Algorithm : Random Forest binary classifier (scikit-learn).
-    Training  : All samples (vulnerable + patched) from the dataset.
-                Label is the ``is_vulnerable`` column (1 / 0).
-    Storage   : same joblib bundle as the severity model.
-
-Both models share one TF-IDF vectorizer fitted on all training text.
-The complete bundle (vectorizer + both models + metadata) is stored in
-a single compressed joblib file so loading is one call.
-"""
+"""ML engine: a Random Forest severity classifier and a Random Forest false
+positive classifier, sharing one TF-IDF vectorizer. The full bundle is stored
+as a gzip-compressed joblib file at ml_engine.pkl.gz."""
 
 import csv
 import logging
@@ -59,7 +35,7 @@ _N_JOBS = max(1, int((os.cpu_count() or 1) * 0.8))
 
 # Combined FP score threshold.  A finding is flagged when:
 #   ml_vuln_prob * ML_WEIGHT + rule_confidence * RULE_WEIGHT < FP_THRESHOLD
-# The rule confidence (0.45–0.99) is a reliable signal derived from how
+# The rule confidence (0.45 - 0.99) is a reliable signal derived from how
 # frequently the pattern appeared in real vulnerable code; the ML model
 # provides an additional code-semantic signal.
 FP_THRESHOLD  = 0.60
@@ -78,7 +54,7 @@ def _build_feature_text(language: str, cwe: str, code: str) -> str:
     detection method token) comes from the CWE mapping dataset and gives the
     TF-IDF vectorizer semantic signal that the bare CWE ID alone cannot provide.
 
-    IMPORTANT: training and inference must call this function identically —
+    IMPORTANT: training and inference must call this function identically  - 
     any change here requires deleting ml_engine.pkl.gz to force a retrain.
     """
     enrichment = cwe_dataset_loader.get_enrichment_text(cwe)
@@ -88,15 +64,13 @@ def _build_feature_text(language: str, cwe: str, code: str) -> str:
 
 
 def _build_feature_text_no_cwe(language: str, code: str) -> str:
-    """Feature text with CWE stripped out — used only for severity eval.
+    """Feature text with CWE stripped out - used only for severity eval.
     Forces the eval to measure whether the model learned code patterns,
     not just the CWE→severity lookup that causes 1.00 accuracy."""
     return f"{language} {code[:600]}"
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # DATA LOADING
-# ══════════════════════════════════════════════════════════════════════════════
 
 def _load_language_samples(
     csv_path: Path,
@@ -115,10 +89,10 @@ def _load_language_samples(
     entries (label 1).
 
     Returns four parallel lists:
-      texts           — combined feature string: "{language} {cwe} {code[:600]}"
-      severity_labels — severity derived from the CWE ID via severity_for_cwe()
-      fp_labels       — 1 = vulnerable, 0 = patched/safe
-      code_only_texts — feature string WITHOUT CWE, used for honest severity eval
+      texts - combined feature string: "{language} {cwe} {code[:600]}"
+      severity_labels - severity derived from the CWE ID via severity_for_cwe()
+      fp_labels - 1 = vulnerable, 0 = patched/safe
+      code_only_texts - feature string WITHOUT CWE, used for honest severity eval
     """
     texts:           List[str] = []
     severity_labels: List[str] = []
@@ -126,7 +100,7 @@ def _load_language_samples(
     code_only_texts: List[str] = []
 
     if not csv_path.exists():
-        logger.warning("Dataset file not found — skipping: %s", csv_path)
+        logger.warning("Dataset file not found - skipping: %s", csv_path)
         return texts, severity_labels, fp_labels
 
     try:
@@ -173,9 +147,7 @@ def _load_language_samples(
     return texts, severity_labels, fp_labels, code_only_texts
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # ML ENGINE
-# ══════════════════════════════════════════════════════════════════════════════
 
 class MLEngine:
     """
@@ -202,7 +174,7 @@ class MLEngine:
         self.fp_model       = fp_model
         self.metadata       = metadata
 
-    # ── per-finding inference ──────────────────────────────────────────────────
+    #  per-finding inference 
 
     def predict_severity(
         self, snippet: str, cwe_id: str, language: str
@@ -256,7 +228,7 @@ class MLEngine:
             logger.debug("FP prediction failed", exc_info=True)
             return {"is_fp": False, "vuln_prob": 1.0}
 
-    # ── scan-level enrichment ─────────────────────────────────────────────────
+    #  scan-level enrichment 
 
     def enrich_scan_output(
         self, scan_output: Dict[str, object]
@@ -265,15 +237,15 @@ class MLEngine:
         Run both models over every finding in *scan_output* in-place.
 
         Fields written to each finding:
-          ml_severity             — ML-predicted severity label
-          ml_severity_confidence  — model confidence (0–1)
-          ml_confidence           — vulnerability probability from FP model
-          fp_flag                 — True when vuln_prob < FP_THRESHOLD
-          fp_label                — human-readable explanation when flagged
+          ml_severity - ML-predicted severity label
+          ml_severity_confidence - model confidence (0 - 1)
+          ml_confidence - vulnerability probability from FP model
+          fp_flag - True when vuln_prob < FP_THRESHOLD
+          fp_label - human-readable explanation when flagged
         """
         findings = scan_output.get("findings", [])
         for finding in findings:
-            # Use ml_context (surrounding lines) if available — it matches the
+            # Use ml_context (surrounding lines) if available - it matches the
             # function-body scale the models were trained on. Fall back to the
             # single-line display snippet only when ml_context is absent.
             snippet  = finding.get("ml_context") or finding.get("snippet", "")
@@ -288,7 +260,7 @@ class MLEngine:
             # False positive classification
             # Flag as FP when ML vuln_prob is at or below FP_THRESHOLD (0.60).
             # The rule confidence is stored for display only and does not
-            # affect the FP decision — this ensures the ML score drives it.
+            # affect the FP decision - this ensures the ML score drives it.
             fp = self.predict_fp(snippet, cwe_id, language)
             rule_conf    = float(finding.get("confidence", 0.75))
             vuln_prob    = fp["vuln_prob"]
@@ -297,16 +269,14 @@ class MLEngine:
             if combined <= FP_THRESHOLD:
                 finding["fp_flag"]  = True
                 finding["fp_label"] = (
-                    f"Low confidence finding — combined score {combined:.0%} "
+                    f"Low confidence finding - combined score {combined:.0%} "
                     f"(ML: {vuln_prob:.0%}, rule: {rule_conf:.0%})"
                 )
 
         return scan_output
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # TRAINING
-# ══════════════════════════════════════════════════════════════════════════════
 
 def _train(
     max_samples_per_language: int,
@@ -342,7 +312,7 @@ def _train(
         len(all_texts), sum(all_fp), len(all_fp) - sum(all_fp),
     )
 
-    # ── Shared TF-IDF vectorizer (word bigrams + char n-grams) ────────────────
+    #  Shared TF-IDF vectorizer (word bigrams + char n-grams) 
     # Word bigrams capture multi-token patterns (e.g. "buffer overflow",
     # "eval input").  Char n-grams catch API names like strcpy/os.system
     # regardless of surrounding tokens.  FeatureUnion concatenates both
@@ -369,18 +339,18 @@ def _train(
     word_vocab = len(word_vec.vocabulary_)
     char_vocab = len(char_vec.vocabulary_)
     logger.info(
-        "Vectorizer fitted — word vocab: %d  char vocab: %d  total features: %d",
+        "Vectorizer fitted - word vocab: %d  char vocab: %d  total features: %d",
         word_vocab, char_vocab, word_vocab + char_vocab,
     )
 
-    # ── Severity model (trained on vulnerable samples only) ────────────────────
+    #  Severity model (trained on vulnerable samples only) 
     # We train only on genuinely vulnerable code so the model learns
     # which code patterns correspond to each severity, not the patterns
     # of patched/safe code.
     vuln_idx = [i for i, v in enumerate(all_fp) if v == 1]
     if len(vuln_idx) < 20:
         raise RuntimeError(
-            f"Only {len(vuln_idx)} vulnerable samples found — too few to train. "
+            f"Only {len(vuln_idx)} vulnerable samples found - too few to train. "
             "Check that is_vulnerable=True rows exist in the datasets."
         )
 
@@ -392,7 +362,7 @@ def _train(
     vuln_code_only = [all_code_only[i] for i in vuln_idx]
     X_vuln_no_cwe  = vectorizer.transform(vuln_code_only)
 
-    # Train/test split — train on full features, eval on no-CWE features
+    # Train/test split - train on full features, eval on no-CWE features
     idx_tr, idx_te = train_test_split(
         range(len(y_sev)), test_size=0.2, random_state=42,
         stratify=y_sev if len(set(y_sev)) > 1 else None,
@@ -413,7 +383,7 @@ def _train(
     )
     _sev_rf.fit(X_sev_tr, y_sev_tr)
     logger.info(
-        "Severity model eval — code-only features, 20%% hold-out "
+        "Severity model eval - code-only features, 20%% hold-out "
         "(CWE excluded so score reflects code-pattern learning):\n%s",
         classification_report(y_sev_te, _sev_rf.predict(X_sev_te), zero_division=0),
     )
@@ -431,13 +401,13 @@ def _train(
     severity_model = CalibratedClassifierCV(_sev_rf_full, method="isotonic", cv=3)
     severity_model.fit(X_vuln, y_sev)
     logger.info(
-        "Severity model trained — classes: %s  samples: %d",
+        "Severity model trained - classes: %s  samples: %d",
         list(_sev_rf_full.classes_), len(vuln_idx),
     )
 
-    # ── FP classifier (trained on all samples) ─────────────────────────────────
-    # Note: isotonic calibration was removed — it collapsed the RF's already-
-    # narrow output range (~0.63–0.69) into a constant (~0.536).  The raw RF
+    #  FP classifier (trained on all samples) 
+    # Note: isotonic calibration was removed - it collapsed the RF's already-
+    # narrow output range (~0.63 - 0.69) into a constant (~0.536).  The raw RF
     # predict_proba is more spread and is combined with rule confidence at
     # inference time (see enrich_scan_output) which is a better FP signal.
     X_fp_tr, X_fp_te, y_fp_tr, y_fp_te = train_test_split(
@@ -461,7 +431,7 @@ def _train(
     fp_model.fit(X, all_fp)
     unique, counts = np.unique(all_fp, return_counts=True)
     logger.info(
-        "FP classifier trained — class distribution: %s",
+        "FP classifier trained - class distribution: %s",
         dict(zip(unique.tolist(), counts.tolist())),
     )
 
@@ -484,9 +454,7 @@ def _train(
     )
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# PERSISTENCE  (joblib — proposal tools section)
-# ══════════════════════════════════════════════════════════════════════════════
+# PERSISTENCE  (joblib - proposal tools section)
 
 def _save(engine: "MLEngine", path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -497,7 +465,7 @@ def _save(engine: "MLEngine", path: Path) -> None:
 def _load(path: Path) -> "MLEngine":
     engine = joblib.load(path)
     if not isinstance(engine, MLEngine):
-        raise TypeError("Unexpected object in model file — expected MLEngine.")
+        raise TypeError("Unexpected object in model file - expected MLEngine.")
     return engine
 
 
@@ -513,14 +481,14 @@ def load_or_train(force_retrain: bool = False) -> "MLEngine":
         try:
             engine = _load(ML_ENGINE_PATH)
             logger.info(
-                "ML engine loaded — samples: %d  vocab: %d  severity classes: %s",
+                "ML engine loaded - samples: %d  vocab: %d  severity classes: %s",
                 engine.metadata.get("sample_count", 0),
                 engine.metadata.get("vocab_size", 0),
                 engine.metadata.get("severity_classes", []),
             )
             return engine
         except Exception:
-            logger.exception("Failed to load saved ML engine — retraining from scratch")
+            logger.exception("Failed to load saved ML engine - retraining from scratch")
 
     logger.info("Training ML engine from datasets (this may take a moment)...")
     engine = _train(

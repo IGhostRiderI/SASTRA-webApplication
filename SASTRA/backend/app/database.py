@@ -1,18 +1,5 @@
-"""
-SQLAlchemy database setup.
-
-Provides:
-  - ``engine``       — SQLAlchemy engine bound to the project SQLite file.
-  - ``SessionLocal`` — session factory; call ``SessionLocal()`` to open a session.
-  - ``Base``         — declarative base class that all ORM models inherit from.
-  - ``_get_session`` — context manager that opens a session, commits on exit,
-                       rolls back on exception, and always closes cleanly.
-
-Usage in db.py:
-    with _get_session() as session:
-        user = session.get(User, user_id)
-        ...
-"""
+"""SQLAlchemy engine, session factory, declarative base, and a _get_session
+context manager that commits on exit and rolls back on exception."""
 
 from contextlib import contextmanager
 
@@ -21,7 +8,7 @@ from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
 from .config import DB_PATH
 
-# ── engine ─────────────────────────────────────────────────────────────────────
+#  engine 
 # check_same_thread=False is required for SQLite when used with FastAPI because
 # FastAPI may access the same connection from different threads during testing
 # or background tasks.  The session-per-request pattern below keeps this safe.
@@ -43,7 +30,7 @@ def _set_sqlite_pragma(dbapi_connection, connection_record):
     cursor.close()
 
 
-# ── session factory ────────────────────────────────────────────────────────────
+#  session factory 
 SessionLocal = sessionmaker(
     bind=engine,
     autocommit=False,
@@ -52,12 +39,12 @@ SessionLocal = sessionmaker(
 )
 
 
-# ── declarative base ───────────────────────────────────────────────────────────
+#  declarative base 
 class Base(DeclarativeBase):
     pass
 
 
-# ── session context manager ────────────────────────────────────────────────────
+#  session context manager 
 @contextmanager
 def _get_session() -> Session:
     """
