@@ -810,9 +810,23 @@
       const label = document.getElementById('progress-label');
       const sub = document.getElementById('scanning-sub');
       overlay.classList.add('show');
-      fill.style.width = '15%';
-      label.textContent = '15%';
+      
+      let progress = 5;
+      fill.style.width = progress + '%';
+      label.textContent = progress + '%';
       sub.textContent = steps[0];
+
+      const simInterval = setInterval(() => {
+        if (progress < 95) {
+          progress += Math.floor(Math.random() * 8) + 2;
+          if (progress > 95) progress = 95;
+          
+          const stepIdx = Math.floor((progress / 95) * (steps.length - 2));
+          fill.style.width = progress + '%';
+          label.textContent = progress + '%';
+          sub.textContent = steps[stepIdx];
+        }
+      }, 600);
 
       try {
         const formData = new FormData();
@@ -823,6 +837,8 @@
           }
           if (!validateSelectedFileSize(selectedFile)) {
             clearFileSelection();
+            clearInterval(simInterval);
+            overlay.classList.remove('show');
             return;
           }
           formData.append('file', selectedFile);
@@ -833,15 +849,14 @@
           formData.append('code_filename', `snippet.${lang === 'java' ? 'java' : lang === 'cpp' ? 'cpp' : 'py'}`);
         }
 
-        fill.style.width = '55%';
-        label.textContent = '55%';
-        sub.textContent = steps[2];
-
         const response = await fetch('/api/scan', {
           method: 'POST',
           credentials: 'include',
           body: formData,
         });
+        
+        clearInterval(simInterval);
+        
         const payload = await response.json();
         if (!response.ok) {
           if (response.status === 429) {
@@ -857,7 +872,7 @@
 
         fill.style.width = '100%';
         label.textContent = '100%';
-        sub.textContent = steps[6];
+        sub.textContent = steps[steps.length - 1];
         sessionStorage.setItem('sastra_scan_result', JSON.stringify(payload));
         const createdScanId =
           payload?.scan_id ??
@@ -870,8 +885,10 @@
         }
         window.location.href = `scan-results.html?scan_id=${createdScanId}`;
       } catch (error) {
+        clearInterval(simInterval);
         showAppPopup(error.message || 'Scan failed');
       } finally {
+        clearInterval(simInterval);
         setTimeout(() => overlay.classList.remove('show'), 400);
       }
     }
