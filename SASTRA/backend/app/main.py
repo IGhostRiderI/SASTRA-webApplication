@@ -1,7 +1,9 @@
+import asyncio
 import io
 import logging
 import logging.handlers
 import posixpath
+import random
 import secrets
 import sys
 import threading
@@ -235,7 +237,7 @@ def _log_unhandled_exception(exc_type, exc_value, exc_tb):
 
 sys.excepthook = _log_unhandled_exception
 
-_limiter = Limiter(key_func=get_remote_address)
+_limiter = Limiter(key_func=get_remote_address, default_limits=["200/minute"])
 
 SESSION_COOKIE = "sast_session"
 SESSION_COOKIE_MAX_AGE = 60 * 60 * 24 * JWT_EXPIRY_DAYS  # matches JWT expiry
@@ -360,6 +362,15 @@ async def lifespan(_: FastAPI):
 app = FastAPI(title="Lightweight SAST Dashboard", lifespan=lifespan)
 app.state.limiter = _limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+
+async def _not_found_handler(request: Request, exc: HTTPException) -> JSONResponse:
+    # Random delay 100–400ms — slows directory enumeration tools significantly
+    await asyncio.sleep(random.uniform(0.1, 0.4))
+    return JSONResponse({"detail": "Not found"}, status_code=404)
+
+
+app.add_exception_handler(404, _not_found_handler)
 
 BASE_DIR     = Path(__file__).resolve().parent
 FRONTEND_DIR = BASE_DIR.parent.parent / "frontend"
@@ -660,7 +671,7 @@ async def health() -> JSONResponse:
 
 
 @app.get("/api/catalog")
-async def catalog_summary() -> JSONResponse:
+async def catalog_summary(current_user: dict = Depends(_require_user)) -> JSONResponse:
     catalog = app_state.get("catalog") or {}
     return JSONResponse({
         "rule_count":   catalog.get("rule_count", 0),
@@ -1242,7 +1253,9 @@ async def save_llm_fix(
 #  scan endpoints 
 
 @app.post("/api/scan")
+@_limiter.limit("10/minute")
 async def scan_file(
+    request: Request,
     file: UploadFile | None = File(default=None),
     language: Optional[str] = Form(default=None),
     code: Optional[str] = Form(default=None),
