@@ -82,10 +82,14 @@
       position: relative;
       z-index: 5;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: calc(100vh - 100px);
       padding: 20px;
+    }
+
+    @supports (min-height: 100dvh) {
+      .page-center { min-height: calc(100dvh - 100px); }
     }
 
     .card {
@@ -97,6 +101,8 @@
       max-width: 520px;
       text-align: center;
       animation: fadeUp 0.6s ease both;
+      margin-top: auto;
+      margin-bottom: auto;
     }
 
     @keyframes fadeUp {
@@ -207,6 +213,29 @@
     }
 
     .card-footer a:hover { opacity: 0.6; }
+
+    @media (max-height: 820px) {
+      nav { padding: 16px 56px; }
+      .page-center { min-height: calc(100vh - 60px); padding: 16px 20px; }
+      .card { padding: 32px 40px 28px; border-radius: 22px; }
+      .card-sub { margin-bottom: 24px; }
+      .field { margin-bottom: 16px; }
+      .field input { padding: 11px 14px; }
+      .card-footer { margin-top: 18px; }
+    }
+
+    @media (max-height: 700px) {
+      nav { padding: 12px 56px; }
+      .page-center { min-height: auto; padding: 12px 20px; }
+      .card { padding: 24px 32px 20px; }
+      .card-title { font-size: 1.3rem; }
+      .card-sub { margin-bottom: 16px; font-size: 0.85rem; }
+      .field { margin-bottom: 12px; }
+      .field label { margin-bottom: 5px; font-size: 0.82rem; }
+      .field input { padding: 10px 12px; font-size: 0.9rem; border-radius: 10px; }
+      .btn-submit { padding: 11px; margin-top: 10px; font-size: 0.88rem; }
+      .card-footer { margin-top: 14px; font-size: 0.82rem; }
+    }
 
     @media (max-width: 560px) {
       nav { padding: 20px 24px; }

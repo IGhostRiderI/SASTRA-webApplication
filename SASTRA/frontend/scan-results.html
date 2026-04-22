@@ -824,6 +824,62 @@
     .fix-tag { display: inline-flex; align-items: center; gap: 5px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: #059669; font-size: 0.78rem; font-weight: 600; padding: 4px 12px; border-radius: 999px; margin-top: 6px; }
     .fix-tag svg { width: 12px; height: 12px; }
 
+    /* Finding Detail Modal - dark theme overrides */
+    html[data-theme="dark"] .modal-overlay { background: rgba(0,0,0,0.55); }
+    html[data-theme="dark"] .modal-box {
+      background: rgba(17,17,22,0.97);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+    html[data-theme="dark"] .modal-close { background: rgba(255,255,255,0.08); color: #9ca3af; }
+    html[data-theme="dark"] .modal-close:hover { background: rgba(255,255,255,0.14); }
+    html[data-theme="dark"] .modal-title { color: #f1f5f9; }
+    html[data-theme="dark"] .modal-section-title { color: #64748b; }
+    html[data-theme="dark"] .modal-desc { color: #cbd5e1; }
+    html[data-theme="dark"] .modal-meta span { color: #94a3b8; }
+    html[data-theme="dark"] .code-block {
+      background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); color: #e2e8f0;
+    }
+
+    /* Modal layout refinements */
+    .modal-box { max-width: 720px; max-height: 85vh; overflow-y: auto; }
+    .modal-header-row { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .modal-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .modal-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.78rem; font-weight: 600; padding: 5px 14px;
+      border-radius: 999px; border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(0,0,0,0.03);
+    }
+    html[data-theme="dark"] .modal-badge { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); color: #cbd5e1; }
+    .modal-two-col { display: grid; grid-template-columns: 1fr 240px; gap: 24px; }
+    @media (max-width: 640px) { .modal-two-col { grid-template-columns: 1fr; } }
+    .modal-ref-card {
+      border-radius: 14px; padding: 18px 20px;
+      border: 1px solid rgba(0,0,0,0.08); background: rgba(0,0,0,0.02);
+    }
+    html[data-theme="dark"] .modal-ref-card { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); }
+    .modal-ref-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 0.82rem; }
+    html[data-theme="dark"] .modal-ref-row { border-bottom-color: rgba(255,255,255,0.06); }
+    .modal-ref-row:last-child { border-bottom: none; }
+    .modal-ref-label { color: var(--text-muted); }
+    .modal-ref-value { font-weight: 600; color: #2563eb; }
+    html[data-theme="dark"] .modal-ref-value { color: #60a5fa; }
+    .modal-risk-box {
+      margin-top: 14px; border-radius: 14px; padding: 16px 18px;
+      border: 1px solid rgba(220,38,38,0.15); background: rgba(220,38,38,0.04);
+    }
+    html[data-theme="dark"] .modal-risk-box { background: rgba(220,38,38,0.08); border-color: rgba(220,38,38,0.2); }
+    .modal-risk-title { font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 700; color: #dc2626; margin-bottom: 6px; }
+    .modal-risk-text { font-size: 0.82rem; line-height: 1.6; color: var(--text-muted); }
+    html[data-theme="dark"] .modal-risk-text { color: #e2e8f0; }
+    .code-block-header {
+      font-size: 0.75rem; color: var(--text-muted); margin-bottom: 6px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .code-block-loc { font-family: 'DM Mono', monospace; color: var(--text-light); }
+    html[data-theme="dark"] .code-block-loc { color: #64748b; }
+
     /*  FLOATING CHATBOT BUBBLE  */
     .chat-bubble-btn {
       position: fixed; bottom: 28px; right: 28px; z-index: 9999;
@@ -1304,6 +1360,156 @@
   }
 
   function closeModal() { document.getElementById('modal-overlay').classList.remove('show'); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function riskDescriptionForSev(sev) {
+    const map = {
+      critical: 'This finding requires immediate attention and should be resolved before merging to production.',
+      high: 'This finding poses significant risk and should be prioritised for remediation.',
+      medium: 'This finding should be addressed in the normal development cycle.',
+      low: 'This is a low-risk finding. Consider fixing when working in this area.',
+    };
+    return map[sev] || map.medium;
+  }
+
+  function openFindingModal(idx) {
+    const f = allFindings.find(x => x._idx === idx);
+    if (!f) return;
+    // All values inserted via escapeHtml() — safe against XSS.
+    // The only raw HTML is static structural markup and hardcoded href patterns.
+    const sevUpper = f.sev.charAt(0).toUpperCase() + f.sev.slice(1);
+    const cweNum = (f.cwe || '').replace('CWE-','');
+    const cweHref = /^\d+$/.test(cweNum) ? 'https://cwe.mitre.org/data/definitions/' + cweNum + '.html' : '#';
+    const owaspShort = f.owasp !== '-' ? f.owasp.split(' - ')[0] : '-';
+
+    const container = document.getElementById('modal-content');
+    container.textContent = '';
+
+    // Header row
+    const headerRow = document.createElement('div');
+    headerRow.className = 'modal-header-row';
+    const sevPill = document.createElement('span');
+    sevPill.className = 'sev-pill ' + escapeHtml(f.sev);
+    sevPill.style.fontSize = '0.72rem';
+    sevPill.textContent = sevUpper;
+    headerRow.appendChild(sevPill);
+    container.appendChild(headerRow);
+
+    // Title
+    const titleEl = document.createElement('div');
+    titleEl.className = 'modal-title';
+    titleEl.textContent = f.title;
+    container.appendChild(titleEl);
+
+    // Badges
+    const badges = document.createElement('div');
+    badges.className = 'modal-badges';
+    const b1 = document.createElement('span');
+    b1.className = 'modal-badge';
+    b1.textContent = f.cwe + (f.cwe_name ? ' \u00B7 ' + f.cwe_name : '');
+    const b2 = document.createElement('span');
+    b2.className = 'modal-badge';
+    b2.textContent = 'OWASP ' + owaspShort;
+    const b3 = document.createElement('span');
+    b3.className = 'modal-badge';
+    b3.textContent = 'Confidence: ' + f.confidence + '%';
+    badges.append(b1, b2, b3);
+    container.appendChild(badges);
+
+    // Two-column layout
+    const twocol = document.createElement('div');
+    twocol.className = 'modal-two-col';
+
+    // Left column
+    const left = document.createElement('div');
+    const codeTitle = document.createElement('div');
+    codeTitle.className = 'modal-section-title';
+    codeTitle.textContent = 'Vulnerable Code';
+    left.appendChild(codeTitle);
+
+    const codeHeader = document.createElement('div');
+    codeHeader.className = 'code-block-header';
+    const chFile = document.createElement('span');
+    chFile.textContent = f.file;
+    const chLoc = document.createElement('span');
+    chLoc.className = 'code-block-loc';
+    chLoc.textContent = 'line ' + f.line + ', col ' + f.col;
+    codeHeader.append(chFile, chLoc);
+    left.appendChild(codeHeader);
+
+    const codeBlock = document.createElement('div');
+    codeBlock.className = 'code-block';
+    codeBlock.textContent = f.snippet;
+    left.appendChild(codeBlock);
+
+    const descTitle = document.createElement('div');
+    descTitle.className = 'modal-section-title';
+    descTitle.style.marginTop = '22px';
+    descTitle.textContent = 'Description';
+    left.appendChild(descTitle);
+
+    const descText = document.createElement('div');
+    descText.className = 'modal-desc';
+    descText.textContent = f.fix || 'No recommendation available.';
+    left.appendChild(descText);
+
+    // Right column
+    const right = document.createElement('div');
+    const refTitle = document.createElement('div');
+    refTitle.className = 'modal-section-title';
+    refTitle.textContent = 'References';
+    right.appendChild(refTitle);
+
+    const refCard = document.createElement('div');
+    refCard.className = 'modal-ref-card';
+    const refs = [
+      { label: 'CWE',  value: f.cwe,  href: cweHref },
+      { label: 'OWASP', value: owaspShort, href: null },
+      { label: 'File',  value: getBasename(f.file), href: null },
+      { label: 'Line',  value: f.line + ':' + f.col, href: null },
+    ];
+    refs.forEach(r => {
+      const row = document.createElement('div');
+      row.className = 'modal-ref-row';
+      const lbl = document.createElement('span');
+      lbl.className = 'modal-ref-label';
+      lbl.textContent = r.label;
+      const val = document.createElement('span');
+      val.className = 'modal-ref-value';
+      if (r.href && r.href !== '#') {
+        const a = document.createElement('a');
+        a.href = r.href;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.style.color = 'inherit';
+        a.style.textDecoration = 'none';
+        a.textContent = r.value;
+        val.appendChild(a);
+      } else {
+        val.textContent = r.value;
+      }
+      if (r.label === 'File') { val.style.fontSize = '0.78rem'; val.style.wordBreak = 'break-all'; }
+      row.append(lbl, val);
+      refCard.appendChild(row);
+    });
+    right.appendChild(refCard);
+
+    const riskBox = document.createElement('div');
+    riskBox.className = 'modal-risk-box';
+    const riskTitle = document.createElement('div');
+    riskTitle.className = 'modal-risk-title';
+    riskTitle.textContent = 'RISK';
+    const riskText = document.createElement('div');
+    riskText.className = 'modal-risk-text';
+    riskText.textContent = riskDescriptionForSev(f.sev);
+    riskBox.append(riskTitle, riskText);
+    right.appendChild(riskBox);
+
+    twocol.append(left, right);
+    container.appendChild(twocol);
+
+    document.getElementById('modal-overlay').classList.add('show');
+  }
 
   async function initResults() {
     const meRes = await fetch('/api/auth/me', { credentials: 'include' });
@@ -1346,9 +1552,11 @@
       finding_id: f.finding_id || null,
       sev: String(f.severity || 'low').toLowerCase(),
       cwe: f.cwe_id || '-',
+      cwe_name: f.cwe_name || '',
       owasp: f.owasp_category || '-',
       file: f.source_path || scan.filename || '-',
       line: String(f.line_number || '-'),
+      col: String(f.column_number || '-'),
       title: f.title || f.rule_name || 'Finding',
       desc: f.description || '',
       snippet: f.snippet || '',
@@ -1357,6 +1565,10 @@
       llm_fix: f.llm_fix || '',
       confidence: formatConfidencePercent(f.ml_confidence ?? f.ml_severity_confidence ?? 0),
       fp_flag: !!f.fp_flag,
+      fp_label: f.fp_label || '',
+      source: f.source || '',
+      rule_id: f.rule_id || '',
+      severity_score: f.severity_score || 0,
     }));
     window.allFindings = allFindings;
     // Load previously saved fixed state
@@ -1643,8 +1855,8 @@
       row.style.gridTemplateColumns = getColTemplate();
       const confClass = confidenceClass(f.confidence);
       const fixAreaHtml = f.llm_fix
-        ? `<div class="fix-bubble" id="fix-bubble-${i}" onclick="toggleFixBubble(${i})"><span class="fix-bubble-label">LLM Fix</span><span class="fix-bubble-code">${escapeHtml(f.llm_fix)}</span></div>`
-        : `<button class="btn-fix-now" id="fix-btn-${i}" onclick="openFixPopup(${i})">Fix now</button>`;
+        ? `<div class="fix-bubble" id="fix-bubble-${i}" onclick="event.stopPropagation();toggleFixBubble(${i})"><span class="fix-bubble-label">LLM Fix</span><span class="fix-bubble-code">${escapeHtml(f.llm_fix)}</span></div>`
+        : `<button class="btn-fix-now" id="fix-btn-${i}" onclick="event.stopPropagation();openFixPopup(${i})">Fix now</button>`;
 
       const sevBadge = fp
         ? `<div class="sev-badge"><span class="sev-pill false-positive">False Positive</span><span class="confidence-tag ${confClass}">ML ${f.confidence}%</span></div>`
@@ -1655,6 +1867,7 @@
 
       const checkboxHtml = `<label class="fix-checkbox-wrap" onclick="event.stopPropagation()"><input type="checkbox" class="fix-checkbox" ${isFixed ? 'checked' : ''} onchange="markFixed(${i}, this.checked)"><span class="fix-checkbox-box"></span><span class="fix-checkbox-label">${isFixed ? 'Fixed' : 'Mark fixed'}</span></label>`;
       row.innerHTML = `${sevBadge}<div class="cell-code col-cwe">${escapeHtml(f.cwe)}</div><div class="cell-owasp col-owasp">${escapeHtml(f.owasp)}</div>${locCell}<div class="cell-issue col-issue">${checkboxHtml}<div class="issue-title">${escapeHtml(f.title)}</div><div class="issue-fix">${escapeHtml(f.fix || '-')}</div></div><div class="cell-snippet snippet-col"><span class="snippet-code">${escapeHtml(f.snippet)}</span><div id="fix-area-${i}">${fixAreaHtml}</div></div>`;
+      row.addEventListener('click', () => openFindingModal(i));
       list.appendChild(row);
     });
     applyColTemplate();
