@@ -791,14 +791,14 @@
     .modal-overlay {
       display: none; position: fixed; inset: 0; z-index: 300;
       background: rgba(0,0,0,0.22); backdrop-filter: blur(6px);
-      align-items: center; justify-content: center; padding: 24px;
+      align-items: center; justify-content: center; padding: 0;
     }
     .modal-overlay.show { display: flex; }
     .modal-box {
       background: rgba(248,249,251,0.97); backdrop-filter: blur(24px);
-      border: 1px solid rgba(255,255,255,0.9); border-radius: 24px;
+      border: none; border-radius: 0;
       box-shadow: 0 24px 64px rgba(0,0,0,0.14);
-      padding: 36px 38px; max-width: 620px; width: 100%;
+      padding: 40px 5%; width: 100vw; height: 100vh; max-width: none;
       animation: fadeUp 0.28s ease both; position: relative;
     }
     .modal-close {
@@ -842,7 +842,7 @@
     }
 
     /* Modal layout refinements */
-    .modal-box { max-width: 720px; max-height: 85vh; overflow-y: auto; }
+    .modal-box { overflow-y: auto; }
     .modal-header-row { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
     .modal-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
     .modal-badge {
@@ -1452,6 +1452,21 @@
     descText.className = 'modal-desc';
     descText.textContent = f.fix || 'No recommendation available.';
     left.appendChild(descText);
+
+    if (f.llm_fix) {
+      const fixTitle = document.createElement('div');
+      fixTitle.className = 'modal-section-title';
+      fixTitle.style.marginTop = '22px';
+      fixTitle.textContent = 'AI Fix Suggestion';
+      left.appendChild(fixTitle);
+
+      const fixBlock = document.createElement('div');
+      fixBlock.className = 'code-block';
+      fixBlock.style.borderColor = 'rgba(16,185,129,0.3)';
+      fixBlock.style.background = 'rgba(16,185,129,0.06)';
+      fixBlock.textContent = f.llm_fix;
+      left.appendChild(fixBlock);
+    }
 
     // Right column
     const right = document.createElement('div');
