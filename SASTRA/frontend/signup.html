@@ -32,12 +32,20 @@
       --radius: 14px;
     }
 
-    html, body { min-height: 100vh; font-family: 'DM Sans', sans-serif; }
+    html, body {
+      height: 100%;
+      font-family: 'DM Sans', sans-serif;
+    }
 
     body {
       background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
       color: var(--text-primary);
-      overflow-x: hidden;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    @supports (height: 100dvh) {
+      body { height: 100dvh; }
     }
 
     body::before {
@@ -57,7 +65,8 @@
     nav {
       position: relative;
       z-index: 10;
-      padding: 28px 56px;
+      padding: 20px 56px;
+      flex-shrink: 0;
     }
 
     .logo {
@@ -81,25 +90,26 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: calc(100vh - 100px);
-      padding: 20px;
+      justify-content: center;
+      height: calc(100vh - 68px);
+      padding: 16px 20px;
+      overflow: hidden;
     }
 
-    @supports (min-height: 100dvh) {
-      .page-center { min-height: calc(100dvh - 100px); }
+    @supports (height: 100dvh) {
+      .page-center { height: calc(100dvh - 68px); }
     }
 
     .card {
       background: var(--card-bg);
       border-radius: 28px;
       box-shadow: 0 8px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
-      padding: 52px 56px 48px;
+      padding: 44px 52px 40px;
       width: 100%;
       max-width: 520px;
       text-align: center;
       animation: fadeUp 0.6s ease both;
-      margin-top: auto;
-      margin-bottom: auto;
+      flex-shrink: 0;
     }
 
     @keyframes fadeUp {
@@ -290,36 +300,55 @@
       text-align: left;
     }
 
+    /* --- Responsive: smaller laptop screens (e.g. 15") --- */
     @media (max-height: 820px) {
-      nav { padding: 16px 56px; }
-      .page-center { min-height: calc(100vh - 60px); padding: 16px 20px; }
-      .card { padding: 32px 40px 28px; border-radius: 22px; }
-      .card-sub { margin-bottom: 24px; }
-      .field { margin-bottom: 16px; }
+      nav { padding: 14px 56px; }
+      .page-center { height: calc(100vh - 56px); padding: 12px 20px; }
+      .card { padding: 30px 44px 26px; border-radius: 22px; }
+      .card-sub { margin-bottom: 20px; }
+      .field { margin-bottom: 14px; }
       .field input { padding: 11px 14px; }
-      .privacy-row { margin-top: 12px; }
-      .card-footer { margin-top: 18px; }
+      .privacy-row { margin-top: 10px; }
+      .card-footer { margin-top: 16px; }
+      .btn-submit { margin-top: 12px; }
     }
 
-    @media (max-height: 700px) {
-      nav { padding: 12px 56px; }
-      .page-center { min-height: auto; padding: 12px 20px; }
-      .card { padding: 24px 32px 20px; }
+    @media (max-height: 750px) {
+      nav { padding: 10px 56px; }
+      .page-center { height: calc(100vh - 48px); padding: 8px 20px; }
+      .card { padding: 22px 36px 18px; border-radius: 20px; }
       .card-title { font-size: 1.3rem; }
-      .card-sub { margin-bottom: 16px; font-size: 0.85rem; }
-      .field { margin-bottom: 12px; }
+      .card-sub { margin-bottom: 14px; font-size: 0.87rem; }
+      .field { margin-bottom: 10px; }
       .field label { margin-bottom: 5px; font-size: 0.82rem; }
-      .field input { padding: 10px 12px; font-size: 0.9rem; border-radius: 10px; }
+      .field input { padding: 9px 12px; font-size: 0.9rem; border-radius: 10px; }
       .password-hint { margin-top: 4px; font-size: 0.72rem; }
-      .btn-submit { padding: 11px; margin-top: 10px; font-size: 0.88rem; }
-      .privacy-row { margin-top: 8px; gap: 8px; }
+      .btn-submit { padding: 10px; margin-top: 8px; font-size: 0.88rem; }
+      .privacy-row { margin-top: 6px; gap: 8px; }
       .privacy-label { font-size: 0.78rem; }
-      .card-footer { margin-top: 14px; font-size: 0.82rem; }
+      .card-footer { margin-top: 12px; font-size: 0.82rem; }
+    }
+
+    @media (max-height: 650px) {
+      nav { padding: 8px 56px; }
+      .page-center { height: calc(100vh - 44px); padding: 6px 20px; }
+      .card { padding: 16px 30px 14px; border-radius: 18px; }
+      .card-title { font-size: 1.2rem; }
+      .card-sub { margin-bottom: 10px; font-size: 0.83rem; }
+      .field { margin-bottom: 8px; }
+      .field label { margin-bottom: 4px; font-size: 0.8rem; }
+      .field input { padding: 8px 10px; font-size: 0.85rem; border-radius: 9px; }
+      .password-hint { margin-top: 3px; font-size: 0.7rem; }
+      .btn-submit { padding: 9px; margin-top: 6px; font-size: 0.85rem; }
+      .privacy-row { margin-top: 4px; gap: 6px; }
+      .privacy-row input[type="checkbox"] { width: 15px; height: 15px; min-width: 15px; }
+      .privacy-label { font-size: 0.74rem; }
+      .card-footer { margin-top: 10px; font-size: 0.8rem; }
     }
 
     @media (max-width: 560px) {
-      nav { padding: 20px 24px; }
-      .card { padding: 36px 24px 32px; }
+      nav { padding: 16px 24px; }
+      .card { padding: 32px 24px 28px; }
     }
   </style>
   <link rel="icon" type="image/svg+xml" href="/static/favicon.svg"/>
