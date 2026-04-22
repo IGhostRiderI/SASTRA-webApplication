@@ -32,20 +32,25 @@
       --radius: 14px;
     }
 
-    html, body {
+    /* === LOCK the whole page to one viewport — no scroll anywhere === */
+    html {
       height: 100%;
-      font-family: 'DM Sans', sans-serif;
+      overflow: hidden;
     }
 
     body {
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
       background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
       color: var(--text-primary);
-      overflow: hidden;
-      height: 100vh;
+      font-family: 'DM Sans', sans-serif;
     }
 
-    @supports (height: 100dvh) {
-      body { height: 100dvh; }
+    /* Use real viewport units when available */
+    @supports (height: 100svh) {
+      html, body { height: 100svh; }
     }
 
     body::before {
@@ -65,7 +70,8 @@
     nav {
       position: relative;
       z-index: 10;
-      padding: 20px 56px;
+      /* Compact nav — does not stretch vertically */
+      padding: clamp(10px, 2.2vh, 24px) 56px;
       flex-shrink: 0;
     }
 
@@ -84,32 +90,33 @@
 
     .logo svg { width: 26px; height: 26px; }
 
+    /* Takes all remaining height after nav */
     .page-center {
       position: relative;
       z-index: 5;
+      flex: 1 1 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: calc(100vh - 68px);
-      padding: 16px 20px;
+      /* Never let this area overflow — card must shrink to fit */
       overflow: hidden;
-    }
-
-    @supports (height: 100dvh) {
-      .page-center { height: calc(100dvh - 68px); }
+      padding: clamp(8px, 2vh, 20px) 20px;
     }
 
     .card {
       background: var(--card-bg);
-      border-radius: 28px;
+      border-radius: clamp(16px, 3vh, 28px);
       box-shadow: 0 8px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
-      padding: 44px 52px 40px;
+      /* Padding scales with viewport height */
+      padding: clamp(18px, 3.5vh, 48px) clamp(20px, 5vw, 52px);
       width: 100%;
       max-width: 520px;
       text-align: center;
       animation: fadeUp 0.6s ease both;
-      flex-shrink: 0;
+      /* Ensure card never grows larger than the available space */
+      flex-shrink: 1;
+      overflow: hidden;
     }
 
     @keyframes fadeUp {
@@ -119,29 +126,29 @@
 
     .card-title {
       font-family: 'Sora', sans-serif;
-      font-size: 1.5rem;
+      font-size: clamp(1.15rem, 2.5vh, 1.5rem);
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 6px;
+      margin-bottom: clamp(2px, 0.6vh, 6px);
     }
 
     .card-sub {
-      font-size: 0.92rem;
+      font-size: clamp(0.78rem, 1.6vh, 0.92rem);
       color: var(--text-muted);
-      margin-bottom: 36px;
+      margin-bottom: clamp(12px, 2.5vh, 32px);
     }
 
     .field {
       text-align: left;
-      margin-bottom: 24px;
+      margin-bottom: clamp(8px, 1.6vh, 22px);
     }
 
     .field label {
       display: block;
       font-family: 'Sora', sans-serif;
-      font-size: 0.88rem;
+      font-size: clamp(0.76rem, 1.5vh, 0.88rem);
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: clamp(4px, 0.8vh, 8px);
       color: var(--text-primary);
     }
 
@@ -150,9 +157,9 @@
       background: var(--input-bg);
       border: none;
       border-radius: 12px;
-      padding: 14px 16px;
+      padding: clamp(8px, 1.4vh, 14px) 16px;
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
+      font-size: clamp(0.82rem, 1.6vh, 0.95rem);
       color: var(--text-primary);
       outline: none;
       transition: box-shadow 0.2s ease, background 0.2s ease;
@@ -168,15 +175,15 @@
     }
 
     .password-hint {
-      margin-top: 8px;
-      font-size: 0.78rem;
+      margin-top: clamp(3px, 0.5vh, 8px);
+      font-size: clamp(0.68rem, 1.3vh, 0.78rem);
       color: var(--text-muted);
     }
 
     .field-error {
-      margin-top: 8px;
+      margin-top: clamp(4px, 0.6vh, 8px);
       min-height: 1em;
-      font-size: 0.8rem;
+      font-size: clamp(0.7rem, 1.3vh, 0.8rem);
       font-weight: 600;
       color: #b91c1c;
     }
@@ -192,10 +199,10 @@
 
     .btn-submit {
       width: 100%;
-      margin-top: 16px;
-      padding: 14px;
+      margin-top: clamp(8px, 1.4vh, 16px);
+      padding: clamp(9px, 1.4vh, 14px);
       font-family: 'Sora', sans-serif;
-      font-size: 0.95rem;
+      font-size: clamp(0.82rem, 1.6vh, 0.95rem);
       font-weight: 600;
       border-radius: 999px;
       cursor: pointer;
@@ -215,8 +222,8 @@
     .btn-submit:active { transform: translateY(0); }
 
     .card-footer {
-      margin-top: 28px;
-      font-size: 0.88rem;
+      margin-top: clamp(10px, 1.8vh, 24px);
+      font-size: clamp(0.78rem, 1.5vh, 0.88rem);
       font-weight: 600;
       color: var(--text-primary);
     }
@@ -234,7 +241,7 @@
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: clamp(6px, 1.2vh, 18px);
       text-align: left;
     }
 
@@ -276,9 +283,9 @@
     }
 
     .privacy-label {
-      font-size: 0.86rem;
+      font-size: clamp(0.72rem, 1.4vh, 0.86rem);
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.45;
     }
 
     .privacy-label a {
@@ -292,63 +299,52 @@
     .privacy-label a:hover { opacity: 0.6; }
 
     .privacy-error {
-      font-size: 0.8rem;
+      font-size: clamp(0.7rem, 1.3vh, 0.8rem);
       font-weight: 600;
       color: #b91c1c;
-      margin-top: 6px;
+      margin-top: clamp(3px, 0.5vh, 6px);
       min-height: 1em;
       text-align: left;
     }
 
-    /* --- Responsive: smaller laptop screens (e.g. 15") --- */
-    @media (max-height: 820px) {
-      nav { padding: 14px 56px; }
-      .page-center { height: calc(100vh - 56px); padding: 12px 20px; }
-      .card { padding: 30px 44px 26px; border-radius: 22px; }
-      .card-sub { margin-bottom: 20px; }
-      .field { margin-bottom: 14px; }
-      .field input { padding: 11px 14px; }
-      .privacy-row { margin-top: 10px; }
-      .card-footer { margin-top: 16px; }
-      .btn-submit { margin-top: 12px; }
+    /* Google button responsive row */
+    .google-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: clamp(8px, 1.4vh, 18px);
+      margin-bottom: 4px;
     }
 
-    @media (max-height: 750px) {
-      nav { padding: 10px 56px; }
-      .page-center { height: calc(100vh - 48px); padding: 8px 20px; }
-      .card { padding: 22px 36px 18px; border-radius: 20px; }
-      .card-title { font-size: 1.3rem; }
-      .card-sub { margin-bottom: 14px; font-size: 0.87rem; }
-      .field { margin-bottom: 10px; }
-      .field label { margin-bottom: 5px; font-size: 0.82rem; }
-      .field input { padding: 9px 12px; font-size: 0.9rem; border-radius: 10px; }
-      .password-hint { margin-top: 4px; font-size: 0.72rem; }
-      .btn-submit { padding: 10px; margin-top: 8px; font-size: 0.88rem; }
-      .privacy-row { margin-top: 6px; gap: 8px; }
-      .privacy-label { font-size: 0.78rem; }
-      .card-footer { margin-top: 12px; font-size: 0.82rem; }
+    .google-divider-line { flex: 1; height: 1px; background: rgba(0,0,0,0.12); }
+    .google-divider-text { font-size: clamp(0.72rem, 1.3vh, 0.82rem); color: var(--text-muted); white-space: nowrap; }
+
+    .btn-google {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin-top: clamp(6px, 1vh, 12px);
+      padding: clamp(8px, 1.3vh, 13px);
+      border-radius: 999px;
+      border: 1.5px solid rgba(0,0,0,0.15);
+      background: #fff;
+      color: #0a0a0a;
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(0.78rem, 1.5vh, 0.92rem);
+      font-weight: 600;
+      text-decoration: none;
+      transition: box-shadow 0.18s ease, transform 0.18s ease;
     }
 
-    @media (max-height: 650px) {
-      nav { padding: 8px 56px; }
-      .page-center { height: calc(100vh - 44px); padding: 6px 20px; }
-      .card { padding: 16px 30px 14px; border-radius: 18px; }
-      .card-title { font-size: 1.2rem; }
-      .card-sub { margin-bottom: 10px; font-size: 0.83rem; }
-      .field { margin-bottom: 8px; }
-      .field label { margin-bottom: 4px; font-size: 0.8rem; }
-      .field input { padding: 8px 10px; font-size: 0.85rem; border-radius: 9px; }
-      .password-hint { margin-top: 3px; font-size: 0.7rem; }
-      .btn-submit { padding: 9px; margin-top: 6px; font-size: 0.85rem; }
-      .privacy-row { margin-top: 4px; gap: 6px; }
-      .privacy-row input[type="checkbox"] { width: 15px; height: 15px; min-width: 15px; }
-      .privacy-label { font-size: 0.74rem; }
-      .card-footer { margin-top: 10px; font-size: 0.8rem; }
+    .btn-google:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      transform: translateY(-1px);
     }
 
     @media (max-width: 560px) {
-      nav { padding: 16px 24px; }
-      .card { padding: 32px 24px 28px; }
+      nav { padding: clamp(10px, 2.2vh, 20px) 24px; }
     }
   </style>
   <link rel="icon" type="image/svg+xml" href="/static/favicon.svg"/>
@@ -401,13 +397,13 @@
 
       <button class="btn-submit" onclick="handleSignup()">Create Account</button>
 
-      <div style="display:flex;align-items:center;gap:12px;margin-top:20px;margin-bottom:4px;">
-        <div style="flex:1;height:1px;background:rgba(0,0,0,0.12);"></div>
-        <span style="font-size:0.82rem;color:var(--text-muted);white-space:nowrap;">or continue with</span>
-        <div style="flex:1;height:1px;background:rgba(0,0,0,0.12);"></div>
+      <div class="google-divider">
+        <div class="google-divider-line"></div>
+        <span class="google-divider-text">or continue with</span>
+        <div class="google-divider-line"></div>
       </div>
 
-      <a href="/auth/google" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:12px;padding:13px;border-radius:999px;border:1.5px solid rgba(0,0,0,0.15);background:#fff;color:#0a0a0a;font-family:'Sora',sans-serif;font-size:0.92rem;font-weight:600;text-decoration:none;transition:box-shadow 0.18s ease,transform 0.18s ease;" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.12)';this.style.transform='translateY(-1px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+      <a href="/auth/google" class="btn-google">
         <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
         Sign up with Google
       </a>
