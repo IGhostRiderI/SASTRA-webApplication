@@ -564,20 +564,13 @@ def _rebuild_summary_from_findings(scan_output: dict) -> dict:
 
 def _promote_ml_severity(scan_output: dict) -> dict:
     """
-    Use ML severity as the primary severity only when the model is
-    confident enough (>= 0.70).  Otherwise keep the rule-based severity
-    which is derived from well-known CWE→severity mappings.
+    Keep rule-based severity (from CWE mappings) as the primary severity.
+    ML severity is stored in ml_severity / ml_severity_confidence for
+    display only — it never overrides the rule-based value because the
+    deterministic CWE→severity mapping is more reliable than the ML model.
 
-    Summary and risk score are recalculated afterwards.
+    Summary is rebuilt to ensure counts stay consistent.
     """
-    ML_SEV_CONFIDENCE_THRESHOLD = 0.75
-    findings = scan_output.get("findings", [])
-    for finding in findings:
-        ml_sev  = str(finding.get("ml_severity", "")).strip()
-        ml_conf = float(finding.get("ml_severity_confidence", 0.0))
-        if ml_sev in VALID_SEVERITIES and ml_conf >= ML_SEV_CONFIDENCE_THRESHOLD:
-            finding["severity"] = ml_sev
-            finding["severity_score"] = severity_score(ml_sev)
     return _rebuild_summary_from_findings(scan_output)
 
 
