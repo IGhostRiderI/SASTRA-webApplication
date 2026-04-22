@@ -24,6 +24,7 @@ from pydantic import BaseModel
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
 
 from .config import (
     BACKUP_DIR,
@@ -362,6 +363,7 @@ async def lifespan(_: FastAPI):
 app = FastAPI(title="Lightweight SAST Dashboard", lifespan=lifespan)
 app.state.limiter = _limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_middleware(SlowAPIMiddleware)
 
 
 async def _not_found_handler(request: Request, exc: HTTPException) -> JSONResponse:
@@ -562,13 +564,18 @@ def _rebuild_summary_from_findings(scan_output: dict) -> dict:
 
 def _promote_ml_severity(scan_output: dict) -> dict:
     """
-    Use ML severity as the primary severity for all findings.
-    Summary and risk score are recalculated from ML-based severities.
+    Use ML severity as the primary severity only when the model is
+    confident enough (>= 0.70).  Otherwise keep the rule-based severity
+    which is derived from well-known CWE→severity mappings.
+
+    Summary and risk score are recalculated afterwards.
     """
+    ML_SEV_CONFIDENCE_THRESHOLD = 0.70
     findings = scan_output.get("findings", [])
     for finding in findings:
-        ml_sev = str(finding.get("ml_severity", "")).strip()
-        if ml_sev in VALID_SEVERITIES:
+        ml_sev  = str(finding.get("ml_severity", "")).strip()
+        ml_conf = float(finding.get("ml_severity_confidence", 0.0))
+        if ml_sev in VALID_SEVERITIES and ml_conf >= ML_SEV_CONFIDENCE_THRESHOLD:
             finding["severity"] = ml_sev
             finding["severity_score"] = severity_score(ml_sev)
     return _rebuild_summary_from_findings(scan_output)
