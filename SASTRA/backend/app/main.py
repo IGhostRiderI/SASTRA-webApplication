@@ -570,7 +570,7 @@ def _promote_ml_severity(scan_output: dict) -> dict:
 
     Summary and risk score are recalculated afterwards.
     """
-    ML_SEV_CONFIDENCE_THRESHOLD = 0.70
+    ML_SEV_CONFIDENCE_THRESHOLD = 0.75
     findings = scan_output.get("findings", [])
     for finding in findings:
         ml_sev  = str(finding.get("ml_severity", "")).strip()
