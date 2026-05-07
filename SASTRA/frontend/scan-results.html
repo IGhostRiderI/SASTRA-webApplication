@@ -1998,10 +1998,6 @@
     if (btn) { btn.disabled = true; btn.textContent = 'Generating…'; }
 
     try {
-      // 50s timeout — backend tries up to 3 keys at 15s each
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 50000);
-
       const res = await fetch('/api/llm/codefix', {
         method: 'POST',
         credentials: 'include',
@@ -2012,10 +2008,7 @@
           language:       f.language,
           recommendation: f.fix,
         }),
-        signal: controller.signal,
       });
-      clearTimeout(timeoutId);
-
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
         if (res.status === 429 && errData?.detail?.code === 'LLM_RATE_LIMIT_REACHED') {
@@ -2057,16 +2050,9 @@
 
       // Update the bubble in the row
       renderFixBubble(findingIdx);
-    } catch (err) {
-      const msg = err.name === 'AbortError'
-        ? 'Request timed out. The AI service may be slow — please try again.'
-        : 'Failed to generate fix. Please try again.';
-      const errSpan = document.createElement('span');
-      errSpan.style.color = '#dc2626';
-      errSpan.textContent = msg;
-      generating.textContent = '';
-      generating.appendChild(errSpan);
-      showAppPopup(msg);
+    } catch {
+      generating.innerHTML = '<span style="color:#dc2626">Failed to generate fix. Check your API key.</span>';
+      showAppPopup('Failed to generate fix. Please try again.');
       if (btn) { btn.disabled = false; btn.textContent = 'Fix now'; }
     }
   };
