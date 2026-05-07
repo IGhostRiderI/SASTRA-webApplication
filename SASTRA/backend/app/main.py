@@ -1078,35 +1078,37 @@ async def llm_codefix(
     )
 
     try:
-        response = requests.post(
-            "https://integrate.api.nvidia.com/v1/chat/completions",
-            headers={
-                "Authorization": f"Bearer {config.NVIDIA_API_KEY}",
-                "Accept": "application/json",
-            },
-            json={
-                "model": "meta/llama-3.1-405b-instruct",
-                "messages": [
-                    {
-                        "role": "system",
-                        "content": (
-                            "You are a code security tool. "
-                            "You receive vulnerable code and output ONLY that exact code with the vulnerability fixed. "
-                            "STRICT RULES: same number of lines as input, no new functions, no imports, "
-                            "no explanations, no comments, no markdown, no code fences. "
-                            "Only change what is necessary to fix the vulnerability. Nothing else."
-                        ),
-                    },
-                    {"role": "user", "content": prompt},
-                ],
-                "max_tokens": 300,
-                "temperature": 0.1,
-                "top_p": 0.9,
-                "stream": False,
-            },
+        from openai import OpenAI
+
+        client = OpenAI(
+            base_url="https://integrate.api.nvidia.com/v1",
+            api_key=config.NVIDIA_API_KEY,
         )
-        response.raise_for_status()
-        raw = response.json()["choices"][0]["message"]["content"].strip()
+        completion = client.chat.completions.create(
+            model="meta/llama-3.3-70b-instruct",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a code security tool. "
+                        "You receive vulnerable code and output ONLY that exact code with the vulnerability fixed. "
+                        "STRICT RULES: same number of lines as input, no new functions, no imports, "
+                        "no explanations, no comments, no markdown, no code fences. "
+                        "Only change what is necessary to fix the vulnerability. Nothing else."
+                    ),
+                },
+                {"role": "user", "content": prompt},
+            ],
+            max_tokens=300,
+            temperature=0.1,
+            top_p=0.9,
+            stream=True,
+        )
+        chunks = []
+        for chunk in completion:
+            if chunk.choices and chunk.choices[0].delta.content is not None:
+                chunks.append(chunk.choices[0].delta.content)
+        raw = "".join(chunks).strip()
         text = _extract_code_only(raw)
         logger.info("LLM code-fix returned for CWE: %s", payload.cwe_id)
     except Exception:
