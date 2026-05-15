@@ -40,7 +40,7 @@ MAX_ZIP_FILES = 250
 MAX_ZIP_MEMBER_SIZE_BYTES = 1 * 1024 * 1024
 
 ML_MAX_SAMPLES_PER_LANGUAGE = 999_999  # no effective cap - use all available data
-ML_MAX_VOCAB = 40000   # increased from 20k to match expanded dataset (~72k rows)
+ML_MAX_VOCAB = 40000   
 ML_MIN_DF = 2
 
 # NVIDIA API key for LLM-powered code fixes

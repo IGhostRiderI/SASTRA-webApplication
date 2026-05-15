@@ -514,7 +514,9 @@
     .chat-panel-avatar svg { width: 16px; height: 16px; color: #fff; }
     .chat-panel-title { font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 700; color: #fff; }
     .chat-panel-sub { font-size: 0.7rem; color: rgba(255,255,255,0.72); margin-top: 1px; }
-    .chat-panel-status { margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 2px rgba(255,255,255,0.3); }
+    .chat-panel-close { margin-left: auto; width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.15); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .chat-panel-close:hover { background: rgba(255,255,255,0.3); }
+    .chat-panel-close svg { width: 14px; height: 14px; color: #fff; }
     .chat-panel-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 28px 24px; text-align: center; }
     .chat-panel-body-icon { width: 56px; height: 56px; border-radius: 18px; background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(29,78,216,0.12)); border: 1px solid rgba(37,99,235,0.18); display: flex; align-items: center; justify-content: center; }
     .chat-panel-body-icon svg { width: 26px; height: 26px; color: #2563eb; opacity: 0.7; }
@@ -919,7 +921,7 @@
   <div class="chat-panel-header">
     <div class="chat-panel-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
     <div><div class="chat-panel-title">SASTRA AI</div><div class="chat-panel-sub">Security assistant</div></div>
-    <div class="chat-panel-status"></div>
+    <button class="chat-panel-close" onclick="toggleChatPanel()" aria-label="Close chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="chat-panel-body" id="chatMessages">
     <div class="chat-msg chat-msg-ai">
