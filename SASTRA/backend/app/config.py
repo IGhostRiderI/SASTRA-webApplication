@@ -47,6 +47,12 @@ ML_MIN_DF = 2
 NVIDIA_API_KEY = os.environ.get("NVIDIA_API_KEY", "")
 # NVIDIA API key for the SASTRA AI chatbot (separate key / model)
 NVIDIA_CHAT_API_KEY = os.environ.get("NVIDIA_CHAT_API_KEY", "")
+# NVIDIA-hosted model IDs (override via env when a model reaches end of life)
+NVIDIA_MODEL = os.environ.get("NVIDIA_MODEL", "openai/gpt-oss-20b")
+NVIDIA_CHAT_MODEL = os.environ.get("NVIDIA_CHAT_MODEL", "openai/gpt-oss-20b")
+# OpenAI-compatible API base URLs (swap to GitHub Models: https://models.inference.ai.azure.com)
+NVIDIA_BASE_URL = os.environ.get("NVIDIA_BASE_URL", "https://integrate.api.nvidia.com/v1")
+NVIDIA_CHAT_BASE_URL = os.environ.get("NVIDIA_CHAT_BASE_URL", "https://integrate.api.nvidia.com/v1")
 COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "false").strip().lower() in {"1", "true", "yes", "on"}
 
 #  Observability / alerting configuration 

@@ -1081,11 +1081,11 @@ async def llm_codefix(
         from openai import OpenAI
 
         client = OpenAI(
-            base_url="https://integrate.api.nvidia.com/v1",
+            base_url=config.NVIDIA_BASE_URL,
             api_key=config.NVIDIA_API_KEY,
         )
         completion = client.chat.completions.create(
-            model="meta/llama-3.3-70b-instruct",
+            model=config.NVIDIA_MODEL,
             messages=[
                 {
                     "role": "system",
@@ -1099,9 +1099,10 @@ async def llm_codefix(
                 },
                 {"role": "user", "content": prompt},
             ],
-            max_tokens=300,
+            max_tokens=512,
             temperature=0.1,
             top_p=0.9,
+            extra_body={"reasoning_effort": "low"},
             stream=True,
         )
         chunks = []
@@ -1210,15 +1211,16 @@ async def chat_with_ai(
         import json as _json
         try:
             client = OpenAI(
-                base_url="https://integrate.api.nvidia.com/v1",
+                base_url=config.NVIDIA_CHAT_BASE_URL,
                 api_key=config.NVIDIA_CHAT_API_KEY,
             )
             completion = client.chat.completions.create(
-                model="meta/llama-3.3-70b-instruct",
+                model=config.NVIDIA_CHAT_MODEL,
                 messages=messages,
                 temperature=0.2,
                 top_p=0.7,
                 max_tokens=1024,
+                extra_body={"reasoning_effort": "low"},
                 stream=True,
             )
             for chunk in completion:
