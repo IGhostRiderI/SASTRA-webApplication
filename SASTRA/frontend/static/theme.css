@@ -186,6 +186,16 @@ html[data-theme="dark"] .filter-chip {
   border-color: rgba(255, 255, 255, 0.1) !important;
   color: #e0e0e0 !important;
 }
+html[data-theme="dark"] .filter-chip.active {
+  background: var(--btn-dark) !important;
+  border-color: var(--btn-dark) !important;
+  color: #fff !important;
+}
+html[data-theme="dark"] .filter-chip.critical-chip.active { background: #dc2626 !important; border-color: #dc2626 !important; }
+html[data-theme="dark"] .filter-chip.high-chip.active     { background: #ea580c !important; border-color: #ea580c !important; }
+html[data-theme="dark"] .filter-chip.medium-chip.active   { background: #d97706 !important; border-color: #d97706 !important; }
+html[data-theme="dark"] .filter-chip.low-chip.active      { background: #059669 !important; border-color: #059669 !important; }
+html[data-theme="dark"] .hide-fixed-btn.active { background: #059669 !important; border-color: #059669 !important; color: #fff !important; }
 
 html[data-theme="dark"] .findings-search-wrap input,
 html[data-theme="dark"] .findings-search-wrap input::placeholder,
